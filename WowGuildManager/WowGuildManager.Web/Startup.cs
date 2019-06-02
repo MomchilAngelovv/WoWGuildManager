@@ -34,11 +34,14 @@ namespace WowGuildManager.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDbContext<WowGuildManagerDbContext>(options => 
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("WowGuildManagerDbContext"));
+            });
+
+            services.AddDefaultIdentity<WowGuildManagerUser>()
+                .AddRoles<WowGuildManagerRole>()
+                .AddEntityFrameworkStores<WowGuildManagerDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
