@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WowGuildManager.Web", "WowGuildManager.Web\WowGuildManager.Web.csproj", "{F328A43F-A4BD-49B8-9630-8930EFCDD5AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WowGuildManager.Web", "WowGuildManager.Web\WowGuildManager.Web.csproj", "{F328A43F-A4BD-49B8-9630-8930EFCDD5AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WowGuildManager.Data", "WowGuildManager.Data\WowGuildManager.Data.csproj", "{B7B5114F-4093-4DC3-867F-BB8B63E10D23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WowGuildManager.Services", "WowGuildManager.Services\WowGuildManager.Services.csproj", "{9BF1AC05-394C-4E9F-BA1F-65C05A9C2172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WowGuildManager.Domain", "WowGuildManager.Domain\WowGuildManager.Domain.csproj", "{4346F7B1-92B4-4F87-BBDE-FBB5442D9E2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WowGuildManager.Models", "WowGuildManager.Models\WowGuildManager.Models.csproj", "{DF12DB9B-42E8-46B5-B480-C25F5909A71C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{F328A43F-A4BD-49B8-9630-8930EFCDD5AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F328A43F-A4BD-49B8-9630-8930EFCDD5AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F328A43F-A4BD-49B8-9630-8930EFCDD5AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7B5114F-4093-4DC3-867F-BB8B63E10D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7B5114F-4093-4DC3-867F-BB8B63E10D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7B5114F-4093-4DC3-867F-BB8B63E10D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7B5114F-4093-4DC3-867F-BB8B63E10D23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BF1AC05-394C-4E9F-BA1F-65C05A9C2172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF1AC05-394C-4E9F-BA1F-65C05A9C2172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BF1AC05-394C-4E9F-BA1F-65C05A9C2172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BF1AC05-394C-4E9F-BA1F-65C05A9C2172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4346F7B1-92B4-4F87-BBDE-FBB5442D9E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4346F7B1-92B4-4F87-BBDE-FBB5442D9E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4346F7B1-92B4-4F87-BBDE-FBB5442D9E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4346F7B1-92B4-4F87-BBDE-FBB5442D9E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF12DB9B-42E8-46B5-B480-C25F5909A71C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF12DB9B-42E8-46B5-B480-C25F5909A71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF12DB9B-42E8-46B5-B480-C25F5909A71C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF12DB9B-42E8-46B5-B480-C25F5909A71C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
