@@ -39,9 +39,18 @@ namespace WowGuildManager.Web
                 options.UseSqlServer(Configuration.GetConnectionString("WowGuildManagerDbContext"));
             });
 
-            services.AddDefaultIdentity<WowGuildManagerUser>()
-                .AddRoles<WowGuildManagerRole>()
-                .AddEntityFrameworkStores<WowGuildManagerDbContext>();
+            services.AddDefaultIdentity<WowGuildManagerUser>(options => 
+            {
+                //TODO: Fix password settings
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            })
+            .AddRoles<WowGuildManagerRole>()
+            .AddEntityFrameworkStores<WowGuildManagerDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
