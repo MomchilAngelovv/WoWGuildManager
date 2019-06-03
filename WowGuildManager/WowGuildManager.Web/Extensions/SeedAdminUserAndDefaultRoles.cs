@@ -12,16 +12,18 @@ namespace WowGuildManager.Web.Extensions
     {
         private readonly RequestDelegate _next;
 
-        public SeedAdminUserAndDefaultRoles(RequestDelegate next)
+        public SeedAdminUserAndDefaultRoles(
+            RequestDelegate next)
         {
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context
-            , UserManager<WowGuildManagerUser> userManager
-            , RoleManager<WowGuildManagerRole> roleManager)
+        public async Task InvokeAsync(
+            HttpContext context,
+            UserManager<WowGuildManagerUser> userManager,
+            RoleManager<WowGuildManagerRole> roleManager)
         {
-            if (!roleManager.Roles.Any())
+            if (roleManager.Roles.Any() == false)
             {
                 await SeedRoles(userManager, roleManager);
             }
@@ -48,7 +50,7 @@ namespace WowGuildManager.Web.Extensions
             var adminUser = new WowGuildManagerUser
             {
                 Email = "Admin@admin.com",
-                UserName = "Kuzmata",
+                UserName = "Asd",
             };
 
             //TODO: Fix password

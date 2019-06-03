@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using WowGuildManager.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WowGuildManager.Web.Extensions;
 
 namespace WowGuildManager.Web
 {
@@ -68,6 +69,9 @@ namespace WowGuildManager.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            //Middlewares
+            app.UseSeedAdminUserAndDefaultRoles();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
