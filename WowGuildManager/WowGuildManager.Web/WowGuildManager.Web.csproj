@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Identity\Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\WowGuildManager.Data\WowGuildManager.Data.csproj" />
     <ProjectReference Include="..\WowGuildManager.Domain\WowGuildManager.Domain.csproj" />
   </ItemGroup>
