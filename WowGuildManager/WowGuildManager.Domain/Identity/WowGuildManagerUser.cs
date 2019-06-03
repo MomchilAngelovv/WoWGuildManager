@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WowGuildManager.Web.Data
+namespace WowGuildManager.Domain.Identity
 {
     public class WowGuildManagerUser : IdentityUser<string>
     {

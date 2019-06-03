@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WowGuildManager.Domain.Identity;
 
 namespace WowGuildManager.Web.Data
 {

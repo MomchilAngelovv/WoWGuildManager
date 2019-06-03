@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WowGuildManager.Web.Data
+namespace WowGuildManager.Domain.Identity
 {
     public class WowGuildManagerRole : IdentityRole<string>
     {

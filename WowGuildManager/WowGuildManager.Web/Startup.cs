@@ -9,10 +9,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WowGuildManager.Web.Data;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WowGuildManager.Web.Extensions;
+using WowGuildManager.Domain.Identity;
+using WowGuildManager.Web.Data;
 
 namespace WowGuildManager.Web
 {

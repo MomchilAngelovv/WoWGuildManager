@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using WowGuildManager.Web.Data;
+using WowGuildManager.Domain.Identity;
 
 namespace WowGuildManager.Web.Areas.Identity.Pages.Account
 {

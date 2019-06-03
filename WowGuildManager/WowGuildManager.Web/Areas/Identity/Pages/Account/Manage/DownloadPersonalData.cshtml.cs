@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using WowGuildManager.Domain.Identity;
 using WowGuildManager.Web.Data;
 
 namespace WowGuildManager.Web.Areas.Identity.Pages.Account.Manage

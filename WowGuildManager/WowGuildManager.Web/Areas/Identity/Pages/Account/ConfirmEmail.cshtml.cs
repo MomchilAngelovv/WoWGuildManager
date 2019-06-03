@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WowGuildManager.Web.Data;
+using WowGuildManager.Domain.Identity;
+
 
 namespace WowGuildManager.Web.Areas.Identity.Pages.Account
 {
