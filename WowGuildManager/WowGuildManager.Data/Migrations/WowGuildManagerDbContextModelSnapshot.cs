@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WowGuildManager.Web.Data;
+using WowGuildManager.Data;
 
 namespace WowGuildManager.Web.Migrations
 {
     [DbContext(typeof(WowGuildManagerDbContext))]
-    [Migration("20190603111130_InitialDbCreate")]
-    partial class InitialDbCreate
+    partial class WowGuildManagerDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

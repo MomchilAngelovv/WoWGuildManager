@@ -8,12 +8,18 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WowGuildManager.Data\WowGuildManager.Data.csproj" />
     <ProjectReference Include="..\WowGuildManager.Domain\WowGuildManager.Domain.csproj" />
+    <ProjectReference Include="..\WowGuildManager.Models\WowGuildManager.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Data\" />
+    <Folder Include="Areas\Administration\Models\" />
   </ItemGroup>
 
 </Project>

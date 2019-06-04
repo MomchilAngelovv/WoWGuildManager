@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WowGuildManager.Domain.Identity;
 
-namespace WowGuildManager.Web.Data
+namespace WowGuildManager.Data
 {
     public class WowGuildManagerDbContext : IdentityDbContext<WowGuildManagerUser, WowGuildManagerRole, string>
     {

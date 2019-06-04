@@ -14,7 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WowGuildManager.Web.Extensions;
 using WowGuildManager.Domain.Identity;
-using WowGuildManager.Web.Data;
+using WowGuildManager.Data;
 
 namespace WowGuildManager.Web
 {
@@ -83,6 +83,9 @@ namespace WowGuildManager.Web
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(name: "mvcAreaRoute",
+                   template: "{area:exists}/{controller=Home}/{action=Index}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

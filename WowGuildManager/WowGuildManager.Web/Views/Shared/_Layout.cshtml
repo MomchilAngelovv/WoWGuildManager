@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WowGuildManager.Web</title>
+    <title>@ViewData["Title"]</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -19,40 +19,62 @@
 
 </head>
 <body style="padding-top:unset; padding-bottom:unset">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Navbar w/ text</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-            </ul>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Iceblock Citadel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a asp-area="" asp-controller="Calendar" asp-action="Index" class="nav-link">Calendar <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Guild Members <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Guild Armory <span class="sr-only">(current)</span></a>
+                    </li>
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item active">
+                            <a asp-area="Administration" asp-controller="Administration" asp-action="Index" class="nav-link">Administration Page <span class="sr-only">(current)</span></a>
+                        </li>
+                    }
+                </ul>
 
-            <partial name="_LoginPartial" />
+                <partial name="_LoginPartial" />
 
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+    </div>
 
     <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
+    <div class="container-fluid text-white">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2019 - WowGuildManager.Web</p>
+       
+        <footer class="page-footer font-small unique-color-dark pt-4">
+
+            <div class=" bg-white">
+
+                <ul class="list-unstyled list-inline text-center py-2">
+                    <li class="list-inline-item">
+                        <h5 class="mb-1"></h5>
+                    </li>
+                    <li class="list-inline-item">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-dark">Go at start page!</a>
+                    </li>
+                </ul>
+
+            </div>
+
         </footer>
     </div>
 
