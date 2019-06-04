@@ -38,13 +38,19 @@ namespace WowGuildManager.Web.Extensions
             await roleManager.CreateAsync(new WowGuildManagerRole
             {
                 Name = "Admin",
-                Description = "Maximum access"
+                Description = "Total control of page."
+            });
+
+            await roleManager.CreateAsync(new WowGuildManagerRole
+            {
+                Name = "Raid Leader",
+                Description = "Authorized to create raid and make events."
             });
 
             await roleManager.CreateAsync(new WowGuildManagerRole
             {
                 Name = "User",
-                Description = "Minimum access"
+                Description = "Basic user with no actual rights."
             });
 
             var adminUser = new WowGuildManagerUser

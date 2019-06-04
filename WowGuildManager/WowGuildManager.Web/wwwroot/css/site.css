@@ -41,7 +41,9 @@ body {
 
 
 /*//////////////////////////////////////////////////////////////*/
-
+.carousel {
+    width: 50%;
+}
 .carousel-inner > .item > img {
     width: 1280px;
     height: 1024px;

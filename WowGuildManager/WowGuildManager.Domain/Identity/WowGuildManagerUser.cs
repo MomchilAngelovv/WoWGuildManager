@@ -8,6 +8,6 @@ namespace WowGuildManager.Domain.Identity
 {
     public class WowGuildManagerUser : IdentityUser<string>
     {
-
+        
     }
 }

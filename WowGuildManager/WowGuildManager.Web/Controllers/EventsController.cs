@@ -8,11 +8,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace WowGuildManager.Web.Controllers
 {
     [Authorize]
-    public class CalendarController : Controller
+    public class EventsController : Controller
     {
         public IActionResult Index()
         {
             return View();
+        }
+
+        [Authorize(Roles = "Admin, Raid Leader")]
+        public IActionResult Create()
+        {
+            return this.View();
         }
     }
 }
