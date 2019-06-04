@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WowGuildManager.Domain.Characters
 {
-    //TODO: Validation
+
     public enum CharacterRole
     {
         Tank = 1,

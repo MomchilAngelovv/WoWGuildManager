@@ -30,15 +30,18 @@
                     <a asp-area="" asp-controller="Events" asp-action="Index" class="nav-link">Raids and Events<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a asp-area="" asp-controller="Armory" asp-action="Index" class="nav-link">Armory<span class="sr-only">(current)</span></a>
+                    <a asp-area="" asp-controller="Members" asp-action="Index" class="nav-link">Guild Members<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a asp-area="" asp-controller="Gallery" asp-action="Index" class="nav-link">Gallery<span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item active">
+                    <a asp-area="" asp-controller="Characters" asp-action="Index" class="nav-link">MyCharacters<span class="sr-only">(current)</span></a>
+                </li>
                 @if (this.User.IsInRole("Admin"))
                 {
                     <li class="nav-item active">
-                        <a asp-area="Administration" asp-controller="Administration" asp-action="Index" class="nav-link">Administration Page <span class="sr-only">(current)</span></a>
+                        <a asp-area="Administration" asp-controller="Administration" asp-action="Index" class="nav-link btn btn-danger">Administration section<span class="sr-only">(current)</span></a>
                     </li>
                 }
             </ul>

@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WowGuildManager.Web.Controllers
 {
-    [Authorize]
-    public class ArmoryController : Controller
+    [AllowAnonymous]
+    public class MembersController : Controller
     {
         public IActionResult Index()
         {

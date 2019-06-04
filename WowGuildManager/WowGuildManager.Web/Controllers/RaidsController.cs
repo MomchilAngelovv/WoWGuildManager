@@ -8,11 +8,22 @@ using Microsoft.AspNetCore.Mvc;
 namespace WowGuildManager.Web.Controllers
 {
     [Authorize]
-    public class EventsController : Controller
+    public class RaidsController : Controller
     {
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Create()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(int id)
+        {
+            return null;
         }
     }
 }
