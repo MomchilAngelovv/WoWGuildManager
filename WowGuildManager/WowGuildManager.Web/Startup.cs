@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WowGuildManager.Web.Extensions;
 using WowGuildManager.Domain.Identity;
 using WowGuildManager.Data;
+using WowGuildManager.Services.Characters;
 
 namespace WowGuildManager.Web
 {
@@ -54,6 +55,9 @@ namespace WowGuildManager.Web
             })
             .AddRoles<WowGuildManagerRole>()
             .AddEntityFrameworkStores<WowGuildManagerDbContext>();
+
+            //Services
+            services.AddTransient<ICharacterService, CharacterService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

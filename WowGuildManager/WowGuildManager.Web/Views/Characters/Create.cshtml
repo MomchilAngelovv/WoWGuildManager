@@ -1,0 +1,27 @@
+﻿@model  WowGuildManager.Models.ViewModels.Characters.CharacterCreateViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="@Model.Name"></label>
+        <input asp-for="@Model.Name" class="form-control" placeholder="Name" />
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Level"></label>
+        <input asp-for="@Model.Level" class="form-control" placeholder="Level" />
+        <span asp-validation-for="@Model.Level" class="text-danger"></span>
+    </div>
+
+    <select asp-for="@Model.Class" asp-items="@ViewBag.Classes"></select>
+
+    <select asp-for="@Model.Role" asp-items="@ViewBag.Roles"></select>
+    
+    <button type="submit" class="btn btn-primary">Create new account</button>
+</form>
+

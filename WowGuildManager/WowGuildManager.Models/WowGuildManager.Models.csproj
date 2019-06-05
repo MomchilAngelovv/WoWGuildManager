@@ -8,4 +8,8 @@
     <Folder Include="ViewModels\Raids\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WowGuildManager.Domain\WowGuildManager.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
