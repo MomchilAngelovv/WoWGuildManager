@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Identity;
@@ -11,8 +12,10 @@ namespace WowGuildManager.Services.Characters
     {
         Character Create(CharacterCreateViewModel inputModel, WowGuildManagerUser user);
 
-        ICollection<ClassType> GetClasses();
+        IEnumerable<ClassType> GetClasses();
 
-        ICollection<CharacterRole> GetRoles();
+        IEnumerable<CharacterRole> GetRoles();
+
+        IEnumerable<Character> GetCharactersByUser(WowGuildManagerUser user);
     }
 }

@@ -16,6 +16,8 @@ using WowGuildManager.Web.Extensions;
 using WowGuildManager.Domain.Identity;
 using WowGuildManager.Data;
 using WowGuildManager.Services.Characters;
+using AutoMapper;
+using WowGuildManager.Web.Mapper;
 
 namespace WowGuildManager.Web
 {
@@ -57,6 +59,8 @@ namespace WowGuildManager.Web
             .AddEntityFrameworkStores<WowGuildManagerDbContext>();
 
             //Services
+            services.AddAutoMapper(x => x.AddProfile<WowGuildManagerProfile>());
+
             services.AddTransient<ICharacterService, CharacterService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

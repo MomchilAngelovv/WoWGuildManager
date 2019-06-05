@@ -35,12 +35,18 @@ namespace WowGuildManager.Services.Characters
             return character;
         }
 
-        public ICollection<ClassType> GetClasses()
+        public IEnumerable<Character> GetCharactersByUser(WowGuildManagerUser user)
+        {
+            return this.context.Characters
+                .Where(character => character.User == user);
+        }
+
+        public IEnumerable<ClassType> GetClasses()
         {
             return Enum.GetValues(typeof(ClassType)).Cast<ClassType>().ToList();
         }
 
-        public ICollection<CharacterRole> GetRoles()
+        public IEnumerable<CharacterRole> GetRoles()
         {
             return Enum.GetValues(typeof(CharacterRole)).Cast<CharacterRole>().ToList();
         }

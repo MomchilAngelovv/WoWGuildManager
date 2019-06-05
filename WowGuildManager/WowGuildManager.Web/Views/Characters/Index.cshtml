@@ -1,10 +1,22 @@
-﻿@{
+﻿@model WowGuildManager.Models.ViewModels.Characters.CharacterIndexViewModel
+@{
     ViewData["Title"] = "Index";
 }
 <a asp-area="" asp-controller="Characters" asp-action="Create"><h2>Add character</h2></a>
 
 <section>
     <div id="myCharacters">
+        @foreach (var character in Model.Characters)
+        {
+            <div class="card bg-dark text-white w-50">
+                <img class="card-img" src="https://i.pinimg.com/originals/75/27/fb/7527fba970c07d8c29aa2b9cbdb5be08.jpg" alt="Card image">
+                <div class="card-img-overlay">
+                    <h5 class="card-title">@character.Level @character.Class</h5>
+                    <p class="card-text">@character.Name</p>
+                    <p class="card-text">@character.Role</p>
+                </div>
+            </div>
+        }
         <div class="card bg-dark text-white w-50">
             <img class="card-img" src="https://i.pinimg.com/originals/75/27/fb/7527fba970c07d8c29aa2b9cbdb5be08.jpg" alt="Card image">
             <div class="card-img-overlay">

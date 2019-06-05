@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using WowGuildManager.Domain.Identity;
 using WowGuildManager.Models.ViewModels.Characters;
 using WowGuildManager.Services.Characters;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using WowGuildManager.Web.Mapper;
 
 namespace WowGuildManager.Web.Controllers
 {
@@ -25,11 +28,31 @@ namespace WowGuildManager.Web.Controllers
         {
             this.userManager = userManager;
             this.characterService = characterService;
+            
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            //TODO: COnfigure AutoMapper
+            var characters = this.characterService.GetCharactersByUser(user)
+                .Select(character => new CharacterViewModel
+                {
+                    Class = character.Class.ToString(),
+                    Level = character.Level.ToString(),
+                    Name = character.Name,
+                    Role = character.Role.ToString()
+                })
+                .ToList();
+               
+               
+            var characterIndexViewModel = new CharacterIndexViewModel
+            {
+                Characters = characters
+            };
+
+            return View(characterIndexViewModel);
         }
 
         
