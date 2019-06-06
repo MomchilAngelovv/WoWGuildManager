@@ -10,6 +10,8 @@ namespace WowGuildManager.Services.Dungeons
 {
     public interface IDungeonService
     {
+        IEnumerable<Dungeon> GetAll();
+
         IEnumerable<DungeonPlace> GetPlaces();
 
         Dungeon Create(DungeonCreateViewModel inputModel);

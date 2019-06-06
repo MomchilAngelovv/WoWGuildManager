@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,14 @@ namespace WowGuildManager.Services.Dungeons
         {
             this.context = context;
             this.characterService = characterService;
+        }
+
+        public IEnumerable<Dungeon> GetAll()
+        {
+            return this.context.Dungeons
+                .Include(dungeon => dungeon.DungeonLeader)
+                .Include(dungeon => dungeon.RegisteredCharacters)
+                .ToList();
         }
 
         public Dungeon Create(DungeonCreateViewModel inputModel)
