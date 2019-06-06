@@ -6,23 +6,22 @@
 
 <section>
     <div id="myCharacters">
-        @foreach (var character in Model.Characters)
-        {
-            <div class="card bg-dark text-white w-50">
-                <img class="card-img" src="https://i.pinimg.com/originals/75/27/fb/7527fba970c07d8c29aa2b9cbdb5be08.jpg" alt="Card image">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">@character.Level @character.Class</h5>
-                    <p class="card-text">@character.Name</p>
-                    <p class="card-text">@character.Role</p>
-                </div>
-            </div>
-        }
-        <div class="card bg-dark text-white w-50">
-            <img class="card-img" src="https://i.pinimg.com/originals/75/27/fb/7527fba970c07d8c29aa2b9cbdb5be08.jpg" alt="Card image">
-            <div class="card-img-overlay">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text">Last updated 3 mins ago</p>
+        <div class="row">
+
+            <div class="card-deck">
+                @foreach (var character in Model.Characters)
+                {
+                    <div class="card bg-dark border text-warning" style="width: 20rem;">
+                        <a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id"><img class="card-img-top" src="@character.Image" style="width:281px;height:230px;"></a>
+                        <div class="card-body">
+                            <h5 class="card-title">@character.Name</h5>
+                            <p class="card-text">@character.Level @character.Class @character.Role</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Last updated 3 mins ago</small>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>

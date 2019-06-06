@@ -39,10 +39,12 @@ namespace WowGuildManager.Web.Controllers
             var characters = this.characterService.GetCharactersByUser(user)
                 .Select(character => new CharacterViewModel
                 {
+                    Id = character.Id,
                     Class = character.Class.ToString(),
                     Level = character.Level.ToString(),
                     Name = character.Name,
-                    Role = character.Role.ToString()
+                    Role = character.Role.ToString(),
+                    Image = character.Image
                 })
                 .ToList();
                
@@ -91,6 +93,11 @@ namespace WowGuildManager.Web.Controllers
             this.characterService.Create(inputModel, user);
 
             return this.RedirectToAction(nameof(Index));
+        }
+
+        private IActionResult Details(string id)
+        {
+            return this.View();
         }
     }
 }

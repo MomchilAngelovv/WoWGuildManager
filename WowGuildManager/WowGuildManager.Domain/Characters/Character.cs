@@ -12,6 +12,8 @@ namespace WowGuildManager.Domain.Characters
     [Table("Characters")]
     public class Character
     {
+      
+        
         public Character()
         {
             this.Raids = new HashSet<RaidCharacters>();
@@ -34,6 +36,9 @@ namespace WowGuildManager.Domain.Characters
 
         [Required]
         public CharacterRole Role { get; set; }
+
+        [Required]
+        public string Image { get; set; }
 
         [Required]
         public string WowGuildManagerUserId { get; set; }

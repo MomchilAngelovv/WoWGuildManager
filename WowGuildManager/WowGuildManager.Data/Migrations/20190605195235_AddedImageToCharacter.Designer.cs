@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WowGuildManager.Data;
 
 namespace WowGuildManager.Web.Migrations
 {
     [DbContext(typeof(WowGuildManagerDbContext))]
-    partial class WowGuildManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190605195235_AddedImageToCharacter")]
+    partial class AddedImageToCharacter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,8 +118,7 @@ namespace WowGuildManager.Web.Migrations
 
                     b.Property<int>("Class");
 
-                    b.Property<string>("Image")
-                        .IsRequired();
+                    b.Property<int>("Image");
 
                     b.Property<int>("Level");
 
