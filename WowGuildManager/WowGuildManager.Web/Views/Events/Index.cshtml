@@ -2,49 +2,49 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Create new dungeon event</h2>
+    <a asp-area="" asp-controller="Dungeons" asp-action="Create"><h2>Create new dungeon event</h2></a>
 
 
-@if (this.User.IsInRole("Raid Leader") || this.User.IsInRole("Admin"))
-{
-    <a asp-area="" asp-controller="Raids" asp-action="Create"><h2>Create new Raid event</h2></a>
-}
+    @if (this.User.IsInRole("Raid Leader") || this.User.IsInRole("Admin"))
+    {
+        <a asp-area="" asp-controller="Raids" asp-action="Create"><h2>Create new Raid event</h2></a>
+    }
 
-<h2>Upcoming events</h2>
-<section>
-    <h4>Raids</h4>
-    <div class="row">
-        <div class="card col-2 m-3 bg-transparent border" style="width: 18rem;">
-            <img class="card-img-top" src="https://1lal3e4eckus2d9p8g17wl8c-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/Ragnaros_the_Firelord_full-960x1239.png" alt="Card image cap">
-            <div class="card-body text-white ">
-                <h5 class="card-title">June 5 20:00</h5>
-                <p class="card-text">Molten Core</p>
-                <p class="card-text">24/40</p>
-                <a asp-area="" asp-controller="Events" asp-action="Join" class="btn btn-primary w-100">Join</a>
+    <h2>Upcoming events</h2>
+    <section>
+        <h4>Raids</h4>
+        <div class="row">
+            <div class="card col-2 m-3 bg-transparent border" style="width: 18rem;">
+                <img class="card-img-top" src="https://1lal3e4eckus2d9p8g17wl8c-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/Ragnaros_the_Firelord_full-960x1239.png" alt="Card image cap">
+                <div class="card-body text-white ">
+                    <h5 class="card-title">June 5 20:00</h5>
+                    <p class="card-text">Molten Core</p>
+                    <p class="card-text">24/40</p>
+                    <a asp-area="" asp-controller="Events" asp-action="Join" class="btn btn-primary w-100">Join</a>
+                </div>
+            </div>
+            <div class="card col-2 m-3" style="width: 18rem;">
+                <img class="card-img-top" src="https://1lal3e4eckus2d9p8g17wl8c-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/Ragnaros_the_Firelord_full-960x1239.png" alt="Card image cap">
+                <div class="card-body text-dark">
+                    <h5 class="card-title  ">June 5 20:00</h5>
+                    <p class="card-text">Molten Core</p>
+                    <p class="card-text">24/40</p>
+                    <a asp-area="" asp-controller="Events" asp-action="Join" class="btn btn-primary w-100">Join</a>
+                </div>
             </div>
         </div>
-        <div class="card col-2 m-3" style="width: 18rem;">
-            <img class="card-img-top" src="https://1lal3e4eckus2d9p8g17wl8c-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/Ragnaros_the_Firelord_full-960x1239.png" alt="Card image cap">
-            <div class="card-body text-dark">
-                <h5 class="card-title  ">June 5 20:00</h5>
-                <p class="card-text">Molten Core</p>
-                <p class="card-text">24/40</p>
-                <a asp-area="" asp-controller="Events" asp-action="Join" class="btn btn-primary w-100">Join</a>
+    </section>
+    <section>
+        <h4>Dungeons</h4>
+        <div class="row">
+            <div class="card col-2 m-3 bg-transparent border" style="width: 18rem;">
+                <img class="card-img-top" src="https://1lal3e4eckus2d9p8g17wl8c-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/Ragnaros_the_Firelord_full-960x1239.png" alt="Card image cap">
+                <div class="card-body text-white ">
+                    <h5 class="card-title">June 5 20:00</h5>
+                    <p class="card-text">Molten Core</p>
+                    <p class="card-text">24/40</p>
+                    <a asp-area="" asp-controller="Events" asp-action="Join" class="btn btn-primary w-100">Join</a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-<section>
-    <h4>Dungeons</h4>
-    <div class="row">
-        <div class="card col-2 m-3 bg-transparent border" style="width: 18rem;">
-            <img class="card-img-top" src="https://1lal3e4eckus2d9p8g17wl8c-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/Ragnaros_the_Firelord_full-960x1239.png" alt="Card image cap">
-            <div class="card-body text-white ">
-                <h5 class="card-title">June 5 20:00</h5>
-                <p class="card-text">Molten Core</p>
-                <p class="card-text">24/40</p>
-                <a asp-area="" asp-controller="Events" asp-action="Join" class="btn btn-primary w-100">Join</a>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>

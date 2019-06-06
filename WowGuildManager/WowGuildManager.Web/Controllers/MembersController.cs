@@ -23,6 +23,7 @@ namespace WowGuildManager.Web.Controllers
             this.characterService = characterService;
             this.mapper = mapper;
         }
+
         //TODO: Add Ranks to models
         public IActionResult Index()
         {

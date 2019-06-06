@@ -7,7 +7,6 @@ using WowGuildManager.Domain.Characters;
 
 namespace WowGuildManager.Domain.Raid
 {
-
     [Table("Raids")]
     public class Raid
     {
@@ -24,6 +23,12 @@ namespace WowGuildManager.Domain.Raid
 
         [Range(10, 40)]
         public int MaxPlayers { get; set; }
+
+        [Required]
+        public DateTime DateTime { get; set; }
+
+        [Required]
+        public string Image { get; set; }
 
         [Range(10, 40)]
         public int RegisteredPlayers => this.RegisteredCharacters.Count;

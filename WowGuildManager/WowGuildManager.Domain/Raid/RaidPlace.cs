@@ -7,12 +7,12 @@ namespace WowGuildManager.Domain.Raid
 {
     public enum RaidPlace
     {
-        [Display(Name = "Zul'Gubub")] ZG = 1,
-        [Display(Name = "Ruins of Ahn'Qiraj")] AQ20 = 2,
-        [Display(Name = "Molten Core")] MC = 3,
-        [Display(Name = "Blackwing Lair")] BWL = 4,
-        [Display(Name = "Onyxia's Lair")] ONY = 5,
-        [Display(Name = "The Temple of Ahn'Qiraj")] AQ40 = 6,
-        [Display(Name = "Naxxramas")] NAXX = 7
+        ZG = 1,
+        AQ20 = 2,
+        MC = 3,
+        BWL = 4,
+        ONY = 5,
+        AQ40 = 6,
+        NAXX = 7
     }
 }

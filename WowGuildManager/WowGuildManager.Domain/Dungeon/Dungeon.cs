@@ -23,6 +23,12 @@ namespace WowGuildManager.Domain.Dungeon
         public int MaxPlayers { get; set; } = DungeonMaxPlayers;
 
         [Required]
+        public DateTime DateTime { get; set; }
+
+        [Required]
+        public string Image { get; set; }
+
+        [Required]
         public string LeaderId { get; set; }
         public Character DungeonLeader { get; set; }
 
