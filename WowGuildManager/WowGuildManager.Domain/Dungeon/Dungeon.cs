@@ -29,6 +29,11 @@ namespace WowGuildManager.Domain.Dungeon
         public string Image { get; set; }
 
         [Required]
+        public DungeonPlace Place { get; set; }
+
+        public string Description { get; set; }
+
+        [Required]
         public string LeaderId { get; set; }
         public Character DungeonLeader { get; set; }
 

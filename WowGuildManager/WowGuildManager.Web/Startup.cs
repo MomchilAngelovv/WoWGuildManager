@@ -18,6 +18,7 @@ using WowGuildManager.Data;
 using WowGuildManager.Services.Characters;
 using AutoMapper;
 using WowGuildManager.Web.Mapper;
+using WowGuildManager.Services.Dungeons;
 
 namespace WowGuildManager.Web
 {
@@ -61,6 +62,7 @@ namespace WowGuildManager.Web
             //Services
             services.AddAutoMapper();
             services.AddTransient<ICharacterService, CharacterService>();
+            services.AddTransient<IDungeonService, DungeonService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

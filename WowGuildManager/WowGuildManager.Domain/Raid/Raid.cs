@@ -30,6 +30,8 @@ namespace WowGuildManager.Domain.Raid
         [Required]
         public string Image { get; set; }
 
+        public string Description { get; set; }
+
         [Range(10, 40)]
         public int RegisteredPlayers => this.RegisteredCharacters.Count;
 
