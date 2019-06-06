@@ -65,6 +65,12 @@ namespace WowGuildManager.Services.Characters
             return Enum.GetValues(typeof(CharacterRole)).Cast<CharacterRole>().ToList();
         }
 
+        public Character GetCharacterById(string id)
+        {
+            return this.context.Characters
+                .FirstOrDefault(c => c.Id == id);
+        }
+
         private void SetNewCharacterImage(Character character)
         {
             switch (character.Class)
@@ -97,6 +103,11 @@ namespace WowGuildManager.Services.Characters
                     character.Image = WarriorImage;
                     break;
             }
+        }
+
+        public IEnumerable<Character> GetAll()
+        {
+            return this.context.Characters.ToList();
         }
     }
 }

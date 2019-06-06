@@ -1,7 +1,31 @@
-﻿
+﻿@model WowGuildManager.Models.ViewModels.Characters.MembersIndexViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2>Armory view</h2>
+
+<table class="table table-sm table-hover table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Rank</th>
+            <th scope="col">Name</th>
+            <th scope="col">Level</th>
+            <th scope="col">Class</th>
+            <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model.Members)
+        {
+            <tr>
+                <th scope="row">Grunk</th>
+                <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@member.Id">@member.Name</a></td>
+                <td>@member.Level</td>
+                <td>@member.Class</td>
+                <td>@member.Role</td>
+            </tr>
+        }
+    </tbody>
+</table>
 

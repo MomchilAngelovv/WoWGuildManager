@@ -17,5 +17,9 @@ namespace WowGuildManager.Services.Characters
         IEnumerable<CharacterRole> GetRoles();
 
         IEnumerable<Character> GetCharactersByUser(WowGuildManagerUser user);
+
+        Character GetCharacterById(string id);
+
+        IEnumerable<Character> GetAll();
     }
 }

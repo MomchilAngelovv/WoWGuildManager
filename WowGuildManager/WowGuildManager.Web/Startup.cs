@@ -59,7 +59,7 @@ namespace WowGuildManager.Web
             .AddEntityFrameworkStores<WowGuildManagerDbContext>();
 
             //Services
-
+            services.AddAutoMapper();
             services.AddTransient<ICharacterService, CharacterService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

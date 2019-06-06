@@ -4,8 +4,8 @@ using System.Text;
 
 namespace WowGuildManager.Models.ViewModels.Characters
 {
-    public class CharacterIndexViewModel
+    public class MembersIndexViewModel
     {
-        public IEnumerable<CharacterViewModel> Characters { get; set; }
+        public IEnumerable<CharacterViewModel> Members { get; set; }
     }
 }

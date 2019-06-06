@@ -21,14 +21,16 @@ namespace WowGuildManager.Web.Controllers
         private readonly UserManager<WowGuildManagerUser> userManager;
 
         private readonly ICharacterService characterService;
+        private readonly IMapper mapper;
 
         public CharactersController(
             UserManager<WowGuildManagerUser> userManager,
-            ICharacterService characterService)
+            ICharacterService characterService,
+            IMapper mapper)
         {
             this.userManager = userManager;
             this.characterService = characterService;
-            
+            this.mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
@@ -37,18 +39,9 @@ namespace WowGuildManager.Web.Controllers
 
             //TODO: COnfigure AutoMapper
             var characters = this.characterService.GetCharactersByUser(user)
-                .Select(character => new CharacterViewModel
-                {
-                    Id = character.Id,
-                    Class = character.Class.ToString(),
-                    Level = character.Level.ToString(),
-                    Name = character.Name,
-                    Role = character.Role.ToString(),
-                    Image = character.Image
-                })
+                .Select(character => mapper.Map<CharacterViewModel>(character))
                 .ToList();
-               
-               
+
             var characterIndexViewModel = new CharacterIndexViewModel
             {
                 Characters = characters
@@ -57,7 +50,7 @@ namespace WowGuildManager.Web.Controllers
             return View(characterIndexViewModel);
         }
 
-        
+
         public IActionResult Create()
         {
             var classes = this.characterService.GetClasses()
@@ -95,9 +88,12 @@ namespace WowGuildManager.Web.Controllers
             return this.RedirectToAction(nameof(Index));
         }
 
-        private IActionResult Details(string id)
+        public IActionResult Details(string id)
         {
-            return this.View();
+            var character = mapper.Map<CharacterViewModel>(this.characterService.GetCharacterById(id));
+
+
+            return this.View(character);
         }
     }
 }
