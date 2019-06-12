@@ -39,20 +39,20 @@
 
     <h4>Dungeons</h4>
 
-    @foreach (var dungeon in Model.Dungeons)
-    {
-        <div class="row">
-            <div class="card col-2 m-3 bg-transparent border" style="width: 18rem;">
+    <div class="row">
+        @foreach (var dungeon in Model.Dungeons)
+        {
+            <div class="card col-2 m-3 bg-dark border" style="width: 18rem;">
                 <img class="card-img-top" src="@dungeon.Image" alt="Card image cap">
                 <div class="card-body text-white ">
                     <h5 class="card-title">@dungeon.DateTime</h5>
                     <p class="card-text">@dungeon.Place - Leader:@dungeon.DungeonLeaderName</p>
                     <p class="card-text">@dungeon.RegisteredPlayers/@dungeon.MaxPlayers</p>
                     <p class="card-text">@dungeon.Description</p>
-                    <a asp-area="" asp-controller="Events" asp-action="Join" asp-route-id="@dungeon.Id" class="btn btn-primary w-100">Join</a>
+                    <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-primary w-100">Join</a>
                 </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 
 </section>

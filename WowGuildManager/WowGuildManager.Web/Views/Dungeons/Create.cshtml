@@ -9,7 +9,7 @@
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
         <label asp-for="@Model.DateTime"></label>
-        <input asp-for="@Model.DateTime" class="form-control" placeholder="Name" />
+        <input asp-for="@Model.DateTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ','T')" class="form-control" placeholder="Name" />
         <span asp-validation-for="@Model.DateTime" class="text-danger"></span>
     </div>
 

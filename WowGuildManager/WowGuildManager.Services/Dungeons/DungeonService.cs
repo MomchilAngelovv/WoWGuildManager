@@ -14,7 +14,15 @@ namespace WowGuildManager.Services.Dungeons
 {
     public class DungeonService : IDungeonService
     {
-        private const string RfcImage = "/images/rfcImg.jpg";
+        private const string RfcImage = "/images/dungeons/rfcImg.jpg";
+        private const string WcImage = "/images/dungeons/wcImg.jpg";
+        private const string DmImage = "/images/dungeons/dmImg.jpg";
+        private const string SfkImage = "/images/dungeons/sfkImg.jpg";
+        private const string BfdImage = "/images/dungeons/bdfImg.jpg";
+        private const string StocksImage = "/images/dungeons/stocksImg.jpg";
+        private const string GnomeImage = "/images/dungeons/gnomeImg.jpg";
+        private const string SmImage = "/images/dungeons/smImg.jpg";
+
 
         private readonly WowGuildManagerDbContext context;
         private readonly ICharacterService characterService;
@@ -77,18 +85,25 @@ namespace WowGuildManager.Services.Dungeons
                     dungeon.Image = RfcImage;
                     break;
                 case DungeonPlace.WC:
+                    dungeon.Image = WcImage;
                     break;
                 case DungeonPlace.DM:
+                    dungeon.Image = DmImage;
                     break;
                 case DungeonPlace.SFK:
+                    dungeon.Image = SfkImage;
                     break;
                 case DungeonPlace.BFD:
+                    dungeon.Image = BfdImage;
                     break;
                 case DungeonPlace.STOCKS:
+                    dungeon.Image = StocksImage;
                     break;
                 case DungeonPlace.GNOME:
+                    dungeon.Image = GnomeImage;
                     break;
                 case DungeonPlace.SM:
+                    dungeon.Image = SmImage;
                     break;
                 case DungeonPlace.RFK:
                     break;
@@ -96,7 +111,7 @@ namespace WowGuildManager.Services.Dungeons
                     break;
                 case DungeonPlace.RFD:
                     break;
-                case DungeonPlace.DIREM:
+                case DungeonPlace.DIREMAUL:
                     break;
                 case DungeonPlace.SCHOLO:
                     break;

@@ -63,5 +63,10 @@ namespace WowGuildManager.Web.Controllers
 
             return RedirectToAction("Index", "Events");
         }
+
+        public IActionResult Details(string id)
+        {
+            return this.View();
+        }
     }
 }

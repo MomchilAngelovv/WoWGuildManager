@@ -18,7 +18,7 @@ namespace WowGuildManager.Domain.Dungeon
         RFK = 9,
         MARA = 10,
         RFD = 11,
-        DIREM = 12,
+        DIREMAUL = 12,
         SCHOLO = 13,
         ULDA = 14,
         STRAT = 15,

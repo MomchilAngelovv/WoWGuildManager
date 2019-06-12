@@ -11,16 +11,15 @@ namespace WowGuildManager.Services.Characters
 {
     public class CharacterService : ICharacterService
     {
-        //TODO: Fix and fill up images
-        private const string DruidImage = "/images/druidImg.jpg";
-        private const string HunterImage = "/images/hunterImg.jpg";
-        private const string MageImage = "/images/mageImg.jpg";
-        private const string PaladinImage = "/images/paladinImg.jpg";
-        private const string PriestImage = "/images/priestImg.jpg";
-        private const string RogueImage = "/images/rogueImg.jpg";
-        private const string ShamanImage = "/images/shamanImg.jpg";
-        private const string WarlockImage = "/images/warlockImg.jpg";
-        private const string WarriorImage = "/images/warriorImg.jpg";
+        private const string DruidImage = "/images/classes/druidImg.jpg";
+        private const string HunterImage = "/images/classes/hunterImg.jpg";
+        private const string MageImage = "/images/classes/mageImg.jpg";
+        private const string PaladinImage = "/images/classes/paladinImg.jpg";
+        private const string PriestImage = "/images/classes/priestImg.jpg";
+        private const string RogueImage = "/images/classes/rogueImg.jpg";
+        private const string ShamanImage = "/images/classes/shamanImg.jpg";
+        private const string WarlockImage = "/images/classes/warlockImg.jpg";
+        private const string WarriorImage = "/images/classes/warriorImg.jpg";
 
         private readonly WowGuildManagerDbContext context;
 
