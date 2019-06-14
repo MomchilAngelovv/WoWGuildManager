@@ -23,6 +23,9 @@
   <ItemGroup>
     <Folder Include="Areas\Administration\Data\" />
     <Folder Include="Areas\Administration\Models\" />
+    <Folder Include="Areas\Api\Data\" />
+    <Folder Include="Areas\Api\Models\" />
+    <Folder Include="Areas\Api\Views\" />
   </ItemGroup>
 
 </Project>

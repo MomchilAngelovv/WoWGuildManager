@@ -12,6 +12,7 @@ using WowGuildManager.Services.Characters;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using WowGuildManager.Web.Mapper;
+using System.Security.Claims;
 
 namespace WowGuildManager.Web.Controllers
 {
@@ -74,16 +75,16 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CharacterCreateInputModel inputModel)
+        public IActionResult Create(CharacterCreateInputModel inputModel)
         {
             if (ModelState.IsValid == false)
             {
                 return this.RedirectToAction(nameof(Create));
             }
 
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = this.userManager.GetUserId(this.User);
 
-            this.characterService.Create(inputModel, user);
+            this.characterService.Create(inputModel, userId);
 
             return this.RedirectToAction(nameof(Index));
         }

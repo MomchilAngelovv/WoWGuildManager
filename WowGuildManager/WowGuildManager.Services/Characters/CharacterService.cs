@@ -28,16 +28,20 @@ namespace WowGuildManager.Services.Characters
             this.context = context;
         }
 
-        public Character Create(CharacterCreateInputModel inputModel, WowGuildManagerUser user)
+        public Character Create(CharacterCreateInputModel inputModel, string userId)
         {
-            
+            if (this.context.Characters.Where(c => c.WowGuildManagerUserId == userId).Count() == 4)
+            {
+                return null;
+            }
+
             var character = new Character
             {
                 Class = inputModel.Class,
                 Level = inputModel.Level,
                 Name = inputModel.Name,
                 Role = inputModel.Role,
-                User = user,
+                WowGuildManagerUserId = userId,
             };
 
             this.SetCharacterImage(character);

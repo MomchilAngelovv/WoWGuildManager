@@ -20,6 +20,7 @@ using AutoMapper;
 using WowGuildManager.Web.Mapper;
 using WowGuildManager.Services.Dungeons;
 using WowGuildManager.Services.Raids;
+using WowGuildManager.Services.Api;
 
 namespace WowGuildManager.Web
 {
@@ -65,6 +66,7 @@ namespace WowGuildManager.Web
             services.AddTransient<ICharacterService, CharacterService>();
             services.AddTransient<IDungeonService, DungeonService>();
             services.AddTransient<IRaidService, RaidService>();
+            services.AddTransient<IApiService, ApiService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -95,7 +97,7 @@ namespace WowGuildManager.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "mvcAreaRoute",
-                   template: "{area:exists}/{controller=Home}/{action=Index}");
+                   template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(
                     name: "default",
