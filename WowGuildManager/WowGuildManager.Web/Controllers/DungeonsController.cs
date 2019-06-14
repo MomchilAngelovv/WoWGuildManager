@@ -52,7 +52,7 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(DungeonCreateViewModel inputModel)
+        public IActionResult Create(DungeonCreateInputModel inputModel)
         {
             if (ModelState.IsValid == false)
             {

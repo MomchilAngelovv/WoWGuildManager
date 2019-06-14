@@ -14,6 +14,6 @@ namespace WowGuildManager.Services.Dungeons
 
         IEnumerable<DungeonPlace> GetPlaces();
 
-        Dungeon Create(DungeonCreateViewModel inputModel);
+        Dungeon Create(DungeonCreateInputModel inputModel);
     }
 }

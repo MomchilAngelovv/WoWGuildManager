@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190604161934_AddedCharacterDungeonRaidEntities.cs" />
-    <Compile Remove="Migrations\20190604161934_AddedCharacterDungeonRaidEntities.Designer.cs" />
-    <Compile Remove="Migrations\20190604163938_AddedCharacterDungeonRaidEntities.cs" />
-    <Compile Remove="Migrations\20190604163938_AddedCharacterDungeonRaidEntities.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Configurations\" />
   </ItemGroup>
 

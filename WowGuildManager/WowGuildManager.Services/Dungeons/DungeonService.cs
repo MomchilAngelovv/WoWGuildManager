@@ -22,6 +22,17 @@ namespace WowGuildManager.Services.Dungeons
         private const string StocksImage = "/images/dungeons/stocksImg.jpg";
         private const string GnomeImage = "/images/dungeons/gnomeImg.jpg";
         private const string SmImage = "/images/dungeons/smImg.jpg";
+        private const string RfkImage = "/images/dungeons/rfkImg.jpg";
+        private const string MaraImage = "/images/dungeons/maraImg.jpg";
+        private const string RfdImage = "/images/dungeons/rfdImg.jpg";
+        private const string DiremaulImage = "/images/dungeons/diremaulkImg.jpg";
+        private const string ScholoImage = "/images/dungeons/scholoImg.jpg";
+        private const string UldaImage = "/images/dungeons/uldaImg.jpg";
+        private const string StratImage = "/images/dungeons/stratImg.jpg";
+        private const string ZfImage = "/images/dungeons/zfImg.jpg";
+        private const string BrdImage = "/images/dungeons/brdImg.jpg";
+        private const string StImage = "/images/dungeons/stImg.jpg";
+        private const string LbrsImage = "/images/dungeons/lbrsImg.jpg";
 
 
         private readonly WowGuildManagerDbContext context;
@@ -38,29 +49,26 @@ namespace WowGuildManager.Services.Dungeons
         public IEnumerable<Dungeon> GetAll()
         {
             return this.context.Dungeons
-                .Include(dungeon => dungeon.DungeonLeader)
+                .Include(dungeon => dungeon.Leader)
                 .Include(dungeon => dungeon.RegisteredCharacters)
                 .ToList();
         }
 
-        public Dungeon Create(DungeonCreateViewModel inputModel)
+        public Dungeon Create(DungeonCreateInputModel inputModel)
         {
-            var dungeonLeader = this.characterService.GetCharacterById(inputModel.DungeonLeaderId);
-
             var dungeon = new Dungeon
             {
                 DateTime = inputModel.DateTime,
-                DungeonLeader = dungeonLeader,
                 Description = inputModel.Description,
                 Place = inputModel.Place,
                 LeaderId = inputModel.DungeonLeaderId
             };
 
-            this.SetNewDungeonImage(dungeon);
+            this.SetDungeonImage(dungeon);
 
-            dungeon.RegisteredCharacters.Add(new DungeonCharacters
+            dungeon.RegisteredCharacters.Add(new DungeonsCharacters
             {
-                Character = dungeonLeader,
+                CharacterId = dungeon.LeaderId,
                 Dungeon = dungeon
             });
 
@@ -77,7 +85,7 @@ namespace WowGuildManager.Services.Dungeons
                 .ToList();
         }
 
-        private void SetNewDungeonImage(Dungeon dungeon)
+        private void SetDungeonImage(Dungeon dungeon)
         {
             switch (dungeon.Place)
             {
@@ -106,26 +114,37 @@ namespace WowGuildManager.Services.Dungeons
                     dungeon.Image = SmImage;
                     break;
                 case DungeonPlace.RFK:
+                    dungeon.Image = RfkImage;
                     break;
                 case DungeonPlace.MARA:
+                    dungeon.Image = MaraImage;
                     break;
                 case DungeonPlace.RFD:
+                    dungeon.Image = RfdImage;
                     break;
                 case DungeonPlace.DIREMAUL:
+                    dungeon.Image = DiremaulImage;
                     break;
                 case DungeonPlace.SCHOLO:
+                    dungeon.Image = ScholoImage;
                     break;
                 case DungeonPlace.ULDA:
+                    dungeon.Image = UldaImage;
                     break;
                 case DungeonPlace.STRAT:
+                    dungeon.Image = StratImage;
                     break;
                 case DungeonPlace.ZF:
+                    dungeon.Image = ZfImage;
                     break;
                 case DungeonPlace.BRD:
+                    dungeon.Image = BrdImage;
                     break;
                 case DungeonPlace.ST:
+                    dungeon.Image = StImage;
                     break;
                 case DungeonPlace.LBRS:
+                    dungeon.Image = LbrsImage;
                     break;
             }
         }

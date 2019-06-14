@@ -7,12 +7,13 @@ namespace WowGuildManager.Domain.Raid
 {
     public enum RaidPlace
     {
-        ZG = 1,
-        AQ20 = 2,
-        MC = 3,
-        BWL = 4,
-        ONY = 5,
-        AQ40 = 6,
-        NAXX = 7
+        UBRS = 1,
+        ZG = 2,
+        AQ20 = 3,
+        MC = 4,
+        BWL = 5,
+        ONY = 6,
+        AQ40 = 7,
+        NAXX = 8,
     }
 }

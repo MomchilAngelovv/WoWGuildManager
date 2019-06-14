@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WowGuildManager.Domain.Characters
+﻿namespace WowGuildManager.Domain.Characters
 {
-    public enum ClassType
+    public enum CharacterClass
     {
         Druid = 1,
         Hunter = 2,

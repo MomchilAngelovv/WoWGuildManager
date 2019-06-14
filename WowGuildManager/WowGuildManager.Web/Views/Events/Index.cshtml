@@ -14,8 +14,21 @@
 <h2>Upcoming events</h2>
 <section>
     <h4>Raids</h4>
-    <div class="row">
-        <div class="card col-2 m-3 bg-transparent border" style="width: 18rem;">
+    <div class="row d-flex justify-content-center">
+        @foreach (var raid in Model.Raids)
+        {
+            <div class="card col-auto m-4 bg-dark border" style="width: 18rem; padding:0px;">
+                <img class="card-img-top" src="@raid.Image" alt="Card image cap">
+                <div class="card-body text-warning">
+                    <h5 class="card-title">@raid.DateTime</h5>
+                    <p class="card-text">@raid.Place - Leader: @raid.LeaderName</p>
+                    <p class="card-text">@raid.RegisteredPlayers/@raid.MaxPlayers</p>
+                    <p class="card-text">@raid.Description</p>
+                    <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-success w-100">Join</a>
+                </div>
+            </div>
+        }
+        @*<div class="card col-2 m-3 bg-transparent border" style="width: 18rem;">
             <img class="card-img-top" src="https://1lal3e4eckus2d9p8g17wl8c-wpengine.netdna-ssl.com/wp-content/uploads/2018/09/Ragnaros_the_Firelord_full-960x1239.png" alt="Card image cap">
             <div class="card-body text-white ">
                 <h5 class="card-title">June 5 20:00</h5>
@@ -32,24 +45,23 @@
                 <p class="card-text">24/40</p>
                 <a asp-area="" asp-controller="Events" asp-action="Join" class="btn btn-primary w-100">Join</a>
             </div>
-        </div>
+        </div>*@
     </div>
 </section>
 <section>
+    <h2 class="text-center text-dark">Dungeons</h2>
 
-    <h4>Dungeons</h4>
-
-    <div class="row">
+    <div class="row d-flex justify-content-center">
         @foreach (var dungeon in Model.Dungeons)
         {
-            <div class="card col-2 m-3 bg-dark border" style="width: 18rem;">
+            <div class="card col-auto m-4 bg-dark border" style="width: 18rem; padding:0px;">
                 <img class="card-img-top" src="@dungeon.Image" alt="Card image cap">
-                <div class="card-body text-white ">
+                <div class="card-body text-warning">
                     <h5 class="card-title">@dungeon.DateTime</h5>
-                    <p class="card-text">@dungeon.Place - Leader:@dungeon.DungeonLeaderName</p>
+                    <p class="card-text">@dungeon.Place - Leader: @dungeon.LeaderName</p>
                     <p class="card-text">@dungeon.RegisteredPlayers/@dungeon.MaxPlayers</p>
                     <p class="card-text">@dungeon.Description</p>
-                    <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-primary w-100">Join</a>
+                    <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100">Join</a>
                 </div>
             </div>
         }

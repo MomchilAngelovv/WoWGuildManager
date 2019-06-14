@@ -74,7 +74,7 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CharacterCreateViewModel inputModel)
+        public async Task<IActionResult> Create(CharacterCreateInputModel inputModel)
         {
             if (ModelState.IsValid == false)
             {

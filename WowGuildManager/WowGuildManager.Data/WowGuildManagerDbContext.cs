@@ -19,9 +19,9 @@ namespace WowGuildManager.Data
 
         public DbSet<Raid> Raids { get; set; }
 
-        public DbSet<RaidCharacters> RaidCharacters { get; set; }
+        public DbSet<RaidsCharacters> RaidsCharacters { get; set; }
 
-        public DbSet<DungeonCharacters> DungeonCharacters { get; set; }
+        public DbSet<DungeonsCharacters> DungeonsCharacters { get; set; }
 
         public WowGuildManagerDbContext(DbContextOptions<WowGuildManagerDbContext> options)
             : base(options)
@@ -31,11 +31,34 @@ namespace WowGuildManager.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<DungeonCharacters>()
+            builder.Entity<DungeonsCharacters>()
                 .HasKey(e => new { e.DungeonId, e.CharacterId });
 
-            builder.Entity<RaidCharacters>()
-               .HasKey(e => new { e.RaidnId, e.CharacterId });
+            builder.Entity<DungeonsCharacters>().HasOne(dc => dc.Dungeon)
+                .WithMany(d => d.RegisteredCharacters)
+                .HasForeignKey(d => d.DungeonId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<DungeonsCharacters>().HasOne(dc => dc.Character)
+               .WithMany(d => d.Dungeons)
+               .HasForeignKey(d => d.CharacterId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+
+
+            builder.Entity<RaidsCharacters>()
+               .HasKey(e => new { e.RaidId, e.CharacterId });
+
+            builder.Entity<RaidsCharacters>().HasOne(dc => dc.Raid)
+               .WithMany(d => d.RegisteredCharacters)
+               .HasForeignKey(d => d.RaidId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<RaidsCharacters>().HasOne(dc => dc.Character)
+            .WithMany(d => d.Raids)
+            .HasForeignKey(d => d.CharacterId)
+            .OnDelete(DeleteBehavior.Restrict);
+
 
             base.OnModelCreating(builder);
         }

@@ -14,7 +14,7 @@ namespace WowGuildManager.Domain.Dungeon
 
         public Dungeon()
         {
-            this.RegisteredCharacters = new HashSet<DungeonCharacters>();
+            this.RegisteredCharacters = new HashSet<DungeonsCharacters>();
         }
 
         [Key]
@@ -35,8 +35,8 @@ namespace WowGuildManager.Domain.Dungeon
 
         [Required]
         public string LeaderId { get; set; }
-        public Character DungeonLeader { get; set; }
+        public Character Leader { get; set; }
 
-        public ICollection<DungeonCharacters> RegisteredCharacters { get; set; }
+        public ICollection<DungeonsCharacters> RegisteredCharacters { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace WowGuildManager.Services.Characters
             this.context = context;
         }
 
-        public Character Create(CharacterCreateViewModel inputModel, WowGuildManagerUser user)
+        public Character Create(CharacterCreateInputModel inputModel, WowGuildManagerUser user)
         {
             
             var character = new Character
@@ -40,7 +40,7 @@ namespace WowGuildManager.Services.Characters
                 User = user,
             };
 
-            this.SetNewCharacterImage(character);
+            this.SetCharacterImage(character);
 
             this.context.Characters.Add(character);
             this.context.SaveChanges();
@@ -54,9 +54,9 @@ namespace WowGuildManager.Services.Characters
                 .Where(character => character.User == user);
         }
 
-        public IEnumerable<ClassType> GetClasses()
+        public IEnumerable<CharacterClass> GetClasses()
         {
-            return Enum.GetValues(typeof(ClassType)).Cast<ClassType>().ToList();
+            return Enum.GetValues(typeof(CharacterClass)).Cast<CharacterClass>().ToList();
         }
 
         public IEnumerable<CharacterRole> GetRoles()
@@ -70,35 +70,35 @@ namespace WowGuildManager.Services.Characters
                 .FirstOrDefault(c => c.Id == id);
         }
 
-        private void SetNewCharacterImage(Character character)
+        private void SetCharacterImage(Character character)
         {
             switch (character.Class)
             {
-                case ClassType.Druid:
+                case CharacterClass.Druid:
                     character.Image = DruidImage;
                     break;
-                case ClassType.Hunter:
+                case CharacterClass.Hunter:
                     character.Image = HunterImage;
                     break;
-                case ClassType.Mage:
+                case CharacterClass.Mage:
                     character.Image = MageImage;
                     break;
-                case ClassType.Paladin:
+                case CharacterClass.Paladin:
                     character.Image = PaladinImage;
                     break;
-                case ClassType.Priest:
+                case CharacterClass.Priest:
                     character.Image = PriestImage;
                     break;
-                case ClassType.Rogue:
+                case CharacterClass.Rogue:
                     character.Image = RogueImage;
                     break;
-                case ClassType.Shaman:
+                case CharacterClass.Shaman:
                     character.Image = ShamanImage;
                     break;
-                case ClassType.Warlock:
+                case CharacterClass.Warlock:
                     character.Image = WarlockImage;
                     break;
-                case ClassType.Warrior:
+                case CharacterClass.Warrior:
                     character.Image = WarriorImage;
                     break;
             }

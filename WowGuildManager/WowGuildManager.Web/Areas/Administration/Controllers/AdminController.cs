@@ -9,7 +9,7 @@ namespace WowGuildManager.Web.Areas.Administration.Controllers
 {
     [Area("Administration")]
     [Authorize(Roles ="Admin")]
-    public class AdministrationController : Controller
+    public class AdminController : Controller
     {
         public IActionResult Index()
         {

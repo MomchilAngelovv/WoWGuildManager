@@ -1,8 +1,9 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 body {
-    background-image: url("../images/IndexBackgroud.jpg");
+    background-image: url("../images/common/backgroundImg.jpg");
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover;
     padding-top: 50px;
     padding-bottom: 20px;
@@ -48,3 +49,13 @@ body {
     width: 1280px;
     height: 1024px;
 }
+
+.card col-2 m-3 bg-dark border{
+    width:800px;
+    height:600px;
+}
+
+.card bg-dark border text-warning{
+    padding: 0px;
+}
+

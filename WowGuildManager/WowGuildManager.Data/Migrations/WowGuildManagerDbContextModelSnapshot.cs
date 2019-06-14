@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WowGuildManager.Data;
 
-namespace WowGuildManager.Web.Migrations
+namespace WowGuildManager.Data.Migrations
 {
     [DbContext(typeof(WowGuildManagerDbContext))]
     partial class WowGuildManagerDbContextModelSnapshot : ModelSnapshot
@@ -116,6 +116,8 @@ namespace WowGuildManager.Web.Migrations
 
                     b.Property<int>("Class");
 
+                    b.Property<int>("GuildPoints");
+
                     b.Property<string>("Image")
                         .IsRequired();
 
@@ -146,8 +148,6 @@ namespace WowGuildManager.Web.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("DungeonLeaderId");
-
                     b.Property<string>("Image")
                         .IsRequired();
 
@@ -160,12 +160,12 @@ namespace WowGuildManager.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DungeonLeaderId");
+                    b.HasIndex("LeaderId");
 
                     b.ToTable("Dungeons");
                 });
 
-            modelBuilder.Entity("WowGuildManager.Domain.Dungeon.DungeonCharacters", b =>
+            modelBuilder.Entity("WowGuildManager.Domain.Dungeon.DungeonsCharacters", b =>
                 {
                     b.Property<string>("DungeonId");
 
@@ -275,28 +275,22 @@ namespace WowGuildManager.Web.Migrations
 
                     b.Property<int>("Place");
 
-                    b.Property<string>("RaidLeaderId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("RaidLeaderId");
+                    b.HasIndex("LeaderId");
 
                     b.ToTable("Raids");
                 });
 
-            modelBuilder.Entity("WowGuildManager.Domain.Raid.RaidCharacters", b =>
+            modelBuilder.Entity("WowGuildManager.Domain.Raid.RaidsCharacters", b =>
                 {
-                    b.Property<string>("RaidnId");
+                    b.Property<string>("RaidId");
 
                     b.Property<string>("CharacterId");
 
-                    b.Property<string>("DungeonId");
-
-                    b.HasKey("RaidnId", "CharacterId");
+                    b.HasKey("RaidId", "CharacterId");
 
                     b.HasIndex("CharacterId");
-
-                    b.HasIndex("DungeonId");
 
                     b.ToTable("RaidCharacters");
                 });
@@ -356,41 +350,44 @@ namespace WowGuildManager.Web.Migrations
 
             modelBuilder.Entity("WowGuildManager.Domain.Dungeon.Dungeon", b =>
                 {
-                    b.HasOne("WowGuildManager.Domain.Characters.Character", "DungeonLeader")
+                    b.HasOne("WowGuildManager.Domain.Characters.Character", "Leader")
                         .WithMany()
-                        .HasForeignKey("DungeonLeaderId");
+                        .HasForeignKey("LeaderId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("WowGuildManager.Domain.Dungeon.DungeonCharacters", b =>
+            modelBuilder.Entity("WowGuildManager.Domain.Dungeon.DungeonsCharacters", b =>
                 {
                     b.HasOne("WowGuildManager.Domain.Characters.Character", "Character")
                         .WithMany("Dungeons")
                         .HasForeignKey("CharacterId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("WowGuildManager.Domain.Dungeon.Dungeon", "Dungeon")
                         .WithMany("RegisteredCharacters")
                         .HasForeignKey("DungeonId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("WowGuildManager.Domain.Raid.Raid", b =>
                 {
-                    b.HasOne("WowGuildManager.Domain.Characters.Character", "RaidLeader")
+                    b.HasOne("WowGuildManager.Domain.Characters.Character", "Leader")
                         .WithMany()
-                        .HasForeignKey("RaidLeaderId");
+                        .HasForeignKey("LeaderId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("WowGuildManager.Domain.Raid.RaidCharacters", b =>
+            modelBuilder.Entity("WowGuildManager.Domain.Raid.RaidsCharacters", b =>
                 {
                     b.HasOne("WowGuildManager.Domain.Characters.Character", "Character")
                         .WithMany("Raids")
                         .HasForeignKey("CharacterId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("WowGuildManager.Domain.Raid.Raid", "Dungeon")
+                    b.HasOne("WowGuildManager.Domain.Raid.Raid", "Raid")
                         .WithMany("RegisteredCharacters")
-                        .HasForeignKey("DungeonId");
+                        .HasForeignKey("RaidId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

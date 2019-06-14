@@ -5,8 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Dungeon;
+using WowGuildManager.Domain.Raid;
 using WowGuildManager.Models.ViewModels.Characters;
 using WowGuildManager.Models.ViewModels.Dungeons;
+using WowGuildManager.Models.ViewModels.Raids;
 
 namespace WowGuildManager.Web.Mapper
 {
@@ -15,8 +17,12 @@ namespace WowGuildManager.Web.Mapper
         public WowGuildManagerProfile()
         {
             this.CreateMap<Character, CharacterViewModel>();
+
             this.CreateMap<Dungeon, DungeonViewModel>()
                 .ForMember(d => d.RegisteredPlayers, dvm => dvm.MapFrom(x => x.RegisteredCharacters.Count));
+
+            this.CreateMap<Raid, RaidViewModel>()
+               .ForMember(d => d.RegisteredPlayers, dvm => dvm.MapFrom(x => x.RegisteredCharacters.Count));
         }
     }
 }

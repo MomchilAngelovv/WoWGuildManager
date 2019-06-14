@@ -38,7 +38,7 @@ namespace WowGuildManager.Web.Extensions
             await roleManager.CreateAsync(new WowGuildManagerRole
             {
                 Name = "Admin",
-                Description = "Total control of page."
+                Description = "Full access."
             });
 
             await roleManager.CreateAsync(new WowGuildManagerRole
@@ -50,13 +50,13 @@ namespace WowGuildManager.Web.Extensions
             await roleManager.CreateAsync(new WowGuildManagerRole
             {
                 Name = "User",
-                Description = "Basic user with no actual rights."
+                Description = "Basic user."
             });
 
             var adminUser = new WowGuildManagerUser
             {
                 Email = "Admin@admin.com",
-                UserName = "Asd",
+                UserName = "Monkata",
             };
 
             //TODO: Fix password

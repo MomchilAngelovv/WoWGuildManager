@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
-using WowGuildManager.Domain.Dungeon;
+using WowGuildManager.Domain.Raid;
 
-namespace WowGuildManager.Models.ViewModels.Dungeons
+namespace WowGuildManager.Models.ViewModels.Raids
 {
-    public class DungeonCreateViewModel
+    public class RaidCreateInputModel
     {
         [Required]
         public DateTime DateTime { get; set; }
 
         [Required]
-        public DungeonPlace Place { get; set; }
+        public RaidPlace Place { get; set; }
 
         public string Description { get; set; }
 
-        public string DungeonLeaderId { get; set; }
+        [Required]
+        public string RaidLeaderId { get; set; }
     }
 }

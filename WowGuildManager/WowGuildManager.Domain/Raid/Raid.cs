@@ -12,7 +12,7 @@ namespace WowGuildManager.Domain.Raid
     {
         public Raid()
         {
-            this.RegisteredCharacters = new HashSet<RaidCharacters>();
+            this.RegisteredCharacters = new HashSet<RaidsCharacters>();
         }
 
         [Key]
@@ -32,13 +32,10 @@ namespace WowGuildManager.Domain.Raid
 
         public string Description { get; set; }
 
-        [Range(10, 40)]
-        public int RegisteredPlayers => this.RegisteredCharacters.Count;
-
         [Required]
         public string LeaderId { get; set; }
-        public Character RaidLeader { get; set; }
+        public Character Leader { get; set; }
 
-        public ICollection<RaidCharacters> RegisteredCharacters { get; set; }
+        public ICollection<RaidsCharacters> RegisteredCharacters { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using WowGuildManager.Domain.Characters;
@@ -7,12 +8,13 @@ using WowGuildManager.Domain.Characters;
 namespace WowGuildManager.Domain.Dungeon
 {
     [Table("DungeonCharacters")]
-    public class DungeonCharacters
+    public class DungeonsCharacters
     {
+        [Required]
         public string DungeonId { get; set; }
         public Dungeon Dungeon { get; set; }
 
-
+        [Required]
         public string CharacterId { get; set; }
         public Character Character { get; set; }
     }

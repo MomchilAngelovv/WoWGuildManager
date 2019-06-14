@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WowGuildManager.Domain.Characters
+﻿namespace WowGuildManager.Domain.Characters
 {
-
     public enum CharacterRole
     {
         Tank = 1,

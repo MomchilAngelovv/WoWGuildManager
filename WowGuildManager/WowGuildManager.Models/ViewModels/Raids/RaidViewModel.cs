@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WowGuildManager.Models.ViewModels.Dungeons
+namespace WowGuildManager.Models.ViewModels.Raids
 {
-    public class DungeonViewModel
+    public class RaidViewModel
     {
         public string Id { get; set; }
 

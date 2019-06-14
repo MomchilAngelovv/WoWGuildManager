@@ -6,7 +6,7 @@ using WowGuildManager.Domain.Characters;
 
 namespace WowGuildManager.Models.ViewModels.Characters
 {
-    public class CharacterCreateViewModel
+    public class CharacterCreateInputModel
     {
         [Required]
         [MinLength(3)]
@@ -14,7 +14,7 @@ namespace WowGuildManager.Models.ViewModels.Characters
         public string Name { get; set; }
 
         [Required]
-        public ClassType Class { get; set; }
+        public CharacterClass Class { get; set; }
 
         [Range(1, 60)]
         public int Level { get; set; }

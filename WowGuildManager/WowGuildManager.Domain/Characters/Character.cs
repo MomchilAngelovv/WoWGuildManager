@@ -12,12 +12,10 @@ namespace WowGuildManager.Domain.Characters
     [Table("Characters")]
     public class Character
     {
-      
-        
         public Character()
         {
-            this.Raids = new HashSet<RaidCharacters>();
-            this.Dungeons = new HashSet<DungeonCharacters>();
+            this.Raids = new HashSet<RaidsCharacters>();
+            this.Dungeons = new HashSet<DungeonsCharacters>();
         }
 
         [Key]
@@ -29,7 +27,7 @@ namespace WowGuildManager.Domain.Characters
         public string Name { get; set; }
 
         [Required]
-        public ClassType Class { get; set; }
+        public CharacterClass Class { get; set; }
 
         [Range(1,60)]
         public int Level { get; set; }
@@ -40,13 +38,14 @@ namespace WowGuildManager.Domain.Characters
         [Required]
         public string Image { get; set; }
 
+        public int GuildPoints { get; set; }
+
         [Required]
         public string WowGuildManagerUserId { get; set; }
         public WowGuildManagerUser User { get; set; }
 
-        public ICollection<RaidCharacters> Raids { get; set; }
+        public ICollection<RaidsCharacters> Raids { get; set; }
 
-        public ICollection<DungeonCharacters> Dungeons { get; set; }
-
+        public ICollection<DungeonsCharacters> Dungeons { get; set; }
     }
 }
