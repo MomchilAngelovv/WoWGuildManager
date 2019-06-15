@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,6 @@ namespace WowGuildManager.Services.Api
         {
             return this.context.Characters
                 .Where(c => c.WowGuildManagerUserId == userId);
-
-            throw new NotImplementedException();
         }
 
         public Character GetCharacterById(string characterId)

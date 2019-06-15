@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,8 @@ using WowGuildManager.Services.Api;
 
 namespace WowGuildManager.Web.Areas.Api.Controllers
 {
+    [Authorize]
+    [Route("api/[controller]")]
     [Area("Api")]
     [ApiController]
     public class CharactersController : ControllerBase
@@ -25,8 +28,7 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
             this.userManager = userManager;
             this.apiService = apiService;
         }
-
-        [Route("api/[controller]/all")]
+    
         public IEnumerable<Character> All()
         {
             var userId = this.userManager.GetUserId(this.User);
@@ -34,7 +36,7 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
             return this.apiService.GetAll(userId).ToList();
         }
 
-        [Route("api/[controller]/{id}")]
+        [Route("{id}")]
         public Character GetCharacterById(string id)
         {
             return this.apiService.GetCharacterById(id);

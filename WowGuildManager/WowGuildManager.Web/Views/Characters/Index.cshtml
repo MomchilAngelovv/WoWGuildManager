@@ -2,7 +2,9 @@
 @{
     ViewData["Title"] = "Index";
 }
-<a asp-area="" asp-controller="Characters" asp-action="Create"><h2>Add character</h2></a>
+<div class="text-center m-3">
+    <a asp-area="" asp-controller="Characters" asp-action="Create" class="btn btn-warning "><h2>Add character</h2></a>
+</div>
 
 <section>
     <div id="myCharacters">
@@ -17,7 +19,7 @@
                             <p class="card-text">@character.Level @character.Class @character.Role</p>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted">Last updated 3 mins ago</small>
+                            <small class="text-muted">TBA GuildRanks</small>
                         </div>
                     </div>
                 }

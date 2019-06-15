@@ -13,9 +13,11 @@
 </div>
 
 <h2 class="text-center">Upcoming events</h2>
-<hr class="bg-white" />
+
 <section>
-    <h4>Raids</h4>
+    <hr class="bg-warning" />
+    <h4 class="text-center text-success">Raids</h4>
+    <hr class="bg-warning" />
     <div class="row d-flex justify-content-center">
         @foreach (var raid in Model.Raids)
         {
@@ -24,7 +26,7 @@
                 <div class="card-body text-warning">
                     <h5 class="card-title">@raid.DateTime</h5>
                     <p class="card-text">@raid.Place - Leader: @raid.LeaderName</p>
-                    <p class="card-text">@raid.RegisteredPlayers/@raid.MaxPlayers</p>
+                    <p class="card-text">Registered: @raid.RegisteredPlayers/@raid.MaxPlayers</p>
                     <p class="card-text">@raid.Description</p>
                     <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-success w-100">Join</a>
                 </div>
@@ -33,8 +35,9 @@
     </div>
 </section>
 <section>
-    <h2 class="text-center text-dark">Dungeons</h2>
-
+    <hr class="bg-warning" />
+    <h2 class="text-center text-danger">Dungeons</h2>
+    <hr class="bg-warning" />
     <div class="row d-flex justify-content-center">
         @foreach (var dungeon in Model.Dungeons)
         {
@@ -43,7 +46,7 @@
                 <div class="card-body text-warning">
                     <h5 class="card-title">@dungeon.DateTime</h5>
                     <p class="card-text">@dungeon.Place - Leader: @dungeon.LeaderName</p>
-                    <p class="card-text">@dungeon.RegisteredPlayers/@dungeon.MaxPlayers</p>
+                    <p class="card-text">Registered: @dungeon.RegisteredPlayers/@dungeon.MaxPlayers</p>
                     <p class="card-text">@dungeon.Description</p>
                     <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100">Join</a>
                 </div>

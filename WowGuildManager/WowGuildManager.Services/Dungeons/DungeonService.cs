@@ -69,7 +69,7 @@ namespace WowGuildManager.Services.Dungeons
             dungeon.RegisteredCharacters.Add(new DungeonsCharacters
             {
                 CharacterId = dungeon.LeaderId,
-                Dungeon = dungeon
+                DungeonId = dungeon.Id
             });
 
             this.context.Dungeons.Add(dungeon);
