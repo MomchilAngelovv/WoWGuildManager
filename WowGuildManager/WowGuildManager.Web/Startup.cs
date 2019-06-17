@@ -62,7 +62,7 @@ namespace WowGuildManager.Web
             .AddEntityFrameworkStores<WowGuildManagerDbContext>();
 
             //Services
-            services.AddAutoMapper(x => x.AddProfile<WowGuildManagerProfile>());
+            services.AddAutoMapper(typeof(Startup));
             services.AddTransient<ICharacterService, CharacterService>();
             services.AddTransient<IDungeonService, DungeonService>();
             services.AddTransient<IRaidService, RaidService>();

@@ -34,7 +34,6 @@ namespace WowGuildManager.Services.Dungeons
         private const string StImage = "/images/dungeons/stImg.jpg";
         private const string LbrsImage = "/images/dungeons/lbrsImg.jpg";
 
-
         private readonly WowGuildManagerDbContext context;
         private readonly ICharacterService characterService;
 
