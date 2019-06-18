@@ -42,3 +42,15 @@ body {
 
 
 /*//////////////////////////////////////////////////////////////*/
+.list-unstyled {
+    margin-bottom: 0px;
+}
+
+.fixed-bottom{
+    margin-top:0px !important;
+}
+
+
+.carousel-indicators{
+    margin-bottom: 0px !important;
+}

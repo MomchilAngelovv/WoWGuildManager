@@ -4,11 +4,11 @@
 }
 
 <div class="text-center">
-    <a asp-area="" asp-controller="Dungeons" asp-action="Create" class="btn btn-warning m-3"><h2>Create new dungeon event</h2></a>
+    <a asp-area="" asp-controller="Dungeons" asp-action="Create" class="btn btn-warning m-3 border-dark"><h2>Create new Dungeon</h2></a>
 
     @if (this.User.IsInRole("Raid Leader") || this.User.IsInRole("Admin"))
     {
-        <a asp-area="" asp-controller="Raids" asp-action="Create" class="btn btn-warning m-3"><h2>Create new Raid event</h2></a>
+        <a asp-area="" asp-controller="Raids" asp-action="Create" class="btn btn-warning m-3 border-dark"><h2>Create new Raid</h2></a>
     }
 </div>
 
@@ -32,7 +32,7 @@
 </section>
 <section>
     <h2 class="text-center">Dungeons</h2>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center mb-5">
         @foreach (var dungeon in Model.Dungeons)
         {
             <div class="card col-auto m-4 bg-dark border-success" style="width: 18rem; padding:0px;">
@@ -42,7 +42,7 @@
                     <p class="card-text">@dungeon.Place - Leader: @dungeon.LeaderName</p>
                     <p class="card-text">Registered: @dungeon.RegisteredPlayers/@dungeon.MaxPlayers</p>
                     <p class="card-text">@dungeon.Description</p>
-                    <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100">Join</a>
+                    <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100 ">Join</a>
                 </div>
             </div>
         }
