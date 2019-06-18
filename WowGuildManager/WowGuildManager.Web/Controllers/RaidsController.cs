@@ -37,21 +37,29 @@ namespace WowGuildManager.Web.Controllers
        
         public async Task<IActionResult> Create()
         {
-            this.ViewBag.Places = this.raidService.GetPlaces()
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var myCharacters = this.characterService.GetCharactersByUser(user)
+              .Select(character => new SelectListItem
+              {
+                  Text = character.Name,
+                  Value = character.Id
+              });
+
+            if (myCharacters.Any() == false)
+            {
+                return this.RedirectToAction("Create", "Characters");
+            }
+
+            var places = this.raidService.GetPlaces()
                .Select(place => new SelectListItem
                {
                    Text = place.ToString(),
                    Value = ((int)place).ToString()
                });
 
-            var user = await this.userManager.GetUserAsync(this.User);
-
-            this.ViewBag.Characters = this.characterService.GetCharactersByUser(user)
-              .Select(character => new SelectListItem
-              {
-                  Text = character.Name,
-                  Value = character.Id
-              });
+            this.ViewBag.Characters = myCharacters;
+            this.ViewBag.Places = places;
 
             return this.View();
         }

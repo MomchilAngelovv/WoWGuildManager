@@ -25,7 +25,6 @@ namespace WowGuildManager.Web.Mapper
             this.CreateMap<Raid, RaidViewModel>()
                .ForMember(d => d.RegisteredPlayers, dvm => dvm.MapFrom(x => x.RegisteredCharacters.Count))
                .ForMember(d => d.DateTime, dvm => dvm.MapFrom(x => $"{x.DateTime.ToString("dd MMMM yyyy HH:mm")}"));
-
         }
     }
 }

@@ -3,27 +3,39 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<div class="row d-flex justify-content-center m-3">
+    <div class="col-sm-6 col-sm">
 
-<div class="w-50 justify-content-center align-items-center col-sm-6 offset-sm-3">
-    <form method="post">
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="@Model.DateTime"></label>
-            <input asp-for="@Model.DateTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ','T')" class="form-control" placeholder="Name" />
-            <span asp-validation-for="@Model.DateTime" class="text-danger"></span>
-        </div>
+        <form method="post">
+            <h2 class="text-center mt-3">Create new dungeon event</h2>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="@Model.DateTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ','T')" class="form-control border-dark" />
+                <span asp-validation-for="@Model.DateTime" class="text-danger"></span>
+            </div>
 
-        <select asp-for="@Model.Place" asp-items="@ViewBag.Places" class="form-control"></select>
+            <div class="form-group">
+                <select asp-for="@Model.Place" asp-items="@ViewBag.Places" class="form-control border-dark">
+                    <option disabled selected> -- Place -- </option>
+                </select>
+                <span asp-validation-for="@Model.Place" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="@Model.DungeonLeaderId" asp-items="@ViewBag.Characters" class="form-control border-dark">
+                    <option disabled selected> -- Leader -- </option>
+                </select>
+                <span asp-validation-for="@Model.DungeonLeaderId" class="text-danger"></span>
+            </div>
 
-        <select asp-for="@Model.DungeonLeaderId" asp-items="@ViewBag.Characters" class="form-control mt-3"></select>
+            <div class="form-group">
+                <input asp-for="@Model.Description" class="form-control border-dark" placeholder="Optional description (Quest run, Item farm, Event chase etc...)" />
+            </div>
 
-        <div class="form-group">
-            <label asp-for="@Model.Description"></label>
-            <input asp-for="@Model.Description" class="form-control" placeholder="Optional description (Quest run, Item farm, Event chase etc...)" />
-            <span asp-validation-for="@Model.Description" class="text-danger"></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Add event</button>
-    </form>
+            <button type="submit" class="btn btn-warning w-100 border-dark">Create</button>
+        </form>
+    </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

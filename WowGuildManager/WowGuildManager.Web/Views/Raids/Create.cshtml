@@ -3,25 +3,36 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<div class="row d-flex justify-content-center m-3">
+    <div class="col-sm-6 col-sm">
+        <form method="post">
+            <h2 class="text-center mt-3">Create new raid</h2>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="@Model.DateTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ','T')" class="form-control border-dark"/>
+                <span asp-validation-for="@Model.DateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="@Model.Place" asp-items="@ViewBag.Places" class="form-control border-dark">
+                    <option disabled selected> -- Place -- </option>
+                </select>
+                <span asp-validation-for="@Model.Place" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="@Model.RaidLeaderId" asp-items="@ViewBag.Characters" class="form-control border-dark">
+                    <option disabled selected> -- Leader -- </option>
+                </select>
+                <span asp-validation-for="@Model.RaidLeaderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="@Model.Description" class="form-control border-dark" placeholder="Optional description" />
+            </div>
 
-<form method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="@Model.DateTime"></label>
-        <input asp-for="@Model.DateTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ','T')" class="form-control" placeholder="Name" />
-        <span asp-validation-for="@Model.DateTime" class="text-danger"></span>
+            <button type="submit" class="btn btn-warning w-100 border-dark">Create raid</button>
+        </form>
     </div>
+</div>
 
-    <select asp-for="@Model.Place" asp-items="@ViewBag.Places"></select>
-
-    <select asp-for="@Model.RaidLeaderId" asp-items="@ViewBag.Characters"></select>
-
-    <div class="form-group">
-        <label asp-for="@Model.Description"></label>
-        <input asp-for="@Model.Description" class="form-control" placeholder="Optional description" />
-        <span asp-validation-for="@Model.Description" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Add event</button>
-</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

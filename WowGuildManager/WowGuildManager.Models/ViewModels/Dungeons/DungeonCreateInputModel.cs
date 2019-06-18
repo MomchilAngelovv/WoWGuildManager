@@ -16,6 +16,7 @@ namespace WowGuildManager.Models.ViewModels.Dungeons
 
         public string Description { get; set; }
 
+        [Required]
         public string DungeonLeaderId { get; set; }
     }
 }
