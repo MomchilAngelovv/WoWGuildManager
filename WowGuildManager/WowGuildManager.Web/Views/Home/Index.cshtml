@@ -1,28 +1,36 @@
-﻿<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner w-100">
+﻿<div id="homeCarousel" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+        <li data-target="#homeCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#homeCarousel" data-slide-to="1"></li>
+        <li data-target="#homeCarousel" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner">
         <div class="carousel-item active">
-            <a asp-area="" asp-controller="Calendar" asp-action="Index"><img class="d-block w-100" src="https://i.imgur.com/nhHsQg1.jpg" alt="First slide"></a>
+            <a asp-area="" asp-controller="Events" asp-action="Index"><img src="https://i.redd.it/kulotquzg7y21.jpg" class="d-block w-100 h-100" alt="Los Angeles"></a>
+            <div class="carousel-caption">
+                <h3>Raids and events schedule</h3>
+                <p>Browse the guild's upcoming events</p>
+            </div>
         </div>
         <div class="carousel-item">
-            <a asp-area="" asp-controller="Armory" asp-action="Index"><img class="d-block w-100" src="https://i.imgur.com/nhHsQg1.jpg" alt="Second slide"></a>
+            <img src="https://i.redd.it/kulotquzg7y21.jpg" class="w-100 h-100" alt="Chicago">
+            <div class="carousel-caption">
+                <h3>Chicago</h3>
+                <p>Thank you, Chicago!</p>
+            </div>
         </div>
         <div class="carousel-item">
-            <a asp-area="" asp-controller="Gallery" asp-action="Index"><img class="d-block w-100" src="https://i.imgur.com/nhHsQg1.jpg" alt="Third slide"></a>
+            <img src="https://i.redd.it/kulotquzg7y21.jpg" class="w-100 h-100" alt="New York">
+            <div class="carousel-caption">
+                <h3>New York</h3>
+                <p>We love the Big Apple!</p>
+            </div>
         </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+    <a class="carousel-control-prev" href="#homeCarousel" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
     </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+    <a class="carousel-control-next" href="#homeCarousel" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
     </a>
 </div>
-
-<a asp-area="Api" asp-controller="Characters" asp-action="All">GetChars</a>

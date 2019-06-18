@@ -2,28 +2,27 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="text-center m-3">
-    <a asp-area="" asp-controller="Characters" asp-action="Create" class="btn btn-warning "><h2>Add character</h2></a>
+
+<div class="text-center">
+    <a asp-area="" asp-controller="Characters" asp-action="Create" class="btn btn-primary m-3"><h2>Add character</h2></a>
 </div>
 
 <section>
-    <div id="myCharacters">
-        <div class="row d-flex justify-content-center">
-            <div class="card-deck">
-                @foreach (var character in Model.Characters)
-                {
-                    <div class="card bg-dark border text-warning" style="width: 20rem;">
-                        <a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id"><img class="card-img-top" src="@character.Image" style="height:260px;"></a>
-                        <div class="card-body">
-                            <h5 class="card-title">@character.Name</h5>
-                            <p class="card-text">@character.Level @character.Class @character.Role</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">TBA GuildRanks</small>
-                        </div>
+    <div class="row d-flex justify-content-center">
+        <div class="card-deck">
+            @foreach (var character in Model.Characters)
+            {
+                <div class="card bg-dark border text-warning" style="width: 20rem;">
+                    <a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id"><img class="card-img-top" src="@character.Image" style="height:260px;"></a>
+                    <div class="card-body">
+                        <h5 class="card-title">@character.Name</h5>
+                        <p class="card-text">@character.Level @character.Class @character.Role</p>
                     </div>
-                }
-            </div>
+                    <div class="card-footer">
+                        <small class="text-muted">TBA GuildRanks</small>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </section>

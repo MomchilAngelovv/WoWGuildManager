@@ -4,7 +4,7 @@
 }
 
 <div class="text-center">
-    <a asp-area="" asp-controller="Dungeons" asp-action="Create" class="btn btn-primary m-3"><h2>Create new dungeon event</h2></a>
+    <a asp-area="" asp-controller="Dungeons" asp-action="Create" class="btn btn-warning m-3"><h2>Create new dungeon event</h2></a>
 
     @if (this.User.IsInRole("Raid Leader") || this.User.IsInRole("Admin"))
     {
@@ -12,36 +12,30 @@
     }
 </div>
 
-<h2 class="text-center">Upcoming events</h2>
-
 <section>
-    <hr class="bg-warning" />
-    <h4 class="text-center text-success">Raids</h4>
-    <hr class="bg-warning" />
+    <h2 class="text-center">Raids</h2>
     <div class="row d-flex justify-content-center">
         @foreach (var raid in Model.Raids)
         {
-            <div class="card col-auto m-4 bg-dark border-warning" style="width: 18rem; padding:0px;">
+            <div class="card col-auto m-4 bg-dark border-danger" style="width: 18rem; padding:0px;">
                 <img class="card-img-top" src="@raid.Image" alt="Card image cap">
                 <div class="card-body text-warning">
                     <h5 class="card-title">@raid.DateTime</h5>
                     <p class="card-text">@raid.Place - Leader: @raid.LeaderName</p>
                     <p class="card-text">Registered: @raid.RegisteredPlayers/@raid.MaxPlayers</p>
                     <p class="card-text">@raid.Description</p>
-                    <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-success w-100">Join</a>
+                    <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100">Join</a>
                 </div>
             </div>
         }
     </div>
 </section>
 <section>
-    <hr class="bg-warning" />
-    <h2 class="text-center text-danger">Dungeons</h2>
-    <hr class="bg-warning" />
+    <h2 class="text-center">Dungeons</h2>
     <div class="row d-flex justify-content-center">
         @foreach (var dungeon in Model.Dungeons)
         {
-            <div class="card col-auto m-4 bg-dark border" style="width: 18rem; padding:0px;">
+            <div class="card col-auto m-4 bg-dark border-success" style="width: 18rem; padding:0px;">
                 <img class="card-img-top" src="@dungeon.Image" alt="Card image cap">
                 <div class="card-body text-warning">
                     <h5 class="card-title">@dungeon.DateTime</h5>
@@ -53,5 +47,4 @@
             </div>
         }
     </div>
-
 </section>

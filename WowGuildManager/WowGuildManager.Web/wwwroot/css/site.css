@@ -5,8 +5,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    padding-top: 50px;
-    padding-bottom: 20px;
+    margin-top: 58px;
+    padding-bottom: unset;
 }
 
 /* Wrapping element */
@@ -42,16 +42,3 @@ body {
 
 
 /*//////////////////////////////////////////////////////////////*/
-.carousel {
-    width: 100%;
-}
-
-.card col-2 m-3 bg-dark border{
-    width:800px;
-    height:600px;
-}
-
-.card bg-dark border text-warning{
-    padding: 0px;
-}
-

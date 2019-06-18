@@ -61,7 +61,6 @@ namespace WowGuildManager.Web
             .AddRoles<WowGuildManagerRole>()
             .AddEntityFrameworkStores<WowGuildManagerDbContext>();
 
-            //Services
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<ICharacterService, CharacterService>();
             services.AddTransient<IDungeonService, DungeonService>();
