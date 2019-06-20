@@ -9,7 +9,7 @@ using WowGuildManager.Web.Models;
 namespace WowGuildManager.Web.Controllers
 {
     //TODO APPLY Authorization attribites everywhere
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public IActionResult Index()
         {

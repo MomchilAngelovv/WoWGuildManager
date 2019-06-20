@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WowGuildManager.Web.Controllers
 {
     [AllowAnonymous]
-    public class GalleryController : Controller
+    public class GalleryController : BaseController
     {
         public IActionResult Index()
         {

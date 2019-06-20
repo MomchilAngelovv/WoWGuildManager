@@ -16,7 +16,7 @@ using WowGuildManager.Services.Dungeons;
 namespace WowGuildManager.Web.Controllers
 {
     [Authorize]
-    public class DungeonsController : Controller
+    public class DungeonsController : BaseController
     {
         private readonly UserManager<WowGuildManagerUser> userManager;
         private readonly IDungeonService dungeonService;
@@ -64,7 +64,7 @@ namespace WowGuildManager.Web.Controllers
 
         private async Task<IEnumerable<SelectListItem>> BindCharactersToSelectListItem()
         {
-            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
+            var userId = await this.GetUserId(this.userManager);
 
             var myCharacters = this.characterService
                 .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
@@ -96,7 +96,7 @@ namespace WowGuildManager.Web.Controllers
                 .GetCharactersForDungeonByDungeonId<CharacterDungeonDetailsViewModel>(id)
                 .AsEnumerable();
 
-            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
+            var userId = await this.GetUserId(this.userManager);
 
             //TODO TOTAL REFACtor OF LOGIC and models if joined in dungeon
             var myCharacters = this.characterService

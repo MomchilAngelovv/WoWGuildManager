@@ -17,23 +17,20 @@ using System.Security.Claims;
 namespace WowGuildManager.Web.Controllers
 {
     [Authorize]
-    public class CharactersController : Controller
+    public class CharactersController : BaseController
     {
+        private readonly ICharacterService characterService;
         private readonly UserManager<WowGuildManagerUser> userManager;
 
-        private readonly ICharacterService characterService;
-
-        public CharactersController(
-            UserManager<WowGuildManagerUser> userManager,
-            ICharacterService characterService)
-        {
-            this.userManager = userManager;
+        public CharactersController(ICharacterService characterService, UserManager<WowGuildManagerUser> userManager)
+        { 
             this.characterService = characterService;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
         {
-            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
+            var userId = await this.GetUserId(this.userManager);
 
             var characters = this.characterService
                 .GetCharactersByUserId<CharacterViewModel>(userId)
@@ -66,7 +63,7 @@ namespace WowGuildManager.Web.Controllers
                 return this.RedirectToAction(nameof(Create));
             }
 
-            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
+            var userId = await this.GetUserId(this.userManager);
 
             inputModel.UserId = userId;
 

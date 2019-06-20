@@ -15,7 +15,7 @@ using WowGuildManager.Services.Raids;
 namespace WowGuildManager.Web.Controllers
 {
     [Authorize(Roles = "Admin, Raid Leader")]
-    public class RaidsController : Controller
+    public class RaidsController : BaseController
     {
         private readonly IRaidService raidService;
         private readonly ICharacterService characterService;
@@ -55,7 +55,7 @@ namespace WowGuildManager.Web.Controllers
 
         private async Task<IEnumerable<SelectListItem>> BindCharactersToSelectListItem()
         {
-            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
+            var userId = await this.GetUserId(this.userManager);
 
             var myCharacters = this.characterService
                 .GetCharactersByUserId<CharacterIdNameViewModel>(userId)

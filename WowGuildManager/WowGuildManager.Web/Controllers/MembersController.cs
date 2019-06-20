@@ -11,7 +11,7 @@ using WowGuildManager.Services.Characters;
 namespace WowGuildManager.Web.Controllers
 {
     [AllowAnonymous]
-    public class MembersController : Controller
+    public class MembersController : BaseController
     {
         private readonly ICharacterService characterService;
 

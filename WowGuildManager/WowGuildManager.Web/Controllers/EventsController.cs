@@ -20,7 +20,7 @@ using WowGuildManager.Services.Raids;
 namespace WowGuildManager.Web.Controllers
 {
     [Authorize]
-    public class EventsController : Controller
+    public class EventsController : BaseController
     {
         private readonly UserManager<WowGuildManagerUser> userManager;
         private readonly IDungeonService dungeonService;
@@ -41,7 +41,7 @@ namespace WowGuildManager.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
+            var userId = await this.GetUserId(this.userManager);
 
             var myCharacters = this.charactersService
                 .GetCharactersByUserId<Character>(userId)
