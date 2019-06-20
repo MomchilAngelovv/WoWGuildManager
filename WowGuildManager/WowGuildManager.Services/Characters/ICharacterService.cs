@@ -10,7 +10,7 @@ namespace WowGuildManager.Services.Characters
 {
     public interface ICharacterService
     {
-        Character Create(CharacterCreateInputModel inputModel, string userId);
+        Character Create(CharacterCreateInputModel inputModel);
 
         IQueryable<CharacterClass> GetClasses();
 

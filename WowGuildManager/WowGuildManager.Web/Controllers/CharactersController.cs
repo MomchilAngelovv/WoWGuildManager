@@ -75,16 +75,18 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CharacterCreateInputModel inputModel)
+        public async Task<IActionResult> Create(CharacterCreateInputModel inputModel)
         {
             if (ModelState.IsValid == false)
             {
                 return this.RedirectToAction(nameof(Create));
             }
 
-            var userId = this.userManager.GetUserId(this.User);
+            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
 
-            this.characterService.Create(inputModel, userId);
+            inputModel.UserId = userId;
+
+            this.characterService.Create(inputModel);
 
             return this.RedirectToAction(nameof(Index));
         }

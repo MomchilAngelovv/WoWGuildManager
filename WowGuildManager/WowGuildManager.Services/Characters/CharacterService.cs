@@ -29,9 +29,9 @@ namespace WowGuildManager.Services.Characters
             this.context = context;
         }
 
-        public Character Create(CharacterCreateInputModel inputModel, string userId)
+        public Character Create(CharacterCreateInputModel inputModel)
         {
-            if (this.context.Characters.Where(c => c.WowGuildManagerUserId == userId).Count() == 4)
+            if (this.context.Characters.Where(c => c.WowGuildManagerUserId == inputModel.UserId).Count() == 4)
             {
                 return null;
             }
@@ -42,7 +42,7 @@ namespace WowGuildManager.Services.Characters
                 Level = inputModel.Level,
                 Name = inputModel.Name,
                 Role = inputModel.Role,
-                WowGuildManagerUserId = userId,
+                WowGuildManagerUserId = inputModel.UserId,
             };
 
             this.SetCharacterImage(character);
