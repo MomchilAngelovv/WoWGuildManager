@@ -93,8 +93,14 @@ namespace WowGuildManager.Web.Controllers
         {
             var character = mapper.Map<CharacterViewModel>(this.characterService.GetCharacterById(id));
 
-
             return this.View(character);
+        }
+
+        public IActionResult Delete(string id)
+        {
+            this.characterService.Delete(id);
+
+            return this.RedirectToAction(nameof(Index));
         }
     }
 }

@@ -42,7 +42,7 @@ namespace WowGuildManager.Services.Raids
 
             this.SetRaidImageAndMaxPlayers(raid);
 
-            raid.RegisteredCharacters.Add(new RaidsCharacters
+            raid.RegisteredCharacters.Add(new RaidCharacter
             {
                 CharacterId = inputModel.RaidLeaderId,
                 Raid = raid

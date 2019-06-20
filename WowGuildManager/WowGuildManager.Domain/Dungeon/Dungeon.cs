@@ -14,13 +14,15 @@ namespace WowGuildManager.Domain.Dungeon
 
         public Dungeon()
         {
-            this.RegisteredCharacters = new HashSet<DungeonsCharacters>();
+            this.MaxPlayers = DungeonMaxPlayers;
+
+            this.RegisteredCharacters = new HashSet<DungeonCharacter>();
         }
 
         [Key]
         public string Id { get; set; }
 
-        public int MaxPlayers { get; set; } = DungeonMaxPlayers;
+        public int MaxPlayers { get; set; }
 
         [Required]
         public DateTime DateTime { get; set; }
@@ -37,6 +39,6 @@ namespace WowGuildManager.Domain.Dungeon
         public string LeaderId { get; set; }
         public Character Leader { get; set; }
 
-        public ICollection<DungeonsCharacters> RegisteredCharacters { get; set; }
+        public ICollection<DungeonCharacter> RegisteredCharacters { get; set; }
     }
 }

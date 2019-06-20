@@ -1,7 +1,48 @@
-﻿@{
+﻿@model WowGuildManager.Models.ViewModels.Dungeons.DungeonDetailsViewModel
+@{
     ViewData["Title"] = "Details";
 }
 
 <h2>Dugeons Details</h2>
+
+<table class="table table-sm table-hover table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Guild rank</th>
+            <th scope="col">Name</th>
+            <th scope="col">Level</th>
+            <th scope="col">Class</th>
+            <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var character in Model.Characters)
+        {
+            <tr>
+                <th scope="row">N/A</th>
+                <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="ID">@character.Name</a></td>
+                <td>@character.Level</td>
+                <td>@character.Class</td>
+                <td>@character.Role</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.Characters.Count() < 5)
+{
+    <div class="dropdown ">
+        <button class="btn btn-secondary dropdown-toggle bg-warning w-100 text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select character to join
+        </button>
+        <div class="dropdown-menu w-100 bg-dark" aria-labelledby="dropdownMenuButton">
+            @foreach (var availableCharacter in Model.AvailableCharacters)
+            {
+                <a asp-area="" asp-controller="Dungeons" asp-action="Join" asp-route-characterId="@availableCharacter.Id" asp-route-dungeonId="@Model.Id" class="dropdown-item text-white">@availableCharacter.Name</a>
+            }
+        </div>
+    </div>
+}
+
 
 

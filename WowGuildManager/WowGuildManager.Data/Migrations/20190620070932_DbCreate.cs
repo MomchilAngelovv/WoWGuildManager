@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WowGuildManager.Data.Migrations
 {
-    public partial class InitialDbCreate : Migration
+    public partial class DbCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -225,7 +225,7 @@ namespace WowGuildManager.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DungeonCharacters",
+                name: "DungeonCharacter",
                 columns: table => new
                 {
                     DungeonId = table.Column<string>(nullable: false),
@@ -233,15 +233,15 @@ namespace WowGuildManager.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DungeonCharacters", x => new { x.DungeonId, x.CharacterId });
+                    table.PrimaryKey("PK_DungeonCharacter", x => new { x.DungeonId, x.CharacterId });
                     table.ForeignKey(
-                        name: "FK_DungeonCharacters_Characters_CharacterId",
+                        name: "FK_DungeonCharacter_Characters_CharacterId",
                         column: x => x.CharacterId,
                         principalTable: "Characters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DungeonCharacters_Dungeons_DungeonId",
+                        name: "FK_DungeonCharacter_Dungeons_DungeonId",
                         column: x => x.DungeonId,
                         principalTable: "Dungeons",
                         principalColumn: "Id",
@@ -249,7 +249,7 @@ namespace WowGuildManager.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RaidCharacters",
+                name: "RaidCharacter",
                 columns: table => new
                 {
                     RaidId = table.Column<string>(nullable: false),
@@ -257,15 +257,15 @@ namespace WowGuildManager.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RaidCharacters", x => new { x.RaidId, x.CharacterId });
+                    table.PrimaryKey("PK_RaidCharacter", x => new { x.RaidId, x.CharacterId });
                     table.ForeignKey(
-                        name: "FK_RaidCharacters_Characters_CharacterId",
+                        name: "FK_RaidCharacter_Characters_CharacterId",
                         column: x => x.CharacterId,
                         principalTable: "Characters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_RaidCharacters_Raids_RaidId",
+                        name: "FK_RaidCharacter_Raids_RaidId",
                         column: x => x.RaidId,
                         principalTable: "Raids",
                         principalColumn: "Id",
@@ -317,8 +317,8 @@ namespace WowGuildManager.Data.Migrations
                 column: "WowGuildManagerUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DungeonCharacters_CharacterId",
-                table: "DungeonCharacters",
+                name: "IX_DungeonCharacter_CharacterId",
+                table: "DungeonCharacter",
                 column: "CharacterId");
 
             migrationBuilder.CreateIndex(
@@ -327,8 +327,8 @@ namespace WowGuildManager.Data.Migrations
                 column: "LeaderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RaidCharacters_CharacterId",
-                table: "RaidCharacters",
+                name: "IX_RaidCharacter_CharacterId",
+                table: "RaidCharacter",
                 column: "CharacterId");
 
             migrationBuilder.CreateIndex(
@@ -355,10 +355,10 @@ namespace WowGuildManager.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DungeonCharacters");
+                name: "DungeonCharacter");
 
             migrationBuilder.DropTable(
-                name: "RaidCharacters");
+                name: "RaidCharacter");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

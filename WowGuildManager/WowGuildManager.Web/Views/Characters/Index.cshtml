@@ -4,12 +4,12 @@
 }
 
 <div class="text-center">
-    <a asp-area="" asp-controller="Characters" asp-action="Create" class="btn btn-primary m-3"><h2>Add character</h2></a>
+    <a asp-area="" asp-controller="Characters" asp-action="Create" class="btn btn-warning mt-3 mb-3 border-dark col-sm-6"><h2>Add character</h2></a>
 </div>
 
 <section>
     <div class="row d-flex justify-content-center">
-        <div class="card-deck">
+        <div class="card-deck mb-5">
             @foreach (var character in Model.Characters)
             {
                 <div class="card bg-dark border text-warning" style="width: 20rem;">

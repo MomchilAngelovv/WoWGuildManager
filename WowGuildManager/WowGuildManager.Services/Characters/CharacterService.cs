@@ -112,5 +112,24 @@ namespace WowGuildManager.Services.Characters
         {
             return this.context.Characters.ToList();
         }
+
+        public Character Delete(string id)
+        {
+            var character = this.GetCharacterById(id);
+
+            this.context.Characters.Remove(character);
+            this.context.SaveChanges();
+
+            return character;
+        }
+
+        public IQueryable<Character> GetCharactersForDungeonByDungeonId(string id)
+        {
+            var characters = this.context.DungeonCharacter
+                .Where(dc => dc.DungeonId == id)
+                .Select(dc => dc.Character);
+
+            return characters;
+        }
     }
 }

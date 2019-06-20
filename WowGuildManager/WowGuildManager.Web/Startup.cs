@@ -84,7 +84,6 @@ namespace WowGuildManager.Web
                 app.UseHsts();
             }
 
-            //Middlewares
             app.UseSeedAdminUserAndDefaultRoles();
 
             app.UseHttpsRedirection();

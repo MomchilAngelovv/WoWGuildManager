@@ -7,8 +7,8 @@ using WowGuildManager.Domain.Characters;
 
 namespace WowGuildManager.Domain.Dungeon
 {
-    [Table("DungeonCharacters")]
-    public class DungeonsCharacters
+    [Table("DungeonCharacter")]
+    public class DungeonCharacter
     {
         [Required]
         public string DungeonId { get; set; }

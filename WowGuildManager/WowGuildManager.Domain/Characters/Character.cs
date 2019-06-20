@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using WowGuildManager.Domain.Dungeon;
 using WowGuildManager.Domain.Identity;
 using WowGuildManager.Domain.Raid;
@@ -14,8 +12,8 @@ namespace WowGuildManager.Domain.Characters
     {
         public Character()
         {
-            this.Raids = new HashSet<RaidsCharacters>();
-            this.Dungeons = new HashSet<DungeonsCharacters>();
+            this.Raids = new HashSet<RaidCharacter>();
+            this.Dungeons = new HashSet<DungeonCharacter>();
         }
 
         [Key]
@@ -24,6 +22,7 @@ namespace WowGuildManager.Domain.Characters
         [Required]
         [MinLength(3)]
         [MaxLength(30)]
+        
         public string Name { get; set; }
 
         [Required]
@@ -44,8 +43,8 @@ namespace WowGuildManager.Domain.Characters
         public string WowGuildManagerUserId { get; set; }
         public WowGuildManagerUser User { get; set; }
 
-        public ICollection<RaidsCharacters> Raids { get; set; }
+        public ICollection<RaidCharacter> Raids { get; set; }
 
-        public ICollection<DungeonsCharacters> Dungeons { get; set; }
+        public ICollection<DungeonCharacter> Dungeons { get; set; }
     }
 }

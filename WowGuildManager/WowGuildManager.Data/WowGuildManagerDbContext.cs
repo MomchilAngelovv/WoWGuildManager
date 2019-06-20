@@ -19,9 +19,9 @@ namespace WowGuildManager.Data
 
         public DbSet<Raid> Raids { get; set; }
 
-        public DbSet<RaidsCharacters> RaidsCharacters { get; set; }
+        public DbSet<RaidCharacter> RaidCharacter { get; set; }
 
-        public DbSet<DungeonsCharacters> DungeonsCharacters { get; set; }
+        public DbSet<DungeonCharacter> DungeonCharacter { get; set; }
 
         public WowGuildManagerDbContext(DbContextOptions<WowGuildManagerDbContext> options)
             : base(options)
@@ -31,34 +31,36 @@ namespace WowGuildManager.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<DungeonsCharacters>()
-                .HasKey(e => new { e.DungeonId, e.CharacterId });
+            builder.Entity<DungeonCharacter>().HasKey(dungChar => new { dungChar.DungeonId, dungChar.CharacterId });
+            builder.Entity<RaidCharacter>().HasKey(raidChar => new { raidChar.RaidId, raidChar.CharacterId });
 
-            builder.Entity<DungeonsCharacters>().HasOne(dc => dc.Dungeon)
-                .WithMany(d => d.RegisteredCharacters)
-                .HasForeignKey(d => d.DungeonId)
+            builder.Entity<Character>()
+                .HasIndex(u => u.Name)
+                .IsUnique();
+
+            builder.Entity<DungeonCharacter>()
+                .HasOne(dungChar => dungChar.Dungeon)
+                .WithMany(dung => dung.RegisteredCharacters)
+                .HasForeignKey(dungChar => dungChar.DungeonId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<DungeonsCharacters>().HasOne(dc => dc.Character)
-               .WithMany(d => d.Dungeons)
-               .HasForeignKey(d => d.CharacterId)
-               .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<DungeonCharacter>()
+                .HasOne(dungChar => dungChar.Character)
+                .WithMany(dung => dung.Dungeons)
+                .HasForeignKey(dungChar => dungChar.CharacterId)
+                .OnDelete(DeleteBehavior.Restrict);
+                
+            builder.Entity<RaidCharacter>()
+                .HasOne(raidChar => raidChar.Raid)
+                .WithMany(raid => raid.RegisteredCharacters)
+                .HasForeignKey(raidChar => raidChar.RaidId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-
-
-            builder.Entity<RaidsCharacters>()
-               .HasKey(e => new { e.RaidId, e.CharacterId });
-
-            builder.Entity<RaidsCharacters>().HasOne(dc => dc.Raid)
-               .WithMany(d => d.RegisteredCharacters)
-               .HasForeignKey(d => d.RaidId)
-               .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<RaidsCharacters>().HasOne(dc => dc.Character)
-            .WithMany(d => d.Raids)
-            .HasForeignKey(d => d.CharacterId)
-            .OnDelete(DeleteBehavior.Restrict);
-
+            builder.Entity<RaidCharacter>()
+                .HasOne(raidChar => raidChar.Character)
+                .WithMany(raid => raid.Raids)
+                .HasForeignKey(raidChar => raidChar.CharacterId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
         }

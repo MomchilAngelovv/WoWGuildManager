@@ -3,12 +3,12 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="text-center">
-    <a asp-area="" asp-controller="Dungeons" asp-action="Create" class="btn btn-warning m-3 border-dark"><h2>Create new Dungeon</h2></a>
+<div class="row d-flex justify-content-center">
+    <a asp-area="" asp-controller="Dungeons" asp-action="Create" class="btn btn-warning m-3 border-dark col-sm-6"><h2>Create new Dungeon</h2></a>
 
     @if (this.User.IsInRole("Raid Leader") || this.User.IsInRole("Admin"))
     {
-        <a asp-area="" asp-controller="Raids" asp-action="Create" class="btn btn-warning m-3 border-dark"><h2>Create new Raid</h2></a>
+        <a asp-area="" asp-controller="Raids" asp-action="Create" class="btn btn-warning m-3 border-dark col-sm-6"><h2>Create new Raid</h2></a>
     }
 </div>
 
@@ -24,7 +24,14 @@
                     <p class="card-text">@raid.Place - Leader: @raid.LeaderName</p>
                     <p class="card-text">Registered: @raid.RegisteredPlayers/@raid.MaxPlayers</p>
                     <p class="card-text">@raid.Description</p>
-                    <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100">Join</a>
+                    @if (raid.RegisteredPlayers != raid.MaxPlayers)
+                    {
+                        <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100">Join</a>
+                    }
+                    else
+                    {
+                        <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100">No spots left - see details</a>
+                    }
                 </div>
             </div>
         }
@@ -42,7 +49,14 @@
                     <p class="card-text">@dungeon.Place - Leader: @dungeon.LeaderName</p>
                     <p class="card-text">Registered: @dungeon.RegisteredPlayers/@dungeon.MaxPlayers</p>
                     <p class="card-text">@dungeon.Description</p>
-                    <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100 ">Join</a>
+                    @if (dungeon.RegisteredPlayers != dungeon.MaxPlayers)
+                    {
+                        <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100 ">Join</a>
+                    }
+                    else
+                    {
+                        <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100 ">Full - see details</a>
+                    }
                 </div>
             </div>
         }

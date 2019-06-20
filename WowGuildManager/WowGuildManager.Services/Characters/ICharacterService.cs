@@ -21,5 +21,9 @@ namespace WowGuildManager.Services.Characters
         Character GetCharacterById(string id);
 
         IEnumerable<Character> GetAll();
+
+        Character Delete(string id);
+
+        IQueryable<Character> GetCharactersForDungeonByDungeonId(string id);
     }
 }

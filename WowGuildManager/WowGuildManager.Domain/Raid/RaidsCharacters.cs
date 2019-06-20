@@ -7,8 +7,8 @@ using WowGuildManager.Domain.Characters;
 
 namespace WowGuildManager.Domain.Raid
 {
-    [Table("RaidCharacters")]
-    public class RaidsCharacters
+    [Table("RaidCharacter")]
+    public class RaidCharacter
     {
         [Required]
         public string RaidId { get; set; }

@@ -25,7 +25,7 @@ namespace WowGuildManager.Services.Dungeons
         private const string RfkImage = "/images/dungeons/rfkImg.jpg";
         private const string MaraImage = "/images/dungeons/maraImg.jpg";
         private const string RfdImage = "/images/dungeons/rfdImg.jpg";
-        private const string DiremaulImage = "/images/dungeons/diremaulkImg.jpg";
+        private const string DiremaulImage = "/images/dungeons/diremaulImg.jpg";
         private const string ScholoImage = "/images/dungeons/scholoImg.jpg";
         private const string UldaImage = "/images/dungeons/uldaImg.jpg";
         private const string StratImage = "/images/dungeons/stratImg.jpg";
@@ -65,7 +65,7 @@ namespace WowGuildManager.Services.Dungeons
 
             this.SetDungeonImage(dungeon);
 
-            dungeon.RegisteredCharacters.Add(new DungeonsCharacters
+            dungeon.RegisteredCharacters.Add(new DungeonCharacter
             {
                 CharacterId = dungeon.LeaderId,
                 DungeonId = dungeon.Id
@@ -146,6 +146,18 @@ namespace WowGuildManager.Services.Dungeons
                     dungeon.Image = LbrsImage;
                     break;
             }
+        }
+
+        public void RegisterCharacter(string characterId, string dungeonId)
+        {
+            var dungeonCharacter = new DungeonCharacter
+            {
+                CharacterId = characterId,
+                DungeonId = dungeonId
+            };
+
+            this.context.DungeonCharacter.Add(dungeonCharacter);
+            this.context.SaveChanges();
         }
     }
 }

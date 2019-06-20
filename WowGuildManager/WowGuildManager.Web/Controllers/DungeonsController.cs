@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WowGuildManager.Domain.Identity;
+using WowGuildManager.Models.ViewModels.Characters;
 using WowGuildManager.Models.ViewModels.Dungeons;
 using WowGuildManager.Services.Characters;
 using WowGuildManager.Services.Dungeons;
@@ -19,15 +21,18 @@ namespace WowGuildManager.Web.Controllers
         private readonly UserManager<WowGuildManagerUser> userManager;
         private readonly IDungeonService dungeonService;
         private readonly ICharacterService characterService;
+        private readonly IMapper mapper;
 
         public DungeonsController(
             UserManager<WowGuildManagerUser> userManager,
             IDungeonService dungeonService,
-            ICharacterService characterService)
+            ICharacterService characterService,
+            IMapper mapper)
         {
             this.userManager = userManager;
             this.dungeonService = dungeonService;
             this.characterService = characterService;
+            this.mapper = mapper;
         }
 
         public async Task<IActionResult> Create()
@@ -72,9 +77,39 @@ namespace WowGuildManager.Web.Controllers
             return RedirectToAction("Index", "Events");
         }
 
-        public IActionResult Details(string id)
+        public async Task<IActionResult> Details(string id)
         {
-            return this.View();
+            var registeredCharacters = this.characterService
+                .GetCharactersForDungeonByDungeonId(id)
+                .Select(c => mapper.Map<CharacterViewModel>(c))
+                .ToList();
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var myCharacters = this.characterService.GetCharactersByUser(user)
+               .Select(character => new CharacterJoinViewModel
+               {
+                   Id = character.Id,
+                   Name = character.Name
+               })
+               .ToList();
+
+            var dungeonDetailsViewModel = new DungeonDetailsViewModel
+            {
+                Id = id,
+                Characters = registeredCharacters,
+                AvailableCharacters = myCharacters
+            };
+
+            return this.View(dungeonDetailsViewModel);
+        }
+
+        public IActionResult Join(string characterId, string dungeonId)
+        {
+            this.dungeonService.RegisterCharacter(characterId, dungeonId);
+
+
+            return this.RedirectToAction("Index", "Events");
         }
     }
 }
