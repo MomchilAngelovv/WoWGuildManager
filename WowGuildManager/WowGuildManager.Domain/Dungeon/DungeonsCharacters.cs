@@ -12,10 +12,10 @@ namespace WowGuildManager.Domain.Dungeon
     {
         [Required]
         public string DungeonId { get; set; }
-        public Dungeon Dungeon { get; set; }
+        public virtual Dungeon Dungeon { get; set; }
 
         [Required]
         public string CharacterId { get; set; }
-        public Character Character { get; set; }
+        public virtual Character Character { get; set; }
     }
 }

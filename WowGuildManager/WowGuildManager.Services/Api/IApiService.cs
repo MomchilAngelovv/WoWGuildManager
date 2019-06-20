@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using WowGuildManager.Domain.Characters;
 
 namespace WowGuildManager.Services.Api
 {
     public interface IApiService
     {
-        IEnumerable<Character> GetAll(string userId);
+        IQueryable<T> GetAll<T>(string userId);
 
-        Character GetCharacterById(string characterId);
+        T GetCharacterById<T>(string characterId);
     }
 }

@@ -12,10 +12,10 @@ namespace WowGuildManager.Domain.Raid
     {
         [Required]
         public string RaidId { get; set; }
-        public Raid Raid { get; set; }
+        public virtual Raid Raid { get; set; }
 
         [Required]
         public string CharacterId { get; set; }
-        public Character Character { get; set; }
+        public virtual Character Character { get; set; }
     }
 }

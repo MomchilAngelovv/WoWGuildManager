@@ -37,8 +37,8 @@ namespace WowGuildManager.Domain.Dungeon
 
         [Required]
         public string LeaderId { get; set; }
-        public Character Leader { get; set; }
+        public virtual Character Leader { get; set; }
 
-        public ICollection<DungeonCharacter> RegisteredCharacters { get; set; }
+        public virtual ICollection<DungeonCharacter> RegisteredCharacters { get; set; }
     }
 }

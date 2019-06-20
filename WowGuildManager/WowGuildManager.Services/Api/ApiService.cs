@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +12,35 @@ namespace WowGuildManager.Services.Api
     public class ApiService : IApiService
     {
         private readonly WowGuildManagerDbContext context;
+        private readonly IMapper mapper;
 
-        public ApiService(WowGuildManagerDbContext context)
+        public ApiService(
+            WowGuildManagerDbContext context,
+            IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
-        public IEnumerable<Character> GetAll(string userId)
+        public IQueryable<T> GetAll<T>(string userId)
         {
-            return this.context.Characters
-                .Where(c => c.WowGuildManagerUserId == userId);
+            var characters =  this.context.Characters
+                .Where(c => c.WowGuildManagerUserId == userId)
+                .Include(c => c.Dungeons)
+                .Include(c => c.Raids)
+                .Select(c => mapper.Map<T>(c));
+
+            return characters;
         }
 
-        public Character GetCharacterById(string characterId)
+        public T GetCharacterById<T>(string characterId)
         {
-            return this.context.Characters.FirstOrDefault(c => c.Id == characterId);
+            var character = this.context.Characters
+                .Include(c => c.Dungeons)
+                .Include(c => c.Raids)
+                .FirstOrDefault(c => c.Id == characterId);
+
+            return mapper.Map<T>(character);
         }
     }
 }

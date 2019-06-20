@@ -93,19 +93,16 @@ namespace WowGuildManager.Services.Raids
             }
         }
 
-        public IEnumerable<Raid> GetAll()
+        public IQueryable<Raid> GetAll()
         {
             return this.context.Raids
                .Include(raid => raid.Leader)
-               .Include(raid => raid.RegisteredCharacters)
-               .ToList();
+               .Include(raid => raid.RegisteredCharacters);
         }
 
-        public IEnumerable<RaidPlace> GetPlaces()
+        public IQueryable<RaidPlace> GetPlaces()
         {
-            return Enum.GetValues(typeof(RaidPlace))
-               .Cast<RaidPlace>()
-               .ToList();
+            return Enum.GetValues(typeof(RaidPlace)).Cast<RaidPlace>().AsQueryable();
         }
     }
 }

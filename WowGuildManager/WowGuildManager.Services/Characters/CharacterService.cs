@@ -53,29 +53,56 @@ namespace WowGuildManager.Services.Characters
             return character;
         }
 
-        public IEnumerable<Character> GetCharactersByUser(WowGuildManagerUser user)
+        public IQueryable<Character> GetCharactersByUser(WowGuildManagerUser user)
         {
             return this.context.Characters
                 .Where(character => character.User == user)
                 .Include(ch => ch.Dungeons);
         }
 
-        public IEnumerable<CharacterClass> GetClasses()
+        public IQueryable<CharacterClass> GetClasses()
         {
-            return Enum.GetValues(typeof(CharacterClass)).Cast<CharacterClass>().ToList();
+            return Enum.GetValues(typeof(CharacterClass)).Cast<CharacterClass>().AsQueryable();
         }
 
-        public IEnumerable<CharacterRole> GetRoles()
+        public IQueryable<CharacterRole> GetRoles()
         {
-            return Enum.GetValues(typeof(CharacterRole)).Cast<CharacterRole>().ToList();
+            return Enum.GetValues(typeof(CharacterRole)).Cast<CharacterRole>().AsQueryable();
         }
 
         public Character GetCharacterById(string id)
         {
-            return this.context.Characters
+            var character = this.context.Characters
                 .FirstOrDefault(c => c.Id == id);
+
+            return character;
         }
 
+       
+
+        public IQueryable<Character> GetAll()
+        {
+            return this.context.Characters;
+        }
+
+        public Character Delete(string id)
+        {
+            var character = this.GetCharacterById(id);
+
+            this.context.Characters.Remove(character);
+            this.context.SaveChanges();
+
+            return character;
+        }
+
+        public IQueryable<Character> GetCharactersForDungeonByDungeonId(string id)
+        {
+            var characters = this.context.DungeonCharacter
+                .Where(dc => dc.DungeonId == id)
+                .Select(dc => dc.Character);
+
+            return characters;
+        }
         private void SetCharacterImage(Character character)
         {
             switch (character.Class)
@@ -108,30 +135,6 @@ namespace WowGuildManager.Services.Characters
                     character.Image = WarriorImage;
                     break;
             }
-        }
-
-        public IEnumerable<Character> GetAll()
-        {
-            return this.context.Characters.ToList();
-        }
-
-        public Character Delete(string id)
-        {
-            var character = this.GetCharacterById(id);
-
-            this.context.Characters.Remove(character);
-            this.context.SaveChanges();
-
-            return character;
-        }
-
-        public IQueryable<Character> GetCharactersForDungeonByDungeonId(string id)
-        {
-            var characters = this.context.DungeonCharacter
-                .Where(dc => dc.DungeonId == id)
-                .Select(dc => dc.Character);
-
-            return characters;
         }
     }
 }

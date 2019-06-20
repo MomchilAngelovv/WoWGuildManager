@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Identity;
+using WowGuildManager.Models.ApiModels.Characters;
 using WowGuildManager.Services.Api;
 
 namespace WowGuildManager.Web.Areas.Api.Controllers
@@ -29,17 +30,18 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
             this.apiService = apiService;
         }
     
-        public IEnumerable<Character> All()
+        //TODO: Separate Input model from view models
+        public IEnumerable<CharacterApiViewModel> All()
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            return this.apiService.GetAll(userId).ToList();
+            return this.apiService.GetAll<CharacterApiViewModel>(userId).ToList();
         }
 
         [Route("{id}")]
-        public Character GetCharacterById(string id)
+        public CharacterApiViewModel GetCharacterById(string id)
         {
-            return this.apiService.GetCharacterById(id);
+            return this.apiService.GetCharacterById<CharacterApiViewModel>(id);
         }
     }
 }

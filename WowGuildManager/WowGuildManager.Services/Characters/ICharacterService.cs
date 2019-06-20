@@ -12,15 +12,15 @@ namespace WowGuildManager.Services.Characters
     {
         Character Create(CharacterCreateInputModel inputModel, string userId);
 
-        IEnumerable<CharacterClass> GetClasses();
+        IQueryable<CharacterClass> GetClasses();
 
-        IEnumerable<CharacterRole> GetRoles();
+        IQueryable<CharacterRole> GetRoles();
 
-        IEnumerable<Character> GetCharactersByUser(WowGuildManagerUser user);
+        IQueryable<Character> GetCharactersByUser(WowGuildManagerUser user);
 
         Character GetCharacterById(string id);
 
-        IEnumerable<Character> GetAll();
+        IQueryable<Character> GetAll();
 
         Character Delete(string id);
 

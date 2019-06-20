@@ -34,8 +34,8 @@ namespace WowGuildManager.Domain.Raid
 
         [Required]
         public string LeaderId { get; set; }
-        public Character Leader { get; set; }
+        public virtual Character Leader { get; set; }
 
-        public ICollection<RaidCharacter> RegisteredCharacters { get; set; }
+        public virtual ICollection<RaidCharacter> RegisteredCharacters { get; set; }
     }
 }

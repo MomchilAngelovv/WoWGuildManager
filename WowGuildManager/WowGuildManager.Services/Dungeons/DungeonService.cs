@@ -84,11 +84,11 @@ namespace WowGuildManager.Services.Dungeons
             return dungeon;
         }
 
-        public IEnumerable<DungeonPlace> GetPlaces()
+        public IQueryable<DungeonPlace> GetPlaces()
         {
             return Enum.GetValues(typeof(DungeonPlace))
                 .Cast<DungeonPlace>()
-                .ToList();
+                .AsQueryable();
         }
 
         private void SetDungeonImage(Dungeon dungeon)

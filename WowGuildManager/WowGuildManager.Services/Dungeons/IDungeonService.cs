@@ -13,7 +13,7 @@ namespace WowGuildManager.Services.Dungeons
     {
         IQueryable<T> GetAll<T>();
 
-        IEnumerable<DungeonPlace> GetPlaces();
+        IQueryable<DungeonPlace> GetPlaces();
 
         Dungeon Create(DungeonCreateInputModel inputModel);
 

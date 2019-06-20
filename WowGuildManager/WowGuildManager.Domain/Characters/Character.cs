@@ -41,10 +41,10 @@ namespace WowGuildManager.Domain.Characters
 
         [Required]
         public string WowGuildManagerUserId { get; set; }
-        public WowGuildManagerUser User { get; set; }
+        public virtual WowGuildManagerUser User { get; set; }
 
-        public ICollection<RaidCharacter> Raids { get; set; }
+        public virtual ICollection<RaidCharacter> Raids { get; set; }
 
-        public ICollection<DungeonCharacter> Dungeons { get; set; }
+        public virtual ICollection<DungeonCharacter> Dungeons { get; set; }
     }
 }
