@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,7 +56,8 @@ namespace WowGuildManager.Services.Characters
         public IEnumerable<Character> GetCharactersByUser(WowGuildManagerUser user)
         {
             return this.context.Characters
-                .Where(character => character.User == user);
+                .Where(character => character.User == user)
+                .Include(ch => ch.Dungeons);
         }
 
         public IEnumerable<CharacterClass> GetClasses()

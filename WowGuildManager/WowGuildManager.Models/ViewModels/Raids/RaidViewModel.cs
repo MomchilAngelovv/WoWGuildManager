@@ -21,5 +21,7 @@ namespace WowGuildManager.Models.ViewModels.Raids
         public string RegisteredPlayers { get; set; }
 
         public string MaxPlayers { get; set; }
+
+       
     }
 }

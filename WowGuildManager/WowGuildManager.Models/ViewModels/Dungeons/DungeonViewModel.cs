@@ -21,5 +21,13 @@ namespace WowGuildManager.Models.ViewModels.Dungeons
         public string RegisteredPlayers { get; set; }
 
         public string MaxPlayers { get; set; }
+
+        public bool AlreadyJoined { get; set; }
+
+        public string JoinedCharacterName { get; set; }
+
+        public string JoinedCharacterLevel { get; set; }
+
+        public string JoinedCharacterRole { get; set; }
     }
 }

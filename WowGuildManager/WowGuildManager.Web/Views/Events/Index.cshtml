@@ -49,7 +49,12 @@
                     <p class="card-text">@dungeon.Place - Leader: @dungeon.LeaderName</p>
                     <p class="card-text">Registered: @dungeon.RegisteredPlayers/@dungeon.MaxPlayers</p>
                     <p class="card-text">@dungeon.Description</p>
-                    @if (dungeon.RegisteredPlayers != dungeon.MaxPlayers)
+                    @if (dungeon.AlreadyJoined)
+                    {
+                        <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100 ">Already Joined with @dungeon.JoinedCharacterLevel @dungeon.JoinedCharacterName @dungeon.JoinedCharacterRole</a>
+
+                    }
+                    else if (dungeon.RegisteredPlayers != dungeon.MaxPlayers)
                     {
                         <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100 ">Join</a>
                     }
@@ -58,7 +63,7 @@
                         <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100 ">Full - see details</a>
                     }
                 </div>
-            </div>
+            </div>  
         }
     </div>
 </section>

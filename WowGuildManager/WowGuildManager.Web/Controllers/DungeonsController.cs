@@ -101,13 +101,23 @@ namespace WowGuildManager.Web.Controllers
                 AvailableCharacters = myCharacters
             };
 
+            foreach (var myCharacter in myCharacters)
+            {
+                if (registeredCharacters.Any(rc => rc.Id == myCharacter.Id))
+                {
+                    dungeonDetailsViewModel.AlreadyJoined = true;
+                    dungeonDetailsViewModel.JoinedCharacterId = myCharacter.Id;
+                    dungeonDetailsViewModel.JoinedCharacterName = myCharacter.Name;
+                    break;
+                }
+            }
+
             return this.View(dungeonDetailsViewModel);
         }
 
         public IActionResult Join(string characterId, string dungeonId)
         {
             this.dungeonService.RegisterCharacter(characterId, dungeonId);
-
 
             return this.RedirectToAction("Index", "Events");
         }

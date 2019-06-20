@@ -11,7 +11,7 @@ namespace WowGuildManager.Services.Dungeons
 {
     public interface IDungeonService
     {
-        IEnumerable<Dungeon> GetAll();
+        IQueryable<T> GetAll<T>();
 
         IEnumerable<DungeonPlace> GetPlaces();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,21 +37,27 @@ namespace WowGuildManager.Services.Dungeons
 
         private readonly WowGuildManagerDbContext context;
         private readonly ICharacterService characterService;
+        private readonly IMapper mapper;
 
         public DungeonService(
             WowGuildManagerDbContext context,
-            ICharacterService characterService)
+            ICharacterService characterService,
+            IMapper mapper)
         {
             this.context = context;
             this.characterService = characterService;
+            this.mapper = mapper;
         }
 
-        public IEnumerable<Dungeon> GetAll()
+        public IQueryable<T> GetAll<T>()
         {
-            return this.context.Dungeons
+            var dungeons = this.context.Dungeons
                 .Include(dungeon => dungeon.Leader)
                 .Include(dungeon => dungeon.RegisteredCharacters)
-                .ToList();
+                .Select(dungeon => this.mapper.Map<T>(dungeon));
+
+            return dungeons;
+               
         }
 
         public Dungeon Create(DungeonCreateInputModel inputModel)

@@ -18,18 +18,32 @@
     <tbody>
         @foreach (var character in Model.Characters)
         {
-            <tr>
-                <th scope="row">N/A</th>
-                <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="ID">@character.Name</a></td>
-                <td>@character.Level</td>
-                <td>@character.Class</td>
-                <td>@character.Role</td>
-            </tr>
+            if (character.Id == Model.JoinedCharacterId)
+            {
+                <tr class="bg-warning">
+                    <th scope="row">N/A</th>
+                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="ID">@character.Name</a></td>
+                    <td>@character.Level</td>
+                    <td>@character.Class</td>
+                    <td>@character.Role</td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <th scope="row">N/A</th>
+                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="ID">@character.Name</a></td>
+                    <td>@character.Level</td>
+                    <td>@character.Class</td>
+                    <td>@character.Role</td>
+                </tr>
+            }
+
         }
     </tbody>
 </table>
 
-@if (Model.Characters.Count() < 5)
+@if (Model.Characters.Count() < 5 && !Model.AlreadyJoined)
 {
     <div class="dropdown ">
         <button class="btn btn-secondary dropdown-toggle bg-warning w-100 text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -12,6 +12,11 @@ namespace WowGuildManager.Models.ViewModels.Dungeons
         public List<CharacterViewModel> Characters { get; set; }
 
         public List<CharacterJoinViewModel> AvailableCharacters { get; set; }
-        //TODO: Make characters unique names
+
+        public bool AlreadyJoined { get; set; }
+
+        public string JoinedCharacterName { get; set; }
+
+        public string JoinedCharacterId { get; set; }
     }
 }
