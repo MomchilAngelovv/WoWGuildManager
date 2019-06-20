@@ -35,29 +35,46 @@ namespace WowGuildManager.Web.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
-
-            var myCharacters = this.characterService
-                .GetCharactersByUserId<SelectListItem>(userId)
-                .AsEnumerable();
-               
+            var myCharacters = await this.BindCharactersToSelectListItem();
 
             if (myCharacters.Any() == false)
             {
                 return this.RedirectToAction("Create", "Characters");
             }
 
-            var dungeonPlaces = this.dungeonService.GetPlaces()
+            var dungeonPlaceList = this.BindDungeonPlacesToSelectListItem();
+
+            this.ViewData["Characters"] = myCharacters;
+            this.ViewData["Places"] = dungeonPlaceList;
+
+            return this.View();
+        }
+
+        private IEnumerable<SelectListItem> BindDungeonPlacesToSelectListItem()
+        {
+            var dungeonPlaceList = this.dungeonService.GetPlaces()
               .Select(place => new SelectListItem
               {
                   Text = place.ToString(),
                   Value = ((int)place).ToString()
               });
 
-            this.ViewBag.Characters = myCharacters;
-            this.ViewBag.Places = dungeonPlaces;
+            return dungeonPlaceList;
+        }
 
-            return this.View();
+        private async Task<IEnumerable<SelectListItem>> BindCharactersToSelectListItem()
+        {
+            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
+
+            var myCharacters = this.characterService
+                .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
+                .Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id
+                });
+
+            return myCharacters;
         }
 
         [HttpPost]
@@ -83,7 +100,7 @@ namespace WowGuildManager.Web.Controllers
 
             //TODO TOTAL REFACtor OF LOGIC and models if joined in dungeon
             var myCharacters = this.characterService
-                .GetCharactersByUserId<CharacterJoinViewModel>(userId)
+                .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
                 .AsEnumerable();
 
             var dungeonDetailsViewModel = new DungeonDetailsViewModel

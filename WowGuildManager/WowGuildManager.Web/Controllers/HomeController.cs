@@ -8,6 +8,7 @@ using WowGuildManager.Web.Models;
 
 namespace WowGuildManager.Web.Controllers
 {
+    //TODO APPLY Authorization attribites everywhere
     public class HomeController : Controller
     {
         public IActionResult Index()
@@ -21,6 +22,7 @@ namespace WowGuildManager.Web.Controllers
             return View();
         }
 
+        //TODO: Consired proper error view (search in net)
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

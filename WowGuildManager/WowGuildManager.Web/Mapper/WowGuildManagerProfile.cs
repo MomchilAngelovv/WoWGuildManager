@@ -18,9 +18,13 @@ namespace WowGuildManager.Web.Mapper
     {
         public WowGuildManagerProfile()
         {
+            this.CreateMap<CharacterClass, SelectListItem>()
+                .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.ToString()))
+                .ForMember(cl => cl.Value, sli => sli.MapFrom(x => ((int)x).ToString()));
+
             this.CreateMap<Character, CharacterViewModel>();
 
-            this.CreateMap<Character, CharacterJoinViewModel>();
+            this.CreateMap<Character, CharacterIdNameViewModel>();
             this.CreateMap<Character, CharacterDungeonDetailsViewModel>();
             
             this.CreateMap<Character, SelectListItem>()

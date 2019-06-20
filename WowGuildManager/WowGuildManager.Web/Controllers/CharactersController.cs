@@ -47,26 +47,13 @@ namespace WowGuildManager.Web.Controllers
             return View(characterIndexViewModel);
         }
 
-
         public IActionResult Create()
         {
-            //TODO REFACTOR THIS -> Consired moving enumerations in separate table
-            var classes = this.characterService.GetClasses()
-                .Select(cl => new SelectListItem
-                {
-                    Text = cl.ToString(),
-                    Value = ((int)cl).ToString()
-                });
+            var classList = this.BindClassesToSelectListItem();
+            var roleList = this.BindRolesToSelectListItem();
 
-            var roles = this.characterService.GetRoles()
-               .Select(cl => new SelectListItem
-               {
-                   Text = cl.ToString(),
-                   Value = ((int)cl).ToString()
-               });
-
-            this.ViewBag.Classes = classes;
-            this.ViewBag.Roles = roles;
+            this.ViewData["Classes"] = classList;
+            this.ViewData["Roles"] = roleList;
 
             return this.View();
         }
@@ -100,6 +87,31 @@ namespace WowGuildManager.Web.Controllers
             this.characterService.Delete(id);
 
             return this.RedirectToAction(nameof(Index));
+        }
+
+        private IEnumerable<SelectListItem> BindRolesToSelectListItem()
+        {
+
+            var roleList = this.characterService.GetRoles()
+               .Select(cl => new SelectListItem
+               {
+                   Text = cl.ToString(),
+                   Value = ((int)cl).ToString()
+               });
+
+            return roleList;
+        }
+
+        private IEnumerable<SelectListItem> BindClassesToSelectListItem()
+        {
+            var classList = this.characterService.GetClasses()
+              .Select(cl => new SelectListItem
+              {
+                  Text = cl.ToString(),
+                  Value = ((int)cl).ToString()
+              });
+
+            return classList;
         }
     }
 }

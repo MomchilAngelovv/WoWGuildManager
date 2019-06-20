@@ -19,13 +19,13 @@
                     <span asp-validation-for="@Model.Level" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <select asp-for="@Model.Class" asp-items="@ViewBag.Classes" class="form-control border-dark">
+                    <select asp-for="@Model.Class" asp-items="@((IEnumerable<SelectListItem>)ViewData["Classes"])" class="form-control border-dark">
                         <option disabled selected> -- Class -- </option>
                     </select>
                     <span asp-validation-for="@Model.Class" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <select asp-for="@Model.Role" asp-items="@ViewBag.Roles" class="form-control border-dark">
+                    <select asp-for="@Model.Role" asp-items="@((IEnumerable<SelectListItem>)ViewData["Roles"])" class="form-control border-dark">
                         <option disabled selected> -- Role -- </option>
                     </select>
                     <span asp-validation-for="@Model.Role" class="text-danger"></span>

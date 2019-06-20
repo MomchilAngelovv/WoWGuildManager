@@ -13,13 +13,13 @@
                 <span asp-validation-for="@Model.DateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <select asp-for="@Model.Place" asp-items="@ViewBag.Places" class="form-control border-dark">
+                <select asp-for="@Model.Place" asp-items="@((IEnumerable<SelectListItem>)ViewData["Places"])" class="form-control border-dark">
                     <option disabled selected> -- Place -- </option>
                 </select>
                 <span asp-validation-for="@Model.Place" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <select asp-for="@Model.RaidLeaderId" asp-items="@ViewBag.Characters" class="form-control border-dark">
+                <select asp-for="@Model.RaidLeaderId" asp-items="@((IEnumerable<SelectListItem>)ViewData["Characters"])" class="form-control border-dark">
                     <option disabled selected> -- Leader -- </option>
                 </select>
                 <span asp-validation-for="@Model.RaidLeaderId" class="text-danger"></span>

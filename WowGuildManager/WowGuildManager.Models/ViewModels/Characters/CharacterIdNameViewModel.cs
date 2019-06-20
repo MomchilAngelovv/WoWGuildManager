@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WowGuildManager.Models.ViewModels.Characters
 {
-    public class CharacterJoinViewModel
+    public class CharacterIdNameViewModel
     {
         public string Id { get; set; }
 

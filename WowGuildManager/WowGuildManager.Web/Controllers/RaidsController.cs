@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WowGuildManager.Domain.Identity;
+using WowGuildManager.Models.ViewModels.Characters;
 using WowGuildManager.Models.ViewModels.Raids;
 using WowGuildManager.Services.Characters;
 using WowGuildManager.Services.Raids;
@@ -37,28 +38,46 @@ namespace WowGuildManager.Web.Controllers
        
         public async Task<IActionResult> Create()
         {
-            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
-
-            var myCharacters = this.characterService
-                .GetCharactersByUserId<SelectListItem>(userId)
-                .AsEnumerable();
+            var myCharacters = await this.BindCharactersToSelectListItem();
 
             if (myCharacters.Any() == false)
             {
                 return this.RedirectToAction("Create", "Characters");
             }
 
-            var places = this.raidService.GetPlaces()
+            var placeList = this.BindRaidPlacesToSelectListItem();
+
+            this.ViewData["Characters"] = myCharacters;
+            this.ViewData["Places"] = placeList;
+
+            return this.View();
+        }
+
+        private async Task<IEnumerable<SelectListItem>> BindCharactersToSelectListItem()
+        {
+            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
+
+            var myCharacters = this.characterService
+                .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
+                .Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id
+                });
+
+            return myCharacters;
+        }
+
+        private IEnumerable<SelectListItem> BindRaidPlacesToSelectListItem()
+        {
+            var raidPlaceList = this.raidService.GetPlaces()
                .Select(place => new SelectListItem
                {
                    Text = place.ToString(),
                    Value = ((int)place).ToString()
                });
 
-            this.ViewBag.Characters = myCharacters;
-            this.ViewBag.Places = places;
-
-            return this.View();
+            return raidPlaceList;
         }
 
         [HttpPost]

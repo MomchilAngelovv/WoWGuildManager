@@ -11,7 +11,7 @@ namespace WowGuildManager.Models.ViewModels.Dungeons
 
         public IEnumerable<CharacterDungeonDetailsViewModel> Characters { get; set; }
 
-        public IEnumerable<CharacterJoinViewModel> AvailableCharacters { get; set; }
+        public IEnumerable<CharacterIdNameViewModel> AvailableCharacters { get; set; }
 
         public bool AlreadyJoined { get; set; }
 
