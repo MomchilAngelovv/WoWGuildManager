@@ -9,6 +9,5 @@ namespace WowGuildManager.Models.ViewModels.Characters
         public string Id { get; set; }
 
         public string Name { get; set; }
-
     }
 }

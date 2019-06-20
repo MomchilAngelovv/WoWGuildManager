@@ -74,7 +74,6 @@ namespace WowGuildManager.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CharacterCreateInputModel inputModel)
         {
-            //TODO CHek if i chec MODELSTATE EVERYWHER
             if (ModelState.IsValid == false)
             {
                 return this.RedirectToAction(nameof(Create));

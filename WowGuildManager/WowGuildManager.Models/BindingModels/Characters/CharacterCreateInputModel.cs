@@ -22,6 +22,7 @@ namespace WowGuildManager.Models.ViewModels.Characters
         [Required]
         public CharacterRole Role { get; set; }
 
+        [Required]
         public string UserId { get; set; }
     }
 }

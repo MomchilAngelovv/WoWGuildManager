@@ -30,7 +30,6 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
             this.apiService = apiService;
         }
     
-        //TODO: Separate Input model from view models
         public IEnumerable<CharacterApiViewModel> All()
         {
             var userId = this.userManager.GetUserId(this.User);

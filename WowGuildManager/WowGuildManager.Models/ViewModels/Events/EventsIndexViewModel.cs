@@ -6,7 +6,7 @@ using WowGuildManager.Models.ViewModels.Raids;
 
 namespace WowGuildManager.Models.ViewModels.Events
 {
-    //TODO Fix all view models with consisten collection types
+    //TODO FIX INTERFACES EVEYWHRE WHEN END!!!!!!!!!! IMPORTANT
     public class EventsIndexViewModel
     {
         public IEnumerable<DungeonViewModel> Dungeons { get; set; }
