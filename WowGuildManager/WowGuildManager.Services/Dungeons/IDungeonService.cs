@@ -11,11 +11,11 @@ namespace WowGuildManager.Services.Dungeons
 {
     public interface IDungeonService
     {
+        Dungeon Create(DungeonCreateInputModel inputModel);
+
         IQueryable<T> GetAll<T>();
 
         IQueryable<DungeonPlace> GetPlaces();
-
-        Dungeon Create(DungeonCreateInputModel inputModel);
 
         void RegisterCharacter(string characterId, string dungeonId);
     }

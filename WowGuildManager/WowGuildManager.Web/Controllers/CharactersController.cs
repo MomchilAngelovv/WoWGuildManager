@@ -22,26 +22,22 @@ namespace WowGuildManager.Web.Controllers
         private readonly UserManager<WowGuildManagerUser> userManager;
 
         private readonly ICharacterService characterService;
-        private readonly IMapper mapper;
 
         public CharactersController(
             UserManager<WowGuildManagerUser> userManager,
-            ICharacterService characterService,
-            IMapper mapper)
+            ICharacterService characterService)
         {
             this.userManager = userManager;
             this.characterService = characterService;
-            this.mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
 
-            //TODO: COnfigure AutoMapper
-            var characters = this.characterService.GetCharactersByUser(user)
-                .Select(character => mapper.Map<CharacterViewModel>(character))
-                .ToList();
+            var characters = this.characterService
+                .GetCharactersByUserId<CharacterViewModel>(userId)
+                .AsEnumerable();
 
             var characterIndexViewModel = new CharacterIndexViewModel
             {
@@ -54,6 +50,7 @@ namespace WowGuildManager.Web.Controllers
 
         public IActionResult Create()
         {
+            //TODO REFACTOR THIS -> Consired moving enumerations in separate table
             var classes = this.characterService.GetClasses()
                 .Select(cl => new SelectListItem
                 {
@@ -77,6 +74,7 @@ namespace WowGuildManager.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CharacterCreateInputModel inputModel)
         {
+            //TODO CHek if i chec MODELSTATE EVERYWHER
             if (ModelState.IsValid == false)
             {
                 return this.RedirectToAction(nameof(Create));
@@ -93,7 +91,7 @@ namespace WowGuildManager.Web.Controllers
 
         public IActionResult Details(string id)
         {
-            var character = mapper.Map<CharacterViewModel>(this.characterService.GetCharacterById(id));
+            var character = this.characterService.GetCharacterById<CharacterViewModel>(id);
 
             return this.View(character);
         }

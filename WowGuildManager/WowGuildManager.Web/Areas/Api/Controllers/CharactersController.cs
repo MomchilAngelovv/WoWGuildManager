@@ -35,7 +35,7 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            return this.apiService.GetAll<CharacterApiViewModel>(userId).ToList();
+            return this.apiService.GetAll<CharacterApiViewModel>(userId).AsEnumerable();
         }
 
         [Route("{id}")]

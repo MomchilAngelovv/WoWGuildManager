@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WowGuildManager.Data;
+using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Identity;
+using WowGuildManager.Models.ViewModels.Characters;
 using WowGuildManager.Models.ViewModels.Dungeons;
 using WowGuildManager.Models.ViewModels.Events;
 using WowGuildManager.Models.ViewModels.Raids;
@@ -24,7 +26,6 @@ namespace WowGuildManager.Web.Controllers
         private readonly WowGuildManagerDbContext context;
         private readonly IDungeonService dungeonService;
         private readonly IRaidService raidService;
-        private readonly IMapper mapper;
         private readonly ICharacterService charactersService;
 
         //TODO: All view Model will be IEnumerables
@@ -33,27 +34,30 @@ namespace WowGuildManager.Web.Controllers
             WowGuildManagerDbContext context,
             IDungeonService dungeonService,
             IRaidService raidService,
-            IMapper mapper,
             ICharacterService charactersService)
         {
             this.userManager = userManager;
             this.context = context;
             this.dungeonService = dungeonService;
             this.raidService = raidService;
-            this.mapper = mapper;
             this.charactersService = charactersService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var user = await this.userManager.GetUserAsync(this.User);
-            var myCharacters = this.charactersService.GetCharactersByUser(user);
+            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
+
+            //TODO: REMOVE DB ENTITY
+            var myCharacters = this.charactersService
+                .GetCharactersByUserId<Character>(userId)
+                .AsEnumerable();
 
             //TODO: Remove all  mapping from controllers
             var dungeons = this.dungeonService
                 .GetAll<DungeonViewModel>()
                 .ToList();
 
+            //TODO: 10000000% REFACTOR THIS WITH MAPPER
             for (int i = 0; i < dungeons.Count; i++)
             {
                 if (myCharacters.Any(c => c.Dungeons.Any(d => d.DungeonId == dungeons[i].Id)))
@@ -68,8 +72,8 @@ namespace WowGuildManager.Web.Controllers
             }
 
             var raids = this.raidService
-                .GetAll()
-                .Select(raid => mapper.Map<RaidViewModel>(raid));
+                .GetAll<RaidViewModel>()
+                .AsEnumerable();
 
             var eventsIndexViewModel = new EventsIndexViewModel
             {

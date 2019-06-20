@@ -9,10 +9,10 @@ namespace WowGuildManager.Services.Raids
 {
     public interface IRaidService
     {
-        IQueryable<Raid> GetAll();
+        Raid Create(RaidCreateInputModel inputModel);
+
+        IQueryable<T> GetAll<T>();
 
         IQueryable<RaidPlace> GetPlaces();
-
-        Raid Create(RaidCreateInputModel inputModel);
     }
 }

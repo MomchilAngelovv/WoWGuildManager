@@ -9,9 +9,9 @@ namespace WowGuildManager.Models.ViewModels.Dungeons
     {
         public string Id { get; set; }
 
-        public List<CharacterViewModel> Characters { get; set; }
+        public IEnumerable<CharacterDungeonDetailsViewModel> Characters { get; set; }
 
-        public List<CharacterJoinViewModel> AvailableCharacters { get; set; }
+        public IEnumerable<CharacterJoinViewModel> AvailableCharacters { get; set; }
 
         public bool AlreadyJoined { get; set; }
 

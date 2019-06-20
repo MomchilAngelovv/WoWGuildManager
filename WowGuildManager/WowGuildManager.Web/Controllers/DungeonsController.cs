@@ -21,30 +21,26 @@ namespace WowGuildManager.Web.Controllers
         private readonly UserManager<WowGuildManagerUser> userManager;
         private readonly IDungeonService dungeonService;
         private readonly ICharacterService characterService;
-        private readonly IMapper mapper;
+       
 
         public DungeonsController(
             UserManager<WowGuildManagerUser> userManager,
             IDungeonService dungeonService,
-            ICharacterService characterService,
-            IMapper mapper)
+            ICharacterService characterService)
         {
             this.userManager = userManager;
             this.dungeonService = dungeonService;
             this.characterService = characterService;
-            this.mapper = mapper;
         }
 
         public async Task<IActionResult> Create()
         {
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
 
-            var myCharacters = this.characterService.GetCharactersByUser(user)
-                .Select(character => new SelectListItem
-                {
-                    Text = character.Name,
-                    Value = character.Id
-                });
+            var myCharacters = this.characterService
+                .GetCharactersByUserId<SelectListItem>(userId)
+                .AsEnumerable();
+               
 
             if (myCharacters.Any() == false)
             {
@@ -80,19 +76,15 @@ namespace WowGuildManager.Web.Controllers
         public async Task<IActionResult> Details(string id)
         {
             var registeredCharacters = this.characterService
-                .GetCharactersForDungeonByDungeonId(id)
-                .Select(c => mapper.Map<CharacterViewModel>(c))
-                .ToList();
+                .GetCharactersForDungeonByDungeonId<CharacterDungeonDetailsViewModel>(id)
+                .AsEnumerable();
 
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
 
-            var myCharacters = this.characterService.GetCharactersByUser(user)
-               .Select(character => new CharacterJoinViewModel
-               {
-                   Id = character.Id,
-                   Name = character.Name
-               })
-               .ToList();
+            //TODO TOTAL REFACtor OF LOGIC and models if joined in dungeon
+            var myCharacters = this.characterService
+                .GetCharactersByUserId<CharacterJoinViewModel>(userId)
+                .AsEnumerable();
 
             var dungeonDetailsViewModel = new DungeonDetailsViewModel
             {

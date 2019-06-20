@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,14 @@ namespace WowGuildManager.Services.Characters
         private const string WarriorImage = "/images/classes/warriorImg.jpg";
 
         private readonly WowGuildManagerDbContext context;
+        private readonly IMapper mapper;
 
-        public CharacterService(WowGuildManagerDbContext context)
+        public CharacterService(
+            WowGuildManagerDbContext context,
+            IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public Character Create(CharacterCreateInputModel inputModel)
@@ -53,11 +58,14 @@ namespace WowGuildManager.Services.Characters
             return character;
         }
 
-        public IQueryable<Character> GetCharactersByUser(WowGuildManagerUser user)
+        public IQueryable<T> GetCharactersByUserId<T>(string userId)
         {
-            return this.context.Characters
-                .Where(character => character.User == user)
-                .Include(ch => ch.Dungeons);
+            var characters = this.context.Characters
+                .Where(character => character.WowGuildManagerUserId == userId)
+                .Include(ch => ch.Dungeons)
+                .Select(ch => mapper.Map<T>(ch));
+
+            return characters;
         }
 
         public IQueryable<CharacterClass> GetClasses()
@@ -70,24 +78,26 @@ namespace WowGuildManager.Services.Characters
             return Enum.GetValues(typeof(CharacterRole)).Cast<CharacterRole>().AsQueryable();
         }
 
-        public Character GetCharacterById(string id)
+        public T GetCharacterById<T>(string characterId)
         {
             var character = this.context.Characters
-                .FirstOrDefault(c => c.Id == id);
+                .Find(characterId);
 
-            return character;
+            return mapper.Map<T>(character);
         }
 
-       
 
-        public IQueryable<Character> GetAll()
+        public IQueryable<T> GetAll<T>()
         {
-            return this.context.Characters;
+            var characters = this.context.Characters
+                .Select(c => mapper.Map<T>(c));
+
+            return characters;
         }
 
-        public Character Delete(string id)
+        public Character Delete(string characterId)
         {
-            var character = this.GetCharacterById(id);
+            var character = this.context.Characters.Find(characterId);
 
             this.context.Characters.Remove(character);
             this.context.SaveChanges();
@@ -95,11 +105,11 @@ namespace WowGuildManager.Services.Characters
             return character;
         }
 
-        public IQueryable<Character> GetCharactersForDungeonByDungeonId(string id)
+        public IQueryable<T> GetCharactersForDungeonByDungeonId<T>(string id)
         {
             var characters = this.context.DungeonCharacter
                 .Where(dc => dc.DungeonId == id)
-                .Select(dc => dc.Character);
+                .Select(dc => mapper.Map<T>(dc.Character));
 
             return characters;
         }

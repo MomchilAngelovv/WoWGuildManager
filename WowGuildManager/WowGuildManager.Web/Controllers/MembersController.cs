@@ -14,28 +14,26 @@ namespace WowGuildManager.Web.Controllers
     public class MembersController : Controller
     {
         private readonly ICharacterService characterService;
-        private readonly IMapper mapper;
 
         public MembersController(
-            ICharacterService characterService,
-            IMapper mapper)
+            ICharacterService characterService)
         {
             this.characterService = characterService;
-            this.mapper = mapper;
         }
 
         //TODO: Add Ranks to models
         public IActionResult Index()
         {
-            var allMembers = this.characterService.GetAll()
-                .Select(character => mapper.Map<CharacterViewModel>(character));
+            var members = this.characterService
+                .GetAll<CharacterViewModel>()
+                .AsEnumerable();
 
             var membersIndexViewModel = new MembersIndexViewModel
             {
-                Members = allMembers
+                Members = members
             };
 
-            return View(membersIndexViewModel);
+            return this.View(membersIndexViewModel);
         }
     }
 }

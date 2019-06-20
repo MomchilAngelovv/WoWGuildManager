@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,13 @@ namespace WowGuildManager.Web.Mapper
         public WowGuildManagerProfile()
         {
             this.CreateMap<Character, CharacterViewModel>();
+
+            this.CreateMap<Character, CharacterJoinViewModel>();
+            this.CreateMap<Character, CharacterDungeonDetailsViewModel>();
+            
+            this.CreateMap<Character, SelectListItem>()
+                .ForMember(d => d.Text, dvm => dvm.MapFrom(x => x.Name))
+                .ForMember(d => d.Value, dvm => dvm.MapFrom(x => x.Id));
 
             this.CreateMap<Dungeon, DungeonViewModel>()
                 .ForMember(d => d.RegisteredPlayers, dvm => dvm.MapFrom(x => x.RegisteredCharacters.Count))

@@ -12,18 +12,18 @@ namespace WowGuildManager.Services.Characters
     {
         Character Create(CharacterCreateInputModel inputModel);
 
+        Character Delete(string characterId);
+
         IQueryable<CharacterClass> GetClasses();
 
         IQueryable<CharacterRole> GetRoles();
 
-        IQueryable<Character> GetCharactersByUser(WowGuildManagerUser user);
+        IQueryable<T> GetCharactersByUserId<T>(string userId);
 
-        Character GetCharacterById(string id);
+        T GetCharacterById<T>(string characterId);
 
-        IQueryable<Character> GetAll();
+        IQueryable<T> GetAll<T>();
 
-        Character Delete(string id);
-
-        IQueryable<Character> GetCharactersForDungeonByDungeonId(string id);
+        IQueryable<T> GetCharactersForDungeonByDungeonId<T>(string id);
     }
 }

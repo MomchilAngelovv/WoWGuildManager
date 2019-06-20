@@ -37,14 +37,11 @@ namespace WowGuildManager.Web.Controllers
        
         public async Task<IActionResult> Create()
         {
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = (await this.userManager.GetUserAsync(this.User)).Id;
 
-            var myCharacters = this.characterService.GetCharactersByUser(user)
-              .Select(character => new SelectListItem
-              {
-                  Text = character.Name,
-                  Value = character.Id
-              });
+            var myCharacters = this.characterService
+                .GetCharactersByUserId<SelectListItem>(userId)
+                .AsEnumerable();
 
             if (myCharacters.Any() == false)
             {

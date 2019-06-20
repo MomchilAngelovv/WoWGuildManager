@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,16 @@ namespace WowGuildManager.Services.Raids
 
         private readonly ICharacterService characterService;
         private readonly WowGuildManagerDbContext context;
+        private readonly IMapper mapper;
 
-        public RaidService(ICharacterService characterService, WowGuildManagerDbContext context)
+        public RaidService(
+            ICharacterService characterService, 
+            WowGuildManagerDbContext context,
+            IMapper mapper)
         {
             this.characterService = characterService;
             this.context = context;
+            this.mapper = mapper;
         }
         public Raid Create(RaidCreateInputModel inputModel)
         {
@@ -93,11 +99,14 @@ namespace WowGuildManager.Services.Raids
             }
         }
 
-        public IQueryable<Raid> GetAll()
+        public IQueryable<T> GetAll<T>()
         {
-            return this.context.Raids
+            var raids = this.context.Raids
                .Include(raid => raid.Leader)
-               .Include(raid => raid.RegisteredCharacters);
+               .Include(raid => raid.RegisteredCharacters)
+               .Select(raid => mapper.Map<T>(raid));
+
+            return raids;
         }
 
         public IQueryable<RaidPlace> GetPlaces()
