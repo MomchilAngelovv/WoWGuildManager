@@ -100,7 +100,6 @@ namespace WowGuildManager.Web.Controllers
 
             var userId = await this.GetUserId(this.userManager);
 
-            //TODO TOTAL REFACtor OF LOGIC and models if joined in dungeon
             var myCharacters = this.characterService
                 .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
                 .AsEnumerable();

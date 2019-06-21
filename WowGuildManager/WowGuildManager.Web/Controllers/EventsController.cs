@@ -73,14 +73,10 @@ namespace WowGuildManager.Web.Controllers
 
                 foreach (var raid in raids)
                 {
-                    //if (character.Dungeons.Any(d => d.DungeonId == raid.Id))
-                    //{
-                    //    var joinedCharacter = this.charactersService
-                    //        .GetCharacterById<CharacterNameRoleViewModel>(character.Id);
-
-                    //    raid.AlreadyJoined = true;
-                    //    raid.JoinedCharacter = joinedCharacter;
-                    //}
+                    if (IsCharacterRegisteredForRaid(character, raid))
+                    {
+                        SetJoinedCharacterToDungeon(character, raid);
+                    }
                 }
                 //TODO: 10000000% REFACTOR THIS WITH MAPPE this make query for eveyr dungon
                 //var joinedCharacter = this.charactersService
@@ -115,6 +111,23 @@ namespace WowGuildManager.Web.Controllers
 
             dungeon.AlreadyJoined = true;
             dungeon.JoinedCharacter = joinedCharacter;
+        }
+
+        private static void SetJoinedCharacterToDungeon(Character character, RaidViewModel raid)
+        {
+            var joinedCharacter = new CharacterNameRoleViewModel
+            {
+                Name = character.Name,
+                Role = character.Role.ToString()
+            };
+
+            raid.AlreadyJoined = true;
+            raid.JoinedCharacter = joinedCharacter;
+        }
+
+        private bool IsCharacterRegisteredForRaid(Character character, RaidViewModel raid)
+        {
+            return character.Raids.Any(d => d.RaidId == raid.Id);
         }
     }
 }

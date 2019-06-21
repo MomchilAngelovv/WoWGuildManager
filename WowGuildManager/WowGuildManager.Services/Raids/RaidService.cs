@@ -28,7 +28,7 @@ namespace WowGuildManager.Services.Raids
         private readonly IMapper mapper;
 
         public RaidService(
-            ICharacterService characterService, 
+            ICharacterService characterService,
             WowGuildManagerDbContext context,
             IMapper mapper)
         {
@@ -112,6 +112,28 @@ namespace WowGuildManager.Services.Raids
         public IQueryable<RaidPlace> GetPlaces()
         {
             return Enum.GetValues(typeof(RaidPlace)).Cast<RaidPlace>().AsQueryable();
+        }
+
+        public IQueryable<T> GetRegisteredCharactersByRaidId<T>(string raidId)
+        {
+            var registeredCharacters = this.context.RaidCharacter
+                .Where(rc => rc.RaidId == raidId)
+                .Include(rc => rc.Character)
+                .Select(rc => mapper.Map<T>(rc.Character));
+
+            return registeredCharacters;
+        }
+
+        public void RegisterCharacter(string characterId, string raidId)
+        {
+            var raidCharacter = new RaidCharacter
+            {
+                CharacterId = characterId,
+                RaidId = raidId
+            };
+
+            this.context.RaidCharacter.Add(raidCharacter);
+            this.context.SaveChanges();
         }
     }
 }

@@ -11,13 +11,18 @@
                     <p class="card-text">@raid.Place - Leader: @raid.LeaderName</p>
                     <p class="card-text">Registered: @raid.RegisteredPlayers/@raid.MaxPlayers</p>
                     <p class="card-text">@raid.Description</p>
-                    @if (raid.RegisteredPlayers != raid.MaxPlayers)
+                    @if (raid.AlreadyJoined)
                     {
-                        <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100">Join</a>
+                        <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Already Joined with @raid.JoinedCharacter.Name (@raid.JoinedCharacter.Role)</a>
+
+                    }
+                    else if (raid.RegisteredPlayers != raid.MaxPlayers)
+                    {
+                        <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Join</a>
                     }
                     else
                     {
-                        <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100">No spots left - see details</a>
+                        <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Full - see details</a>
                     }
                 </div>
             </div>

@@ -14,7 +14,6 @@ using WowGuildManager.Services.Raids;
 
 namespace WowGuildManager.Web.Controllers
 {
-    [Authorize(Roles = "Admin, Raid Leader")]
     public class RaidsController : BaseController
     {
         private readonly IRaidService raidService;
@@ -31,6 +30,7 @@ namespace WowGuildManager.Web.Controllers
             this.userManager = userManager;
         }
 
+        //TODO: Security and authority validation everyWHERE !! IMPORTANTT !!!!
         public IActionResult Index()
         {
             return View();
@@ -91,6 +91,48 @@ namespace WowGuildManager.Web.Controllers
             this.raidService.Create(inputModel);
 
             return RedirectToAction("Index", "Events");
+        }
+
+        public async Task<IActionResult> Details(string id)
+        {
+            var userId = await this.GetUserId(this.userManager);
+
+            var registeredCharacters = this.raidService
+                 .GetRegisteredCharactersByRaidId<CharacterRaidDetailsViewModel>(id)
+                 .AsEnumerable();
+
+            var myCharacters = this.characterService
+                .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
+                .AsEnumerable();
+
+            var raidDetailsViewModel = new RaidDetailsViewModel
+            {
+                Id = id,
+                Characters = registeredCharacters,
+                AvailableCharacters = myCharacters
+            };
+
+            foreach (var myCharacter in myCharacters)
+            {
+                if (registeredCharacters.Any(rc => rc.Id == myCharacter.Id))
+                {
+                    var characterNameIdViewModel = this.characterService
+                        .GetCharacterById<CharacterIdNameViewModel>(myCharacter.Id);
+
+                    raidDetailsViewModel.AlreadyJoined = true;
+                    raidDetailsViewModel.JoinedCharacter = characterNameIdViewModel;
+                    break;
+                }
+            }
+
+            return this.View(raidDetailsViewModel);
+        }
+
+        public IActionResult Join(string characterId, string raidId)
+        {
+            this.raidService.RegisterCharacter(characterId, raidId);
+
+            return this.RedirectToAction("Index", "Events");
         }
     }
 }

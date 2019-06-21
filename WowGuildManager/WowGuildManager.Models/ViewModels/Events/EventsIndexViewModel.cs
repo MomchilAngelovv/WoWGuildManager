@@ -12,6 +12,7 @@ namespace WowGuildManager.Models.ViewModels.Events
         public bool IsUserRaidLeaderOrAdmin { get; set; }
 
         public IEnumerable<RaidViewModel> Raids { get; set; }
+
         public IEnumerable<DungeonViewModel> Dungeons { get; set; }
     }
 }

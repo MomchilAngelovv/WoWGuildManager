@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WowGuildManager.Models.ViewModels.Characters;
 
 namespace WowGuildManager.Models.ViewModels.Raids
 {
@@ -21,5 +22,9 @@ namespace WowGuildManager.Models.ViewModels.Raids
         public string RegisteredPlayers { get; set; }
 
         public string MaxPlayers { get; set; }
+
+        public bool AlreadyJoined { get; set; }
+
+        public CharacterNameRoleViewModel JoinedCharacter { get; set; }
     }
 }

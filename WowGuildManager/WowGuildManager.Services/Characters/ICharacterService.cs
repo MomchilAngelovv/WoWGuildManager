@@ -25,6 +25,7 @@ namespace WowGuildManager.Services.Characters
         IQueryable<T> GetAll<T>();
 
         //TODO: Refactor and be consistend with id or dungeon id
+        //TOD0: Move this to dungeon service
         IQueryable<T> GetCharactersForDungeonByDungeonId<T>(string dungeonId);
     }
 }

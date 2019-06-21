@@ -27,7 +27,8 @@ namespace WowGuildManager.Web.Mapper
             this.CreateMap<Character, CharacterIdNameViewModel>();
             this.CreateMap<Character, CharacterNameRoleViewModel>();
             this.CreateMap<Character, CharacterDungeonDetailsViewModel>();
-            
+            this.CreateMap<Character, CharacterRaidDetailsViewModel>();
+
             this.CreateMap<Character, SelectListItem>()
                 .ForMember(d => d.Text, dvm => dvm.MapFrom(x => x.Name))
                 .ForMember(d => d.Value, dvm => dvm.MapFrom(x => x.Id));

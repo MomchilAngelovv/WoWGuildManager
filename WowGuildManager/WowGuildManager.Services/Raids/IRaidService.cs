@@ -14,5 +14,9 @@ namespace WowGuildManager.Services.Raids
         IQueryable<T> GetAll<T>();
 
         IQueryable<RaidPlace> GetPlaces();
+
+        IQueryable<T> GetRegisteredCharactersByRaidId<T>(string raidId);
+
+        void RegisterCharacter(string characterId, string raidId);
     }
 }
