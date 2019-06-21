@@ -50,6 +50,7 @@ namespace WowGuildManager.Services.Characters
             return character;
         }
 
+        //TODO: Learn MOQING
         public IQueryable<T> GetCharactersByUserId<T>(string userId)
         {
             var characters = this.context.Characters

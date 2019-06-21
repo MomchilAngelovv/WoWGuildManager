@@ -5,7 +5,6 @@ using System.Text;
 
 namespace WowGuildManager.Domain.Raid
 {
-    //TODO:Validate every domein entity
     public class RaidDestination
     {
         [Key]

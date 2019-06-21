@@ -23,19 +23,19 @@ namespace WowGuildManager.Domain.Characters
         [MaxLength(30)]
         public string Name { get; set; }
 
+        [Range(1, 60)]
+        public int Level { get; set; }
+
+        [Required]
+        public int GuildPoints { get; set; }
+
         [Required]
         public string ClassId { get; set; }
         public CharacterClass Class { get; set; }
 
-        [Range(1,60)]
-        public int Level { get; set; }
-
         [Required]
         public string RoleId { get; set; }
         public virtual CharacterRole Role { get; set; }
-
-        [Required]
-        public int GuildPoints { get; set; }
 
         [Required]
         public string GuildRankId { get; set; }

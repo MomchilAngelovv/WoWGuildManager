@@ -21,6 +21,7 @@ using WowGuildManager.Web.Mapper;
 using WowGuildManager.Services.Dungeons;
 using WowGuildManager.Services.Raids;
 using WowGuildManager.Services.Api;
+using WowGuildManager.Services.Guilds;
 
 namespace WowGuildManager.Web
 {
@@ -28,17 +29,15 @@ namespace WowGuildManager.Web
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
@@ -62,15 +61,18 @@ namespace WowGuildManager.Web
             .AddEntityFrameworkStores<WowGuildManagerDbContext>();
 
             services.AddAutoMapper(typeof(Startup));
+            
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            #region AppServices
             services.AddTransient<ICharacterService, CharacterService>();
             services.AddTransient<IDungeonService, DungeonService>();
             services.AddTransient<IRaidService, RaidService>();
             services.AddTransient<IApiService, ApiService>();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddTransient<IGuildService, GuildService>();
+            #endregion
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -84,8 +86,11 @@ namespace WowGuildManager.Web
                 app.UseHsts();
             }
 
+            #region AppMiddlewares
             app.UseSeedAdminUserAndRoles();
             app.UseSeedDatabaseDefaultData();
+            #endregion
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

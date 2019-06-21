@@ -21,12 +21,12 @@ namespace WowGuildManager.Domain.Dungeon
         [Required]
         public DateTime EventDateTime { get; set; }
 
+        [MaxLength(100)]
+        public string Description { get; set; }
+
         [Required]
         public string DestinationId { get; set; }
         public virtual DungeonDestination Destination { get; set; }
-
-        [MaxLength(100)]
-        public string Description { get; set; }
 
         [Required]
         public string LeaderId { get; set; }

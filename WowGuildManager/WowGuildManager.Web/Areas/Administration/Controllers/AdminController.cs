@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WowGuildManager.Web.Areas.Administration.Controllers
 {
-    //TODO: MAKE DB SEEDERS
     //TODO: Put bootstrap icons
     [Area("Administration")]
     [Authorize(Roles ="Admin")]
