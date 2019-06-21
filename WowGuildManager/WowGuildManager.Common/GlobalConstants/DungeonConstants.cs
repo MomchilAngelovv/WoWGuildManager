@@ -27,5 +27,25 @@ namespace WowGuildManager.Common
         public const string BrdImage = "/images/dungeons/brdImg.jpg";
         public const string StImage = "/images/dungeons/stImg.jpg";
         public const string LbrsImage = "/images/dungeons/lbrsImg.jpg";
+
+        public const string Rfc = "Rfc";
+        public const string Wc = "Wc";
+        public const string Dm = "Dm";
+        public const string Sfk = "Sfk";
+        public const string Bfd = "Bfd";
+        public const string Stocks = "Stocks";
+        public const string Gnome = "Gnome";
+        public const string Sm = "Sm";
+        public const string Rfk = "Rfk";
+        public const string Mara = "Mara";
+        public const string Rfd = "Rfd";
+        public const string Diremaul = "Diremaul";
+        public const string Scholo = "Scholo";
+        public const string Ulda = "Ulda";
+        public const string Strat = "Strat";
+        public const string Zf = "Zf";
+        public const string Brd = "Brd";
+        public const string St = "St";
+        public const string Lbrs = "Lbrs";
     }
 }

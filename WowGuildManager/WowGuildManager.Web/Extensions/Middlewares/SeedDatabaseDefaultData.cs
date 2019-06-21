@@ -19,10 +19,9 @@ namespace WowGuildManager.Web.Extensions
         private readonly RequestDelegate _next;
 
 
-        public SeedDatabaseDefaultData(
-            RequestDelegate next)
+        public SeedDatabaseDefaultData(RequestDelegate next)
         {
-            _next = next;
+            this._next = next;
         }
 
         public async Task InvokeAsync(HttpContext httpContext, WowGuildManagerDbContext context)
@@ -59,9 +58,13 @@ namespace WowGuildManager.Web.Extensions
         {
             var guildrankNames = new List<string>
             {
-                "GuildMaster",
-                "RaidLeader",
-                "Member"
+                GuildRanksConstants.GuildMaster,
+                GuildRanksConstants.Officer,
+                GuildRanksConstants.Veteran,
+                GuildRanksConstants.Raider,
+                GuildRanksConstants.PvP,
+                GuildRanksConstants.Member,
+                GuildRanksConstants.Alt,
             };
 
             var guildRanks = new List<GuildRank>();
@@ -87,16 +90,17 @@ namespace WowGuildManager.Web.Extensions
         {
             var raidNamesAndMaxPlayers = new Dictionary<string, int>
             {
-                ["Ubrs"] = 10,
-                ["Zg"] = 20,
-                ["Aq20"] = 20,
-                ["Mc"] = 40,
-                ["Bwl"] = 40,
-                ["Ony"] = 40,
-                ["Aq40"] = 40,
-                ["Naxx"] = 40,
+                [RaidConstants.Ubrs] = 10,
+                [RaidConstants.Zg] = 20,
+                [RaidConstants.Aq20] = 20,
+                [RaidConstants.Mc] = 40,
+                [RaidConstants.Ony] = 40,
+                [RaidConstants.Bwl] = 40,
+                [RaidConstants.Aq40] = 40,
+                [RaidConstants.Naxx] = 40,
             };
 
+            //TODO:Consider full dungeon and raid names!!
             var raidDestinations = new List<RaidDestination>();
 
             foreach (var namdAndMaxPlayers in raidNamesAndMaxPlayers)
@@ -147,25 +151,25 @@ namespace WowGuildManager.Web.Extensions
             //TODO: MAKE COMMON constnats project
             var dungeonNamesAnddungeonImagePaths = new Dictionary<string, string>
             {
-                ["Rfc"] = DungeonConstants.RfcImage,
-                ["Wc"] = DungeonConstants.WcImage,
-                ["Dm"] = DungeonConstants.DmImage,
-                ["Sfk"] = DungeonConstants.SfkImage,
-                ["Bfd"] = DungeonConstants.BfdImage,
-                ["Stocks"] = DungeonConstants.StocksImage,
-                ["Gnome"] = DungeonConstants.GnomeImage,
-                ["Sm"] = DungeonConstants.SmImage,
-                ["Rfk"] = DungeonConstants.RfkImage,
-                ["Mara"] = DungeonConstants.MaraImage,
-                ["Rfd"] = DungeonConstants.RfdImage,
-                ["Diremaul"] = DungeonConstants.DiremaulImage,
-                ["Scholo"] = DungeonConstants.ScholoImage,
-                ["Ulda"] = DungeonConstants.UldaImage,
-                ["Strat"] = DungeonConstants.StratImage,
-                ["Zf"] = DungeonConstants.ZfImage,
-                ["Brd"] = DungeonConstants.BrdImage,
-                ["St"] = DungeonConstants.StImage,
-                ["Lbrs"] = DungeonConstants.LbrsImage,
+                [DungeonConstants.Rfc] = DungeonConstants.RfcImage,
+                [DungeonConstants.Wc] = DungeonConstants.WcImage,
+                [DungeonConstants.Dm] = DungeonConstants.DmImage,
+                [DungeonConstants.Sfk] = DungeonConstants.SfkImage,
+                [DungeonConstants.Bfd] = DungeonConstants.BfdImage,
+                [DungeonConstants.Stocks] = DungeonConstants.StocksImage,
+                [DungeonConstants.Gnome] = DungeonConstants.GnomeImage,
+                [DungeonConstants.Sm] = DungeonConstants.SmImage,
+                [DungeonConstants.Rfk] = DungeonConstants.RfkImage,
+                [DungeonConstants.Mara] = DungeonConstants.MaraImage,
+                [DungeonConstants.Rfd] = DungeonConstants.RfdImage,
+                [DungeonConstants.Diremaul] = DungeonConstants.DiremaulImage,
+                [DungeonConstants.Scholo] = DungeonConstants.ScholoImage,
+                [DungeonConstants.Ulda] = DungeonConstants.UldaImage,
+                [DungeonConstants.Strat] = DungeonConstants.StratImage,
+                [DungeonConstants.Zf] = DungeonConstants.ZfImage,
+                [DungeonConstants.Brd] = DungeonConstants.BrdImage,
+                [DungeonConstants.St] = DungeonConstants.StImage,
+                [DungeonConstants.Lbrs] = DungeonConstants.LbrsImage,
             };
 
             var dungeonDestinations = new List<DungeonDestination>();
@@ -189,9 +193,9 @@ namespace WowGuildManager.Web.Extensions
         {
             var roleNames = new List<string>
             {
-                "Tank",
-                "Healer",
-                "Damage"
+                CharacterRoleConstants.Tank,
+                CharacterRoleConstants.Healer,
+                CharacterRoleConstants.Damage
             };
 
             var characterRoles = new List<CharacterRole>();
@@ -214,15 +218,15 @@ namespace WowGuildManager.Web.Extensions
         {
             var classNamesAndImagePaths = new Dictionary<string, string>
             {
-                ["Druid"] = CharacterConstants.DruidImage,
-                ["Hunter"] = CharacterConstants.HunterImage,
-                ["Mage"] = CharacterConstants.MageImage,
-                ["Paladin"] = CharacterConstants.PaladinImage,
-                ["Priest"] = CharacterConstants.PriestImage,
-                ["Rogue"] = CharacterConstants.RogueImage,
-                ["Shaman"] = CharacterConstants.ShamanImage,
-                ["Warlock"] = CharacterConstants.WarlockImage,
-                ["Warrior"] = CharacterConstants.WarlockImage,
+                [CharacterConstants.Druid] = CharacterConstants.DruidImage,
+                [CharacterConstants.Hunter] = CharacterConstants.HunterImage,
+                [CharacterConstants.Mage] = CharacterConstants.MageImage,
+                [CharacterConstants.Paladin] = CharacterConstants.PaladinImage,
+                [CharacterConstants.Priest] = CharacterConstants.PriestImage,
+                [CharacterConstants.Rogue] = CharacterConstants.RogueImage,
+                [CharacterConstants.Shaman] = CharacterConstants.ShamanImage,
+                [CharacterConstants.Warlock] = CharacterConstants.WarlockImage,
+                [CharacterConstants.Warrior] = CharacterConstants.WarlockImage,
             };
 
             var characterClasses = new List<CharacterClass>();

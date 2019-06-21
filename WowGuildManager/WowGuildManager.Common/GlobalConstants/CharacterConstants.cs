@@ -16,5 +16,15 @@ namespace WowGuildManager.Common.GlobalConstants
         public const string ShamanImage = "/images/classes/shamanImg.jpg";
         public const string WarlockImage = "/images/classes/warlockImg.jpg";
         public const string WarriorImage = "/images/classes/warriorImg.jpg";
+
+        public const string Druid = "Druid";
+        public const string Hunter = "Hunter";
+        public const string Mage = "Mage";
+        public const string Paladin = "Paladin";
+        public const string Priest = "Priest";
+        public const string Rogue = "Rogue";
+        public const string Shaman = "Shaman";
+        public const string Warlock = "Warlock";
+        public const string Warrior = "Warrior";
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WowGuildManager.Common.GlobalConstants;
 using WowGuildManager.Data;
 using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Identity;
@@ -40,7 +41,7 @@ namespace WowGuildManager.Services.Characters
                 Name = model.Name,
                 RoleId = this.GetRoleIdByName(model.Role),
                 WowGuildManagerUserId = model.UserId,
-                GuildRankId = this.GetRankIdByName("Member"),
+                GuildRankId = this.GetRankIdByName(GuildRanksConstants.Member),
             };
 
             this.context.Characters.Add(character);
