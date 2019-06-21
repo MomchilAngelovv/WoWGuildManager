@@ -9,8 +9,9 @@ namespace WowGuildManager.Models.ViewModels.Events
     //TODO FIX INTERFACES EVEYWHRE WHEN END!!!!!!!!!! IMPORTANT
     public class EventsIndexViewModel
     {
-        public IEnumerable<DungeonViewModel> Dungeons { get; set; }
+        public bool IsUserRaidLeaderOrAdmin { get; set; }
 
         public IEnumerable<RaidViewModel> Raids { get; set; }
+        public IEnumerable<DungeonViewModel> Dungeons { get; set; }
     }
 }

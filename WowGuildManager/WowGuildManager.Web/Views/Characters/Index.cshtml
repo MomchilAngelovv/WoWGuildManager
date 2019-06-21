@@ -9,7 +9,7 @@
 
 <section>
     <div class="row d-flex justify-content-center">
-        <div class="card-deck mb-5">
+        <div class="card-deck">
             @foreach (var character in Model.Characters)
             {
                 <div class="card bg-dark border text-warning" style="width: 20rem;">
@@ -18,7 +18,7 @@
                         <h5 class="card-title">@character.Name</h5>
                         <p class="card-text">@character.Level @character.Class @character.Role</p>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer mb-3">
                         <small class="text-muted">TBA GuildRanks</small>
                     </div>
                 </div>

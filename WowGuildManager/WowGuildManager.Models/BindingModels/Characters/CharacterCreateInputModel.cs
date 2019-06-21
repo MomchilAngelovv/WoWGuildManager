@@ -22,7 +22,7 @@ namespace WowGuildManager.Models.ViewModels.Characters
         [Required]
         public CharacterRole Role { get; set; }
 
-        [Required]
+        //TODO: FIx identity area bootstrap and interface
         public string UserId { get; set; }
     }
 }

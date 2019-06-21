@@ -22,6 +22,7 @@ namespace WowGuildManager.Web.Controllers
             return View();
         }
 
+        //TODO: COnsider leaveing sections and some few divs outside partial views
         //TODO: Consired proper error view (search in net)
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

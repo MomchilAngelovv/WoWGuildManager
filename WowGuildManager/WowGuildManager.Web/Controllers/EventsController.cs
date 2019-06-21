@@ -65,12 +65,14 @@ namespace WowGuildManager.Web.Controllers
                 }
             }
 
+            //TODO: Code queility when finish !!!!!! IMPORTNAT !!!
             var raids = this.raidService
                 .GetAll<RaidViewModel>()
                 .AsEnumerable();
 
             var eventsIndexViewModel = new EventsIndexViewModel
             {
+                IsUserRaidLeaderOrAdmin = this.User.IsInRole("Raid Leader") || this.User.IsInRole("Admin"),
                 Dungeons = dungeons,
                 Raids = raids
             };

@@ -114,9 +114,11 @@ namespace WowGuildManager.Web.Controllers
             {
                 if (registeredCharacters.Any(rc => rc.Id == myCharacter.Id))
                 {
+                    var characterNameIdViewModel = this.characterService
+                        .GetCharacterById<CharacterIdNameViewModel>(myCharacter.Id);
+
                     dungeonDetailsViewModel.AlreadyJoined = true;
-                    dungeonDetailsViewModel.JoinedCharacterId = myCharacter.Id;
-                    dungeonDetailsViewModel.JoinedCharacterName = myCharacter.Name;
+                    dungeonDetailsViewModel.JoinedCharacter = characterNameIdViewModel;
                     break;
                 }
             }

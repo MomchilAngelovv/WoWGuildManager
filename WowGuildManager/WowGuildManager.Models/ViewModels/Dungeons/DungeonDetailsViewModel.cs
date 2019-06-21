@@ -15,8 +15,6 @@ namespace WowGuildManager.Models.ViewModels.Dungeons
 
         public bool AlreadyJoined { get; set; }
 
-        public string JoinedCharacterName { get; set; }
-
-        public string JoinedCharacterId { get; set; }
+        public CharacterIdNameViewModel JoinedCharacter { get; set; }
     }
 }
