@@ -8,11 +8,11 @@ using WowGuildManager.Domain.Identity;
 
 namespace WowGuildManager.Web.Extensions
 {
-    public class SeedAdminUserAndDefaultRoles
+    public class SeedAdminUserAndRoles
     {
         private readonly RequestDelegate _next;
 
-        public SeedAdminUserAndDefaultRoles(
+        public SeedAdminUserAndRoles(
             RequestDelegate next)
         {
             _next = next;
@@ -43,14 +43,14 @@ namespace WowGuildManager.Web.Extensions
 
             await roleManager.CreateAsync(new WowGuildManagerRole
             {
-                Name = "Raid Leader",
-                Description = "Authorized to create raid and make events."
+                Name = "RaidLeader",
+                Description = "Authorized to create raid events."
             });
 
             await roleManager.CreateAsync(new WowGuildManagerRole
             {
-                Name = "User",
-                Description = "Basic user."
+                Name = "DefaultUser",
+                Description = "Default user."
             });
 
             var adminUser = new WowGuildManagerUser

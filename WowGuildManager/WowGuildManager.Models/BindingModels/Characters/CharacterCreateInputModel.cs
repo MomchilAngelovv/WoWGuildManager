@@ -14,15 +14,16 @@ namespace WowGuildManager.Models.ViewModels.Characters
         public string Name { get; set; }
 
         [Required]
-        public CharacterClass Class { get; set; }
+        public string Class { get; set; }
 
         [Range(1, 60)]
         public int Level { get; set; }
 
         [Required]
-        public CharacterRole Role { get; set; }
+        public string Role { get; set; }
 
         //TODO: FIx identity area bootstrap and interface
+        //TODO: FIX CSS LAST
         public string UserId { get; set; }
     }
 }

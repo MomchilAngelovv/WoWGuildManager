@@ -14,9 +14,9 @@ namespace WowGuildManager.Services.Characters
 
         Character Delete(string characterId);
 
-        IQueryable<CharacterClass> GetClasses();
+        IQueryable<T> GetClasses<T>();
 
-        IQueryable<CharacterRole> GetRoles();
+        IQueryable<T> GetRoles<T>();
 
         IQueryable<T> GetCharactersByUserId<T>(string userId);
 
@@ -27,5 +27,9 @@ namespace WowGuildManager.Services.Characters
         //TODO: Refactor and be consistend with id or dungeon id
         //TOD0: Move this to dungeon service
         IQueryable<T> GetCharactersForDungeonByDungeonId<T>(string dungeonId);
+
+        string GetClassIdByName(string className);
+
+        string GetRoleIdByName(string roleName);
     }
 }

@@ -10,6 +10,7 @@ namespace WowGuildManager.Domain.Identity
     public class WowGuildManagerRole : IdentityRole<string>
     {
         [Required]
+        [MaxLength(100)]
         public string Description { get; set; }
     }
 }

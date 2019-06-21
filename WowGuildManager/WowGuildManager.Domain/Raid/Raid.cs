@@ -7,7 +7,6 @@ using WowGuildManager.Domain.Characters;
 
 namespace WowGuildManager.Domain.Raid
 {
-    [Table("Raids")]
     public class Raid
     {
         public Raid()
@@ -19,17 +18,13 @@ namespace WowGuildManager.Domain.Raid
         public string Id { get; set; }
 
         [Required]
-        public RaidPlace Place { get; set; }
-
-        [Range(10, 40)]
-        public int MaxPlayers { get; set; }
+        public string DestinationId { get; set; }
+        public virtual RaidDestination Destination { get; set; }
 
         [Required]
-        public DateTime DateTime { get; set; }
+        public DateTime EventDateTime { get; set; }
 
-        [Required]
-        public string Image { get; set; }
-
+        [MaxLength(100)]
         public string Description { get; set; }
 
         [Required]

@@ -12,11 +12,11 @@ namespace WowGuildManager.Models.ViewModels.Dungeons
         public DateTime DateTime { get; set; }
 
         [Required]
-        public DungeonPlace Place { get; set; }
+        public string Destination { get; set; }
 
         public string Description { get; set; }
 
         [Required]
-        public string DungeonLeaderId { get; set; }
+        public string LeaderId { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace WowGuildManager.Web.Controllers
             this.raidService = raidService;
             this.charactersService = charactersService;
         }
-        //TODO:REARANGE private and public stuff
+        //TODO:REARANGE private and public stuff AT END !! IMPORTANT
         private bool IsCharacterRegisteredForDungeon(Character character, DungeonViewModel dungeon)
         {
             return character.Dungeons.Any(d => d.DungeonId == dungeon.Id);
@@ -59,7 +59,6 @@ namespace WowGuildManager.Web.Controllers
                .GetAll<RaidViewModel>()
                .ToList();
 
-            //TODO: THink if something eazier is possible
             //TODO: Consider Events view change border if joined or no
             foreach (var character in myCharacters)
             {

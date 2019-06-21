@@ -17,5 +17,7 @@ namespace WowGuildManager.Models.ViewModels.Characters
         public string Class { get; set; }
 
         public string Image { get; set; }
+
+        public string Rank { get; set; }
     }
 }

@@ -70,12 +70,7 @@ namespace WowGuildManager.Web.Controllers
 
         private IEnumerable<SelectListItem> BindRaidPlacesToSelectListItem()
         {
-            var raidPlaceList = this.raidService.GetPlaces()
-               .Select(place => new SelectListItem
-               {
-                   Text = place.ToString(),
-                   Value = ((int)place).ToString()
-               });
+            var raidPlaceList = this.raidService.GetDestinations<SelectListItem>();
 
             return raidPlaceList;
         }

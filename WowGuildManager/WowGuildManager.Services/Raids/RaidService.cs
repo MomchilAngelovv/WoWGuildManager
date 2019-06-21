@@ -12,17 +12,9 @@ using WowGuildManager.Services.Characters;
 
 namespace WowGuildManager.Services.Raids
 {
+    //TODO: Chage images for heroes and Gnomeregan
     public class RaidService : IRaidService
     {
-        private const string UbrsImage = "/images/raids/ubrsImg.jpg";
-        private const string Aq20Image = "/images/raids/aq20Img.jpg";
-        private const string Aq40Image = "/images/raids/aq40Img.jpg";
-        private const string BwlImage = "/images/raids/bwlImg.jpg";
-        private const string McImage = "/images/raids/mcImg.jpg";
-        private const string NaxxImage = "/images/raids/naxxImg.jpg";
-        private const string OnyImage = "/images/raids/onyImg.jpg";
-        private const string ZgImage = "/images/raids/zgImg.jpg";
-
         private readonly ICharacterService characterService;
         private readonly WowGuildManagerDbContext context;
         private readonly IMapper mapper;
@@ -36,21 +28,19 @@ namespace WowGuildManager.Services.Raids
             this.context = context;
             this.mapper = mapper;
         }
-        public Raid Create(RaidCreateInputModel inputModel)
+        public Raid Create(RaidCreateInputModel model)
         {
             var raid = new Raid
             {
-                DateTime = inputModel.DateTime,
-                Description = inputModel.Description,
-                Place = inputModel.Place,
-                LeaderId = inputModel.RaidLeaderId,
+                EventDateTime = model.DateTime,
+                Description = model.Description,
+                DestinationId = this.GetDestinationIdByName(model.Destination),
+                LeaderId = model.LeaderId,
             };
-
-            this.SetRaidImageAndMaxPlayers(raid);
 
             raid.RegisteredCharacters.Add(new RaidCharacter
             {
-                CharacterId = inputModel.RaidLeaderId,
+                CharacterId = model.LeaderId,
                 Raid = raid
             });
 
@@ -60,58 +50,33 @@ namespace WowGuildManager.Services.Raids
             return raid;
         }
 
-        private void SetRaidImageAndMaxPlayers(Raid raid)
-        {
-            switch (raid.Place)
-            {
-                case RaidPlace.UBRS:
-                    raid.Image = UbrsImage;
-                    raid.MaxPlayers = 10;
-                    break;
-                case RaidPlace.ZG:
-                    raid.Image = ZgImage;
-                    raid.MaxPlayers = 20;
-                    break;
-                case RaidPlace.AQ20:
-                    raid.Image = Aq20Image;
-                    raid.MaxPlayers = 20;
-                    break;
-                case RaidPlace.MC:
-                    raid.Image = McImage;
-                    raid.MaxPlayers = 40;
-                    break;
-                case RaidPlace.BWL:
-                    raid.Image = BwlImage;
-                    raid.MaxPlayers = 40;
-                    break;
-                case RaidPlace.ONY:
-                    raid.Image = OnyImage;
-                    raid.MaxPlayers = 40;
-                    break;
-                case RaidPlace.AQ40:
-                    raid.Image = Aq40Image;
-                    raid.MaxPlayers = 40;
-                    break;
-                case RaidPlace.NAXX:
-                    raid.Image = NaxxImage;
-                    raid.MaxPlayers = 40;
-                    break;
-            }
-        }
-
+        //TODO: Use lazyloading
         public IQueryable<T> GetAll<T>()
         {
             var raids = this.context.Raids
                .Include(raid => raid.Leader)
                .Include(raid => raid.RegisteredCharacters)
+               .Include(raid => raid.Destination)
                .Select(raid => mapper.Map<T>(raid));
 
             return raids;
         }
 
-        public IQueryable<RaidPlace> GetPlaces()
+        public string GetDestinationIdByName(string destinationName)
         {
-            return Enum.GetValues(typeof(RaidPlace)).Cast<RaidPlace>().AsQueryable();
+            var destinationId = this.context.RaidDestinations
+                .FirstOrDefault(rd => rd.Name == destinationName)
+                .Id;
+
+            return destinationId;
+        }
+
+        public IQueryable<T> GetDestinations<T>()
+        {
+            var raidDestinations = this.context.RaidDestinations
+                .Select(rd => mapper.Map<T>(rd));
+
+            return raidDestinations;
         }
 
         public IQueryable<T> GetRegisteredCharactersByRaidId<T>(string raidId)

@@ -7,7 +7,6 @@ using WowGuildManager.Domain.Characters;
 
 namespace WowGuildManager.Domain.Raid
 {
-    [Table("RaidCharacter")]
     public class RaidCharacter
     {
         [Required]

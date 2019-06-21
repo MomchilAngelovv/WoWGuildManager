@@ -9,11 +9,11 @@ namespace WowGuildManager.Models.ViewModels.Raids
     {
         public string Id { get; set; }
 
-        public string DateTime { get; set; }
+        public string EventDateTime { get; set; }
 
         public string Image { get; set; }
 
-        public string Place { get; set; }
+        public string Destination { get; set; }
 
         public string Description { get; set; }
 

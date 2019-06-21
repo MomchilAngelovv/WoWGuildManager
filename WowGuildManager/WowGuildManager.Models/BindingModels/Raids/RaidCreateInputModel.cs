@@ -12,11 +12,12 @@ namespace WowGuildManager.Models.ViewModels.Raids
         public DateTime DateTime { get; set; }
 
         [Required]
-        public RaidPlace Place { get; set; }
+        public string Destination { get; set; }
 
+        [MaxLength(100)]
         public string Description { get; set; }
 
         [Required]
-        public string RaidLeaderId { get; set; }
+        public string LeaderId { get; set; }
     }
 }

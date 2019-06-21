@@ -1,9 +1,13 @@
-﻿namespace WowGuildManager.Domain.Characters
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WowGuildManager.Domain.Characters
 {
-    public enum CharacterRole
+    public class CharacterRole
     {
-        Tank = 1,
-        Healer = 2,
-        Damage = 3
+        [Key]
+        public string Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
     }
 }

@@ -28,13 +28,14 @@ namespace WowGuildManager.Web.Controllers
             this.userManager = userManager;
         }
 
+        //TODO: Fix automapper mapping
         public async Task<IActionResult> Index()
         {
             var userId = await this.GetUserId(this.userManager);
 
             var characters = this.characterService
                 .GetCharactersByUserId<CharacterViewModel>(userId)
-                .AsEnumerable();
+                .ToList();
 
             var characterIndexViewModel = new CharacterIndexViewModel
             {
@@ -44,6 +45,7 @@ namespace WowGuildManager.Web.Controllers
             return View(characterIndexViewModel);
         }
 
+        //TODO: Sort controllers dependanicyes and methods
         public IActionResult Create()
         {
             var classList = this.BindClassesToSelectListItem();
@@ -56,7 +58,7 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CharacterCreateInputModel inputModel)
+        public async Task<IActionResult> Create(CharacterCreateInputModel model)
         {
             if (ModelState.IsValid == false)
             {
@@ -65,16 +67,17 @@ namespace WowGuildManager.Web.Controllers
 
             var userId = await this.GetUserId(this.userManager);
 
-            inputModel.UserId = userId;
+            model.UserId = userId;
 
-            this.characterService.Create(inputModel);
+            this.characterService.Create(model);
 
             return this.RedirectToAction(nameof(Index));
         }
 
         public IActionResult Details(string id)
         {
-            var character = this.characterService.GetCharacterById<CharacterViewModel>(id);
+            var character = this.characterService
+                .GetCharacterById<CharacterViewModel>(id);
 
             return this.View(character);
         }
@@ -89,24 +92,14 @@ namespace WowGuildManager.Web.Controllers
         private IEnumerable<SelectListItem> BindRolesToSelectListItem()
         {
 
-            var roleList = this.characterService.GetRoles()
-               .Select(cl => new SelectListItem
-               {
-                   Text = cl.ToString(),
-                   Value = ((int)cl).ToString()
-               });
+            var roleList = this.characterService.GetRoles<SelectListItem>();
 
             return roleList;
         }
 
         private IEnumerable<SelectListItem> BindClassesToSelectListItem()
         {
-            var classList = this.characterService.GetClasses()
-              .Select(cl => new SelectListItem
-              {
-                  Text = cl.ToString(),
-                  Value = ((int)cl).ToString()
-              });
+            var classList = this.characterService.GetClasses<SelectListItem>();
 
             return classList;
         }

@@ -15,8 +15,10 @@ namespace WowGuildManager.Services.Dungeons
 
         IQueryable<T> GetAll<T>();
 
-        IQueryable<DungeonPlace> GetPlaces();
+        IQueryable<T> GetDestinations<T>();
 
         void RegisterCharacter(string characterId, string dungeonId);
+
+        T GetDestinationIdByDestinationName<T>(string destinationName);
     }
 }

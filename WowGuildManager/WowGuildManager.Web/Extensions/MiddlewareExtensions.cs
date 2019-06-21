@@ -8,9 +8,14 @@ namespace WowGuildManager.Web.Extensions
 {
     public static class MiddlewareExtensions
     {
-        public static IApplicationBuilder UseSeedAdminUserAndDefaultRoles(this IApplicationBuilder app)
+        public static IApplicationBuilder UseSeedAdminUserAndRoles(this IApplicationBuilder app)
         {
-            return app.UseMiddleware<SeedAdminUserAndDefaultRoles>();
+            return app.UseMiddleware<SeedAdminUserAndRoles>();
+        }
+
+        public static IApplicationBuilder UseSeedDatabaseDefaultData(this IApplicationBuilder app)
+        {
+            return app.UseMiddleware<SeedDatabaseDefaultData>();
         }
     }
 

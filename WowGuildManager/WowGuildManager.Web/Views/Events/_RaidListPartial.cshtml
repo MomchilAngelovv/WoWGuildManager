@@ -7,8 +7,8 @@
             <div class="card col-auto m-4 bg-dark border-danger" style="width: 18rem; padding:0px;">
                 <img class="card-img-top" src="@raid.Image" alt="Card image cap">
                 <div class="card-body text-warning">
-                    <h5 class="card-title">@raid.DateTime</h5>
-                    <p class="card-text">@raid.Place - Leader: @raid.LeaderName</p>
+                    <h5 class="card-title">@raid.EventDateTime</h5>
+                    <p class="card-text">@raid.Destination - Leader: @raid.LeaderName</p>
                     <p class="card-text">Registered: @raid.RegisteredPlayers/@raid.MaxPlayers</p>
                     <p class="card-text">@raid.Description</p>
                     @if (raid.AlreadyJoined)

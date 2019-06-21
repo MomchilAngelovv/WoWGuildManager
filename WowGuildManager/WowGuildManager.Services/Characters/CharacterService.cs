@@ -14,16 +14,6 @@ namespace WowGuildManager.Services.Characters
 {
     public class CharacterService : ICharacterService
     {
-        private const string DruidImage = "/images/classes/druidImg.jpg";
-        private const string HunterImage = "/images/classes/hunterImg.jpg";
-        private const string MageImage = "/images/classes/mageImg.jpg";
-        private const string PaladinImage = "/images/classes/paladinImg.jpg";
-        private const string PriestImage = "/images/classes/priestImg.jpg";
-        private const string RogueImage = "/images/classes/rogueImg.jpg";
-        private const string ShamanImage = "/images/classes/shamanImg.jpg";
-        private const string WarlockImage = "/images/classes/warlockImg.jpg";
-        private const string WarriorImage = "/images/classes/warriorImg.jpg";
-
         private readonly WowGuildManagerDbContext context;
         private readonly IMapper mapper;
 
@@ -35,23 +25,23 @@ namespace WowGuildManager.Services.Characters
             this.mapper = mapper;
         }
 
-        public Character Create(CharacterCreateInputModel inputModel)
+        public Character Create(CharacterCreateInputModel model)
         {
-            if (this.context.Characters.Where(c => c.WowGuildManagerUserId == inputModel.UserId).Count() == 4)
+            if (this.context.Characters.Where(c => c.WowGuildManagerUserId == model.UserId).Count() == 4)
             {
                 return null;
             }
 
+            //TODO: MAGIC STRINGS FIX 100%
             var character = new Character
             {
-                Class = inputModel.Class,
-                Level = inputModel.Level,
-                Name = inputModel.Name,
-                Role = inputModel.Role,
-                WowGuildManagerUserId = inputModel.UserId,
+                ClassId = this.GetClassIdByName(model.Class),
+                Level = model.Level,
+                Name = model.Name,
+                RoleId = this.GetRoleIdByName(model.Role),
+                WowGuildManagerUserId = model.UserId,
+                GuildRankId = this.GetRankIdByName("Member"),
             };
-
-            this.SetCharacterImage(character);
 
             this.context.Characters.Add(character);
             this.context.SaveChanges();
@@ -64,20 +54,29 @@ namespace WowGuildManager.Services.Characters
             var characters = this.context.Characters
                 .Where(character => character.WowGuildManagerUserId == userId)
                 .Include(ch => ch.Dungeons)
+                .Include(ch => ch.Role)
+                .Include(ch => ch.Class)
+                .Include(ch => ch.GuildRank)
                 .Select(ch => mapper.Map<T>(ch));
 
             return characters;
         }
 
         //TODO: Delete remainning comments when READY ! IMPORTANT !!!
-        public IQueryable<CharacterClass> GetClasses()
+        public IQueryable<T> GetClasses<T>()
         {
-            return Enum.GetValues(typeof(CharacterClass)).Cast<CharacterClass>().AsQueryable();
+            var classes = this.context.CharacterClasses
+               .Select(cc => mapper.Map<T>(cc));
+
+            return classes;
         }
 
-        public IQueryable<CharacterRole> GetRoles()
+        public IQueryable<T> GetRoles<T>()
         {
-            return Enum.GetValues(typeof(CharacterRole)).Cast<CharacterRole>().AsQueryable();
+            var classes = this.context.CharacterRoles
+              .Select(cc => mapper.Map<T>(cc));
+
+            return classes;
         }
 
         public T GetCharacterById<T>(string characterId)
@@ -91,6 +90,10 @@ namespace WowGuildManager.Services.Characters
         public IQueryable<T> GetAll<T>()
         {
             var characters = this.context.Characters
+                .Include(ch => ch.Dungeons)
+                .Include(ch => ch.Role)
+                .Include(ch => ch.Class)
+                .Include(ch => ch.GuildRank)
                 .Select(c => mapper.Map<T>(c));
 
             return characters;
@@ -114,38 +117,33 @@ namespace WowGuildManager.Services.Characters
 
             return characters;
         }
-        private void SetCharacterImage(Character character)
+
+        public string GetClassIdByName(string className)
         {
-            switch (character.Class)
-            {
-                case CharacterClass.Druid:
-                    character.Image = DruidImage;
-                    break;
-                case CharacterClass.Hunter:
-                    character.Image = HunterImage;
-                    break;
-                case CharacterClass.Mage:
-                    character.Image = MageImage;
-                    break;
-                case CharacterClass.Paladin:
-                    character.Image = PaladinImage;
-                    break;
-                case CharacterClass.Priest:
-                    character.Image = PriestImage;
-                    break;
-                case CharacterClass.Rogue:
-                    character.Image = RogueImage;
-                    break;
-                case CharacterClass.Shaman:
-                    character.Image = ShamanImage;
-                    break;
-                case CharacterClass.Warlock:
-                    character.Image = WarlockImage;
-                    break;
-                case CharacterClass.Warrior:
-                    character.Image = WarriorImage;
-                    break;
-            }
+            //TODO: FirstOrDefautl can return null and ID might explode
+            var classId = this.context.CharacterClasses
+                .FirstOrDefault(cc => cc.Name == className)
+                .Id;
+
+            return classId; 
+        }
+
+        public string GetRoleIdByName(string roleName)
+        {
+            var roleId = this.context.CharacterRoles
+                 .FirstOrDefault(cr => cr.Name == roleName)
+                 .Id;
+
+            return roleId;
+        }
+
+        public string GetRankIdByName(string rankName)
+        {
+            var roleId = this.context.GuildRanks
+                 .FirstOrDefault(cr => cr.Name == rankName)
+                 .Id;
+
+            return roleId;
         }
     }
 }

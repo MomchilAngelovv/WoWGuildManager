@@ -9,14 +9,17 @@ namespace WowGuildManager.Services.Raids
 {
     public interface IRaidService
     {
-        Raid Create(RaidCreateInputModel inputModel);
+        Raid Create(RaidCreateInputModel model);
 
         IQueryable<T> GetAll<T>();
 
-        IQueryable<RaidPlace> GetPlaces();
+        IQueryable<T> GetDestinations<T>();
 
         IQueryable<T> GetRegisteredCharactersByRaidId<T>(string raidId);
 
         void RegisterCharacter(string characterId, string raidId);
+
+        //TODO: SOrt interface methods
+        string GetDestinationIdByName(string destinationName);
     }
 }

@@ -67,7 +67,7 @@ namespace WowGuildManager.Web
             services.AddTransient<IRaidService, RaidService>();
             services.AddTransient<IApiService, ApiService>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,8 +84,8 @@ namespace WowGuildManager.Web
                 app.UseHsts();
             }
 
-            app.UseSeedAdminUserAndDefaultRoles();
-
+            app.UseSeedAdminUserAndRoles();
+            app.UseSeedDatabaseDefaultData();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

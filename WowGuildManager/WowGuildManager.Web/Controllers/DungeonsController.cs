@@ -52,17 +52,12 @@ namespace WowGuildManager.Web.Controllers
 
         private IEnumerable<SelectListItem> BindDungeonPlacesToSelectListItem()
         {
-            var dungeonPlaceList = this.dungeonService.GetPlaces()
-              .Select(place => new SelectListItem
-              {
-                  Text = place.ToString(),
-                  Value = ((int)place).ToString()
-              });
+            var dungeonPlaceList = this.dungeonService.GetDestinations<SelectListItem>();
 
             return dungeonPlaceList;
         }
 
-        //TODO: CHange enumerations to data entities
+        //TODO: CHANGE ENUMERATIONS WITH DATA ENTITIES
         private async Task<IEnumerable<SelectListItem>> BindCharactersToSelectListItem()
         {
             var userId = await this.GetUserId(this.userManager);

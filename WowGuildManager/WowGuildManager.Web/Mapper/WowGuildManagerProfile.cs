@@ -19,15 +19,33 @@ namespace WowGuildManager.Web.Mapper
         public WowGuildManagerProfile()
         {
             this.CreateMap<CharacterClass, SelectListItem>()
-                .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.ToString()))
-                .ForMember(cl => cl.Value, sli => sli.MapFrom(x => ((int)x).ToString()));
+                .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.Name));
 
-            this.CreateMap<Character, CharacterViewModel>();
+            this.CreateMap<Character, CharacterViewModel>()
+                .ForMember(cvm => cvm.Role, sli => sli.MapFrom(x => x.Role.Name))
+                .ForMember(cvm => cvm.Class, sli => sli.MapFrom(x => x.Class.Name))
+                .ForMember(cvm => cvm.Rank, sli => sli.MapFrom(x => x.GuildRank.Name))
+                .ForMember(cvm => cvm.Image, sli => sli.MapFrom(x => x.Class.ImagePath));
 
             this.CreateMap<Character, CharacterIdNameViewModel>();
             this.CreateMap<Character, CharacterNameRoleViewModel>();
             this.CreateMap<Character, CharacterDungeonDetailsViewModel>();
             this.CreateMap<Character, CharacterRaidDetailsViewModel>();
+
+            this.CreateMap<DungeonDestination, SelectListItem>()
+                 .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.Name));
+
+            this.CreateMap<RaidDestination, SelectListItem>()
+                .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.Name));
+
+
+            this.CreateMap<CharacterClass, SelectListItem>()
+                .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.Name));
+
+
+            this.CreateMap<CharacterRole, SelectListItem>()
+                .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.Name));
+
 
             this.CreateMap<Character, SelectListItem>()
                 .ForMember(d => d.Text, dvm => dvm.MapFrom(x => x.Name))
@@ -35,11 +53,17 @@ namespace WowGuildManager.Web.Mapper
 
             this.CreateMap<Dungeon, DungeonViewModel>()
                 .ForMember(d => d.RegisteredPlayers, dvm => dvm.MapFrom(x => x.RegisteredCharacters.Count))
-                .ForMember(d => d.DateTime, dvm => dvm.MapFrom(x => $"{x.DateTime.ToString("dd MMMM yyyy HH:mm")}"));
+                .ForMember(d => d.Image, dvm => dvm.MapFrom(x => x.Destination.ImagePath))
+                .ForMember(d => d.MaxPlayers, dvm => dvm.MapFrom(x => x.Destination.MaxPlayers))
+                .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name))
+                .ForMember(d => d.DateTime, dvm => dvm.MapFrom(x => $"{x.EventDateTime.ToString("dd MMMM yyyy HH:mm")}"));
 
             this.CreateMap<Raid, RaidViewModel>()
                 .ForMember(d => d.RegisteredPlayers, dvm => dvm.MapFrom(x => x.RegisteredCharacters.Count))
-                .ForMember(d => d.DateTime, dvm => dvm.MapFrom(x => $"{x.DateTime.ToString("dd MMMM yyyy HH:mm")}"));
+                .ForMember(d => d.Image, dvm => dvm.MapFrom(x => x.Destination.ImagePath))
+                .ForMember(d => d.MaxPlayers, dvm => dvm.MapFrom(x => x.Destination.MaxPlayers))
+                .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name))
+                .ForMember(d => d.EventDateTime, dvm => dvm.MapFrom(x => $"{x.EventDateTime.ToString("dd MMMM yyyy HH:mm")}"));
 
             this.CreateMap<Character, CharacterApiViewModel>()
                 .ForMember(d => d.Dungeons, cvm => cvm.MapFrom(x => x.Dungeons.Select(d => d.DungeonId)))

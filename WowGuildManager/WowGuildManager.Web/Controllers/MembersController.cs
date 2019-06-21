@@ -26,7 +26,7 @@ namespace WowGuildManager.Web.Controllers
         {
             var members = this.characterService
                 .GetAll<CharacterViewModel>()
-                .AsEnumerable();
+                .ToList();
 
             var membersIndexViewModel = new MembersIndexViewModel
             {

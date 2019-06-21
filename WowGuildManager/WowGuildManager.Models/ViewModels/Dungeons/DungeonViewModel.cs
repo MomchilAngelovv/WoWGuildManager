@@ -13,7 +13,7 @@ namespace WowGuildManager.Models.ViewModels.Dungeons
 
         public string Image { get; set; }
 
-        public string Place { get; set; }
+        public string Destination { get; set; }
 
         public string Description { get; set; }
 
