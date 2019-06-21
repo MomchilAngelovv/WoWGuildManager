@@ -86,7 +86,6 @@ namespace WowGuildManager.Services.Characters
             return mapper.Map<T>(character);
         }
 
-
         public IQueryable<T> GetAll<T>()
         {
             var characters = this.context.Characters
@@ -105,10 +104,10 @@ namespace WowGuildManager.Services.Characters
             return character;
         }
 
-        public IQueryable<T> GetCharactersForDungeonByDungeonId<T>(string id)
+        public IQueryable<T> GetCharactersForDungeonByDungeonId<T>(string dungeonId)
         {
             var characters = this.context.DungeonCharacter
-                .Where(dc => dc.DungeonId == id)
+                .Where(dc => dc.DungeonId == dungeonId)
                 .Select(dc => mapper.Map<T>(dc.Character));
 
             return characters;
@@ -145,6 +144,22 @@ namespace WowGuildManager.Services.Characters
                     character.Image = WarriorImage;
                     break;
             }
+        }
+
+        public T GetRegisteredCharacterForCurrentDungeon<T>(string dungeonId, string userId)
+        {
+            var myCharacters = this
+                .GetCharactersByUserId<Character>(userId)
+                .AsEnumerable();
+
+            if (myCharacters.Any(c => c.Dungeons.Any(d => d.DungeonId == dungeonId)))
+            {
+                var joinedCharacer = mapper.Map<T>(myCharacters.First(c => c.Dungeons.Any(d => d.DungeonId == dungeonId)));
+
+                return joinedCharacer;
+            }
+
+            return default;
         }
     }
 }

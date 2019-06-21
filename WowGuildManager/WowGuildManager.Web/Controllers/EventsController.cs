@@ -43,27 +43,26 @@ namespace WowGuildManager.Web.Controllers
         {
             var userId = await this.GetUserId(this.userManager);
 
-            var myCharacters = this.charactersService
-                .GetCharactersByUserId<Character>(userId)
-                .AsEnumerable();
-
             var dungeons = this.dungeonService
                 .GetAll<DungeonViewModel>()
                 .ToList();
 
             //TODO: 10000000% REFACTOR THIS WITH MAPPER
-            for (int i = 0; i < dungeons.Count; i++)
-            {
-                if (myCharacters.Any(c => c.Dungeons.Any(d => d.DungeonId == dungeons[i].Id)))
-                {
-                    var joinedCharacer = myCharacters.First(c => c.Dungeons.Any(d => d.DungeonId == dungeons[i].Id));
 
-                    dungeons[i].AlreadyJoined = true;
-                    dungeons[i].JoinedCharacterName = joinedCharacer.Name;
-                    dungeons[i].JoinedCharacterLevel = joinedCharacer.Level.ToString();
-                    dungeons[i].JoinedCharacterRole = joinedCharacer.Role.ToString();
+            foreach (var dungeon in dungeons)
+            {
+                var joinedCharacter = this.charactersService
+                    .GetRegisteredCharacterForCurrentDungeon<CharacterNameRoleViewModel>(dungeon.Id, userId);
+
+                if (joinedCharacter != null)
+                {
+                    dungeon.AlreadyJoined = true;
+                    dungeon.JoinedCharacter = joinedCharacter;
                 }
             }
+
+            //var joinedCharacer = myCharacters.First(c => c.Dungeons.Any(d => d.DungeonId == dungeon.Id));
+            //if (myCharacters.Any(c => c.Dungeons.Any(d => d.DungeonId == dungeon.Id)))
 
             //TODO: Code queility when finish !!!!!! IMPORTNAT !!!
             var raids = this.raidService

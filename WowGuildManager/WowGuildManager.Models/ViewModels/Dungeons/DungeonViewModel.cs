@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WowGuildManager.Models.ViewModels.Characters;
 
 namespace WowGuildManager.Models.ViewModels.Dungeons
 {
@@ -24,10 +25,6 @@ namespace WowGuildManager.Models.ViewModels.Dungeons
 
         public bool AlreadyJoined { get; set; }
 
-        public string JoinedCharacterName { get; set; }
-
-        public string JoinedCharacterLevel { get; set; }
-
-        public string JoinedCharacterRole { get; set; }
+        public CharacterNameRoleViewModel JoinedCharacter { get; set; }
     }
 }

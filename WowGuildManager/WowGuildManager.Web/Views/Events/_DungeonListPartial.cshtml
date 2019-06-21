@@ -9,11 +9,11 @@
                 <div class="card-body text-warning">
                     <h5 class="card-title">@dungeon.DateTime</h5>
                     <p class="card-text">@dungeon.Place - Leader: @dungeon.LeaderName</p>
-                    <p class="card-text">Registered: @dungeon.RegisteredPlayers/@dungeon.MaxPlayers</p>
+                    <p class="card-text">Registered: @dungeon.RegisteredPlayers / @dungeon.MaxPlayers</p>
                     <p class="card-text">@dungeon.Description</p>
                     @if (dungeon.AlreadyJoined)
                     {
-                        <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100 ">Already Joined with @dungeon.JoinedCharacterLevel @dungeon.JoinedCharacterName @dungeon.JoinedCharacterRole</a>
+                        <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100 ">Already Joined with @dungeon.JoinedCharacter.Name (@dungeon.JoinedCharacter.Role)</a>
 
                     }
                     else if (dungeon.RegisteredPlayers != dungeon.MaxPlayers)

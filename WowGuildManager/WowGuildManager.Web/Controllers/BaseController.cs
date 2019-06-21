@@ -8,7 +8,6 @@ using WowGuildManager.Domain.Identity;
 
 namespace WowGuildManager.Web.Controllers
 {
-    //TODO: Consider moving raid and dungeon listing in partial views
     public class BaseController : Controller
     {
         protected async Task<string> GetUserId(UserManager<WowGuildManagerUser> userManager)

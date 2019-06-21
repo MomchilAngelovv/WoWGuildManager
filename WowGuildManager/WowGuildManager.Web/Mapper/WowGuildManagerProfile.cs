@@ -25,6 +25,7 @@ namespace WowGuildManager.Web.Mapper
             this.CreateMap<Character, CharacterViewModel>();
 
             this.CreateMap<Character, CharacterIdNameViewModel>();
+            this.CreateMap<Character, CharacterNameRoleViewModel>();
             this.CreateMap<Character, CharacterDungeonDetailsViewModel>();
             
             this.CreateMap<Character, SelectListItem>()
