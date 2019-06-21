@@ -62,6 +62,7 @@ namespace WowGuildManager.Web.Controllers
             return dungeonPlaceList;
         }
 
+        //TODO: CHange enumerations to data entities
         private async Task<IEnumerable<SelectListItem>> BindCharactersToSelectListItem()
         {
             var userId = await this.GetUserId(this.userManager);
@@ -90,6 +91,7 @@ namespace WowGuildManager.Web.Controllers
             return RedirectToAction("Index", "Events");
         }
 
+        //TODO: Think how to implement guild points
         public async Task<IActionResult> Details(string id)
         {
             var registeredCharacters = this.characterService
@@ -103,6 +105,7 @@ namespace WowGuildManager.Web.Controllers
                 .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
                 .AsEnumerable();
 
+            //TODO: Fix bug hwen it syas to register character when dungeon is full
             var dungeonDetailsViewModel = new DungeonDetailsViewModel
             {
                 Id = id,

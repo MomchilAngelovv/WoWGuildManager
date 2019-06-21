@@ -8,6 +8,7 @@ using WowGuildManager.Data;
 using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Identity;
 using WowGuildManager.Models.ViewModels.Characters;
+using WowGuildManager.Services.Dungeons;
 
 namespace WowGuildManager.Services.Characters
 {
@@ -68,6 +69,7 @@ namespace WowGuildManager.Services.Characters
             return characters;
         }
 
+        //TODO: Delete remainning comments when READY ! IMPORTANT !!!
         public IQueryable<CharacterClass> GetClasses()
         {
             return Enum.GetValues(typeof(CharacterClass)).Cast<CharacterClass>().AsQueryable();
@@ -144,22 +146,6 @@ namespace WowGuildManager.Services.Characters
                     character.Image = WarriorImage;
                     break;
             }
-        }
-
-        public T GetRegisteredCharacterForCurrentDungeon<T>(string dungeonId, string userId)
-        {
-            var myCharacters = this
-                .GetCharactersByUserId<Character>(userId)
-                .AsEnumerable();
-
-            if (myCharacters.Any(c => c.Dungeons.Any(d => d.DungeonId == dungeonId)))
-            {
-                var joinedCharacer = mapper.Map<T>(myCharacters.First(c => c.Dungeons.Any(d => d.DungeonId == dungeonId)));
-
-                return joinedCharacer;
-            }
-
-            return default;
         }
     }
 }

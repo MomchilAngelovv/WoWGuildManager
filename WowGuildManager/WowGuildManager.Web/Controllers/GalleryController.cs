@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WowGuildManager.Web.Controllers
 {
+    //TODO: Require unique email;
     [AllowAnonymous]
     public class GalleryController : BaseController
     {

@@ -4,6 +4,7 @@ namespace WowGuildManager.Data.Migrations
 {
     public partial class Add_Unique_Index_Characters_Name : Migration
     {
+      
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateIndex(

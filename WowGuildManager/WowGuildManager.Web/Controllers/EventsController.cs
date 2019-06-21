@@ -38,37 +38,63 @@ namespace WowGuildManager.Web.Controllers
             this.raidService = raidService;
             this.charactersService = charactersService;
         }
+        //TODO:REARANGE private and public stuff
+        private bool IsCharacterRegisteredForDungeon(Character character, DungeonViewModel dungeon)
+        {
+            return character.Dungeons.Any(d => d.DungeonId == dungeon.Id);
+        }
 
         public async Task<IActionResult> Index()
         {
             var userId = await this.GetUserId(this.userManager);
 
+            var myCharacters = this.charactersService
+                .GetCharactersByUserId<Character>(userId);
+
             var dungeons = this.dungeonService
                 .GetAll<DungeonViewModel>()
                 .ToList();
 
-            //TODO: 10000000% REFACTOR THIS WITH MAPPER
+            var raids = this.raidService
+               .GetAll<RaidViewModel>()
+               .ToList();
 
-            foreach (var dungeon in dungeons)
+            //TODO: THink if something eazier is possible
+            //TODO: Consider Events view change border if joined or no
+            foreach (var character in myCharacters)
             {
-                var joinedCharacter = this.charactersService
-                    .GetRegisteredCharacterForCurrentDungeon<CharacterNameRoleViewModel>(dungeon.Id, userId);
-
-                if (joinedCharacter != null)
+                foreach (var dungeon in dungeons)
                 {
-                    dungeon.AlreadyJoined = true;
-                    dungeon.JoinedCharacter = joinedCharacter;
+                    if (IsCharacterRegisteredForDungeon(character, dungeon))
+                    {
+                        SetJoinedCharacterToDungeon(character, dungeon);
+                    }
                 }
+
+                foreach (var raid in raids)
+                {
+                    //if (character.Dungeons.Any(d => d.DungeonId == raid.Id))
+                    //{
+                    //    var joinedCharacter = this.charactersService
+                    //        .GetCharacterById<CharacterNameRoleViewModel>(character.Id);
+
+                    //    raid.AlreadyJoined = true;
+                    //    raid.JoinedCharacter = joinedCharacter;
+                    //}
+                }
+                //TODO: 10000000% REFACTOR THIS WITH MAPPE this make query for eveyr dungon
+                //var joinedCharacter = this.charactersService
+                //    .GetRegisteredCharacterForCurrentDungeon<CharacterNameRoleViewModel>(dungeon.Id, myCharacterIds);
+
+                //if (joinedCharacter != null)
+                //{
+                //    dungeon.AlreadyJoined = true;
+                //    dungeon.JoinedCharacter = joinedCharacter;
+                //}
             }
 
-            //var joinedCharacer = myCharacters.First(c => c.Dungeons.Any(d => d.DungeonId == dungeon.Id));
-            //if (myCharacters.Any(c => c.Dungeons.Any(d => d.DungeonId == dungeon.Id)))
-
             //TODO: Code queility when finish !!!!!! IMPORTNAT !!!
-            var raids = this.raidService
-                .GetAll<RaidViewModel>()
-                .AsEnumerable();
-
+           
             var eventsIndexViewModel = new EventsIndexViewModel
             {
                 IsUserRaidLeaderOrAdmin = this.User.IsInRole("Raid Leader") || this.User.IsInRole("Admin"),
@@ -77,6 +103,18 @@ namespace WowGuildManager.Web.Controllers
             };
 
             return View(eventsIndexViewModel);
+        }
+
+        private static void SetJoinedCharacterToDungeon(Character character, DungeonViewModel dungeon)
+        {
+            var joinedCharacter = new CharacterNameRoleViewModel
+            {
+                Name = character.Name,
+                Role = character.Role.ToString()
+            };
+
+            dungeon.AlreadyJoined = true;
+            dungeon.JoinedCharacter = joinedCharacter;
         }
     }
 }

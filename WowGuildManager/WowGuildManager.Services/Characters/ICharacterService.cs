@@ -26,7 +26,5 @@ namespace WowGuildManager.Services.Characters
 
         //TODO: Refactor and be consistend with id or dungeon id
         IQueryable<T> GetCharactersForDungeonByDungeonId<T>(string dungeonId);
-
-        T GetRegisteredCharacterForCurrentDungeon<T>(string dungeonId, string userId);
     }
 }
