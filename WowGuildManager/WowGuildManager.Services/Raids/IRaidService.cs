@@ -14,6 +14,8 @@ namespace WowGuildManager.Services.Raids
 
         IQueryable<T> GetAll<T>();
 
+        IQueryable<T> GetRaidsForToday<T>();
+
         IQueryable<T> GetDestinations<T>();
 
         IQueryable<T> GetRegisteredCharactersByRaidId<T>(string raidId);

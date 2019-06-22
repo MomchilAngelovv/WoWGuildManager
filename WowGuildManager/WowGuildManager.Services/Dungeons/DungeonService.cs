@@ -51,6 +51,7 @@ namespace WowGuildManager.Services.Dungeons
             var dungeons = this.context.Dungeons
                 .Include(dungeon => dungeon.Leader)
                 .Include(dungeon => dungeon.RegisteredCharacters)
+                .Include(dungeon => dungeon.Destination)
                 .Select(dungeon => this.mapper.Map<T>(dungeon));
 
             return dungeons;
@@ -83,6 +84,16 @@ namespace WowGuildManager.Services.Dungeons
                 .FirstOrDefault(dd => dd.Name == destinationName));
 
             return destinationId;
+        }
+
+        public IQueryable<T> GetDungeonsForToday<T>()
+        {
+            var dungeonsForToday = this.context.Dungeons
+                .Where(d => d.EventDateTime.Day == DateTime.Now.Day)
+                .Include(d => d.Destination)
+                .Select(d => mapper.Map<T>(d));
+
+            return dungeonsForToday;
         }
     }
 }

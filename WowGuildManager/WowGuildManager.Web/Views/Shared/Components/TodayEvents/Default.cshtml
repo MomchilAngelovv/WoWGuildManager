@@ -1,0 +1,31 @@
+﻿@model WowGuildManager.Models.ViewModels.Events.TodayEventsViewModel
+
+<table class="table table-sm table-hover table-dark">
+    <thead>
+        <tr>
+            <th colspan="2" class="text-center">Today's events</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th colspan="2" class="text-center">Raids</th>
+        </tr>
+        @foreach (var raid in Model.Raids)
+        {
+            <tr>
+                <th scope="row">@raid.Destination</th>
+                <th scope="row"><a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id">Details</a></th>
+            </tr>
+        }
+        <tr>
+            <th colspan="2" class="text-center">Dungeons</th>
+        </tr>
+        @foreach (var dungeon in Model.Dungeons)
+        {
+            <tr>
+                <th scope="row">@dungeon.Destination</th>
+                <th scope="row"><a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id">Details</a></th>
+            </tr>
+        }
+    </tbody>
+</table>

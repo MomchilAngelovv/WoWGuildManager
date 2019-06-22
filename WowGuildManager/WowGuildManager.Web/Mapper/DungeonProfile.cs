@@ -20,6 +20,9 @@ namespace WowGuildManager.Web.Mapper
                 .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name))
                 .ForMember(d => d.DateTime, dvm => dvm.MapFrom(x => $"{x.EventDateTime.ToString("dd MMMM yyyy HH:mm")}"));
 
+            this.CreateMap<Dungeon, DungeonIdDestinationViewModel>()
+                .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name));
+
             this.CreateMap<DungeonDestination, SelectListItem>()
                 .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.Name));
         }

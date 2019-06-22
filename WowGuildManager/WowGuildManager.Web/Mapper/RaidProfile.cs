@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WowGuildManager.Domain.Raid;
+using WowGuildManager.Models.ViewModels.Characters;
 using WowGuildManager.Models.ViewModels.Raids;
 
 namespace WowGuildManager.Web.Mapper
@@ -19,6 +20,9 @@ namespace WowGuildManager.Web.Mapper
                 .ForMember(d => d.MaxPlayers, dvm => dvm.MapFrom(x => x.Destination.MaxPlayers))
                 .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name))
                 .ForMember(d => d.EventDateTime, dvm => dvm.MapFrom(x => $"{x.EventDateTime.ToString("dd MMMM yyyy HH:mm")}"));
+
+            this.CreateMap<Raid, RaidIdDestinationViewModel>()
+                .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name));
 
             this.CreateMap<RaidDestination, SelectListItem>()
                 .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.Name));

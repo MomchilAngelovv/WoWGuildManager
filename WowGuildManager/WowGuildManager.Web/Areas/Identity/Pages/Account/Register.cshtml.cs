@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using WowGuildManager.Common.GlobalConstants;
 using WowGuildManager.Domain.Identity;
 
 namespace WowGuildManager.Web.Areas.Identity.Pages.Account
@@ -82,7 +83,7 @@ namespace WowGuildManager.Web.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "User");
+                    await _userManager.AddToRoleAsync(user, WowGuildManagerUserConstants.DefaultUser);
 
                     _logger.LogInformation("User created a new account with password.");
 

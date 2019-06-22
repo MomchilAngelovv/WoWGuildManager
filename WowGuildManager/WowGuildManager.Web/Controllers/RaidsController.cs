@@ -58,19 +58,15 @@ namespace WowGuildManager.Web.Controllers
             var userId = await this.GetUserId(this.userManager);
 
             var myCharacters = this.characterService
-                .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
-                .Select(c => new SelectListItem
-                {
-                    Text = c.Name,
-                    Value = c.Id
-                });
-
+                .GetCharactersByUserId<SelectListItem>(userId);
+               
             return myCharacters;
         }
 
         private IEnumerable<SelectListItem> BindRaidPlacesToSelectListItem()
         {
-            var raidPlaceList = this.raidService.GetDestinations<SelectListItem>();
+            var raidPlaceList = this.raidService
+                .GetDestinations<SelectListItem>();
 
             return raidPlaceList;
         }

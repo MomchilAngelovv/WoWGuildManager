@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-//TODO: Make viewcomponent with the latest registered member and put it on main page
+//TODO: Make viewcomponent with the todays events
 //TODO: FIX THE FAKING CAROUSEL
 namespace WowGuildManager.Common
 {

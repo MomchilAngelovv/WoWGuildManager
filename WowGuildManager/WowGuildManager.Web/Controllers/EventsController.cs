@@ -96,7 +96,7 @@ namespace WowGuildManager.Web.Controllers
             var joinedCharacter = new CharacterNameRoleViewModel
             {
                 Name = character.Name,
-                Role = character.Role.ToString()
+                Role = character.Role.Name
             };
 
             dungeon.AlreadyJoined = true;
@@ -108,7 +108,7 @@ namespace WowGuildManager.Web.Controllers
             var joinedCharacter = new CharacterNameRoleViewModel
             {
                 Name = character.Name,
-                Role = character.Role.ToString()
+                Role = character.Role.Name
             };
 
             raid.AlreadyJoined = true;

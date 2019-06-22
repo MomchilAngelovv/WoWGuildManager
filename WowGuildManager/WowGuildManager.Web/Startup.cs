@@ -42,9 +42,10 @@ namespace WowGuildManager.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<WowGuildManagerDbContext>(options => 
+            services.AddDbContext<WowGuildManagerDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("WowGuildManagerDbContext"));
+                
             });
 
             services.AddDefaultIdentity<WowGuildManagerUser>(options => 

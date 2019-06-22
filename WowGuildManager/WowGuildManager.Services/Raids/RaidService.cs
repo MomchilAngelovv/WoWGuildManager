@@ -13,8 +13,6 @@ using WowGuildManager.Services.Characters;
 namespace WowGuildManager.Services.Raids
 {
     //TODO: Chage images for heroes and Gnomeregan
-    //TODO: Use lazyloading
-
     public class RaidService : IRaidService
     {
         private readonly WowGuildManagerDbContext context;
@@ -57,6 +55,16 @@ namespace WowGuildManager.Services.Raids
                .Select(raid => mapper.Map<T>(raid));
 
             return raids;
+        }
+
+        public IQueryable<T> GetRaidsForToday<T>()
+        {
+            var raidsForToday = this.context.Raids
+                .Where(d => d.EventDateTime.Day == DateTime.Now.Day)
+                .Include(d => d.Destination)
+                .Select(d => mapper.Map<T>(d));
+
+            return raidsForToday;
         }
 
         public IQueryable<T> GetDestinations<T>()
