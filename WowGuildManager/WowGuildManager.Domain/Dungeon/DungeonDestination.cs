@@ -5,8 +5,7 @@ namespace WowGuildManager.Domain.Dungeon
 {
     public class DungeonDestination
     {
-        //TODO: PUT CONSTANTS PROJECT AND REMOVE ALL MAGIC STRING AND NUMEBRS
-        //TODO: INTRODUCE TEST PROJECT HIG TIME
+        //TODO: REMOVE ALL MAGIC STRING AND NUMEBRS
         public DungeonDestination()
         {
             this.MaxPlayers = DungeonConstants.MaxPlayers;

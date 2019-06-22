@@ -4,9 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using WowGuildManager.Domain.Characters;
 
+//TODO: FIx identity area bootstrap and interface
+//TODO: FIX CSS LAST
+
 namespace WowGuildManager.Models.ViewModels.Characters
 {
-    public class CharacterCreateInputModel
+    public class CharacterCreateBindingModel
     {
         [Required]
         [MinLength(3)]
@@ -21,9 +24,7 @@ namespace WowGuildManager.Models.ViewModels.Characters
 
         [Required]
         public string Role { get; set; }
-
-        //TODO: FIx identity area bootstrap and interface
-        //TODO: FIX CSS LAST
+        
         public string UserId { get; set; }
     }
 }

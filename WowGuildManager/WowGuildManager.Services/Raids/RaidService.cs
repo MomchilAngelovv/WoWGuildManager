@@ -13,22 +13,20 @@ using WowGuildManager.Services.Characters;
 namespace WowGuildManager.Services.Raids
 {
     //TODO: Chage images for heroes and Gnomeregan
+    //TODO: Use lazyloading
+
     public class RaidService : IRaidService
     {
-        private readonly ICharacterService characterService;
         private readonly WowGuildManagerDbContext context;
         private readonly IMapper mapper;
 
-        public RaidService(
-            ICharacterService characterService,
-            WowGuildManagerDbContext context,
-            IMapper mapper)
+        public RaidService(WowGuildManagerDbContext context, IMapper mapper)
         {
-            this.characterService = characterService;
             this.context = context;
             this.mapper = mapper;
         }
-        public Raid Create(RaidCreateInputModel model)
+
+        public Raid Create(RaidCreateBindingModel model)
         {
             var raid = new Raid
             {
@@ -50,7 +48,6 @@ namespace WowGuildManager.Services.Raids
             return raid;
         }
 
-        //TODO: Use lazyloading
         public IQueryable<T> GetAll<T>()
         {
             var raids = this.context.Raids
@@ -60,15 +57,6 @@ namespace WowGuildManager.Services.Raids
                .Select(raid => mapper.Map<T>(raid));
 
             return raids;
-        }
-
-        public string GetDestinationIdByName(string destinationName)
-        {
-            var destinationId = this.context.RaidDestinations
-                .FirstOrDefault(rd => rd.Name == destinationName)
-                .Id;
-
-            return destinationId;
         }
 
         public IQueryable<T> GetDestinations<T>()
@@ -99,6 +87,15 @@ namespace WowGuildManager.Services.Raids
 
             this.context.RaidCharacter.Add(raidCharacter);
             this.context.SaveChanges();
+        }
+
+        public string GetDestinationIdByName(string destinationName)
+        {
+            var destinationId = this.context.RaidDestinations
+                .FirstOrDefault(rd => rd.Name == destinationName)
+                .Id;
+
+            return destinationId;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace WowGuildManager.Services.Dungeons
 {
     public interface IDungeonService
     {
-        Dungeon Create(DungeonCreateInputModel inputModel);
+        Dungeon Create(DungeonCreateBindingModel inputModel);
 
         IQueryable<T> GetAll<T>();
 

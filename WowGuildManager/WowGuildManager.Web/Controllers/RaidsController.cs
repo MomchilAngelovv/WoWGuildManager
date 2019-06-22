@@ -76,7 +76,7 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(RaidCreateInputModel inputModel)
+        public IActionResult Create(RaidCreateBindingModel inputModel)
         {
             if (ModelState.IsValid == false)
             {

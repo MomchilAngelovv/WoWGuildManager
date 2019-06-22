@@ -33,7 +33,6 @@ namespace WowGuildManager.Data
 
         public DbSet<GuildRank> GuildRanks { get; set; }
 
-        //TODO:Move a lot of stuf into common constants
         public WowGuildManagerDbContext(DbContextOptions<WowGuildManagerDbContext> options)
             : base(options)
         {

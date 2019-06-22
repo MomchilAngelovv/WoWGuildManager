@@ -21,7 +21,6 @@ namespace WowGuildManager.Web.Controllers
             this.characterService = characterService;
         }
 
-        //TODO: Add Ranks to models
         public IActionResult Index()
         {
             var members = this.characterService

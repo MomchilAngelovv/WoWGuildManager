@@ -6,7 +6,7 @@ using WowGuildManager.Domain.Dungeon;
 
 namespace WowGuildManager.Models.ViewModels.Dungeons
 {
-    public class DungeonCreateInputModel
+    public class DungeonCreateBindingModel
     {
         [Required]
         public DateTime DateTime { get; set; }
@@ -14,6 +14,7 @@ namespace WowGuildManager.Models.ViewModels.Dungeons
         [Required]
         public string Destination { get; set; }
 
+        [MaxLength(100)]
         public string Description { get; set; }
 
         [Required]

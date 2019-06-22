@@ -18,5 +18,4 @@ namespace WowGuildManager.Web.Extensions
             return app.UseMiddleware<SeedDatabaseDefaultData>();
         }
     }
-
 }

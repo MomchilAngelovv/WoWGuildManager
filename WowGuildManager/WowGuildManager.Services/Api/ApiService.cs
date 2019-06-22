@@ -14,9 +14,7 @@ namespace WowGuildManager.Services.Api
         private readonly WowGuildManagerDbContext context;
         private readonly IMapper mapper;
 
-        public ApiService(
-            WowGuildManagerDbContext context,
-            IMapper mapper)
+        public ApiService(WowGuildManagerDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -24,7 +22,7 @@ namespace WowGuildManager.Services.Api
 
         public IQueryable<T> GetAll<T>(string userId)
         {
-            var characters =  this.context.Characters
+            var characters = this.context.Characters
                 .Where(c => c.WowGuildManagerUserId == userId)
                 .Include(c => c.Dungeons)
                 .Include(c => c.Raids)

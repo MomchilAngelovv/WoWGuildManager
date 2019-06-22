@@ -6,7 +6,7 @@ using WowGuildManager.Domain.Raid;
 
 namespace WowGuildManager.Models.ViewModels.Raids
 {
-    public class RaidCreateInputModel
+    public class RaidCreateBindingModel
     {
         [Required]
         public DateTime DateTime { get; set; }

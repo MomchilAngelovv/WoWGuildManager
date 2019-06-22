@@ -7,9 +7,10 @@ using WowGuildManager.Models.ViewModels.Raids;
 
 namespace WowGuildManager.Services.Raids
 {
+    //TODO: SOrt interface methods
     public interface IRaidService
     {
-        Raid Create(RaidCreateInputModel model);
+        Raid Create(RaidCreateBindingModel model);
 
         IQueryable<T> GetAll<T>();
 
@@ -19,7 +20,6 @@ namespace WowGuildManager.Services.Raids
 
         void RegisterCharacter(string characterId, string raidId);
 
-        //TODO: SOrt interface methods
         string GetDestinationIdByName(string destinationName);
     }
 }

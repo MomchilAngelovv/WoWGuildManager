@@ -148,7 +148,6 @@ namespace WowGuildManager.Web.Extensions
 
         private async Task SeedDungeonDestinations(WowGuildManagerDbContext context)
         {
-            //TODO: MAKE COMMON constnats project
             var dungeonNamesAnddungeonImagePaths = new Dictionary<string, string>
             {
                 [DungeonConstants.Rfc] = DungeonConstants.RfcImage,
@@ -226,7 +225,7 @@ namespace WowGuildManager.Web.Extensions
                 [CharacterConstants.Rogue] = CharacterConstants.RogueImage,
                 [CharacterConstants.Shaman] = CharacterConstants.ShamanImage,
                 [CharacterConstants.Warlock] = CharacterConstants.WarlockImage,
-                [CharacterConstants.Warrior] = CharacterConstants.WarlockImage,
+                [CharacterConstants.Warrior] = CharacterConstants.WarriorImage,
             };
 
             var characterClasses = new List<CharacterClass>();

@@ -8,25 +8,25 @@ namespace WowGuildManager.Common
     {
         public const int MaxPlayers = 5;
 
-        public const string RfcImage = "/images/dungeons/rfcImg.jpg";
-        public const string WcImage = "/images/dungeons/wcImg.jpg";
-        public const string DmImage = "/images/dungeons/dmImg.jpg";
-        public const string SfkImage = "/images/dungeons/sfkImg.jpg";
-        public const string BfdImage = "/images/dungeons/bdfImg.jpg";
-        public const string StocksImage = "/images/dungeons/stocksImg.jpg";
-        public const string GnomeImage = "/images/dungeons/gnomeImg.jpg";
-        public const string SmImage = "/images/dungeons/smImg.jpg";
-        public const string RfkImage = "/images/dungeons/rfkImg.jpg";
-        public const string MaraImage = "/images/dungeons/maraImg.jpg";
-        public const string RfdImage = "/images/dungeons/rfdImg.jpg";
-        public const string DiremaulImage = "/images/dungeons/diremaulImg.jpg";
-        public const string ScholoImage = "/images/dungeons/scholoImg.jpg";
-        public const string UldaImage = "/images/dungeons/uldaImg.jpg";
-        public const string StratImage = "/images/dungeons/stratImg.jpg";
-        public const string ZfImage = "/images/dungeons/zfImg.jpg";
-        public const string BrdImage = "/images/dungeons/brdImg.jpg";
-        public const string StImage = "/images/dungeons/stImg.jpg";
-        public const string LbrsImage = "/images/dungeons/lbrsImg.jpg";
+        public const string RfcImage = "/images/dungeons/rfc.jpg";
+        public const string WcImage = "/images/dungeons/wc.jpg";
+        public const string DmImage = "/images/dungeons/dm.jpg";
+        public const string SfkImage = "/images/dungeons/sfk.jpg";
+        public const string BfdImage = "/images/dungeons/bdf.jpg";
+        public const string StocksImage = "/images/dungeons/stocks.jpg";
+        public const string GnomeImage = "/images/dungeons/gnome.jpg";
+        public const string SmImage = "/images/dungeons/sm.jpg";
+        public const string RfkImage = "/images/dungeons/rfk.jpg";
+        public const string MaraImage = "/images/dungeons/mara.jpg";
+        public const string RfdImage = "/images/dungeons/rfd.jpg";
+        public const string DiremaulImage = "/images/dungeons/diremaul.jpg";
+        public const string ScholoImage = "/images/dungeons/scholo.jpg";
+        public const string UldaImage = "/images/dungeons/ulda.jpg";
+        public const string StratImage = "/images/dungeons/strat.jpg";
+        public const string ZfImage = "/images/dungeons/zf.jpg";
+        public const string BrdImage = "/images/dungeons/brd.jpg";
+        public const string StImage = "/images/dungeons/st.jpg";
+        public const string LbrsImage = "/images/dungeons/lbrs.jpg";
 
         public const string Rfc = "Rfc";
         public const string Wc = "Wc";

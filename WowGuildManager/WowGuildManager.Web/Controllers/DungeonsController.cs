@@ -57,7 +57,6 @@ namespace WowGuildManager.Web.Controllers
             return dungeonPlaceList;
         }
 
-        //TODO: CHANGE ENUMERATIONS WITH DATA ENTITIES
         private async Task<IEnumerable<SelectListItem>> BindCharactersToSelectListItem()
         {
             var userId = await this.GetUserId(this.userManager);
@@ -74,7 +73,7 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(DungeonCreateInputModel inputModel)
+        public IActionResult Create(DungeonCreateBindingModel inputModel)
         {
             if (ModelState.IsValid == false)
             {

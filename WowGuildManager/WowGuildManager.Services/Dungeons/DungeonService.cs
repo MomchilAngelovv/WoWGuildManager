@@ -16,31 +16,15 @@ namespace WowGuildManager.Services.Dungeons
     public class DungeonService : IDungeonService
     {
         private readonly WowGuildManagerDbContext context;
-        private readonly ICharacterService characterService;
         private readonly IMapper mapper;
 
-        public DungeonService(
-            WowGuildManagerDbContext context,
-            ICharacterService characterService,
-            IMapper mapper)
+        public DungeonService(WowGuildManagerDbContext context,IMapper mapper)
         {
             this.context = context;
-            this.characterService = characterService;
             this.mapper = mapper;
         }
 
-        public IQueryable<T> GetAll<T>()
-        {
-            var dungeons = this.context.Dungeons
-                .Include(dungeon => dungeon.Leader)
-                .Include(dungeon => dungeon.RegisteredCharacters)
-                .Select(dungeon => this.mapper.Map<T>(dungeon));
-
-            return dungeons;
-
-        }
-
-        public Dungeon Create(DungeonCreateInputModel inputModel)
+        public Dungeon Create(DungeonCreateBindingModel inputModel)
         {
             var dungeon = new Dungeon
             {
@@ -60,6 +44,17 @@ namespace WowGuildManager.Services.Dungeons
             this.context.SaveChanges();
 
             return dungeon;
+        }
+
+        public IQueryable<T> GetAll<T>()
+        {
+            var dungeons = this.context.Dungeons
+                .Include(dungeon => dungeon.Leader)
+                .Include(dungeon => dungeon.RegisteredCharacters)
+                .Select(dungeon => this.mapper.Map<T>(dungeon));
+
+            return dungeons;
+
         }
 
         public IQueryable<T> GetDestinations<T>()

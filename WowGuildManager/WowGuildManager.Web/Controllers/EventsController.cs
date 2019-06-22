@@ -77,15 +77,6 @@ namespace WowGuildManager.Web.Controllers
                         SetJoinedCharacterToDungeon(character, raid);
                     }
                 }
-                //TODO: 10000000% REFACTOR THIS WITH MAPPE this make query for eveyr dungon
-                //var joinedCharacter = this.charactersService
-                //    .GetRegisteredCharacterForCurrentDungeon<CharacterNameRoleViewModel>(dungeon.Id, myCharacterIds);
-
-                //if (joinedCharacter != null)
-                //{
-                //    dungeon.AlreadyJoined = true;
-                //    dungeon.JoinedCharacter = joinedCharacter;
-                //}
             }
 
             //TODO: Code queility when finish !!!!!! IMPORTNAT !!!

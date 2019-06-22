@@ -13,27 +13,26 @@ using WowGuildManager.Services.Dungeons;
 
 namespace WowGuildManager.Services.Characters
 {
+    //TODO: Make Test project and start MOQing
+    //TODO: Delete remainning comments when READY ! IMPORTANT !!!
     public class CharacterService : ICharacterService
     {
         private readonly WowGuildManagerDbContext context;
         private readonly IMapper mapper;
 
-        public CharacterService(
-            WowGuildManagerDbContext context,
-            IMapper mapper)
+        public CharacterService(WowGuildManagerDbContext context,IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
 
-        public Character Create(CharacterCreateInputModel model)
+        public Character Create(CharacterCreateBindingModel model)
         {
             if (this.context.Characters.Where(c => c.WowGuildManagerUserId == model.UserId).Count() == 4)
             {
                 return null;
             }
 
-            //TODO: MAGIC STRINGS FIX 100%
             var character = new Character
             {
                 ClassId = this.GetClassIdByName(model.Class),
@@ -50,21 +49,16 @@ namespace WowGuildManager.Services.Characters
             return character;
         }
 
-        //TODO: Learn MOQING
-        public IQueryable<T> GetCharactersByUserId<T>(string userId)
+        public Character Delete(string characterId)
         {
-            var characters = this.context.Characters
-                .Where(character => character.WowGuildManagerUserId == userId)
-                .Include(ch => ch.Dungeons)
-                .Include(ch => ch.Role)
-                .Include(ch => ch.Class)
-                .Include(ch => ch.GuildRank)
-                .Select(ch => mapper.Map<T>(ch));
+            var character = this.context.Characters.Find(characterId);
 
-            return characters;
+            this.context.Characters.Remove(character);
+            this.context.SaveChanges();
+
+            return character;
         }
 
-        //TODO: Delete remainning comments when READY ! IMPORTANT !!!
         public IQueryable<T> GetClasses<T>()
         {
             var classes = this.context.CharacterClasses
@@ -79,6 +73,19 @@ namespace WowGuildManager.Services.Characters
               .Select(cc => mapper.Map<T>(cc));
 
             return classes;
+        }
+
+        public IQueryable<T> GetCharactersByUserId<T>(string userId)
+        {
+            var characters = this.context.Characters
+                .Where(character => character.WowGuildManagerUserId == userId)
+                .Include(ch => ch.Dungeons)
+                .Include(ch => ch.Role)
+                .Include(ch => ch.Class)
+                .Include(ch => ch.GuildRank)
+                .Select(ch => mapper.Map<T>(ch));
+
+            return characters;
         }
 
         public T GetCharacterById<T>(string characterId)
@@ -99,16 +106,6 @@ namespace WowGuildManager.Services.Characters
                 .Select(c => mapper.Map<T>(c));
 
             return characters;
-        }
-
-        public Character Delete(string characterId)
-        {
-            var character = this.context.Characters.Find(characterId);
-
-            this.context.Characters.Remove(character);
-            this.context.SaveChanges();
-
-            return character;
         }
 
         public IQueryable<T> GetCharactersForDungeonByDungeonId<T>(string dungeonId)
