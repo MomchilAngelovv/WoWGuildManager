@@ -82,7 +82,7 @@ namespace WowGuildManager.Web.Controllers
 
             this.dungeonService.Create(inputModel);
 
-            return RedirectToAction("Index", "Events");
+            return RedirectToAction("Upcoming", "Events");
         }
 
         //TODO: Think how to implement guild points

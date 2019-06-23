@@ -12,7 +12,7 @@ namespace WowGuildManager.Common
         public const string WcImage = "/images/dungeons/wc.jpg";
         public const string DmImage = "/images/dungeons/dm.jpg";
         public const string SfkImage = "/images/dungeons/sfk.jpg";
-        public const string BfdImage = "/images/dungeons/bdf.jpg";
+        public const string BfdImage = "/images/dungeons/bfd.jpg";
         public const string StocksImage = "/images/dungeons/stocks.jpg";
         public const string GnomeImage = "/images/dungeons/gnome.jpg";
         public const string SmImage = "/images/dungeons/sm.jpg";

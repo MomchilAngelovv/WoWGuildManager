@@ -49,7 +49,7 @@ namespace WowGuildManager.Services.Dungeons
         public IQueryable<T> GetAllUpcoming<T>()
         {
             var dungeons = this.context.Dungeons
-                .Where(r => r.EventDateTime > DateTime.Now)
+                .Where(r => r.EventDateTime.Day >= DateTime.Now.Day)
                 .Include(dungeon => dungeon.Leader)
                 .Include(dungeon => dungeon.RegisteredCharacters)
                 .Include(dungeon => dungeon.Destination)

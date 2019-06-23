@@ -49,7 +49,7 @@ namespace WowGuildManager.Services.Raids
         public IQueryable<T> GetAllUpcoming<T>()
         {
             var raids = this.context.Raids
-               .Where(r => r.EventDateTime > DateTime.Now)
+               .Where(r => r.EventDateTime.Day >= DateTime.Now.Day)
                .Include(raid => raid.Leader)
                .Include(raid => raid.RegisteredCharacters)
                .Include(raid => raid.Destination)

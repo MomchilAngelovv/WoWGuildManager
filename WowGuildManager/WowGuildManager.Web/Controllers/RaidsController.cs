@@ -81,7 +81,7 @@ namespace WowGuildManager.Web.Controllers
 
             this.raidService.Create(inputModel);
 
-            return RedirectToAction("Index", "Events");
+            return RedirectToAction("Upcoming", "Events");
         }
 
         public async Task<IActionResult> Details(string id)
