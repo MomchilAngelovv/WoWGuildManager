@@ -12,7 +12,7 @@ namespace WowGuildManager.Services.Raids
     {
         Raid Create(RaidCreateBindingModel model);
 
-        IQueryable<T> GetAll<T>();
+        IQueryable<T> GetAllUpcoming<T>();
 
         IQueryable<T> GetRaidsForToday<T>();
 

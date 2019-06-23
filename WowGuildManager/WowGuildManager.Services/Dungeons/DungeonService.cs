@@ -46,9 +46,10 @@ namespace WowGuildManager.Services.Dungeons
             return dungeon;
         }
 
-        public IQueryable<T> GetAll<T>()
+        public IQueryable<T> GetAllUpcoming<T>()
         {
             var dungeons = this.context.Dungeons
+                .Where(r => r.EventDateTime > DateTime.Now)
                 .Include(dungeon => dungeon.Leader)
                 .Include(dungeon => dungeon.RegisteredCharacters)
                 .Include(dungeon => dungeon.Destination)

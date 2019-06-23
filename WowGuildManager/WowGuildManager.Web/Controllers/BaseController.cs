@@ -8,7 +8,7 @@ using WowGuildManager.Domain.Identity;
 
 namespace WowGuildManager.Web.Controllers
 {
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
         protected async Task<string> GetUserId(UserManager<WowGuildManagerUser> userManager)
         {

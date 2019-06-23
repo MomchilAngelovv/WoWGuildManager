@@ -14,6 +14,8 @@ using AutoMapper.QueryableExtensions;
 using WowGuildManager.Web.Mapper;
 using System.Security.Claims;
 
+//TODO: MOve pictures in cloud
+//TODO: Api endpoits for dungeons /raids / characers everythng
 namespace WowGuildManager.Web.Controllers
 {
     [Authorize]

@@ -46,9 +46,10 @@ namespace WowGuildManager.Services.Raids
             return raid;
         }
 
-        public IQueryable<T> GetAll<T>()
+        public IQueryable<T> GetAllUpcoming<T>()
         {
             var raids = this.context.Raids
+               .Where(r => r.EventDateTime > DateTime.Now)
                .Include(raid => raid.Leader)
                .Include(raid => raid.RegisteredCharacters)
                .Include(raid => raid.Destination)

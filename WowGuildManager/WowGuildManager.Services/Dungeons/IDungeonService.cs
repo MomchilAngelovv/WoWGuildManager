@@ -13,7 +13,7 @@ namespace WowGuildManager.Services.Dungeons
     {
         Dungeon Create(DungeonCreateBindingModel inputModel);
 
-        IQueryable<T> GetAll<T>();
+        IQueryable<T> GetAllUpcoming<T>();
 
         IQueryable<T> GetDungeonsForToday<T>();
 

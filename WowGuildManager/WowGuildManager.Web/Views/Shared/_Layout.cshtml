@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a asp-area="" asp-controller="Events" asp-action="Index" class="nav-link">Raids and Events<span class="sr-only">(current)</span></a>
+                    <a asp-area="" asp-controller="Events" asp-action="Upcoming" class="nav-link">Raids and Events<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a asp-area="" asp-controller="Members" asp-action="Index" class="nav-link">Guild Members<span class="sr-only">(current)</span></a>
@@ -36,6 +36,9 @@
                 </li>
                 <li class="nav-item active">
                     <a asp-area="" asp-controller="Characters" asp-action="Index" class="nav-link">My Characters<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a asp-area="" asp-controller="Events" asp-action="History" class="nav-link">History<span class="sr-only">(current)</span></a>
                 </li>
                 @if (this.User.IsInRole("Admin"))
                 {

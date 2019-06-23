@@ -17,6 +17,7 @@ using WowGuildManager.Services.Characters;
 using WowGuildManager.Services.Dungeons;
 using WowGuildManager.Services.Raids;
 
+//TODO: Think how to extract userId with better way in base controller
 namespace WowGuildManager.Web.Controllers
 {
     [Authorize]
@@ -44,7 +45,7 @@ namespace WowGuildManager.Web.Controllers
             return character.Dungeons.Any(d => d.DungeonId == dungeon.Id);
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Upcoming()
         {
             var userId = await this.GetUserId(this.userManager);
 
@@ -52,11 +53,11 @@ namespace WowGuildManager.Web.Controllers
                 .GetCharactersByUserId<Character>(userId);
 
             var dungeons = this.dungeonService
-                .GetAll<DungeonViewModel>()
+                .GetAllUpcoming<DungeonViewModel>()
                 .ToList();
 
             var raids = this.raidService
-               .GetAll<RaidViewModel>()
+               .GetAllUpcoming<RaidViewModel>()
                .ToList();
 
             //TODO: Consider Events view change border if joined or no
@@ -89,6 +90,11 @@ namespace WowGuildManager.Web.Controllers
             };
 
             return View(eventsIndexViewModel);
+        }
+
+        public IActionResult History()
+        {
+            return this.View();
         }
 
         private static void SetJoinedCharacterToDungeon(Character character, DungeonViewModel dungeon)
