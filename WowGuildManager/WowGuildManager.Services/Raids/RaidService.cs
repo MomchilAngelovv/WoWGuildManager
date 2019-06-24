@@ -10,7 +10,7 @@ using WowGuildManager.Domain.Raid;
 using WowGuildManager.Models.ViewModels.Raids;
 using WowGuildManager.Services.Characters;
 
-//TODO: Chage images for heroes and Gnomeregan
+//TODO: Chage images for heroes to be better scaling with square
 
 namespace WowGuildManager.Services.Raids
 {

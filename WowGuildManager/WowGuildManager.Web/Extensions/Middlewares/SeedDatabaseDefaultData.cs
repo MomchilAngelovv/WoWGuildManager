@@ -84,7 +84,6 @@ namespace WowGuildManager.Web.Extensions
         }
 
 
-        //TODO: Rename Input model to binding Models
         //TODO: Extract cofiguraton classes in DataProject
         private async Task SeedRaidDestinations(WowGuildManagerDbContext context)
         {

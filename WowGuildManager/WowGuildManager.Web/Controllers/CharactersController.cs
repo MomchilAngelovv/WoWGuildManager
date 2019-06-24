@@ -29,7 +29,6 @@ namespace WowGuildManager.Web.Controllers
             this.userManager = userManager;
         }
 
-        //TODO: Fix automapper mapping
         public async Task<IActionResult> Index()
         {
             var userId = await this.GetUserId(this.userManager);

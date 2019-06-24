@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-//TODO: FIX THE FAKING CAROUSEL
+//TODO: Make carousel responsive 
 namespace WowGuildManager.Common
 {
     public static class RaidConstants
