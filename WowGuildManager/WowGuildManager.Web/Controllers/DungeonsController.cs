@@ -88,15 +88,13 @@ namespace WowGuildManager.Web.Controllers
         //TODO: Think how to implement guild points
         public async Task<IActionResult> Details(string id)
         {
-            var registeredCharacters = this.characterService
-                .GetCharactersForDungeonByDungeonId<CharacterDungeonDetailsViewModel>(id)
-                .ToList();
+            var registeredCharacters = this.dungeonService
+                .GetRegisteredCharactersByDungeonId<CharacterDungeonDetailsViewModel>(id);
 
             var userId = await this.GetUserId(this.userManager);
 
             var myCharacters = this.characterService
-                .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
-                .ToList();
+                .GetCharactersByUserId<CharacterIdNameViewModel>(userId);
 
             //TODO: Fix bug hwen it syas to register character when dungeon is full
             var dungeonDetailsViewModel = new DungeonDetailsViewModel

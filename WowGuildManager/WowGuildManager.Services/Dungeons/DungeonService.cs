@@ -98,5 +98,19 @@ namespace WowGuildManager.Services.Dungeons
 
             return dungeonsForToday;
         }
+
+        public IEnumerable<T> GetRegisteredCharactersByDungeonId<T>(string dungeonId)
+        {
+            var characters = this.context.DungeonCharacter
+               .Where(dc => dc.DungeonId == dungeonId)
+               .Include(rc => rc.Character)
+               .ThenInclude(ch => ch.Role)
+               .Include(rc => rc.Character)
+               .ThenInclude(ch => ch.Class)
+               .AsEnumerable()
+               .Select(dc => mapper.Map<T>(dc.Character));
+
+            return characters;
+        }
     }
 }

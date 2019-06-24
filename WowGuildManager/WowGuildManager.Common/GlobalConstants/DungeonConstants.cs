@@ -8,25 +8,25 @@ namespace WowGuildManager.Common
     {
         public const int MaxPlayers = 5;
 
-        public const string RfcImage = "/images/dungeons/rfc.jpg";
-        public const string WcImage = "/images/dungeons/wc.jpg";
-        public const string DmImage = "/images/dungeons/dm.jpg";
-        public const string SfkImage = "/images/dungeons/sfk.jpg";
-        public const string BfdImage = "/images/dungeons/bfd.jpg";
-        public const string StocksImage = "/images/dungeons/stocks.jpg";
-        public const string GnomeImage = "/images/dungeons/gnome.jpg";
-        public const string SmImage = "/images/dungeons/sm.jpg";
-        public const string RfkImage = "/images/dungeons/rfk.jpg";
-        public const string MaraImage = "/images/dungeons/mara.jpg";
-        public const string RfdImage = "/images/dungeons/rfd.jpg";
-        public const string DiremaulImage = "/images/dungeons/diremaul.jpg";
-        public const string ScholoImage = "/images/dungeons/scholo.jpg";
-        public const string UldaImage = "/images/dungeons/ulda.jpg";
-        public const string StratImage = "/images/dungeons/strat.jpg";
-        public const string ZfImage = "/images/dungeons/zf.jpg";
-        public const string BrdImage = "/images/dungeons/brd.jpg";
-        public const string StImage = "/images/dungeons/st.jpg";
-        public const string LbrsImage = "/images/dungeons/lbrs.jpg";
+        public const string RfcImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380364/WowGuildManager/images/dungeons/rfc_ty4nms.jpg";
+        public const string WcImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380366/WowGuildManager/images/dungeons/wc_wkbgja.jpg";
+        public const string DmImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380366/WowGuildManager/images/dungeons/dm_a6pwqq.jpg";
+        public const string SfkImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380365/WowGuildManager/images/dungeons/sfk_zuqpr8.jpg";
+        public const string BfdImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380366/WowGuildManager/images/dungeons/bfd_necqdp.jpg";
+        public const string StocksImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380367/WowGuildManager/images/dungeons/stocks_pwp70n.jpg";
+        public const string GnomeImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380366/WowGuildManager/images/dungeons/gnome_agjxsw.jpg";
+        public const string SmImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380363/WowGuildManager/images/dungeons/sm_k1tycm.jpg";
+        public const string RfkImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380367/WowGuildManager/images/dungeons/rfk_vjd9jg.jpg";
+        public const string MaraImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380362/WowGuildManager/images/dungeons/mara_qsm6cq.jpg";
+        public const string RfdImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380363/WowGuildManager/images/dungeons/rfd_eeefat.webp";
+        public const string DiremaulImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380368/WowGuildManager/images/dungeons/diremaul_m3g85c.jpg";
+        public const string ScholoImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380362/WowGuildManager/images/dungeons/scholo_qx0uft.jpg";
+        public const string UldaImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380364/WowGuildManager/images/dungeons/ulda_k8qnhu.jpg";
+        public const string StratImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380365/WowGuildManager/images/dungeons/strat_ch9mxn.jpg";
+        public const string ZfImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380365/WowGuildManager/images/dungeons/zf_gd9yjq.jpg";
+        public const string BrdImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380365/WowGuildManager/images/dungeons/brd_udhgcd.jpg";
+        public const string StImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380363/WowGuildManager/images/dungeons/st_exx0jf.jpg";
+        public const string LbrsImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380368/WowGuildManager/images/dungeons/lbrs_mmsuw4.jpg";
 
         public const string Rfc = "Rfc";
         public const string Wc = "Wc";

@@ -21,6 +21,8 @@ namespace WowGuildManager.Services.Dungeons
 
         void RegisterCharacter(string characterId, string dungeonId);
 
+        IEnumerable<T> GetRegisteredCharactersByDungeonId<T>(string dungeonId);
+
         T GetDestinationIdByDestinationName<T>(string destinationName);
     }
 }

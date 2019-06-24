@@ -25,8 +25,6 @@ namespace WowGuildManager.Services.Characters
 
         IEnumerable<T> GetAll<T>();
 
-        IEnumerable<T> GetCharactersForDungeonByDungeonId<T>(string dungeonId);
-
         string GetClassIdByName(string className);
 
         string GetRoleIdByName(string roleName);

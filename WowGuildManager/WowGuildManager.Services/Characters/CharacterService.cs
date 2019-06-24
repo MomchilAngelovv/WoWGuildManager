@@ -112,19 +112,6 @@ namespace WowGuildManager.Services.Characters
             return characters;
         }
 
-        public IEnumerable<T> GetCharactersForDungeonByDungeonId<T>(string dungeonId)
-        {
-            var characters = this.context.DungeonCharacter
-                .Include(dc => dc.Character)
-                .Where(dc => dc.DungeonId == dungeonId)
-                .Include(dc => dc.Character.Role)
-                .Include(dc => dc.Character.Class)
-                .Select(dc => mapper.Map<T>(dc.Character))
-                .AsEnumerable();
-
-            return characters;
-        }
-
         public string GetClassIdByName(string className)
         {
             //TODO: FirstOrDefautl can return null and ID might explode

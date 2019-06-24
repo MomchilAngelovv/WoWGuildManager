@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 
-//TODO: Make viewcomponent with the todays events
 //TODO: FIX THE FAKING CAROUSEL
 namespace WowGuildManager.Common
 {
     public static class RaidConstants
     {
-        public const string UbrsImage = "/images/raids/ubrs.jpg";
-        public const string Aq20Image = "/images/raids/aq20.jpg";
-        public const string Aq40Image = "/images/raids/aq40.jpg";
-        public const string BwlImage = "/images/raids/bwl.jpg";
-        public const string McImage = "/images/raids/mc.jpg";
-        public const string NaxxImage = "/images/raids/naxx.jpg";
-        public const string OnyImage = "/images/raids/ony.jpg";
-        public const string ZgImage = "/images/raids/zg.jpg";
+        public const string UbrsImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380391/WowGuildManager/images/raids/ubrs_o39eme.jpg";
+        public const string Aq20Image = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380388/WowGuildManager/images/raids/aq20_d5qwlx.jpg";
+        public const string Aq40Image = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380388/WowGuildManager/images/raids/aq40_gmefsu.jpg";
+        public const string BwlImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380392/WowGuildManager/images/raids/bwl_umcgwo.jpg";
+        public const string McImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380391/WowGuildManager/images/raids/mc_ryp6zn.jpg";
+        public const string NaxxImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380389/WowGuildManager/images/raids/naxx_rlsciq.jpg";
+        public const string OnyImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380391/WowGuildManager/images/raids/ony_ctt11r.jpg";
+        public const string ZgImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380390/WowGuildManager/images/raids/zg_ykt1jh.jpg";
 
         public const string Ubrs = "Ubrs";
         public const string Zg = "Zg";
