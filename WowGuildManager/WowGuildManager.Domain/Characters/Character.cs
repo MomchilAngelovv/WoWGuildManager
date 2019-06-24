@@ -31,7 +31,7 @@ namespace WowGuildManager.Domain.Characters
 
         [Required]
         public string ClassId { get; set; }
-        public CharacterClass Class { get; set; }
+        public virtual CharacterClass Class { get; set; }
 
         [Required]
         public string RoleId { get; set; }

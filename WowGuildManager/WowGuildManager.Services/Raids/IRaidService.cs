@@ -12,13 +12,13 @@ namespace WowGuildManager.Services.Raids
     {
         Raid Create(RaidCreateBindingModel model);
 
-        IQueryable<T> GetAllUpcoming<T>();
+        IEnumerable<T> GetAllUpcoming<T>();
 
-        IQueryable<T> GetRaidsForToday<T>();
+        IEnumerable<T> GetRaidsForToday<T>();
 
-        IQueryable<T> GetDestinations<T>();
+        IEnumerable<T> GetDestinations<T>();
 
-        IQueryable<T> GetRegisteredCharactersByRaidId<T>(string raidId);
+        IEnumerable<T> GetRegisteredCharactersByRaidId<T>(string raidId);
 
         void RegisterCharacter(string characterId, string raidId);
 

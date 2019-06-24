@@ -46,23 +46,24 @@ namespace WowGuildManager.Services.Dungeons
             return dungeon;
         }
 
-        public IQueryable<T> GetAllUpcoming<T>()
+        public IEnumerable<T> GetAllUpcoming<T>()
         {
             var dungeons = this.context.Dungeons
                 .Where(r => r.EventDateTime.Day >= DateTime.Now.Day)
                 .Include(dungeon => dungeon.Leader)
                 .Include(dungeon => dungeon.RegisteredCharacters)
                 .Include(dungeon => dungeon.Destination)
-                .Select(dungeon => this.mapper.Map<T>(dungeon));
+                .Select(dungeon => this.mapper.Map<T>(dungeon))
+                .AsEnumerable();
 
             return dungeons;
-
         }
 
-        public IQueryable<T> GetDestinations<T>()
+        public IEnumerable<T> GetDestinations<T>()
         {
             var dungeonDestinations = this.context.DungeonDestinations
-                .Select(dd => mapper.Map<T>(dd));
+                .Select(dd => mapper.Map<T>(dd))
+                .AsEnumerable();
 
             return dungeonDestinations;
         }
@@ -87,12 +88,13 @@ namespace WowGuildManager.Services.Dungeons
             return destinationId;
         }
 
-        public IQueryable<T> GetDungeonsForToday<T>()
+        public IEnumerable<T> GetDungeonsForToday<T>()
         {
             var dungeonsForToday = this.context.Dungeons
                 .Where(d => d.EventDateTime.Day == DateTime.Now.Day)
                 .Include(d => d.Destination)
-                .Select(d => mapper.Map<T>(d));
+                .Select(d => mapper.Map<T>(d))
+                .AsEnumerable();
 
             return dungeonsForToday;
         }

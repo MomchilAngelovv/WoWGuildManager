@@ -90,13 +90,13 @@ namespace WowGuildManager.Web.Controllers
         {
             var registeredCharacters = this.characterService
                 .GetCharactersForDungeonByDungeonId<CharacterDungeonDetailsViewModel>(id)
-                .AsEnumerable();
+                .ToList();
 
             var userId = await this.GetUserId(this.userManager);
 
             var myCharacters = this.characterService
                 .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
-                .AsEnumerable();
+                .ToList();
 
             //TODO: Fix bug hwen it syas to register character when dungeon is full
             var dungeonDetailsViewModel = new DungeonDetailsViewModel
@@ -126,7 +126,7 @@ namespace WowGuildManager.Web.Controllers
         {
             this.dungeonService.RegisterCharacter(characterId, dungeonId);
 
-            return this.RedirectToAction("Index", "Events");
+            return this.RedirectToAction("Upcoming", "Events");
         }
     }
 }

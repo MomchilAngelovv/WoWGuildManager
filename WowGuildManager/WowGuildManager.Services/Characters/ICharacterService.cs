@@ -15,17 +15,17 @@ namespace WowGuildManager.Services.Characters
 
         Character Delete(string characterId);
 
-        IQueryable<T> GetClasses<T>();
+        IEnumerable<T> GetClasses<T>();
 
-        IQueryable<T> GetRoles<T>();
+        IEnumerable<T> GetRoles<T>();
 
-        IQueryable<T> GetCharactersByUserId<T>(string userId);
+        IEnumerable<T> GetCharactersByUserId<T>(string userId);
 
         T GetCharacterById<T>(string characterId);
 
-        IQueryable<T> GetAll<T>();
-    
-        IQueryable<T> GetCharactersForDungeonByDungeonId<T>(string dungeonId);
+        IEnumerable<T> GetAll<T>();
+
+        IEnumerable<T> GetCharactersForDungeonByDungeonId<T>(string dungeonId);
 
         string GetClassIdByName(string className);
 

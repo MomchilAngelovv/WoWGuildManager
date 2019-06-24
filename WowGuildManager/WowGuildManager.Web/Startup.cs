@@ -44,8 +44,8 @@ namespace WowGuildManager.Web
 
             services.AddDbContext<WowGuildManagerDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("WowGuildManagerDbContext"));
-                
+                options
+                    .UseSqlServer(Configuration.GetConnectionString("WowGuildManagerDbContext"));
             });
 
             services.AddDefaultIdentity<WowGuildManagerUser>(options => 

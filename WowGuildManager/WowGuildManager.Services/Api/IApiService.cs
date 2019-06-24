@@ -8,7 +8,7 @@ namespace WowGuildManager.Services.Api
 {
     public interface IApiService
     {
-        IQueryable<T> GetAll<T>(string userId);
+        IEnumerable<T> GetAll<T>(string userId);
 
         T GetCharacterById<T>(string characterId);
     }

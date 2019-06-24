@@ -13,11 +13,11 @@ namespace WowGuildManager.Services.Dungeons
     {
         Dungeon Create(DungeonCreateBindingModel inputModel);
 
-        IQueryable<T> GetAllUpcoming<T>();
+        IEnumerable<T> GetAllUpcoming<T>();
 
-        IQueryable<T> GetDungeonsForToday<T>();
+        IEnumerable<T> GetDungeonsForToday<T>();
 
-        IQueryable<T> GetDestinations<T>();
+        IEnumerable<T> GetDestinations<T>();
 
         void RegisterCharacter(string characterId, string dungeonId);
 

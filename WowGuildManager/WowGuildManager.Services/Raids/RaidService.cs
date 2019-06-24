@@ -10,9 +10,10 @@ using WowGuildManager.Domain.Raid;
 using WowGuildManager.Models.ViewModels.Raids;
 using WowGuildManager.Services.Characters;
 
+//TODO: Chage images for heroes and Gnomeregan
+
 namespace WowGuildManager.Services.Raids
 {
-    //TODO: Chage images for heroes and Gnomeregan
     public class RaidService : IRaidService
     {
         private readonly WowGuildManagerDbContext context;
@@ -46,43 +47,50 @@ namespace WowGuildManager.Services.Raids
             return raid;
         }
 
-        public IQueryable<T> GetAllUpcoming<T>()
+        public IEnumerable<T> GetAllUpcoming<T>()
         {
             var raids = this.context.Raids
                .Where(r => r.EventDateTime.Day >= DateTime.Now.Day)
                .Include(raid => raid.Leader)
                .Include(raid => raid.RegisteredCharacters)
                .Include(raid => raid.Destination)
-               .Select(raid => mapper.Map<T>(raid));
+               .Select(raid => mapper.Map<T>(raid))
+               .AsEnumerable();
 
             return raids;
         }
 
-        public IQueryable<T> GetRaidsForToday<T>()
+        public IEnumerable<T> GetRaidsForToday<T>()
         {
             var raidsForToday = this.context.Raids
                 .Where(d => d.EventDateTime.Day == DateTime.Now.Day)
                 .Include(d => d.Destination)
-                .Select(d => mapper.Map<T>(d));
+                .Select(d => mapper.Map<T>(d))
+                .AsEnumerable();
 
             return raidsForToday;
         }
 
-        public IQueryable<T> GetDestinations<T>()
+        public IEnumerable<T> GetDestinations<T>()
         {
             var raidDestinations = this.context.RaidDestinations
-                .Select(rd => mapper.Map<T>(rd));
+                .Select(rd => mapper.Map<T>(rd))
+                .AsEnumerable();
 
             return raidDestinations;
         }
 
-        public IQueryable<T> GetRegisteredCharactersByRaidId<T>(string raidId)
+        public IEnumerable<T> GetRegisteredCharactersByRaidId<T>(string raidId)
         {
             var registeredCharacters = this.context.RaidCharacter
                 .Where(rc => rc.RaidId == raidId)
                 .Include(rc => rc.Character)
+                .ThenInclude(ch => ch.Role)
+                .Include(rc => rc.Character)
+                .ThenInclude(ch => ch.Class)
+                .AsEnumerable()
                 .Select(rc => mapper.Map<T>(rc.Character));
-
+           
             return registeredCharacters;
         }
 

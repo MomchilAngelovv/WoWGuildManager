@@ -90,11 +90,11 @@ namespace WowGuildManager.Web.Controllers
 
             var registeredCharacters = this.raidService
                  .GetRegisteredCharactersByRaidId<CharacterRaidDetailsViewModel>(id)
-                 .AsEnumerable();
+                 .ToList();
 
             var myCharacters = this.characterService
                 .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
-                .AsEnumerable();
+                .ToList();
 
             var raidDetailsViewModel = new RaidDetailsViewModel
             {
@@ -123,7 +123,7 @@ namespace WowGuildManager.Web.Controllers
         {
             this.raidService.RegisterCharacter(characterId, raidId);
 
-            return this.RedirectToAction("Index", "Events");
+            return this.RedirectToAction("Upcoming", "Events");
         }
     }
 }

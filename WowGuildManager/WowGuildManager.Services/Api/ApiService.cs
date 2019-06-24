@@ -20,13 +20,14 @@ namespace WowGuildManager.Services.Api
             this.mapper = mapper;
         }
 
-        public IQueryable<T> GetAll<T>(string userId)
+        public IEnumerable<T> GetAll<T>(string userId)
         {
             var characters = this.context.Characters
                 .Where(c => c.WowGuildManagerUserId == userId)
                 .Include(c => c.Dungeons)
                 .Include(c => c.Raids)
-                .Select(c => mapper.Map<T>(c));
+                .Select(c => mapper.Map<T>(c))
+                .AsEnumerable();
 
             return characters;
         }

@@ -59,23 +59,25 @@ namespace WowGuildManager.Services.Characters
             return character;
         }
 
-        public IQueryable<T> GetClasses<T>()
+        public IEnumerable<T> GetClasses<T>()
         {
             var classes = this.context.CharacterClasses
-               .Select(cc => mapper.Map<T>(cc));
+               .Select(cc => mapper.Map<T>(cc))
+               .AsEnumerable();
 
             return classes;
         }
 
-        public IQueryable<T> GetRoles<T>()
+        public IEnumerable<T> GetRoles<T>()
         {
             var classes = this.context.CharacterRoles
-              .Select(cc => mapper.Map<T>(cc));
+               .Select(cc => mapper.Map<T>(cc))
+               .AsEnumerable();
 
             return classes;
         }
 
-        public IQueryable<T> GetCharactersByUserId<T>(string userId)
+        public IEnumerable<T> GetCharactersByUserId<T>(string userId)
         {
             var characters = this.context.Characters
                 .Where(character => character.WowGuildManagerUserId == userId)
@@ -83,7 +85,8 @@ namespace WowGuildManager.Services.Characters
                 .Include(ch => ch.Role)
                 .Include(ch => ch.Class)
                 .Include(ch => ch.GuildRank)
-                .Select(ch => mapper.Map<T>(ch));
+                .Select(ch => mapper.Map<T>(ch))
+                .AsEnumerable();
 
             return characters;
         }
@@ -96,23 +99,28 @@ namespace WowGuildManager.Services.Characters
             return mapper.Map<T>(character);
         }
 
-        public IQueryable<T> GetAll<T>()
+        public IEnumerable<T> GetAll<T>()
         {
             var characters = this.context.Characters
                 .Include(ch => ch.Dungeons)
                 .Include(ch => ch.Role)
                 .Include(ch => ch.Class)
                 .Include(ch => ch.GuildRank)
-                .Select(c => mapper.Map<T>(c));
+                .Select(c => mapper.Map<T>(c))
+                .AsEnumerable();
 
             return characters;
         }
 
-        public IQueryable<T> GetCharactersForDungeonByDungeonId<T>(string dungeonId)
+        public IEnumerable<T> GetCharactersForDungeonByDungeonId<T>(string dungeonId)
         {
             var characters = this.context.DungeonCharacter
+                .Include(dc => dc.Character)
                 .Where(dc => dc.DungeonId == dungeonId)
-                .Select(dc => mapper.Map<T>(dc.Character));
+                .Include(dc => dc.Character.Role)
+                .Include(dc => dc.Character.Class)
+                .Select(dc => mapper.Map<T>(dc.Character))
+                .AsEnumerable();
 
             return characters;
         }
