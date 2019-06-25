@@ -83,8 +83,6 @@ namespace WowGuildManager.Web.Extensions
             await context.SaveChangesAsync();
         }
 
-
-        //TODO: Extract cofiguraton classes in DataProject
         private async Task SeedRaidDestinations(WowGuildManagerDbContext context)
         {
             var raidNamesAndMaxPlayers = new Dictionary<string, int>

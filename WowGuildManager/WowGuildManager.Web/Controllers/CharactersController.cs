@@ -31,6 +31,7 @@ namespace WowGuildManager.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            
             var userId = await this.GetUserId(this.userManager);
 
             var characters = this.characterService

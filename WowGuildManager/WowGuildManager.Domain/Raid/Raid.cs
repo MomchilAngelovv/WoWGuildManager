@@ -17,11 +17,11 @@ namespace WowGuildManager.Domain.Raid
         [Key]
         public string Id { get; set; }
 
-        [MaxLength(100)]
-        public string Description { get; set; }
-
         [Required]
         public DateTime EventDateTime { get; set; }
+
+        [MaxLength(100)]
+        public string Description { get; set; }
 
         [Required]
         public string DestinationId { get; set; }

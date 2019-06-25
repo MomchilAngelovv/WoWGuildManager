@@ -98,6 +98,7 @@ namespace WowGuildManager.Web
 
             app.UseAuthentication();
 
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "mvcAreaRoute",

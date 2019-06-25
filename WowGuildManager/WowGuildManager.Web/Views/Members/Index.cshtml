@@ -5,26 +5,37 @@
 
 <h2>All members</h2>
 
-<table class="table table-sm table-hover table-dark">
+<table class="table table-sm table-hover table-dark text-center ">
     <thead>
         <tr>
-            <th scope="col">Guild rank</th>
-            <th scope="col">Name</th>
-            <th scope="col">Level</th>
-            <th scope="col">Class</th>
-            <th scope="col">Role</th>
+            <th scope="col" class="text-center">Guild rank</th>
+            <th scope="col" class="text-center">Name</th>
+            <th scope="col" class="text-center">Level</th>
+            <th scope="col" class="text-center">Class</th>
+            <th scope="col" class="text-center">Role</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var member in Model.Members)
         {
-            <tr>
-                <th scope="row">@member.Rank</th>
-                <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@member.Id">@member.Name</a></td>
-                <td>@member.Level</td>
-                <td>@member.Class</td>
-                <td>@member.Role</td>
-            </tr>
+        <tr>
+            <td>@member.Rank</td>
+            <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@member.Id" class="btn btn-info w-75">@member.Name</a></td>
+            <td>@member.Level</td>
+            <td>@member.Class</td>
+            @if (member.Role == "Damage")
+            {
+                <td><span class="btn btn-danger w-50">@member.Role</span></td>
+            }
+            else if (member.Role == "Healer")
+            {
+                <td><span class="btn btn-success w-50">@member.Role</span></td>
+            }
+            else
+            {
+                <td><span class="btn btn-warning w-50">@member.Role</span></td>
+            }
+        </tr>
         }
     </tbody>
 </table>

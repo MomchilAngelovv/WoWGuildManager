@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using WowGuildManager.Models.ViewModels.Characters;
 using WowGuildManager.Services.Characters;
 
+//TODO: Bootstrap tooltips
+//TODO : Bootstrap progress bar for raids
 namespace WowGuildManager.Web.Controllers
 {
     [AllowAnonymous]
