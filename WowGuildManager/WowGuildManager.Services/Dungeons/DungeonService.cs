@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using WowGuildManager.Data;
 using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Dungeon;
@@ -24,7 +25,7 @@ namespace WowGuildManager.Services.Dungeons
             this.mapper = mapper;
         }
 
-        public Dungeon Create(DungeonCreateBindingModel inputModel)
+        public async Task<Dungeon> CreateAsync(DungeonCreateBindingModel inputModel)
         {
             var dungeon = new Dungeon
             {
@@ -40,8 +41,8 @@ namespace WowGuildManager.Services.Dungeons
                 DungeonId = dungeon.Id
             });
 
-            this.context.Dungeons.Add(dungeon);
-            this.context.SaveChanges();
+            await this.context.Dungeons.AddAsync(dungeon);
+            await this.context.SaveChangesAsync();
 
             return dungeon;
         }
@@ -68,7 +69,7 @@ namespace WowGuildManager.Services.Dungeons
             return dungeonDestinations;
         }
 
-        public void RegisterCharacter(string characterId, string dungeonId)
+        public async Task<DungeonCharacter> RegisterCharacter(string characterId, string dungeonId)
         {
             var dungeonCharacter = new DungeonCharacter
             {
@@ -76,8 +77,10 @@ namespace WowGuildManager.Services.Dungeons
                 DungeonId = dungeonId
             };
 
-            this.context.DungeonCharacter.Add(dungeonCharacter);
-            this.context.SaveChanges();
+            await this.context.DungeonCharacter.AddAsync(dungeonCharacter);
+            await this.context.SaveChangesAsync();
+
+            return dungeonCharacter;
         }
 
         public T GetDestinationIdByDestinationName<T>(string destinationName)

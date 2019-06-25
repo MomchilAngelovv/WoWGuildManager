@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace WowGuildManager.Web.Filters.ActionFilters
         {
             if (context.ModelState.IsValid == false)
             {
-                throw new Exception();
+                throw new ArgumentException("Invalid data provided");
             }
 
             await next();

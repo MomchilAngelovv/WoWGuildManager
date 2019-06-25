@@ -3,7 +3,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>All members</h2>
+<h2 class="text-center">Guild members</h2>
 
 <table class="table table-sm table-hover table-dark text-center ">
     <thead>
@@ -31,7 +31,7 @@
             {
                 <td><span class="btn btn-success w-50">@member.Role</span></td>
             }
-            else
+            else if (member.Role == "Tank")
             {
                 <td><span class="btn btn-warning w-50">@member.Role</span></td>
             }

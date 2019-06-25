@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WowGuildManager.Web.Extensions;
@@ -66,7 +65,11 @@ namespace WowGuildManager.Web
             
             services.AddMvc(options => 
             {
-                options.Filters.Add(new ValidateModelStateActionFilter());
+                options.Filters
+                    .Add(new ValidateModelStateActionFilter());
+
+                options.Filters
+                    .Add(new AutoValidateAntiforgeryTokenAttribute());
             })  
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -102,7 +105,6 @@ namespace WowGuildManager.Web
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
             
             app.UseMvc(routes =>
             {

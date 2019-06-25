@@ -65,7 +65,7 @@ namespace WowGuildManager.Web.Controllers
 
             model.UserId = userId;
 
-            this.characterService.Create(model);
+            await this.characterService.CreateAsync(model);
 
             return this.RedirectToAction(nameof(Index));
         }

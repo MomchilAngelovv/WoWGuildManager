@@ -13,6 +13,7 @@ using WowGuildManager.Models.ViewModels.Dungeons;
 using WowGuildManager.Services.Characters;
 using WowGuildManager.Services.Dungeons;
 
+//TODO: Add validate antyforgery tokesn on every form
 namespace WowGuildManager.Web.Controllers
 {
     [Authorize]
@@ -73,9 +74,9 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(DungeonCreateBindingModel inputModel)
+        public async Task<IActionResult> Create(DungeonCreateBindingModel inputModel)
         {
-            this.dungeonService.Create(inputModel);
+            await this.dungeonService.CreateAsync(inputModel);
 
             return RedirectToAction("Upcoming", "Events");
         }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using WowGuildManager.Data;
 using WowGuildManager.Domain.Dungeon;
 using WowGuildManager.Domain.Raid;
@@ -25,7 +26,7 @@ namespace WowGuildManager.Services.Raids
             this.mapper = mapper;
         }
 
-        public Raid Create(RaidCreateBindingModel model)
+        public async Task<Raid> CreateAsync(RaidCreateBindingModel model)
         {
             var raid = new Raid
             {
@@ -41,8 +42,8 @@ namespace WowGuildManager.Services.Raids
                 Raid = raid
             });
 
-            this.context.Raids.Add(raid);
-            this.context.SaveChanges();
+            await this.context.Raids.AddAsync(raid);
+            await this.context.SaveChangesAsync();
 
             return raid;
         }
@@ -94,7 +95,7 @@ namespace WowGuildManager.Services.Raids
             return registeredCharacters;
         }
 
-        public void RegisterCharacter(string characterId, string raidId)
+        public async Task<RaidCharacter> RegisterCharacter(string characterId, string raidId)
         {
             var raidCharacter = new RaidCharacter
             {
@@ -102,8 +103,10 @@ namespace WowGuildManager.Services.Raids
                 RaidId = raidId
             };
 
-            this.context.RaidCharacter.Add(raidCharacter);
-            this.context.SaveChanges();
+            await this.context.RaidCharacter.AddAsync(raidCharacter);
+            await this.context.SaveChangesAsync();
+
+            return raidCharacter;
         }
 
         public string GetDestinationIdByName(string destinationName)

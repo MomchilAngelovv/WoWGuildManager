@@ -6,12 +6,13 @@ using WowGuildManager.Domain.Dungeon;
 using WowGuildManager.Domain.Identity;
 using System.Linq;
 using WowGuildManager.Models.ViewModels.Dungeons;
+using System.Threading.Tasks;
 
 namespace WowGuildManager.Services.Dungeons
 {
     public interface IDungeonService
     {
-        Dungeon Create(DungeonCreateBindingModel inputModel);
+        Task<Dungeon> CreateAsync(DungeonCreateBindingModel inputModel);
 
         IEnumerable<T> GetAllUpcoming<T>();
 
@@ -19,7 +20,7 @@ namespace WowGuildManager.Services.Dungeons
 
         IEnumerable<T> GetDestinations<T>();
 
-        void RegisterCharacter(string characterId, string dungeonId);
+        Task<DungeonCharacter> RegisterCharacter(string characterId, string dungeonId);
 
         IEnumerable<T> GetRegisteredCharactersByDungeonId<T>(string dungeonId);
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using WowGuildManager.Common.GlobalConstants;
 using WowGuildManager.Data;
 using WowGuildManager.Domain.Characters;
@@ -26,7 +27,7 @@ namespace WowGuildManager.Services.Characters
             this.mapper = mapper;
         }
 
-        public Character Create(CharacterCreateBindingModel model)
+        public async Task<Character> CreateAsync(CharacterCreateBindingModel model)
         {
             if (this.context.Characters.Where(c => c.WowGuildManagerUserId == model.UserId).Count() == 4)
             {
@@ -43,8 +44,8 @@ namespace WowGuildManager.Services.Characters
                 GuildRankId = this.GetRankIdByName(GuildRanksConstants.Member),
             };
 
-            this.context.Characters.Add(character);
-            this.context.SaveChanges();
+            await this.context.Characters.AddAsync(character);
+            await this.context.SaveChangesAsync();
 
             return character;
         }

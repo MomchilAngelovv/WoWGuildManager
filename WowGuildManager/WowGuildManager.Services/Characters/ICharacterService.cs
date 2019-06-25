@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Identity;
 using WowGuildManager.Models.ViewModels.Characters;
@@ -11,7 +12,7 @@ namespace WowGuildManager.Services.Characters
     //TOD0: Move this to dungeon service
     public interface ICharacterService
     {
-        Character Create(CharacterCreateBindingModel inputModel);
+        Task<Character> CreateAsync(CharacterCreateBindingModel inputModel);
 
         Character Delete(string characterId);
 

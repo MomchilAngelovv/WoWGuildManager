@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using WowGuildManager.Domain.Raid;
 using WowGuildManager.Models.ViewModels.Raids;
 
@@ -10,7 +11,7 @@ namespace WowGuildManager.Services.Raids
     //TODO: SOrt interface methods
     public interface IRaidService
     {
-        Raid Create(RaidCreateBindingModel model);
+        Task<Raid> CreateAsync(RaidCreateBindingModel model);
 
         IEnumerable<T> GetAllUpcoming<T>();
 
@@ -20,7 +21,7 @@ namespace WowGuildManager.Services.Raids
 
         IEnumerable<T> GetRegisteredCharactersByRaidId<T>(string raidId);
 
-        void RegisterCharacter(string characterId, string raidId);
+        Task<RaidCharacter> RegisterCharacter(string characterId, string raidId);
 
         string GetDestinationIdByName(string destinationName);
     }

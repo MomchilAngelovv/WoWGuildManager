@@ -72,14 +72,14 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(RaidCreateBindingModel inputModel)
+        public async Task<IActionResult> Create(RaidCreateBindingModel inputModel)
         {
             if (ModelState.IsValid == false)
             {
                 return RedirectToAction(nameof(Create));
             }
 
-            this.raidService.Create(inputModel);
+            await this.raidService.CreateAsync(inputModel);
 
             return RedirectToAction("Upcoming", "Events");
         }
