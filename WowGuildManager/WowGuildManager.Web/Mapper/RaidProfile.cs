@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WowGuildManager.Domain.Raid;
 using WowGuildManager.Models.ViewModels.Characters;
+using WowGuildManager.Models.ViewModels.Guild;
 using WowGuildManager.Models.ViewModels.Raids;
 
 namespace WowGuildManager.Web.Mapper
@@ -23,6 +24,8 @@ namespace WowGuildManager.Web.Mapper
 
             this.CreateMap<Raid, RaidIdDestinationViewModel>()
                 .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name));
+
+            this.CreateMap<RaidDestination, RaidDestinationProgressViewModel>();
 
             this.CreateMap<RaidDestination, SelectListItem>()
                 .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.Name));

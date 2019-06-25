@@ -9,7 +9,6 @@ using WowGuildManager.Models.ViewModels.Raids;
 using WowGuildManager.Services.Dungeons;
 using WowGuildManager.Services.Raids;
 
-//TODO: Considere to replace everywhere with async methods when possible
 namespace WowGuildManager.Web.ViewComponents
 {
     public class TodayEventsViewComponent : ViewComponent

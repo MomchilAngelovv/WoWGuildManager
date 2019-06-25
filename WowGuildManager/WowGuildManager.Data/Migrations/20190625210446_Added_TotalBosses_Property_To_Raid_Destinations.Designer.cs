@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WowGuildManager.Data;
 
 namespace WowGuildManager.Data.Migrations
 {
     [DbContext(typeof(WowGuildManagerDbContext))]
-    partial class WowGuildManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190625210446_Added_TotalBosses_Property_To_Raid_Destinations")]
+    partial class Added_TotalBosses_Property_To_Raid_Destinations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -372,8 +374,6 @@ namespace WowGuildManager.Data.Migrations
 
                     b.Property<string>("ImagePath")
                         .IsRequired();
-
-                    b.Property<int>("KilledBosses");
 
                     b.Property<int>("MaxPlayers");
 

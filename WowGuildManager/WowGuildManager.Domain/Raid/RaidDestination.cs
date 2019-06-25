@@ -19,5 +19,11 @@ namespace WowGuildManager.Domain.Raid
         [Required]
         [Range(10,40)]
         public int MaxPlayers { get; set; }
+
+        [Required]
+        public int TotalBosses { get; set; }
+
+        [Required]
+        public int KilledBosses { get; set; }
     }
 }   

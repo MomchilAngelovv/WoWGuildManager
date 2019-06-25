@@ -24,5 +24,14 @@ namespace WowGuildManager.Common
         public const string Bwl = "Bwl";
         public const string Naxx = "Naxx";
         public const string Aq40 = "Aq40";
+
+        public const int UbrsTotalBosses = 9;
+        public const int ZgTotalBosses = 11;
+        public const int Aq20TotalBosses = 6;
+        public const int McTotalBosses = 10;
+        public const int OnyTotalBosses = 1;
+        public const int BwlTotalBosses = 9;
+        public const int NaxxTotalBosses = 15;
+        public const int Aq40TotalBosses = 9;
     }
 }

@@ -105,34 +105,42 @@ namespace WowGuildManager.Web.Extensions
                 var raidDestination = new RaidDestination
                 {
                     Name = namdAndMaxPlayers.Key,
-                    MaxPlayers = namdAndMaxPlayers.Value
+                    MaxPlayers = namdAndMaxPlayers.Value,
                 };
 
                 switch (raidDestination.Name)
                 {
-                    case "Ubrs":
+                    case RaidConstants.Ubrs:
                         raidDestination.ImagePath = RaidConstants.UbrsImage;
+                        raidDestination.TotalBosses = RaidConstants.UbrsTotalBosses;
                         break;
-                    case "Zg":
+                    case RaidConstants.Zg:
                         raidDestination.ImagePath = RaidConstants.ZgImage;
+                        raidDestination.TotalBosses = RaidConstants.ZgTotalBosses;
                         break;
-                    case "Aq20":
+                    case RaidConstants.Aq20:
                         raidDestination.ImagePath = RaidConstants.Aq20Image;
+                        raidDestination.TotalBosses = RaidConstants.Aq20TotalBosses;
                         break;
-                    case "Mc":
-                        raidDestination.ImagePath = RaidConstants.McImage;
-                        break;
-                    case "Bwl":
-                        raidDestination.ImagePath = RaidConstants.BwlImage;
-                        break;
-                    case "Ony":
-                        raidDestination.ImagePath = RaidConstants.OnyImage;
-                        break;
-                    case "Aq40":
+                    case RaidConstants.Aq40:
                         raidDestination.ImagePath = RaidConstants.Aq40Image;
+                        raidDestination.TotalBosses = RaidConstants.Aq40TotalBosses;
                         break;
-                    case "Naxx":
+                    case RaidConstants.Naxx:
                         raidDestination.ImagePath = RaidConstants.NaxxImage;
+                        raidDestination.TotalBosses = RaidConstants.NaxxTotalBosses;
+                        break;
+                    case RaidConstants.Mc:
+                        raidDestination.ImagePath = RaidConstants.McImage;
+                        raidDestination.TotalBosses = RaidConstants.McTotalBosses;
+                        break;
+                    case RaidConstants.Ony:
+                        raidDestination.ImagePath = RaidConstants.OnyImage;
+                        raidDestination.TotalBosses = RaidConstants.OnyTotalBosses;
+                        break;
+                    case RaidConstants.Bwl:
+                        raidDestination.ImagePath = RaidConstants.BwlImage;
+                        raidDestination.TotalBosses = RaidConstants.BwlTotalBosses;
                         break;
                 }
 

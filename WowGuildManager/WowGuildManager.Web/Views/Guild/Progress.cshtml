@@ -1,9 +1,24 @@
-﻿<h1>Here will be put guild progression and history stuff</h1>
+﻿@model WowGuildManager.Models.ViewModels.Guild.GuildProgressViewModel
+<h1>Here will be put guild progression and history stuff</h1>
+
+<div class="row">
+    @foreach (var raidDestination in Model.RaidDestinationProgresses)
+    {
+        <div class="col-6">
+            <div>@raidDestination.Name</div>
+            <div class="progress">
+                <div class="progress-bar" style="width: @raidDestination.CompletedPercent%" role="progressbar" aria-valuenow="@raidDestination.KilledBosses" aria-valuemin="0" aria-valuemax="@raidDestination.TotalBosses">@raidDestination.KilledBosses/@raidDestination.TotalBosses</div>
+            </div>
+        </div>
+
+    }
+</div>
 
 
+<h1>About Deathwing lair</h1>
+<p class="lead">
+    Deathwing lair as an extraordinary guild
+</p>
 
-    <h1>Marketing stuff!</h1>
-    <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
-    <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>
 
 
