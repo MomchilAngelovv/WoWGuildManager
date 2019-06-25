@@ -75,11 +75,6 @@ namespace WowGuildManager.Web.Controllers
         [HttpPost]
         public IActionResult Create(DungeonCreateBindingModel inputModel)
         {
-            if (ModelState.IsValid == false)
-            {
-                return RedirectToAction(nameof(Create));
-            }
-
             this.dungeonService.Create(inputModel);
 
             return RedirectToAction("Upcoming", "Events");

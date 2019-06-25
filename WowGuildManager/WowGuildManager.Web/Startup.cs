@@ -22,6 +22,7 @@ using WowGuildManager.Services.Dungeons;
 using WowGuildManager.Services.Raids;
 using WowGuildManager.Services.Api;
 using WowGuildManager.Services.Guilds;
+using WowGuildManager.Web.Filters.ActionFilters;
 
 namespace WowGuildManager.Web
 {
@@ -63,7 +64,11 @@ namespace WowGuildManager.Web
 
             services.AddAutoMapper(typeof(Startup));
             
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => 
+            {
+                options.Filters.Add(new ValidateModelStateActionFilter());
+            })  
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             #region AppServices
             services.AddTransient<ICharacterService, CharacterService>();

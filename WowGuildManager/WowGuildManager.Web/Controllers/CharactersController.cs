@@ -61,11 +61,6 @@ namespace WowGuildManager.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CharacterCreateBindingModel model)
         {
-            if (ModelState.IsValid == false)
-            {
-                return this.RedirectToAction(nameof(Create));
-            }
-
             var userId = await this.GetUserId(this.userManager);
 
             model.UserId = userId;

@@ -8,7 +8,7 @@ namespace WowGuildManager.Web.Controllers
 {
     public class GuildController : BaseController
     {
-        public IActionResult Progression()
+        public IActionResult Progress()
         {
             return this.View();
         }
