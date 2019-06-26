@@ -37,9 +37,10 @@ namespace WowGuildManager.Web.Extensions
         {
             var roleNamesAndDescriptions = new Dictionary<string, string>
             {
-                [WowGuildManagerUserConstants.Admin] = WowGuildManagerUserConstants.AdminDescription,
+                [WowGuildManagerUserConstants.DefaultUser] = WowGuildManagerUserConstants.DefaultUserDescription,
                 [WowGuildManagerUserConstants.RaidLeader] = WowGuildManagerUserConstants.RaidLeaderDescription,
-                [WowGuildManagerUserConstants.DefaultUser] = WowGuildManagerUserConstants.DefaultUserDescription
+                [WowGuildManagerUserConstants.GuildMaster] = WowGuildManagerUserConstants.GuildMasterDescription,
+                [WowGuildManagerUserConstants.Admin] = WowGuildManagerUserConstants.AdminDescription
             };
 
             foreach (var roleNameAndDescription in roleNamesAndDescriptions)

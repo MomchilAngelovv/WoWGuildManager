@@ -95,7 +95,7 @@ namespace WowGuildManager.Services.Raids
             return registeredCharacters;
         }
 
-        public async Task<RaidCharacter> RegisterCharacter(string characterId, string raidId)
+        public async Task<RaidCharacter> RegisterCharacterAsync(string characterId, string raidId)
         {
             var raidCharacter = new RaidCharacter
             {

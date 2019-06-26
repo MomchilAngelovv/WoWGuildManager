@@ -20,7 +20,7 @@ namespace WowGuildManager.Services.Dungeons
 
         IEnumerable<T> GetDestinations<T>();
 
-        Task<DungeonCharacter> RegisterCharacter(string characterId, string dungeonId);
+        Task<DungeonCharacter> RegisterCharacterAsync(string characterId, string dungeonId);
 
         IEnumerable<T> GetRegisteredCharactersByDungeonId<T>(string dungeonId);
 

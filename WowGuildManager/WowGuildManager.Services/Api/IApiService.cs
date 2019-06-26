@@ -11,5 +11,7 @@ namespace WowGuildManager.Services.Api
         IEnumerable<T> GetAll<T>(string userId);
 
         T GetCharacterById<T>(string characterId);
+
+        IEnumerable<T> Members<T>();
     }
 }

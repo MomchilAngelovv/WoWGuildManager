@@ -84,7 +84,7 @@ namespace WowGuildManager.Web.Controllers
            
             var eventsIndexViewModel = new EventsIndexViewModel
             {
-                IsUserRaidLeaderOrAdmin = this.User.IsInRole("Raid Leader") || this.User.IsInRole("Admin"),
+                IsUserRaidLeaderOrAdmin = this.User.IsInRole("RaidLeader") || this.User.IsInRole("Admin"),
                 Dungeons = dungeons,
                 Raids = raids
             };

@@ -6,13 +6,13 @@
 
         public string Name { get; set; }
 
-        public int Class { get; set; }
+        public string Class { get; set; }
 
         public int Level { get; set; }
 
-        public int Role { get; set; }
+        public string Role { get; set; }
 
-        public string Image { get; set; }
+        public string GuildRank { get; set; }
 
         public int GuildPoints { get; set; }
 

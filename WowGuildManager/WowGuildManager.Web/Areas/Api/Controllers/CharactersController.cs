@@ -30,17 +30,13 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
             this.apiService = apiService;
         }
     
-        public IEnumerable<CharacterApiViewModel> All()
+        public IEnumerable<CharacterApiViewModel> MyCharacters()
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            return this.apiService.GetAll<CharacterApiViewModel>(userId).AsEnumerable();
-        }
+            var characters = this.apiService.GetAll<CharacterApiViewModel>(userId).AsEnumerable();
 
-        [Route("{id}")]
-        public CharacterApiViewModel GetCharacterById(string id)
-        {
-            return this.apiService.GetCharacterById<CharacterApiViewModel>(id);
+            return characters;
         }
     }
 }

@@ -9,6 +9,10 @@ namespace WowGuildManager.Domain.Identity
 {
     public class WowGuildManagerUser : IdentityUser<string>
     {
+        public bool IsRaidLeader { get; set; }
+
+        public bool IsGuildMaster { get; set; }
+
         public virtual ICollection<Character> Characters { get; set; }
     }
 }

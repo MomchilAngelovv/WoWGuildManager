@@ -7,7 +7,7 @@
         <div class="col-6">
             <div>@raidDestination.Name</div>
             <div class="progress">
-                <div class="progress-bar" style="width: @raidDestination.CompletedPercent%" role="progressbar" aria-valuenow="@raidDestination.KilledBosses" aria-valuemin="0" aria-valuemax="@raidDestination.TotalBosses">@raidDestination.KilledBosses/@raidDestination.TotalBosses</div>
+                <div class="progress-bar" style="width: @(raidDestination.CompletedPercent)%" role="progressbar" aria-valuenow="@raidDestination.KilledBosses" aria-valuemin="0" aria-valuemax="@raidDestination.TotalBosses">@raidDestination.KilledBosses/@raidDestination.TotalBosses</div>
             </div>
         </div>
 

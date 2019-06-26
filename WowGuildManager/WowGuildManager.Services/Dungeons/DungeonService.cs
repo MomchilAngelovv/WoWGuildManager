@@ -69,7 +69,7 @@ namespace WowGuildManager.Services.Dungeons
             return dungeonDestinations;
         }
 
-        public async Task<DungeonCharacter> RegisterCharacter(string characterId, string dungeonId)
+        public async Task<DungeonCharacter> RegisterCharacterAsync(string characterId, string dungeonId)
         {
             var dungeonCharacter = new DungeonCharacter
             {

@@ -7,7 +7,7 @@ using WowGuildManager.Domain.Raid;
 
 namespace WowGuildManager.Domain.Characters
 {
-    public class Character
+    public class Character  
     {
         public Character()
         {

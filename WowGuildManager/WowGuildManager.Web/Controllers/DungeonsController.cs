@@ -116,9 +116,9 @@ namespace WowGuildManager.Web.Controllers
             return this.View(dungeonDetailsViewModel);
         }
 
-        public IActionResult Join(string characterId, string dungeonId)
+        public async Task<IActionResult> Join(string characterId, string dungeonId)
         {
-            this.dungeonService.RegisterCharacter(characterId, dungeonId);
+            await this.dungeonService.RegisterCharacterAsync(characterId, dungeonId);
 
             return this.RedirectToAction("Upcoming", "Events");
         }

@@ -21,7 +21,7 @@ namespace WowGuildManager.Services.Raids
 
         IEnumerable<T> GetRegisteredCharactersByRaidId<T>(string raidId);
 
-        Task<RaidCharacter> RegisterCharacter(string characterId, string raidId);
+        Task<RaidCharacter> RegisterCharacterAsync(string characterId, string raidId);
 
         string GetDestinationIdByName(string destinationName);
     }

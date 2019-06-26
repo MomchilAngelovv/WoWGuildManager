@@ -11,6 +11,7 @@ using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Dungeon;
 using WowGuildManager.Domain.Identity;
 using WowGuildManager.Domain.Raid;
+using System.Reflection;
 
 namespace WowGuildManager.Web.Extensions
 {

@@ -119,9 +119,9 @@ namespace WowGuildManager.Web.Controllers
             return this.View(raidDetailsViewModel);
         }
 
-        public IActionResult Join(string characterId, string raidId)
+        public async Task<IActionResult> Join(string characterId, string raidId)
         {
-            this.raidService.RegisterCharacter(characterId, raidId);
+            await this.raidService.RegisterCharacterAsync(characterId, raidId);
 
             return this.RedirectToAction("Upcoming", "Events");
         }

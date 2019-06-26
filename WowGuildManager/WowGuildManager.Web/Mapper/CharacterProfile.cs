@@ -32,6 +32,9 @@ namespace WowGuildManager.Web.Mapper
                 .ForMember(cvm => cvm.Class, sli => sli.MapFrom(x => x.Class.Name));
 
             this.CreateMap<Character, CharacterApiViewModel>()
+                .ForMember(cvm => cvm.Class, sli => sli.MapFrom(x => x.Class.Name))
+                .ForMember(cvm => cvm.Role, sli => sli.MapFrom(x => x.Role.Name))
+                .ForMember(cvm => cvm.GuildRank, sli => sli.MapFrom(x => x.GuildRank.Name))
                 .ForMember(d => d.Dungeons, cvm => cvm.MapFrom(x => x.Dungeons.Select(d => d.DungeonId)))
                 .ForMember(d => d.Raids, cvm => cvm.MapFrom(x => x.Raids.Select(d => d.RaidId)));
 

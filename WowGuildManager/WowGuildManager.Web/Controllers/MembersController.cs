@@ -9,7 +9,6 @@ using WowGuildManager.Models.ViewModels.Characters;
 using WowGuildManager.Services.Characters;
 
 //TODO: Bootstrap tooltips
-//TODO : Bootstrap progress bar for raids
 namespace WowGuildManager.Web.Controllers
 {
     [AllowAnonymous]
@@ -23,7 +22,7 @@ namespace WowGuildManager.Web.Controllers
             this.characterService = characterService;
         }
 
-        public IActionResult Index()
+        public IActionResult All()
         {
             var members = this.characterService
                 .GetAll<CharacterViewModel>()
