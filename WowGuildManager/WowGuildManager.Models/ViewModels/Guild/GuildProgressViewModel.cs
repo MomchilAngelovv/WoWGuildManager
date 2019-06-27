@@ -7,5 +7,7 @@ namespace WowGuildManager.Models.ViewModels.Guild
     public class GuildProgressViewModel
     {
         public IEnumerable<RaidDestinationProgressViewModel> RaidDestinationProgresses { get; set; }
+
+        public bool IsGuildMaster { get; set; }
     }
 }

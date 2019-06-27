@@ -10,5 +10,9 @@ namespace WowGuildManager.Services.Guilds
         IEnumerable<T> GetRegisteredUsers<T>();
 
         Task SetGuildMasterAsync(string userId);
+
+        Task AddProgressToRaid(string raidName);
+
+        Task RemoveProgressToRaid(string raidName);
     }
 }
