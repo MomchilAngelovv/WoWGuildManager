@@ -13,7 +13,7 @@
                     <p class="card-text">@raid.Description</p>
                     @if (raid.AlreadyJoined)
                     {
-                        @if (raid.JoinedCharacter.Name == raid.LeaderName)
+                        @if (raid.IsLeader)
                         {
                             <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Already Joined with @raid.JoinedCharacter.Name (@raid.JoinedCharacter.Role) (Leader)</a>
                         }

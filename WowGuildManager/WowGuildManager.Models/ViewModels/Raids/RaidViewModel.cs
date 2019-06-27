@@ -26,5 +26,7 @@ namespace WowGuildManager.Models.ViewModels.Raids
         public bool AlreadyJoined { get; set; }
 
         public CharacterNameRoleViewModel JoinedCharacter { get; set; }
+
+        public bool IsLeader => this.JoinedCharacter.Name == this.LeaderName;
     }
 }

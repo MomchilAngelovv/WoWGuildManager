@@ -14,6 +14,7 @@ using WowGuildManager.Services.Dungeons;
 
 namespace WowGuildManager.Services.Characters
 {
+    //TODO: OrderBy clouses where nesesary
     //TODO: Make Test project and start MOQing
     //TODO: Delete remainning comments when READY ! IMPORTANT !!!
     public class CharacterService : ICharacterService
@@ -107,18 +108,16 @@ namespace WowGuildManager.Services.Characters
                 .Include(ch => ch.Role)
                 .Include(ch => ch.Class)
                 .Include(ch => ch.GuildRank)
-                .Select(c => mapper.Map<T>(c))
-                .AsEnumerable();
+                .ToList()
+                .Select(c => mapper.Map<T>(c));
 
             return characters;
         }
 
         public string GetClassIdByName(string className)
         {
-            //TODO: FirstOrDefautl can return null and ID might explode
             var classId = this.context.CharacterClasses
-                .FirstOrDefault(cc => cc.Name == className)
-                .Id;
+                .FirstOrDefault(cc => cc.Name == className)?.Id;
 
             return classId; 
         }

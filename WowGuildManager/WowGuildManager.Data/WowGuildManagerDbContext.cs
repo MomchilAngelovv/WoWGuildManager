@@ -41,11 +41,9 @@ namespace WowGuildManager.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
             builder.ApplyConfiguration(new CharacterConfiguration());
             builder.ApplyConfiguration(new DungeonCharacterConfiguration());
             builder.ApplyConfiguration(new RaidCharacterConfiguration());
-
 
             base.OnModelCreating(builder);
         }

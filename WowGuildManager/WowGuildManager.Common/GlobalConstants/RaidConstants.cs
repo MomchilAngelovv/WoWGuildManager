@@ -16,14 +16,14 @@ namespace WowGuildManager.Common
         public const string OnyImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380391/WowGuildManager/images/raids/ony_ctt11r.jpg";
         public const string ZgImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380390/WowGuildManager/images/raids/zg_ykt1jh.jpg";
 
-        public const string Ubrs = "Ubrs";
-        public const string Zg = "Zg";
-        public const string Aq20 = "Aq20";
-        public const string Mc = "Mc";
-        public const string Ony = "Ony";
-        public const string Bwl = "Bwl";
-        public const string Naxx = "Naxx";
-        public const string Aq40 = "Aq40";
+        public const string Ubrs = "Upper Blackrock Spire";
+        public const string Zg = "Zul'Gurub";
+        public const string Aq20 = "Ruins of Ahn'Qiraj";
+        public const string Mc = "Molter Core";
+        public const string Ony = "Onyxia's lair";
+        public const string Bwl = "Blackwing Lair";
+        public const string Naxx = "Naxxramas";
+        public const string Aq40 = "Temple of Ahn'Qiraj";
 
         public const int UbrsTotalBosses = 9;
         public const int ZgTotalBosses = 11;

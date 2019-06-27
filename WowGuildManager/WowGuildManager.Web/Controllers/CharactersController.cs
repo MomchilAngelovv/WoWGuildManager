@@ -13,7 +13,9 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using WowGuildManager.Web.Mapper;
 using System.Security.Claims;
+using WowGuildManager.Common.GlobalConstants;
 
+//TODO: COnsier create input forms to make models in Get methods and return view models
 //TODO: Api endpoits for dungeons /raids / characers everythng
 namespace WowGuildManager.Web.Controllers
 {

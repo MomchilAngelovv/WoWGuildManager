@@ -9,6 +9,7 @@ using WowGuildManager.Models.ViewModels.Characters;
 using WowGuildManager.Services.Characters;
 
 //TODO: Bootstrap tooltips
+//TODO: CHECK CSS EVEYRHWEW AND FIX CLASSES
 namespace WowGuildManager.Web.Controllers
 {
     [AllowAnonymous]

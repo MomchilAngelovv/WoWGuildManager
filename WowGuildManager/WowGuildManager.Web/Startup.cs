@@ -23,6 +23,8 @@ using WowGuildManager.Services.Api;
 using WowGuildManager.Services.Guilds;
 using WowGuildManager.Web.Filters.ActionFilters;
 
+//TODO: Make services return what i want OR THROW EX 100%
+//TODO: LOG ERRORS
 namespace WowGuildManager.Web
 {
     public class Startup
@@ -65,11 +67,8 @@ namespace WowGuildManager.Web
             
             services.AddMvc(options => 
             {
-                options.Filters
-                    .Add(new ValidateModelStateActionFilter());
-
-                options.Filters
-                    .Add(new AutoValidateAntiforgeryTokenAttribute());
+                options.Filters.Add(new ValidateModelStateActionFilter());
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             })  
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

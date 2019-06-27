@@ -17,6 +17,10 @@ namespace WowGuildManager.Web.Controllers
             this.raidService = raidService;
         }
 
+        public IActionResult Index()
+        {
+            return this.View();
+        }
         public IActionResult Progress()
         {
             var raidDestinations = this.raidService.GetDestinations<RaidDestinationProgressViewModel>();

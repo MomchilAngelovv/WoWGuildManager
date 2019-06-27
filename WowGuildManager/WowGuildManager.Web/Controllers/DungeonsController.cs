@@ -13,7 +13,6 @@ using WowGuildManager.Models.ViewModels.Dungeons;
 using WowGuildManager.Services.Characters;
 using WowGuildManager.Services.Dungeons;
 
-//TODO: Add validate antyforgery tokesn on every form
 namespace WowGuildManager.Web.Controllers
 {
     [Authorize]

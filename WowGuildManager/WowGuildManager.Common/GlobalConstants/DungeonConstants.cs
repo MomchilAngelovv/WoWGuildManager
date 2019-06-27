@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WowGuildManager.Common
+﻿namespace WowGuildManager.Common
 {
     public static class DungeonConstants
     {
@@ -12,7 +8,7 @@ namespace WowGuildManager.Common
         public const string WcImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380366/WowGuildManager/images/dungeons/wc_wkbgja.jpg";
         public const string DmImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380366/WowGuildManager/images/dungeons/dm_a6pwqq.jpg";
         public const string SfkImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380365/WowGuildManager/images/dungeons/sfk_zuqpr8.jpg";
-        public const string BfdImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380366/WowGuildManager/images/dungeons/bfd_necqdp.jpg";
+        public const string BfdImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561626393/WowGuildManager/images/dungeons/bfd_faxxe5.jpg";
         public const string StocksImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380367/WowGuildManager/images/dungeons/stocks_pwp70n.jpg";
         public const string GnomeImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380366/WowGuildManager/images/dungeons/gnome_agjxsw.jpg";
         public const string SmImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380363/WowGuildManager/images/dungeons/sm_k1tycm.jpg";
@@ -28,24 +24,24 @@ namespace WowGuildManager.Common
         public const string StImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380363/WowGuildManager/images/dungeons/st_exx0jf.jpg";
         public const string LbrsImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380368/WowGuildManager/images/dungeons/lbrs_mmsuw4.jpg";
 
-        public const string Rfc = "Rfc";
-        public const string Wc = "Wc";
-        public const string Dm = "Dm";
-        public const string Sfk = "Sfk";
-        public const string Bfd = "Bfd";
-        public const string Stocks = "Stocks";
-        public const string Gnome = "Gnome";
-        public const string Sm = "Sm";
-        public const string Rfk = "Rfk";
-        public const string Mara = "Mara";
-        public const string Rfd = "Rfd";
-        public const string Diremaul = "Diremaul";
-        public const string Scholo = "Scholo";
-        public const string Ulda = "Ulda";
-        public const string Strat = "Strat";
-        public const string Zf = "Zf";
-        public const string Brd = "Brd";
-        public const string St = "St";
-        public const string Lbrs = "Lbrs";
+        public const string Rfc = "Ragefire Chasm";
+        public const string Wc = "Wailing Caverns";
+        public const string Dm = "The Deadmines";
+        public const string Sfk = "Shadowfang Keep";
+        public const string Bfd = "Blackfathom Deeps";
+        public const string Stocks = "The Stockade";
+        public const string Gnome = "Gnomeregan";
+        public const string Sm = "Scarlet Monastery";
+        public const string Rfk = "Razorfen Kraul";
+        public const string Mara = "Maraudon";
+        public const string Rfd = "Razorfen Downs";
+        public const string Diremaul = "Dire Maul";
+        public const string Scholo = "Scholomance";
+        public const string Ulda = "Uldaman";
+        public const string Strat = "Stratholme";
+        public const string Zf = "Zul'Farrak";
+        public const string Brd = "Blackrock Depths";
+        public const string St = "Sunken Temple";
+        public const string Lbrs = "Lower Blackrock Spire";
     }
 }

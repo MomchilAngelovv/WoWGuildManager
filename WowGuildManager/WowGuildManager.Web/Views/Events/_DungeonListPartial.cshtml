@@ -13,7 +13,7 @@
                     <p class="card-text">@dungeon.Description</p>
                     @if (dungeon.AlreadyJoined)
                     {
-                        @if (dungeon.JoinedCharacter.Name == dungeon.LeaderName)
+                        @if (dungeon.IsLeader)
                         {
                             <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-success w-100 ">Already Joined with @dungeon.JoinedCharacter.Name (@dungeon.JoinedCharacter.Role) (Leader)</a>
                         }

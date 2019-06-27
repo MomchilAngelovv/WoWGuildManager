@@ -1,6 +1,6 @@
 ﻿@model WowGuildManager.Models.ViewModels.Events.TodayEventsViewModel
 
-<h3 class="text-center">Today's events</h3>
+<h2 class="w-50 mx-auto text-center m-4">Today's events</h2>
 <table class="table table-sm table-hover table-dark">
     <tbody>
         @if (Model.Raids.Any())
@@ -10,22 +10,20 @@
             </tr>
             @foreach (var raid in Model.Raids)
             {
-                <tr>
-                    <th scope="row">@raid.Destination</th>
-                    <th scope="row"><a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id">Details</a></th>
+                <tr class="w-50 mx-auto text-center">
+                    <th><a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger btn-sm w-25">@raid.Destination</a></th>
                 </tr>
             }
         }
         @if (Model.Dungeons.Any())
         {
             <tr>
-                <th colspan="2" class="text-center">Dungeons</th>
+                <th colspan="2" class="text-center ">Dungeons</th>
             </tr>
             @foreach (var dungeon in Model.Dungeons)
             {
-                <tr>
-                    <th scope="row">@dungeon.Destination</th>
-                    <th scope="row"><a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id">Details</a></th>
+                <tr class="w-50 mx-auto text-center">
+                    <th><a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning btn-sm w-25">@dungeon.Destination</a></th>
                 </tr>
             }
         }

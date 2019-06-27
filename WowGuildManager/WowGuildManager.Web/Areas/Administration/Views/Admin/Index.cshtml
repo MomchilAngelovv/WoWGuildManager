@@ -6,20 +6,6 @@
 <h2>I am page for administration</h2>
 <h4>Be careful! You are admin and your actions will persist and cannot be changed after</h4>
 
-<div class="container-fluid row">
-    <div class="list-group col-6">
-        @foreach (var user in Model.Users)
-        {
-            @if (user.IsGuildMaster)
-            {
-                <a asp-area="Administration" asp-controller="Admin" asp-action="SetGuildMaster" type="button" asp-route-id="@user.Id" class="list-group-item list-group-item-info">@user.Name (Guild Master)</a>
+<h2>Total registered users: @Model.UserCount</h2>
 
-            }
-            else
-            {
-                <a asp-area="Administration" asp-controller="Admin" asp-action="SetGuildMaster" type="button" asp-route-id="@user.Id" class="list-group-item list-group-item-action">@user.Name</a>
-
-            }
-        }
-    </div>
-</div>
+<partial name="_SelectGuildMasterPartial" for="Users" />
