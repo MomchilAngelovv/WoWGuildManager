@@ -14,6 +14,7 @@ using WowGuildManager.Services.Dungeons;
 
 namespace WowGuildManager.Services.Characters
 {
+    //TODO: Make all services throw exceptions instead of returning null
     //TODO: OrderBy clouses where nesesary
     //TODO: Make Test project and start MOQing
     //TODO: Delete remainning comments when READY ! IMPORTANT !!!
@@ -128,19 +129,17 @@ namespace WowGuildManager.Services.Characters
         public string GetRoleIdByName(string roleName)
         {
             var roleId = this.context.CharacterRoles
-                 .FirstOrDefault(cr => cr.Name == roleName)
-                 .Id;
+                 .FirstOrDefault(cr => cr.Name == roleName)?.Id;
 
             return roleId;
         }
 
         public string GetRankIdByName(string rankName)
         {
-            var roleId = this.context.GuildRanks
-                 .FirstOrDefault(cr => cr.Name == rankName)
-                 .Id;
+            var rankId = this.context.GuildRanks
+                 .FirstOrDefault(cr => cr.Name == rankName)?.Id;
 
-            return roleId;
+            return rankId;
         }
     }
 }

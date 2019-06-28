@@ -48,5 +48,17 @@ namespace WowGuildManager.Web.Controllers
             await this.guildService.RemoveProgressToRaid(raidName);
             return this.RedirectToAction(nameof(Progress));
         }
+
+        public async Task<IActionResult> PromoteRank(string characterId)
+        {
+            await this.guildService.PromoteRankAsync(characterId);
+            return this.RedirectToAction("All", "Members");
+        }
+
+        public async Task<IActionResult> DemoteRank(string characterId)
+        {
+            await this.guildService.DemoteRankAsync(characterId);
+            return this.RedirectToAction("All", "Members");
+        }
     }
 }

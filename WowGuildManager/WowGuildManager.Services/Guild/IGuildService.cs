@@ -14,5 +14,9 @@ namespace WowGuildManager.Services.Guilds
         Task AddProgressToRaid(string raidName);
 
         Task RemoveProgressToRaid(string raidName);
+
+        Task PromoteRankAsync(string characterId);
+
+        Task DemoteRankAsync(string characterId);
     }
 }

@@ -9,6 +9,7 @@ using WowGuildManager.Web.Models;
 
 namespace WowGuildManager.Web.Controllers
 {
+    //TODO: MAKE EVEYEWHERE BUTTON-SM !!
     //TODO APPLY Authorization attribites everywhere
     public class HomeController : BaseController
     {
