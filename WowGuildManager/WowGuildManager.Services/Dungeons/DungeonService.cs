@@ -110,6 +110,8 @@ namespace WowGuildManager.Services.Dungeons
                .ThenInclude(ch => ch.Role)
                .Include(rc => rc.Character)
                .ThenInclude(ch => ch.Class)
+               .Include(rc => rc.Character)
+               .ThenInclude(ch => ch.GuildRank)
                .AsEnumerable()
                .Select(dc => mapper.Map<T>(dc.Character));
 

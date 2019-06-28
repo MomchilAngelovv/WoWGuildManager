@@ -7,6 +7,7 @@ using WowGuildManager.Models.ViewModels.Guild;
 using WowGuildManager.Services.Guilds;
 using WowGuildManager.Services.Raids;
 
+//TOD0: FIX ALL EXLUDE DEVELOPMENT LIBRATIES !~~
 namespace WowGuildManager.Web.Controllers
 {
     public class GuildController : BaseController

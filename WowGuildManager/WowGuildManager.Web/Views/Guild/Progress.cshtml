@@ -9,8 +9,9 @@
     @if (this.User.IsInRole("GuildMaster"))
     {
         <h6 class="text-center">@raidDestination.Name: @raidDestination.KilledBosses/@raidDestination.TotalBosses</h6>
-        <a asp-area="" asp-controller="Guild" asp-action="AddProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-success btn-sm mx-auto border border-dark">Add Progress</a>
-        <a asp-area="" asp-controller="Guild" asp-action="RemoveProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-danger btn-sm mx-auto border border-dark">Remove Progress</a>
+        
+        <a asp-area="" asp-controller="Guild" asp-action="AddProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-success btn-sm mx-auto border border-dark"><i class="fas fa-arrow-up"></i> Add Progress</a>
+        <a asp-area="" asp-controller="Guild" asp-action="RemoveProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-danger btn-sm mx-auto border border-dark"><i class="fas fa-arrow-down"></i> Remove Progress</a>
     }
     else
     {

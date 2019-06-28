@@ -25,10 +25,12 @@ namespace WowGuildManager.Web.Mapper
 
             this.CreateMap<Character, CharacterDungeonDetailsViewModel>()
                 .ForMember(cvm => cvm.Role, sli => sli.MapFrom(x => x.Role.Name))
+                .ForMember(cvm => cvm.GuildRank, sli => sli.MapFrom(x => x.GuildRank.Name))
                 .ForMember(cvm => cvm.Class, sli => sli.MapFrom(x => x.Class.Name));
 
             this.CreateMap<Character, CharacterRaidDetailsViewModel>()
                 .ForMember(cvm => cvm.Role, sli => sli.MapFrom(x => x.Role.Name))
+                .ForMember(cvm => cvm.GuildRank, sli => sli.MapFrom(x => x.GuildRank.Name))
                 .ForMember(cvm => cvm.Class, sli => sli.MapFrom(x => x.Class.Name));
 
             this.CreateMap<Character, CharacterApiViewModel>()

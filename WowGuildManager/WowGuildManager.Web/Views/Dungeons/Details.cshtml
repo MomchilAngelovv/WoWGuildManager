@@ -21,8 +21,8 @@
             if (character.Id == Model.JoinedCharacter?.Id)
             {
                 <tr class="bg-warning">
-                    <th scope="row">N/A</th>
-                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="ID">@character.Name</a></td>
+                    <th scope="row">@character.GuildRank</th>
+                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id">@character.Name</a></td>
                     <td>@character.Level</td>
                     <td>@character.Class</td>
                     <td>@character.Role</td>
@@ -31,8 +31,8 @@
             else
             {
                 <tr>
-                    <th scope="row">N/A</th>
-                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="ID">@character.Name</a></td>
+                    <th scope="row">@character.GuildRank</th>
+                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id">@character.Name</a></td>
                     <td>@character.Level</td>
                     <td>@character.Class</td>
                     <td>@character.Role</td>

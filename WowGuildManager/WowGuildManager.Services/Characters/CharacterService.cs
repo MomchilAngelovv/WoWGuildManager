@@ -96,7 +96,10 @@ namespace WowGuildManager.Services.Characters
         public T GetCharacterById<T>(string characterId)
         {
             var character = this.context.Characters
-                .Find(characterId);
+                .Include(ch => ch.Class)
+                .Include(ch => ch.Role)
+                .Include(ch => ch.GuildRank)
+                .FirstOrDefault(ch => ch.Id == characterId);
 
             return mapper.Map<T>(character);
         }

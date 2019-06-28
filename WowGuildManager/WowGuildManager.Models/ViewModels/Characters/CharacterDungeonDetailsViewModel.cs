@@ -15,5 +15,7 @@ namespace WowGuildManager.Models.ViewModels.Characters
         public string Role { get; set; }
 
         public string Class { get; set; }
+
+        public string GuildRank { get; set; }
     }
 }

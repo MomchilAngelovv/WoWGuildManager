@@ -1,7 +1,16 @@
 ﻿@model WowGuildManager.Models.ViewModels.Characters.CharacterViewModel
+
 @{
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+<h1>Details</h1>
+
+<ul class="list-group bg-dark">
+    <li class="list-group-item bg-dark">@Model.Name</li>
+    <li class="list-group-item bg-dark">@Model.Level</li>
+    <li class="list-group-item bg-dark">@Model.Role</li>
+    <li class="list-group-item bg-dark">@Model.Class</li>
+    <li class="list-group-item bg-dark">@Model.Rank</li>
+</ul>
 
