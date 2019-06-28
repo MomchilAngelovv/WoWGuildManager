@@ -14,6 +14,7 @@ using WowGuildManager.Services.Dungeons;
 
 namespace WowGuildManager.Services.Characters
 {
+    //TODO: Make test for EVERY service method
     //TODO: Make all services throw exceptions instead of returning null
     //TODO: OrderBy clouses where nesesary
     //TODO: Make Test project and start MOQing
