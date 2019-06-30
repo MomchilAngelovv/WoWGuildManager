@@ -113,8 +113,8 @@ namespace WowGuildManager.Services.Characters
                 .Include(ch => ch.Role)
                 .Include(ch => ch.Class)
                 .Include(ch => ch.GuildRank)
-                .ToList()
-                .Select(c => mapper.Map<T>(c));
+                .Select(c => mapper.Map<T>(c))
+                .ToList();
 
             return characters;
         }
