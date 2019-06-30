@@ -17,7 +17,6 @@ namespace WowGuildManager.Services.Characters
     //TODO: Make test for EVERY service method
     //TODO: Make all services throw exceptions instead of returning null
     //TODO: OrderBy clouses where nesesary
-    //TODO: Make Test project and start MOQing
     //TODO: Delete remainning comments when READY ! IMPORTANT !!!
     public class CharacterService : ICharacterService
     {
@@ -121,26 +120,41 @@ namespace WowGuildManager.Services.Characters
 
         public string GetClassIdByName(string className)
         {
-            var classId = this.context.CharacterClasses
-                .FirstOrDefault(cc => cc.Name == className)?.Id;
+            var classObject = this.context.CharacterClasses
+                .FirstOrDefault(cc => cc.Name == className);
 
-            return classId; 
+            if (classObject == null)
+            {
+                throw new ArgumentException("Invalid class type!");
+            }
+
+            return classObject.Id; 
         }
 
         public string GetRoleIdByName(string roleName)
         {
-            var roleId = this.context.CharacterRoles
-                 .FirstOrDefault(cr => cr.Name == roleName)?.Id;
+            var roleObject = this.context.CharacterRoles
+                 .FirstOrDefault(cr => cr.Name == roleName);
 
-            return roleId;
+            if (roleObject == null)
+            {
+                throw new ArgumentException("Invalid role type!");
+            }
+
+            return roleObject.Id;
         }
 
         public string GetRankIdByName(string rankName)
         {
-            var rankId = this.context.GuildRanks
-                 .FirstOrDefault(cr => cr.Name == rankName)?.Id;
+            var rankObject = this.context.GuildRanks
+                 .FirstOrDefault(cr => cr.Name == rankName);
 
-            return rankId;
+            if (rankObject == null)
+            {
+                throw new ArgumentException("Invalid rank type!");
+            }
+
+            return rankObject.Id;
         }
     }
 }

@@ -22,6 +22,41 @@ namespace WowGuildManager.Tests
         }
 
         [Fact]
+        public void GetRoleIdByName_Should_Theow_When_Not_Found()
+        {
+            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
+                .UseInMemoryDatabase(databaseName: "GetRoleIdByName_Throw_Database")
+                .Options;
+
+            var roles = new List<CharacterRole>
+            {
+                new CharacterRole
+                {
+                    Id = "1",
+                    Name = "Tank"
+                },
+                new CharacterRole
+                {
+                    Id = "2",
+                    Name = "Healer"
+                },
+                new CharacterRole
+                {
+                    Id = "3",
+                    Name = "Damage"
+                },
+            };
+
+            using (var dbContext = new WowGuildManagerDbContext(options))
+            {
+                var characterService = new CharacterService(dbContext, null);
+                dbContext.CharacterRoles.AddRange(roles);
+                dbContext.SaveChanges();
+
+                Assert.Throws<ArgumentException>(() => characterService.GetRoleIdByName("NoSuchRole"));
+            }
+        }
+        [Fact]
         public void GetRoleIdByName_Should_Return_Correct_Id()
         {
             var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
@@ -59,6 +94,42 @@ namespace WowGuildManager.Tests
         }
 
         [Fact]
+        public void GetRankIdByName_Should_Throw_When_Not_Found()
+        {
+            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
+                .UseInMemoryDatabase(databaseName: "GetRankIdByName_Throw_Database")
+                .Options;
+
+            var ranks = new List<GuildRank>
+            {
+                new GuildRank
+                {
+                    Id = "1",
+                    Name = "Member"
+                },
+                new GuildRank
+                {
+                    Id = "2",
+                    Name = "GuildMaster"
+                },
+                new GuildRank
+                {
+                    Id = "3",
+                    Name = "PvP"
+                },
+            };
+
+            using (var dbContext = new WowGuildManagerDbContext(options))
+            {
+                var characterService = new CharacterService(dbContext, null);
+                dbContext.GuildRanks.AddRange(ranks);
+                dbContext.SaveChanges();
+
+                Assert.Throws<ArgumentException>(() => characterService.GetRankIdByName("NoSuchRole"));
+            }
+        }
+
+        [Fact]
         public void GetRankIdByName_Should_Return_Correct_Id()
         {
             var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
@@ -92,6 +163,42 @@ namespace WowGuildManager.Tests
 
                 var actualRankId = characterService.GetRankIdByName("GuildMaster");
                 Assert.Equal("2", actualRankId);
+            }
+        }
+
+        [Fact]
+        public void GetClassIdByName_Should_Throw_When_Not_Found()
+        {
+            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
+                .UseInMemoryDatabase(databaseName: "GetClassIdByName_Throw_Database")
+                .Options;
+
+            var classes = new List<CharacterClass>
+            {
+                new CharacterClass
+                {
+                    Id = "1",
+                    Name = "Rogue"
+                },
+                new CharacterClass
+                {
+                    Id = "2",
+                    Name = "Warrior"
+                },
+                new CharacterClass
+                {
+                    Id = "3",
+                    Name = "Priest"
+                },
+            };
+
+            using (var dbContext = new WowGuildManagerDbContext(options))
+            {
+                var characterService = new CharacterService(dbContext, null);
+                dbContext.CharacterClasses.AddRange(classes);
+                dbContext.SaveChanges();
+
+                Assert.Throws<ArgumentException>(() => characterService.GetClassIdByName("NoSuchClass"));
             }
         }
 
