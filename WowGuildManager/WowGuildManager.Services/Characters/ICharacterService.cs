@@ -7,6 +7,8 @@ using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Identity;
 using WowGuildManager.Models.ViewModels.Characters;
 
+
+
 namespace WowGuildManager.Services.Characters
 {
     //TOD0: Move this to dungeon service

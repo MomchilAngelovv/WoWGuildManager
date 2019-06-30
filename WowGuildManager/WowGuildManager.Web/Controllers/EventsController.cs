@@ -15,7 +15,9 @@ using WowGuildManager.Models.ViewModels.Events;
 using WowGuildManager.Models.ViewModels.Raids;
 using WowGuildManager.Services.Characters;
 using WowGuildManager.Services.Dungeons;
-using WowGuildManager.Services.Raids;
+using WowGuildManager.Services.Raids;   
+
+//TODO: MAKE RESPONSIVE VERY BAD
 
 //TODO: Think how to extract userId with better way in base controller
 namespace WowGuildManager.Web.Controllers

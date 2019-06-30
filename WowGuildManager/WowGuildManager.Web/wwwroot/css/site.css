@@ -27,3 +27,7 @@ body {
     height: 650px;
     max-width: none;
 }
+
+.progress{
+    height: 35px;
+}
