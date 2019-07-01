@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Identity;
+using WowGuildManager.Models.BindingModels.Characters;
 using WowGuildManager.Models.ViewModels.Characters;
 
 
@@ -33,5 +34,7 @@ namespace WowGuildManager.Services.Characters
         string GetRoleIdByName(string roleName);
 
         string GetRankIdByName(string rankName);
+
+        Task Update(CharacterEditBindingModel model);
     }
 }

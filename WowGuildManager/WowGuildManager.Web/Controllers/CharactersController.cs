@@ -14,6 +14,7 @@ using AutoMapper.QueryableExtensions;
 using WowGuildManager.Web.Mapper;
 using System.Security.Claims;
 using WowGuildManager.Common.GlobalConstants;
+using WowGuildManager.Models.BindingModels.Characters;
 
 //TODO: COnsier create input forms to make models in Get methods and return view models
 //TODO: Api endpoits for dungeons /raids / characers everythng
@@ -100,6 +101,24 @@ namespace WowGuildManager.Web.Controllers
             var classList = this.characterService.GetClasses<SelectListItem>();
 
             return classList;
+        }
+
+        public IActionResult Edit(string id)
+        {
+            var characterEditBindingModel = this.characterService
+                .GetCharacterById<CharacterEditBindingModel>(id);
+
+            var roleList = this.BindRolesToSelectListItem();
+            this.ViewData["Roles"] = roleList;
+
+            return this.View(characterEditBindingModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CharacterEditBindingModel model)
+        {
+            await this.characterService.Update(model);
+            return this.RedirectToAction(nameof(Index));
         }
     }
 }

@@ -9,6 +9,7 @@ using WowGuildManager.Common.GlobalConstants;
 using WowGuildManager.Data;
 using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Identity;
+using WowGuildManager.Models.BindingModels.Characters;
 using WowGuildManager.Models.ViewModels.Characters;
 using WowGuildManager.Services.Dungeons;
 
@@ -155,6 +156,17 @@ namespace WowGuildManager.Services.Characters
             }
 
             return rankObject.Id;
+        }
+
+        public async Task Update(CharacterEditBindingModel model)
+        {
+            var character = this.GetCharacterById<Character>(model.Id);
+
+            character.Level = model.Level;
+            character.RoleId = this.GetRoleIdByName(model.Role);
+
+            this.context.Update(character);
+            await this.context.SaveChangesAsync();
         }
     }
 }

@@ -5,14 +5,14 @@
 
 <h2>Dugeons Details</h2>
 
-<table class="table table-sm table-hover table-dark">
+<table class="table table-sm table-hover table-dark text-center">
     <thead>
         <tr>
-            <th scope="col">Guild rank</th>
-            <th scope="col">Name</th>
-            <th scope="col">Level</th>
-            <th scope="col">Class</th>
-            <th scope="col">Role</th>
+            <th scope="col" class="text-center">Guild rank</th>
+            <th scope="col" class="text-center">Name</th>
+            <th scope="col" class="text-center">Level</th>
+            <th scope="col" class="text-center">Class</th>
+            <th scope="col" class="text-center">Role</th>
         </tr>
     </thead>
     <tbody>
@@ -21,21 +21,21 @@
             if (character.Id == Model.JoinedCharacter?.Id)
             {
                 <tr class="bg-warning">
-                    <th scope="row">@character.GuildRank</th>
-                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id">@character.Name</a></td>
-                    <td>@character.Level</td>
-                    <td>@character.Class</td>
-                    <td>@character.Role</td>
+                    <td class="p-2 w-25">@character.GuildRank</td>
+                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
+                    <td class="p-2">@character.Level</td>
+                    <td class="p-2">@character.Class</td>
+                    <td class="p-2">@character.Role</td>
                 </tr>
             }
             else
             {
                 <tr>
-                    <th scope="row">@character.GuildRank</th>
-                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id">@character.Name</a></td>
-                    <td>@character.Level</td>
-                    <td>@character.Class</td>
-                    <td>@character.Role</td>
+                    <td class="p-2 w-25">@character.GuildRank</td>
+                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
+                    <td class="p-2">@character.Level</td>
+                    <td class="p-2">@character.Class</td>
+                    <td class="p-2">@character.Role</td>
                 </tr>
             }
 
@@ -66,5 +66,12 @@ else if (Model.Characters.Count() < 5 && !Model.AlreadyJoined)
     </div>
 }
 
+@section Scripts{
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+}
 
 

@@ -1,0 +1,40 @@
+﻿@model WowGuildManager.Models.BindingModels.Characters.CharacterEditBindingModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>CharacterViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Level" class="control-label"></label>
+                <input asp-for="Level" value="@Model.Level" class="form-control" />
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select id="role" asp-for="@Model.Role" asp-items="@((IEnumerable<SelectListItem>)ViewData["Roles"])" class="form-control border-dark">
+                </select>
+                <span asp-validation-for="@Model.Role" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts{
+    <script>
+        $('#role').val(@Model.Role)
+    </script>
+ }

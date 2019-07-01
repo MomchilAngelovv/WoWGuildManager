@@ -18,8 +18,9 @@
                         <h5 class="card-title">@character.Name</h5>
                         <p class="card-text">@character.Level @character.Class @character.Role</p>
                     </div>
-                    <div class="card-footer mb-3">
+                    <div class="card-footer d-flex justify-content-between">
                         <small class="text-muted">@character.Rank</small>
+                        <a asp-area="" asp-controller="Characters" asp-action="Edit" asp-route-id="@character.Id" class="btn btn-info btn-sm">Edit character info</a>
                     </div>
                 </div>
             }
