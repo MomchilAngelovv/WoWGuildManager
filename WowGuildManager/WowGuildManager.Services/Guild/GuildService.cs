@@ -12,6 +12,7 @@ using WowGuildManager.Domain.Identity;
 using WowGuildManager.Services.Characters;
 using WowGuildManager.Services.Raids;
 
+//TODO: Error messages in consntants
 namespace WowGuildManager.Services.Guilds
 {
     //TODO: Excratd private method to set new character guild rank DRY
@@ -119,6 +120,10 @@ namespace WowGuildManager.Services.Guilds
                         character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Officer);
                         break;
                     case GuildRanksConstants.Officer:
+                        if (this.context.Characters.Any(ch => ch.GuildRank.Name == GuildRanksConstants.GuildMaster))
+                        {
+                            throw new InvalidOperationException("Cannot have more than one GuildMaster at a time.");
+                        }
                         character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.GuildMaster);
                         break;
                 }

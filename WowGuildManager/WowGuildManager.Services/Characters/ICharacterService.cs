@@ -16,7 +16,7 @@ namespace WowGuildManager.Services.Characters
     {
         Task<Character> CreateAsync(CharacterCreateBindingModel inputModel);
 
-        Character Delete(string characterId);
+        Task<Character> Delete(string characterId);
 
         IEnumerable<T> GetClasses<T>();
 

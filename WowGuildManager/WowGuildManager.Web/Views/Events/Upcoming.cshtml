@@ -6,7 +6,7 @@
 <div class="row d-flex justify-content-center">
     <a asp-area="" asp-controller="Dungeons" asp-action="Create" class="btn btn-warning m-3 border-dark col-sm-6"><h2>Create new Dungeon</h2></a>
 
-    @if (Model.IsUserRaidLeaderOrAdmin)
+    @if (Model.IsUserRaidLeaderOrGuildMaster)
     {
         <a asp-area="" asp-controller="Raids" asp-action="Create" class="btn btn-warning m-3 border-dark col-sm-6"><h2>Create new Raid</h2></a>
     }

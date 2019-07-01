@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WowGuildManager.Common.GlobalConstants;
 using WowGuildManager.Data;
 using WowGuildManager.Domain.Characters;
 using WowGuildManager.Domain.Dungeon;
@@ -50,7 +51,7 @@ namespace WowGuildManager.Services.Dungeons
         public IEnumerable<T> GetAllUpcoming<T>()
         {
             var dungeons = this.context.Dungeons
-                .Where(r => r.EventDateTime.Day >= DateTime.Now.Day)
+                .Where(r => r.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents))
                 .Include(dungeon => dungeon.Leader)
                 .Include(dungeon => dungeon.RegisteredCharacters)
                 .Include(dungeon => dungeon.Destination)

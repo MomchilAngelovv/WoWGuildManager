@@ -16,13 +16,103 @@ namespace WowGuildManager.Tests
     public class CharacterServiceTests
     {
         [Fact]
-        public void GetRoles_Should_Return_Correct_Roles()
+        public void CreateAsync_Should_Throw_When_Already_Registered_4_Characters()
         {
+            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
+                .UseInMemoryDatabase("CreateAsync_Throw_Database")
+                .Options;
 
+            var characters = new List<Character>
+            {
+                new Character
+                {
+                    WowGuildManagerUserId = "TestUser1"
+                },
+                new Character
+                {
+                    WowGuildManagerUserId = "TestUser1"
+                },
+                new Character
+                {
+                    WowGuildManagerUserId = "TestUser1"
+                },
+                new Character
+                {
+                    WowGuildManagerUserId = "TestUser1"
+                }
+            };
+
+            using (var dbContext = new WowGuildManagerDbContext(options))
+            {
+                dbContext.Characters.AddRange(characters);
+                dbContext.SaveChanges();
+                var characterService = new CharacterService(dbContext, null);
+
+                var characterCreateBindingMorel = new CharacterCreateBindingModel
+                {
+                    UserId = "TestUser1"
+                };
+
+                Assert.Throws<InvalidOperationException>(() => characterService.CreateAsync(characterCreateBindingMorel).GetAwaiter().GetResult());
+            }
         }
 
         [Fact]
-        public void GetRoleIdByName_Should_Theow_When_Not_Found()
+        public void CreateAsync_Should_Register_Character()
+        {
+            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
+              .UseInMemoryDatabase("CreateAsync_Database")
+              .Options;
+
+            var characterClass = new CharacterClass
+            {
+                Id = "1",
+                Name = "Warrior"
+            };
+
+            var characterRole = new CharacterRole
+            {
+                Id = "1",
+                Name = "Tank"
+            };
+
+            var guildRank = new GuildRank
+            {
+                Id = "1",
+                Name = "Member"
+            };
+
+            using (var dbContext = new WowGuildManagerDbContext(options))
+            {
+                dbContext.CharacterClasses.Add(characterClass);
+                dbContext.CharacterRoles.Add(characterRole);
+                dbContext.GuildRanks.Add(guildRank);
+                dbContext.SaveChanges();
+
+                var characterService = new CharacterService(dbContext, null);
+
+                var characterCreateBindingMorel = new CharacterCreateBindingModel
+                {
+                    Class = "Warrior",
+                    Level = 50,
+                    Name = "Misty",
+                    Role = "Tank",
+                    UserId = "TestUser1"
+                };
+
+                var newCharacter = characterService.CreateAsync(characterCreateBindingMorel).GetAwaiter().GetResult();
+
+                Assert.Equal(1, dbContext.Characters.Count());
+            }
+        }
+        [Fact]
+        public void GetRoles_Should_Return_Correct_Roles()
+        {
+            
+        }
+
+        [Fact]
+        public void GetRoleIdByName_Should_Throw_When_Not_Found()
         {
             var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
                 .UseInMemoryDatabase(databaseName: "GetRoleIdByName_Throw_Database")
@@ -336,7 +426,7 @@ namespace WowGuildManager.Tests
 
                 for (int index = 0; index < expecterAllCharacters.Count; index++)
                 {
-                    Assert.Equal(expecterAllCharacters[index].Id,actualAllCharacters[index].Id);
+                    Assert.Equal(expecterAllCharacters[index].Id, actualAllCharacters[index].Id);
                     Assert.Equal(expecterAllCharacters[index].Class, actualAllCharacters[index].Class);
                     Assert.Equal(expecterAllCharacters[index].Name, actualAllCharacters[index].Name);
                     Assert.Equal(expecterAllCharacters[index].Level, actualAllCharacters[index].Level);

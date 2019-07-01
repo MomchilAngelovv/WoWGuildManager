@@ -33,7 +33,7 @@ namespace WowGuildManager.Services.Characters
         {
             if (this.context.Characters.Where(c => c.WowGuildManagerUserId == model.UserId).Count() == 4)
             {
-                return null;
+                throw new InvalidOperationException("User cannot have more than 4 characters in the guild");
             }
 
             var character = new Character
@@ -52,12 +52,12 @@ namespace WowGuildManager.Services.Characters
             return character;
         }
 
-        public Character Delete(string characterId)
+        public async Task<Character> Delete(string characterId)
         {
             var character = this.context.Characters.Find(characterId);
 
             this.context.Characters.Remove(character);
-            this.context.SaveChanges();
+            await this.context.SaveChangesAsync();
 
             return character;
         }

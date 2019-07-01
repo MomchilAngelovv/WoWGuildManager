@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WowGuildManager.Common.GlobalConstants;
 using WowGuildManager.Data;
 using WowGuildManager.Domain.Dungeon;
 using WowGuildManager.Domain.Raid;
@@ -51,7 +52,7 @@ namespace WowGuildManager.Services.Raids
         public IEnumerable<T> GetAllUpcoming<T>()
         {
             var raids = this.context.Raids
-               .Where(r => r.EventDateTime.Day >= DateTime.Now.Day)
+               .Where(r => r.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents))
                .Include(raid => raid.Leader)
                .Include(raid => raid.RegisteredCharacters)
                .Include(raid => raid.Destination)
