@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace WowGuildManager.Data.Migrations
+﻿namespace WowGuildManager.Data.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Metadata;
+    using Microsoft.EntityFrameworkCore.Migrations;
     public partial class DbCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

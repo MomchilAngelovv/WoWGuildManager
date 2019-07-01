@@ -9,8 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using WowGuildManager.Data;
 using WowGuildManager.Models.ViewModels.Characters;
 using AutoMapper;
+using WowGuildManager.Models.BindingModels.Characters;
 
-//TODO: Check how to compare List<T> in XunitTests
+//TODO: Make tests async
 namespace WowGuildManager.Tests
 {
     public class CharacterServiceTests
@@ -56,7 +57,6 @@ namespace WowGuildManager.Tests
                 Assert.Throws<InvalidOperationException>(() => characterService.CreateAsync(characterCreateBindingMorel).GetAwaiter().GetResult());
             }
         }
-
         [Fact]
         public void CreateAsync_Should_Register_Character()
         {
@@ -105,6 +105,7 @@ namespace WowGuildManager.Tests
                 Assert.Equal(1, dbContext.Characters.Count());
             }
         }
+        
         [Fact]
         public void GetRoles_Should_Return_Correct_Roles()
         {

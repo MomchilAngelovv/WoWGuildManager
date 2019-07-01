@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using WowGuildManager.Common;
-
-namespace WowGuildManager.Domain.Dungeon
+﻿namespace WowGuildManager.Domain.Dungeon
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using WowGuildManager.Common;
     public class DungeonDestination
     {
         //TODO: REMOVE ALL MAGIC STRING AND NUMEBRS

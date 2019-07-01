@@ -1,12 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using WowGuildManager.Domain.Raid;
-
-namespace WowGuildManager.Data.Configurations
+﻿namespace WowGuildManager.Data.Configurations
 {
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    using WowGuildManager.Domain.Raid;
     public class RaidCharacterConfiguration : IEntityTypeConfiguration<RaidCharacter>
     {
         public void Configure(EntityTypeBuilder<RaidCharacter> entity)

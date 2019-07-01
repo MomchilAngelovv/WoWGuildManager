@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace WowGuildManager.Domain.Characters
+﻿namespace WowGuildManager.Domain.Characters
 {
+    using System.ComponentModel.DataAnnotations;
     public class CharacterClass
     {
         [Key]

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using WowGuildManager.Domain.Characters;
-
-//TODO: FIx identity area bootstrap and interface
+﻿//TODO: FIx identity area bootstrap and interface
 //TODO: FIX CSS LAST
-
-namespace WowGuildManager.Models.ViewModels.Characters
+namespace WowGuildManager.Models.BindingModels.Characters
 {
+    using System.ComponentModel.DataAnnotations;
     public class CharacterCreateBindingModel
     {
         [Required]

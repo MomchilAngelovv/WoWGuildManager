@@ -1,12 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using WowGuildManager.Domain.Dungeon;
-
-namespace WowGuildManager.Data.Configurations
+﻿namespace WowGuildManager.Data.Configurations
 {
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    using WowGuildManager.Domain.Dungeon;
     public class DungeonCharacterConfiguration : IEntityTypeConfiguration<DungeonCharacter>
     {
         public void Configure(EntityTypeBuilder<DungeonCharacter> entity)

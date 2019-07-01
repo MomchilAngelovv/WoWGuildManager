@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Models.BindingModels.Characters;
-using WowGuildManager.Models.ViewModels.Characters;
-
-
-
+﻿//TOD0: Move this to dungeon service
 namespace WowGuildManager.Services.Characters
 {
-    //TOD0: Move this to dungeon service
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Models.BindingModels.Characters;
     public interface ICharacterService
     {
         Task<Character> CreateAsync(CharacterCreateBindingModel inputModel);

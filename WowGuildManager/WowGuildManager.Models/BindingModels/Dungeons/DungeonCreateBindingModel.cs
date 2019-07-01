@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using WowGuildManager.Domain.Dungeon;
-
-namespace WowGuildManager.Models.ViewModels.Dungeons
+﻿namespace WowGuildManager.Models.BindingModels.Dungeons
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
     public class DungeonCreateBindingModel
     {
         [Required]

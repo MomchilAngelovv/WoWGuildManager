@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Domain.Dungeon;
-using WowGuildManager.Domain.Identity;
-using System.Linq;
-using WowGuildManager.Models.ViewModels.Dungeons;
-using System.Threading.Tasks;
-
-namespace WowGuildManager.Services.Dungeons
+﻿namespace WowGuildManager.Services.Dungeons
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Models.BindingModels.Dungeons;
+
     public interface IDungeonService
     {
         Task<Dungeon> CreateAsync(DungeonCreateBindingModel inputModel);

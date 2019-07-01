@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WowGuildManager.Domain.Identity;
+using WowGuildManager.Models.BindingModels.Dungeons;
 using WowGuildManager.Models.ViewModels.Characters;
 using WowGuildManager.Models.ViewModels.Dungeons;
 using WowGuildManager.Services.Characters;

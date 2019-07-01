@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using WowGuildManager.Common;
-using WowGuildManager.Domain.Characters;
-
-namespace WowGuildManager.Domain.Dungeon
+﻿namespace WowGuildManager.Domain.Dungeon
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using WowGuildManager.Domain.Characters;
     public class Dungeon
     {
         public Dungeon()

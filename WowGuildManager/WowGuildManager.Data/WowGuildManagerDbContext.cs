@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using WowGuildManager.Data.Configurations;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Domain.Dungeon;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Domain.Raid;
-
-namespace WowGuildManager.Data
+﻿namespace WowGuildManager.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+
+    using WowGuildManager.Data.Configurations;
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Domain.Raid;
     public class WowGuildManagerDbContext : IdentityDbContext<WowGuildManagerUser, WowGuildManagerRole, string>
     {
         public DbSet<Character> Characters { get; set; }

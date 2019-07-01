@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using WowGuildManager.Domain.Characters;
-
-namespace WowGuildManager.Domain.Raid
+﻿namespace WowGuildManager.Domain.Raid
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using WowGuildManager.Domain.Characters;
     public class Raid
     {
         public Raid()

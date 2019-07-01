@@ -1,21 +1,19 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WowGuildManager.Common.GlobalConstants;
-using WowGuildManager.Data;
-using WowGuildManager.Domain.Dungeon;
-using WowGuildManager.Domain.Raid;
-using WowGuildManager.Models.ViewModels.Raids;
-using WowGuildManager.Services.Characters;
-
-//TODO: Chage images for heroes to be better scaling with square
-
+﻿//TODO: Chage images for heroes to be better scaling with square
+//TODO:
 namespace WowGuildManager.Services.Raids
 {
+    using System;
+    using System.Collections.Generic;
+    using AutoMapper;
+    using Microsoft.EntityFrameworkCore;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using WowGuildManager.Common.GlobalConstants;
+    using WowGuildManager.Data;
+    using WowGuildManager.Domain.Raid;
+    using WowGuildManager.Models.BindingModels.Raids;
+
     public class RaidService : IRaidService
     {
         private readonly WowGuildManagerDbContext context;

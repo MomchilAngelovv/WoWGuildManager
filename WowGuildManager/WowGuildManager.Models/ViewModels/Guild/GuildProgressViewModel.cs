@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WowGuildManager.Models.ViewModels.Guild
+﻿namespace WowGuildManager.Models.ViewModels.Guild
 {
+    using System.Collections.Generic;
     public class GuildProgressViewModel
     {
         public IEnumerable<RaidDestinationProgressViewModel> RaidDestinationProgresses { get; set; }

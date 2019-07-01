@@ -1,21 +1,20 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WowGuildManager.Common.GlobalConstants;
-using WowGuildManager.Data;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Services.Characters;
-using WowGuildManager.Services.Raids;
-
+﻿//TODO: Excratd private method to set new character guild rank DRY
 //TODO: Error messages in consntants
 namespace WowGuildManager.Services.Guilds
 {
-    //TODO: Excratd private method to set new character guild rank DRY
+    using AutoMapper;
+    using Microsoft.AspNetCore.Identity;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using WowGuildManager.Common.GlobalConstants;
+    using WowGuildManager.Data;
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Services.Raids;
     public class GuildService : IGuildService
     {
         private readonly WowGuildManagerDbContext context;

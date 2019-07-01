@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace WowGuildManager.Domain.Raid
+﻿namespace WowGuildManager.Domain.Raid
 {
+    using System.ComponentModel.DataAnnotations;
     public class RaidDestination
     {
         [Key]

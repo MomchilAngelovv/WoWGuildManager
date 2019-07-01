@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-
-namespace WowGuildManager.Models.ViewModels.Characters
+﻿namespace WowGuildManager.Models.ViewModels.Characters
 {
+    using System.Linq;
+    using System.Collections.Generic;
     public class MembersIndexViewModel
     {
         public IEnumerable<CharacterViewModel> Members { get; set; }

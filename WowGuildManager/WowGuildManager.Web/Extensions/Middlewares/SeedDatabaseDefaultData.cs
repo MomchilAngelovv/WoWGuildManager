@@ -98,7 +98,6 @@ namespace WowGuildManager.Web.Extensions
                 [RaidConstants.Naxx] = 40,
             };
 
-            //TODO:Consider full dungeon and raid names!!
             var raidDestinations = new List<RaidDestination>();
 
             foreach (var namdAndMaxPlayers in raidNamesAndMaxPlayers)

@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Domain.Characters;
-
-namespace WowGuildManager.Domain.Identity
+﻿namespace WowGuildManager.Domain.Identity
 {
+    using System.Collections.Generic;
+    using Microsoft.AspNetCore.Identity;
+
+    using WowGuildManager.Domain.Characters;
     public class WowGuildManagerUser : IdentityUser<string>
     {
         public bool IsRaidLeader { get; set; }

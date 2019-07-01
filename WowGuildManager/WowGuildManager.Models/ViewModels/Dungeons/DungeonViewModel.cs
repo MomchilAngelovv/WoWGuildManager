@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WowGuildManager.Models.ViewModels.Characters;
-
-namespace WowGuildManager.Models.ViewModels.Dungeons
+﻿namespace WowGuildManager.Models.ViewModels.Dungeons
 {
+    using WowGuildManager.Models.ViewModels.Characters;
     public class DungeonViewModel
     {
         public string Id { get; set; }

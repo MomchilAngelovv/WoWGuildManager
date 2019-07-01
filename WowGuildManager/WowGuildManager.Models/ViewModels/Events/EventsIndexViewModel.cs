@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WowGuildManager.Models.ViewModels.Dungeons;
-using WowGuildManager.Models.ViewModels.Raids;
-
+﻿//TODO FIX INTERFACES EVEYWHRE WHEN END!!!!!!!!!! IMPORTANT
 namespace WowGuildManager.Models.ViewModels.Events
 {
-    //TODO FIX INTERFACES EVEYWHRE WHEN END!!!!!!!!!! IMPORTANT
+    using System.Collections.Generic;
+
+    using WowGuildManager.Models.ViewModels.Dungeons;
+    using WowGuildManager.Models.ViewModels.Raids;
     public class EventsIndexViewModel
     {
         public bool IsUserRaidLeaderOrGuildMaster { get; set; }

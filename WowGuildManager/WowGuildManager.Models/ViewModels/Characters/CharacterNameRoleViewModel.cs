@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WowGuildManager.Models.ViewModels.Characters
+﻿namespace WowGuildManager.Models.ViewModels.Characters
 {
     public class CharacterNameRoleViewModel
     {

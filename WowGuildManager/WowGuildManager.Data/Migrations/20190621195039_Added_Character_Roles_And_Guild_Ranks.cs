@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace WowGuildManager.Data.Migrations
+﻿namespace WowGuildManager.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
     public partial class Added_Character_Roles_And_Guild_Ranks : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

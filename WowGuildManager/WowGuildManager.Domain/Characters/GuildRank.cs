@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace WowGuildManager.Domain.Characters
+﻿namespace WowGuildManager.Domain.Characters
 {
+    using System.ComponentModel.DataAnnotations;
     public class GuildRank
     {
         [Key]

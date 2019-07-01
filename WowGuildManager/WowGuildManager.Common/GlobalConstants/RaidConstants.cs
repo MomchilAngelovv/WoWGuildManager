@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-//TODO: Make carousel responsive 
+﻿//TODO: Make carousel responsive 
 namespace WowGuildManager.Common
 {
     public static class RaidConstants

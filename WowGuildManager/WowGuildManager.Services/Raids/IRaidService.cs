@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WowGuildManager.Domain.Raid;
-using WowGuildManager.Models.ViewModels.Raids;
-
+﻿//TODO: SOrt interface methods
 namespace WowGuildManager.Services.Raids
 {
-    //TODO: SOrt interface methods
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using WowGuildManager.Domain.Raid;
+    using WowGuildManager.Models.BindingModels.Raids;
+
     public interface IRaidService
     {
         Task<Raid> CreateAsync(RaidCreateBindingModel model);

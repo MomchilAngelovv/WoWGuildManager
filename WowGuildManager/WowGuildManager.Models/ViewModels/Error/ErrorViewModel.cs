@@ -1,6 +1,4 @@
-using System;
-
-namespace WowGuildManager.Web.Models
+namespace WowGuildManager.Models.ViewModels.Error
 {
     public class ErrorViewModel
     {

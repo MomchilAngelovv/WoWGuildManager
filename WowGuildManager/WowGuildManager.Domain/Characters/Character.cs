@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using WowGuildManager.Domain.Dungeon;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Domain.Raid;
-
-namespace WowGuildManager.Domain.Characters
+﻿namespace WowGuildManager.Domain.Characters
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Domain.Raid;
     public class Character  
     {
         public Character()

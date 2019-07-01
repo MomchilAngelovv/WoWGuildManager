@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WowGuildManager.Services.Guilds
+﻿namespace WowGuildManager.Services.Guilds
 {
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
     public interface IGuildService
     {
         IEnumerable<T> GetRegisteredUsers<T>();

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using WowGuildManager.Domain.Characters;
-
-namespace WowGuildManager.Services.Api
+﻿namespace WowGuildManager.Services.Api
 {
+    using System.Collections.Generic;
+
     public interface IApiService
     {
         IEnumerable<T> GetAll<T>(string userId);

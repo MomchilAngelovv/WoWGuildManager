@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using WowGuildManager.Models.ViewModels.Characters;
-
-namespace WowGuildManager.Models.ViewModels.Raids
+﻿namespace WowGuildManager.Models.ViewModels.Raids
 {
+    using System.Collections.Generic;
+
+    using WowGuildManager.Models.ViewModels.Characters;
     public class RaidDetailsViewModel
     {
         public string Id { get; set; }

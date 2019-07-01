@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using WowGuildManager.Domain.Raid;
-
-namespace WowGuildManager.Models.ViewModels.Raids
+﻿namespace WowGuildManager.Models.BindingModels.Raids
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
     public class RaidCreateBindingModel
     {
         [Required]

@@ -1,14 +1,11 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WowGuildManager.Data;
-using WowGuildManager.Domain.Characters;
-
-namespace WowGuildManager.Services.Api
+﻿namespace WowGuildManager.Services.Api
 {
+    using AutoMapper;
+    using System.Linq;
+    using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
+
+    using WowGuildManager.Data;
     public class ApiService : IApiService
     {
         private readonly WowGuildManagerDbContext context;

@@ -1,20 +1,17 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WowGuildManager.Common.GlobalConstants;
-using WowGuildManager.Data;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Domain.Dungeon;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Models.ViewModels.Dungeons;
-using WowGuildManager.Services.Characters;
-
-namespace WowGuildManager.Services.Dungeons
+﻿namespace WowGuildManager.Services.Dungeons
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using AutoMapper;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+
+    using WowGuildManager.Common.GlobalConstants;
+    using WowGuildManager.Data;
+    using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Models.BindingModels.Dungeons;
+
     public class DungeonService : IDungeonService
     {
         private readonly WowGuildManagerDbContext context;
