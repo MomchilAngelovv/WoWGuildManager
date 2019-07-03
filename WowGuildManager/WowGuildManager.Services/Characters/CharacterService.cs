@@ -2,6 +2,8 @@
 //TODO: Make all services throw exceptions instead of returning null
 //TODO: OrderBy clouses where nesesary
 //TODO: Delete remainning comments when READY ! IMPORTANT !!!
+//TODO: Implement Delete character
+//TODO: Consoder to make validator
 namespace WowGuildManager.Services.Characters
 {
     using System;
@@ -15,6 +17,8 @@ namespace WowGuildManager.Services.Characters
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Characters;
     using WowGuildManager.Models.BindingModels.Characters;
+   
+
     public class CharacterService : ICharacterService
     {
         private readonly WowGuildManagerDbContext context;
@@ -28,9 +32,9 @@ namespace WowGuildManager.Services.Characters
 
         public async Task<Character> CreateAsync(CharacterCreateBindingModel model)
         {
-            if (this.context.Characters.Where(c => c.WowGuildManagerUserId == model.UserId).Count() == 4)
+            if (this.UserHasMaxRegiresteredCharacters(model.UserId))
             {
-                throw new InvalidOperationException("User cannot have more than 4 characters in the guild");
+                throw new InvalidOperationException(ErrorConstants.MaximumRegisteredPlayers);
             }
 
             var character = new Character
@@ -99,6 +103,11 @@ namespace WowGuildManager.Services.Characters
                 .Include(ch => ch.GuildRank)
                 .FirstOrDefault(ch => ch.Id == characterId);
 
+            if (character == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidCharacterErrorMessage);
+            }
+
             return mapper.Map<T>(character);
         }
 
@@ -122,7 +131,7 @@ namespace WowGuildManager.Services.Characters
 
             if (classObject == null)
             {
-                throw new ArgumentException("Invalid class type!");
+                throw new ArgumentException(ErrorConstants.InvalidClassTypeErrorMessage);
             }
 
             return classObject.Id; 
@@ -135,7 +144,7 @@ namespace WowGuildManager.Services.Characters
 
             if (roleObject == null)
             {
-                throw new ArgumentException("Invalid role type!");
+                throw new ArgumentException(ErrorConstants.InvalidRoleTypeErrorMessage);
             }
 
             return roleObject.Id;
@@ -148,7 +157,7 @@ namespace WowGuildManager.Services.Characters
 
             if (rankObject == null)
             {
-                throw new ArgumentException("Invalid rank type!");
+                throw new ArgumentException(ErrorConstants.InvalidRankTypeErrorMessage);
             }
 
             return rankObject.Id;
@@ -163,6 +172,16 @@ namespace WowGuildManager.Services.Characters
 
             this.context.Update(character);
             await this.context.SaveChangesAsync();
+        }
+
+        private bool UserHasMaxRegiresteredCharacters(string userId)
+        {
+            if (this.context.Characters.Where(c => c.WowGuildManagerUserId == userId).Count() == CharacterConstants.MaximumAllowedCharactersPerUser)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

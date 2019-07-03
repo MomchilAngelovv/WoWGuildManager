@@ -41,8 +41,7 @@ namespace WowGuildManager.Services.Guilds
         public async Task AddProgressToRaid(string raidName)
         {
             var destinationId = this.raidService.GetDestinationIdByName(raidName);
-
-            var destination = this.context.RaidDestinations.FirstOrDefault(rd => rd.Id == destinationId);
+            var destination = this.context.RaidDestinations.Find(destinationId);
 
             if (destination.KilledBosses < destination.TotalBosses)
             {
@@ -65,8 +64,7 @@ namespace WowGuildManager.Services.Guilds
         public async Task RemoveProgressToRaid(string raidName)
         {
             var destinationId = this.raidService.GetDestinationIdByName(raidName);
-
-            var destination = this.context.RaidDestinations.FirstOrDefault(rd => rd.Id == destinationId);
+            var destination = this.context.RaidDestinations.Find(destinationId);
             
             if (destination.KilledBosses > 0)
             {
@@ -74,25 +72,6 @@ namespace WowGuildManager.Services.Guilds
             }
 
             this.context.Update(destination);
-            await this.context.SaveChangesAsync();
-        }
-
-        public async Task SetGuildMasterAsync(string userId)
-        {
-            var user = this.context.Users
-                .SingleOrDefault(u => u.Id == userId);
-
-            var previuosGuildMaster = this.context.Users
-                .FirstOrDefault(u => u.IsGuildMaster == true);
-
-            if (previuosGuildMaster != null)
-            {
-                await this.userManager.RemoveFromRoleAsync(previuosGuildMaster, WowGuildManagerUserConstants.GuildMaster);
-                previuosGuildMaster.IsGuildMaster = false;
-            }
-
-            await this.userManager.AddToRoleAsync(user, WowGuildManagerUserConstants.GuildMaster);
-            user.IsGuildMaster = true;
             await this.context.SaveChangesAsync();
         }
 
@@ -120,10 +99,12 @@ namespace WowGuildManager.Services.Guilds
                         character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Officer);
                         break;
                     case GuildRanksConstants.Officer:
-                        if (this.context.Characters.Any(ch => ch.GuildRank.Name == GuildRanksConstants.GuildMaster))
+
+                        if (this.HasGuildMaster() == true)
                         {
                             throw new InvalidOperationException("Cannot have more than one GuildMaster at a time.");
                         }
+
                         character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.GuildMaster);
                         break;
                 }
@@ -164,6 +145,16 @@ namespace WowGuildManager.Services.Guilds
                 this.context.Update(character);
                 await this.context.SaveChangesAsync();
             }
+        }
+
+        private bool HasGuildMaster()
+        {
+            if (this.context.Characters.Any(ch => ch.GuildRank.Name == GuildRanksConstants.GuildMaster))
+            {
+                throw new InvalidOperationException("Cannot have more than one GuildMaster at a time.");
+            }
+
+            return true;
         }
     }
 }

@@ -26,18 +26,20 @@ namespace WowGuildManager.Services.Raids
 
         public async Task<Raid> CreateAsync(RaidCreateBindingModel model)
         {
+            var destinationId = this.GetDestinationIdByName(model.Destination);
+
             var raid = new Raid
             {
                 EventDateTime = model.DateTime,
                 Description = model.Description,
-                DestinationId = this.GetDestinationIdByName(model.Destination),
+                DestinationId = destinationId,
                 LeaderId = model.LeaderId,
             };
 
             raid.RegisteredCharacters.Add(new RaidCharacter
             {
                 CharacterId = model.LeaderId,
-                Raid = raid
+                RaidId = raid.Id
             });
 
             await this.context.Raids.AddAsync(raid);
@@ -81,6 +83,14 @@ namespace WowGuildManager.Services.Raids
 
         public IEnumerable<T> GetRegisteredCharactersByRaidId<T>(string raidId)
         {
+            var raid = this.context.Raids
+            .FirstOrDefault(d => d.Id == raidId);
+
+            if (raid == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidRaidErrorMessage);
+            }
+
             var registeredCharacters = this.context.RaidCharacter
                 .Where(rc => rc.RaidId == raidId)
                 .Include(rc => rc.Character)
@@ -97,10 +107,26 @@ namespace WowGuildManager.Services.Raids
 
         public async Task<RaidCharacter> RegisterCharacterAsync(string characterId, string raidId)
         {
+            var character = this.context.Characters
+               .FirstOrDefault(ch => ch.Id == characterId);
+
+            if (character == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidCharacterErrorMessage);
+            }
+
+            var raid = this.context.Raids
+                .FirstOrDefault(d => d.Id == raidId);
+
+            if (raid == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidRaidErrorMessage);
+            }
+
             var raidCharacter = new RaidCharacter
             {
-                CharacterId = characterId,
-                RaidId = raidId
+                CharacterId = character.Id,
+                RaidId = raid.Id
             };
 
             await this.context.RaidCharacter.AddAsync(raidCharacter);
@@ -111,11 +137,15 @@ namespace WowGuildManager.Services.Raids
 
         public string GetDestinationIdByName(string destinationName)
         {
-            var destinationId = this.context.RaidDestinations
-                .FirstOrDefault(rd => rd.Name == destinationName)
-                .Id;
+            var destination = this.context.RaidDestinations
+                .FirstOrDefault(rd => rd.Name == destinationName);
 
-            return destinationId;
+            if (destination == null)
+            {
+                throw new InvalidOperationException(ErrorConstants.InvalidDestinationNameErrorMessage);
+            }
+
+            return destination.Id;
         }
     }
 }

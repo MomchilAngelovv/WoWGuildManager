@@ -31,12 +31,5 @@
 
             return this.View(adminIndexViewModel); ;
         }
-
-        public async Task<IActionResult> SetGuildMaster(string id)
-        {
-            await this.guildService.SetGuildMasterAsync(id);
-
-            return RedirectToAction(nameof(Index));
-        }
     }
 }

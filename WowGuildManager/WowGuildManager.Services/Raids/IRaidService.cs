@@ -24,3 +24,4 @@ namespace WowGuildManager.Services.Raids
         string GetDestinationIdByName(string destinationName);
     }
 }
+    

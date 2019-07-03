@@ -1,4 +1,5 @@
-﻿namespace WowGuildManager.Services.Dungeons
+﻿//TODO: 100% make validator by ids
+namespace WowGuildManager.Services.Dungeons
 {
     using System;
     using System.Collections.Generic;
@@ -29,7 +30,7 @@
             {
                 EventDateTime = inputModel.DateTime,
                 Description = inputModel.Description,
-                Destination = this.GetDestinationIdByDestinationName<DungeonDestination>(inputModel.Destination),
+                DestinationId = this.GetDestinationIdByName(inputModel.Destination),
                 LeaderId = inputModel.LeaderId
             };
 
@@ -69,10 +70,26 @@
 
         public async Task<DungeonCharacter> RegisterCharacterAsync(string characterId, string dungeonId)
         {
+            var character = this.context.Characters
+                .FirstOrDefault(ch => ch.Id == characterId);
+
+            if (character == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidCharacterErrorMessage);
+            }
+
+            var dungeon = this.context.Dungeons
+                .FirstOrDefault(d => d.Id == dungeonId);
+
+            if (dungeon == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidDungeonErrorMessage);
+            }
+
             var dungeonCharacter = new DungeonCharacter
             {
-                CharacterId = characterId,
-                DungeonId = dungeonId
+                CharacterId = character.Id,
+                DungeonId = dungeon.Id
             };
 
             await this.context.DungeonCharacter.AddAsync(dungeonCharacter);
@@ -81,12 +98,17 @@
             return dungeonCharacter;
         }
 
-        public T GetDestinationIdByDestinationName<T>(string destinationName)
+        public T GetDestinationByDestinationName<T>(string destinationName)
         {
-            var destinationId = mapper.Map<T>(this.context.DungeonDestinations
+            var destination = mapper.Map<T>(this.context.DungeonDestinations
                 .FirstOrDefault(dd => dd.Name == destinationName));
 
-            return destinationId;
+            if (destination == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidDestinationNameErrorMessage);
+            }
+
+            return destination;
         }
 
         public IEnumerable<T> GetDungeonsForToday<T>()
@@ -102,6 +124,14 @@
 
         public IEnumerable<T> GetRegisteredCharactersByDungeonId<T>(string dungeonId)
         {
+            var dungeon = this.context.Dungeons
+              .FirstOrDefault(d => d.Id == dungeonId);
+
+            if (dungeon == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidDungeonErrorMessage);
+            }
+
             var characters = this.context.DungeonCharacter
                .Where(dc => dc.DungeonId == dungeonId)
                .Include(rc => rc.Character)
@@ -114,6 +144,19 @@
                .Select(dc => mapper.Map<T>(dc.Character));
 
             return characters;
+        }
+
+        public string GetDestinationIdByName(string destinationName)
+        {
+            var destination = this.context.DungeonDestinations
+               .FirstOrDefault(dd => dd.Name == destinationName);
+
+            if (destination == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidDestinationNameErrorMessage);
+            }
+
+            return destination.Id;
         }
     }
 }

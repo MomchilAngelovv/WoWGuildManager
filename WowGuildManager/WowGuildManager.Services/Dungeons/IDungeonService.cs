@@ -20,6 +20,8 @@
 
         IEnumerable<T> GetRegisteredCharactersByDungeonId<T>(string dungeonId);
 
-        T GetDestinationIdByDestinationName<T>(string destinationName);
+        T GetDestinationByDestinationName<T>(string destinationName);
+
+        string GetDestinationIdByName(string destinationName);
     }
 }

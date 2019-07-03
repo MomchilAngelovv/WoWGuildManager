@@ -1,4 +1,5 @@
-﻿namespace WowGuildManager.Services.Api
+﻿//TODO: Makeerror consntats
+namespace WowGuildManager.Services.Api
 {
     using AutoMapper;
     using System.Linq;
@@ -6,6 +7,9 @@
     using Microsoft.EntityFrameworkCore;
 
     using WowGuildManager.Data;
+    using System;
+    using WowGuildManager.Common.GlobalConstants;
+
     public class ApiService : IApiService
     {
         private readonly WowGuildManagerDbContext context;
@@ -19,6 +23,13 @@
 
         public IEnumerable<T> GetAll<T>(string userId)
         {
+            var user = this.context.Users.FirstOrDefault(u => u.Id == userId);
+
+            if (user == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidUserErrorMessage);
+            }
+
             var characters = this.context.Characters
                 .Where(c => c.WowGuildManagerUserId == userId)
                 .Include(ch => ch.Class)
@@ -40,6 +51,11 @@
                 .Include(c => c.Raids)
                 .Include(c => c.Dungeons)
                 .FirstOrDefault(c => c.Id == characterId);
+
+            if (character == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidCharacterErrorMessage);
+            }
 
             return mapper.Map<T>(character);
         }
