@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using WowGuildManager.Models.ViewModels.Characters;
-using WowGuildManager.Services.Characters;
-
+﻿
 //TODO: Bootstrap tooltips
 //TODO: CHECK CSS EVEYRHWEW AND FIX CLASSES
 namespace WowGuildManager.Web.Controllers
 {
+    using System.Linq;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
+    using WowGuildManager.Models.ViewModels.Characters;
+    using WowGuildManager.Services.Characters;
+
     [AllowAnonymous]
     public class MembersController : BaseController
     {

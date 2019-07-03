@@ -15,6 +15,7 @@ namespace WowGuildManager.Services.Guilds
     using WowGuildManager.Domain.Identity;
     using WowGuildManager.Services.Characters;
     using WowGuildManager.Services.Raids;
+
     public class GuildService : IGuildService
     {
         private readonly WowGuildManagerDbContext context;

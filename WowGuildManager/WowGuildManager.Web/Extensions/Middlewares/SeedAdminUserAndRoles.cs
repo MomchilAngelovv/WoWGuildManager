@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Common.GlobalConstants;
-using WowGuildManager.Domain.Identity;
-
-namespace WowGuildManager.Web.Extensions
+﻿namespace WowGuildManager.Web.Extensions
 {
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using WowGuildManager.Common.GlobalConstants;
+    using WowGuildManager.Domain.Identity;
+
     public class SeedAdminUserAndRoles
     {
         private readonly RequestDelegate _next;

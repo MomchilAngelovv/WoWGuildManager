@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WowGuildManager.Web.Extensions
+﻿namespace WowGuildManager.Web.Extensions
 {
+    using Microsoft.AspNetCore.Builder;
+
     public static class MiddlewareExtensions
     {
         public static IApplicationBuilder UseSeedAdminUserAndRoles(this IApplicationBuilder app)

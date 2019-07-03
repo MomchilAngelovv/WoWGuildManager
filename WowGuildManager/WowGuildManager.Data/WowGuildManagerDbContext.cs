@@ -8,6 +8,7 @@
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Domain.Identity;
     using WowGuildManager.Domain.Raid;
+
     public class WowGuildManagerDbContext : IdentityDbContext<WowGuildManagerUser, WowGuildManagerRole, string>
     {
         public DbSet<Character> Characters { get; set; }

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using WowGuildManager.Models.ViewModels.Admin;
-using WowGuildManager.Models.ViewModels.Users;
-using WowGuildManager.Services.Guilds;
-
-namespace WowGuildManager.Web.Areas.Administration.Controllers
+﻿namespace WowGuildManager.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
+    using WowGuildManager.Models.ViewModels.Admin;
+    using WowGuildManager.Models.ViewModels.Users;
+    using WowGuildManager.Services.Guilds;
+
     //TODO: Put bootstrap icons
     [Area("Administration")]
     [Authorize(Roles ="Admin")]

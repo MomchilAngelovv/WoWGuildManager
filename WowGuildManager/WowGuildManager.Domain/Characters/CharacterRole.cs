@@ -1,4 +1,5 @@
-﻿namespace WowGuildManager.Domain.Characters
+﻿//TODO: Fix All missing or added spaces
+namespace WowGuildManager.Domain.Characters
 {
     using System.ComponentModel.DataAnnotations;
     public class CharacterRole

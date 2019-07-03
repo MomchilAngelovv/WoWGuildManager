@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Models.BindingModels.Raids;
-using WowGuildManager.Models.ViewModels.Characters;
-using WowGuildManager.Models.ViewModels.Raids;
-using WowGuildManager.Services.Characters;
-using WowGuildManager.Services.Raids;
-
-namespace WowGuildManager.Web.Controllers
+﻿namespace WowGuildManager.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Models.BindingModels.Raids;
+    using WowGuildManager.Models.ViewModels.Characters;
+    using WowGuildManager.Models.ViewModels.Raids;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Services.Raids;
+
     public class RaidsController : BaseController
     {
         private readonly IRaidService raidService;
@@ -83,7 +82,7 @@ namespace WowGuildManager.Web.Controllers
             await this.raidService.CreateAsync(inputModel);
 
             return RedirectToAction("Upcoming", "Events");
-        }
+        }   
 
         public async Task<IActionResult> Details(string id)
         {

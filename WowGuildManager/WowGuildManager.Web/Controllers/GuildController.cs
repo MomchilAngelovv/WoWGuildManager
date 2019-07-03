@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Models.ViewModels.Guild;
-using WowGuildManager.Services.Guilds;
-using WowGuildManager.Services.Raids;
-
-//TOD0: FIX ALL EXLUDE DEVELOPMENT LIBRATIES !~~
+﻿//TOD0: FIX ALL EXLUDE DEVELOPMENT LIBRATIES !~~
 namespace WowGuildManager.Web.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
+
+    using WowGuildManager.Models.ViewModels.Guild;
+    using WowGuildManager.Services.Guilds;
+    using WowGuildManager.Services.Raids;
+
     public class GuildController : BaseController
     {
         private readonly IRaidService raidService;

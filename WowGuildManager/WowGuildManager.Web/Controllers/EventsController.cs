@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using WowGuildManager.Data;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Models.ViewModels.Characters;
-using WowGuildManager.Models.ViewModels.Dungeons;
-using WowGuildManager.Models.ViewModels.Events;
-using WowGuildManager.Models.ViewModels.Raids;
-using WowGuildManager.Services.Characters;
-using WowGuildManager.Services.Dungeons;
-using WowGuildManager.Services.Raids;   
-
-//TODO: MAKE RESPONSIVE VERY BAD
-
+﻿//TODO: MAKE RESPONSIVE VERY BAD
 //TODO: Think how to extract userId with better way in base controller
 namespace WowGuildManager.Web.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Models.ViewModels.Characters;
+    using WowGuildManager.Models.ViewModels.Dungeons;
+    using WowGuildManager.Models.ViewModels.Events;
+    using WowGuildManager.Models.ViewModels.Raids;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Services.Dungeons;
+    using WowGuildManager.Services.Raids;
+
     [Authorize]
     public class EventsController : BaseController
     {
@@ -112,7 +108,7 @@ namespace WowGuildManager.Web.Controllers
         }
 
         private static void SetJoinedCharacterToDungeon(Character character, RaidViewModel raid)
-        {
+        { 
             var joinedCharacter = new CharacterNameRoleViewModel
             {
                 Name = character.Name,

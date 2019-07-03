@@ -1,11 +1,12 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using WowGuildManager.Models.ViewModels.Error;
-
+﻿//TODO: MAKE EVEYEWHERE BUTTON-SM !!
+//TODO APPLY Authorization attribites everywhere
 namespace WowGuildManager.Web.Controllers
 {
-    //TODO: MAKE EVEYEWHERE BUTTON-SM !!
-    //TODO APPLY Authorization attribites everywhere
+    using System.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
+
+    using WowGuildManager.Models.ViewModels.Error;
+
     public class HomeController : BaseController
     {
         public IActionResult Index()

@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Models.ApiModels.Characters;
-using WowGuildManager.Services.Api;
-
-namespace WowGuildManager.Web.Areas.Api.Controllers
+﻿namespace WowGuildManager.Web.Areas.Api.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+
+    using WowGuildManager.Models.ApiModels.Characters;
+    using WowGuildManager.Services.Api;
+
     [Area("Api")]
     [Route("api/[controller]")]
     [ApiController]

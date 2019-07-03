@@ -1,16 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Models.ViewModels.Dungeons;
-using WowGuildManager.Models.ViewModels.Events;
-using WowGuildManager.Models.ViewModels.Raids;
-using WowGuildManager.Services.Dungeons;
-using WowGuildManager.Services.Raids;
-
-namespace WowGuildManager.Web.ViewComponents
+﻿namespace WowGuildManager.Web.ViewComponents
 {
+    using Microsoft.AspNetCore.Mvc;
+
+    using WowGuildManager.Models.ViewModels.Dungeons;
+    using WowGuildManager.Models.ViewModels.Events;
+    using WowGuildManager.Models.ViewModels.Raids;
+    using WowGuildManager.Services.Dungeons;
+    using WowGuildManager.Services.Raids;
+
     public class TodayEventsViewComponent : ViewComponent
     {
         private readonly IDungeonService dungeonService;

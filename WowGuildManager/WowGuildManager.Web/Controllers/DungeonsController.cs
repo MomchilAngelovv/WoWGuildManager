@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Models.BindingModels.Dungeons;
-using WowGuildManager.Models.ViewModels.Characters;
-using WowGuildManager.Models.ViewModels.Dungeons;
-using WowGuildManager.Services.Characters;
-using WowGuildManager.Services.Dungeons;
-
-namespace WowGuildManager.Web.Controllers
+﻿namespace WowGuildManager.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Models.BindingModels.Dungeons;
+    using WowGuildManager.Models.ViewModels.Characters;
+    using WowGuildManager.Models.ViewModels.Dungeons;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Services.Dungeons;
+
     [Authorize]
     public class DungeonsController : BaseController
     {

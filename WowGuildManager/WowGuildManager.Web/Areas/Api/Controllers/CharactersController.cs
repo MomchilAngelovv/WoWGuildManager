@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Models.ApiModels.Characters;
-using WowGuildManager.Services.Api;
-
-namespace WowGuildManager.Web.Areas.Api.Controllers
+﻿namespace WowGuildManager.Web.Areas.Api.Controllers
 {
+    using System.Linq;
+    using System.Collections.Generic;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Models.ApiModels.Characters;
+    using WowGuildManager.Services.Api;
+
     [Authorize]
     [Route("api/[controller]")]
     [Area("Api")]

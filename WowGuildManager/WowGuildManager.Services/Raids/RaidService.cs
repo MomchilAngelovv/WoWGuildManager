@@ -1,5 +1,4 @@
 ﻿//TODO: Chage images for heroes to be better scaling with square
-//TODO:
 namespace WowGuildManager.Services.Raids
 {
     using System;

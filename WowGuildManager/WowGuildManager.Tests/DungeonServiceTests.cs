@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-
-namespace WowGuildManager.Tests
+﻿namespace WowGuildManager.Tests
 {
+    using Xunit;
+
     public class DungeonServiceTests
     {
         [Fact]

@@ -4,6 +4,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Infrastructure;
     using Microsoft.EntityFrameworkCore.Metadata;
+
     [DbContext(typeof(WowGuildManagerDbContext))]
     partial class WowGuildManagerDbContextModelSnapshot : ModelSnapshot
     {

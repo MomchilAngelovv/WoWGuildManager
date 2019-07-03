@@ -1,32 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using WowGuildManager.Web.Extensions;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Data;
-using WowGuildManager.Services.Characters;
-using AutoMapper;
-using WowGuildManager.Web.Mapper;
-using WowGuildManager.Services.Dungeons;
-using WowGuildManager.Services.Raids;
-using WowGuildManager.Services.Api;
-using WowGuildManager.Services.Guilds;
-using WowGuildManager.Web.Filters.ActionFilters;
-
-//TODO: Make services return what i want OR THROW EX 100%
+﻿//TODO: Make services return what i want OR THROW EX 100%
 //TODO: LOG ERRORS
 namespace WowGuildManager.Web
 {
+    using AutoMapper;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
+    using WowGuildManager.Web.Extensions;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Data;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Services.Dungeons;
+    using WowGuildManager.Services.Raids;
+    using WowGuildManager.Services.Api;
+    using WowGuildManager.Services.Guilds;
+    using WowGuildManager.Web.Filters.ActionFilters;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)

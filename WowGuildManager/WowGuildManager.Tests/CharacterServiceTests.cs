@@ -1,19 +1,19 @@
-using System;
-using WowGuildManager.Services.Characters;
-using Xunit;
-using Moq;
-using WowGuildManager.Domain.Characters;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using WowGuildManager.Data;
-using WowGuildManager.Models.ViewModels.Characters;
-using AutoMapper;
-using WowGuildManager.Models.BindingModels.Characters;
-
 //TODO: Make tests async
 namespace WowGuildManager.Tests
 {
+    using Xunit;
+    using System;
+    using AutoMapper;
+    using System.Linq;
+    using System.Collections.Generic;
+    using Microsoft.EntityFrameworkCore;
+
+    using WowGuildManager.Data;
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Models.ViewModels.Characters;
+    using WowGuildManager.Models.BindingModels.Characters;
+
     public class CharacterServiceTests
     {
         [Fact]

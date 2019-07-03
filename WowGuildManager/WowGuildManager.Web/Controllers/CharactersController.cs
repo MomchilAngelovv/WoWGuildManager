@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Models.ViewModels.Characters;
-using WowGuildManager.Services.Characters;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using WowGuildManager.Web.Mapper;
-using System.Security.Claims;
-using WowGuildManager.Common.GlobalConstants;
-using WowGuildManager.Models.BindingModels.Characters;
-
-//TODO: COnsier create input forms to make models in Get methods and return view models
+﻿//TODO: COnsier create input forms to make models in Get methods and return view models
 //TODO: Api endpoits for dungeons /raids / characers everythng
+//TODO: Consider remove selectitem list
 namespace WowGuildManager.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Models.ViewModels.Characters;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Models.BindingModels.Characters;
+
     [Authorize]
     public class CharactersController : BaseController
     {
@@ -90,7 +86,6 @@ namespace WowGuildManager.Web.Controllers
 
         private IEnumerable<SelectListItem> BindRolesToSelectListItem()
         {
-
             var roleList = this.characterService.GetRoles<SelectListItem>();
 
             return roleList;

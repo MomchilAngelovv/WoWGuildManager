@@ -1,16 +1,12 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Domain.Raid;
-using WowGuildManager.Models.ViewModels.Characters;
-using WowGuildManager.Models.ViewModels.Guild;
-using WowGuildManager.Models.ViewModels.Raids;
-
-namespace WowGuildManager.Web.Mapper
+﻿namespace WowGuildManager.Web.Mapper
 {
+    using AutoMapper;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
+    using WowGuildManager.Domain.Raid;
+    using WowGuildManager.Models.ViewModels.Guild;
+    using WowGuildManager.Models.ViewModels.Raids;
+
     public class RaidProfile : Profile
     {
         public RaidProfile()

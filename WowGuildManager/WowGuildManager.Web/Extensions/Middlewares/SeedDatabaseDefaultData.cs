@@ -1,20 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Common;
-using WowGuildManager.Common.GlobalConstants;
-using WowGuildManager.Data;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Domain.Dungeon;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Domain.Raid;
-using System.Reflection;
-
-namespace WowGuildManager.Web.Extensions
+﻿namespace WowGuildManager.Web.Extensions
 {
+    using Microsoft.AspNetCore.Http;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using WowGuildManager.Common;
+    using WowGuildManager.Common.GlobalConstants;
+    using WowGuildManager.Data;
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Domain.Raid;
+
     public class SeedDatabaseDefaultData
     {
         private readonly RequestDelegate _next;

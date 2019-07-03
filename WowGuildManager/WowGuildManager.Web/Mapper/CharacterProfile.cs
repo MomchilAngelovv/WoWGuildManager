@@ -1,16 +1,14 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Models.ApiModels.Characters;
-using WowGuildManager.Models.BindingModels.Characters;
-using WowGuildManager.Models.ViewModels.Characters;
-
-namespace WowGuildManager.Web.Mapper
+﻿namespace WowGuildManager.Web.Mapper
 {
+    using AutoMapper;
+    using System.Linq;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Models.ApiModels.Characters;
+    using WowGuildManager.Models.BindingModels.Characters;
+    using WowGuildManager.Models.ViewModels.Characters;
+
     public class CharacterProfile : Profile
     {
         public CharacterProfile()
