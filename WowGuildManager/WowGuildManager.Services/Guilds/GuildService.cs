@@ -75,6 +75,25 @@ namespace WowGuildManager.Services.Guilds
             await this.context.SaveChangesAsync();
         }
 
+        public async Task SetGuildMasterAsync(string userId)
+        {
+            var user = this.context.Users
+                .SingleOrDefault(u => u.Id == userId);
+
+            var previuosGuildMaster = this.context.Users
+                .FirstOrDefault(u => u.IsGuildMaster == true);
+
+            if (previuosGuildMaster != null)
+            {
+                await this.userManager.RemoveFromRoleAsync(previuosGuildMaster, WowGuildManagerUserConstants.GuildMaster);
+                previuosGuildMaster.IsGuildMaster = false;
+            }
+
+            await this.userManager.AddToRoleAsync(user, WowGuildManagerUserConstants.GuildMaster);
+            user.IsGuildMaster = true;
+            await this.context.SaveChangesAsync();
+        }
+
         public async Task PromoteRankAsync(string characterId)
         {
             var character = this.characterService.GetCharacterById<Character>(characterId);
@@ -99,13 +118,10 @@ namespace WowGuildManager.Services.Guilds
                         character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Officer);
                         break;
                     case GuildRanksConstants.Officer:
-
-                        if (this.HasGuildMaster() == true)
+                        if (this.HasGuildMaster() == false)
                         {
-                            throw new InvalidOperationException("Cannot have more than one GuildMaster at a time.");
+                            character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.GuildMaster);
                         }
-
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.GuildMaster);
                         break;
                 }
 
@@ -151,10 +167,10 @@ namespace WowGuildManager.Services.Guilds
         {
             if (this.context.Characters.Any(ch => ch.GuildRank.Name == GuildRanksConstants.GuildMaster))
             {
-                throw new InvalidOperationException("Cannot have more than one GuildMaster at a time.");
+                throw new InvalidOperationException(ErrorConstants.AlreadyHasGuildMasterErrorMessage);
             }
 
-            return true;
+            return false;
         }
     }
 }

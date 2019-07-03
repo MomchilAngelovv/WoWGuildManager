@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc.Filters;
+    using WowGuildManager.Common.GlobalConstants;
 
     public class ValidateModelStateActionFilter : IAsyncActionFilter
     {
@@ -10,7 +11,7 @@
         {
             if (context.ModelState.IsValid == false)
             {
-                throw new ArgumentException("Invalid data provided");
+                throw new ArgumentException(ErrorConstants.InvalidDataProvided);
             }
 
             await next();

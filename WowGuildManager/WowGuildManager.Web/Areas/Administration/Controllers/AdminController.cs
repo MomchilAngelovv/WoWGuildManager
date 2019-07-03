@@ -7,7 +7,6 @@
     using WowGuildManager.Models.ViewModels.Admin;
     using WowGuildManager.Models.ViewModels.Users;
     using WowGuildManager.Services.Guilds;
-
     //TODO: Put bootstrap icons
     [Area("Administration")]
     [Authorize(Roles ="Admin")]
@@ -30,6 +29,13 @@
             };
 
             return this.View(adminIndexViewModel); ;
+        }
+
+        public async Task<IActionResult> SetGuildMaster(string id)
+        {
+            await this.guildService.SetGuildMasterAsync(id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

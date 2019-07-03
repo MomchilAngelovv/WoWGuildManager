@@ -57,6 +57,7 @@ namespace WowGuildManager.Tests
                 Assert.Throws<InvalidOperationException>(() => characterService.CreateAsync(characterCreateBindingMorel).GetAwaiter().GetResult());
             }
         }
+
         [Fact]
         public void CreateAsync_Should_Register_Character()
         {
@@ -147,6 +148,7 @@ namespace WowGuildManager.Tests
                 Assert.Throws<ArgumentException>(() => characterService.GetRoleIdByName("NoSuchRole"));
             }
         }
+
         [Fact]
         public void GetRoleIdByName_Should_Return_Correct_Id()
         {

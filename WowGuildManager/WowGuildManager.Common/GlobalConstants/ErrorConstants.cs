@@ -11,5 +11,7 @@
         public static string InvalidDestinationNameErrorMessage = "Invalid destination name!";
         public static string InvalidDungeonErrorMessage = "There is no such dungeon!";
         public static string InvalidRaidErrorMessage = "There is no such dungeon!";
+        public static string AlreadyHasGuildMasterErrorMessage = "Cannot have more than one GuildMaster at a time.";
+        public static string InvalidDataProvided = "Invalid data provided!";
     }
 }
