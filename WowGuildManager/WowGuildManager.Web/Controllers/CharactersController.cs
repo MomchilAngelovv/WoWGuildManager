@@ -22,6 +22,7 @@ namespace WowGuildManager.Web.Controllers
         private readonly ICharacterService characterService;
         private readonly UserManager<WowGuildManagerUser> userManager;
 
+        
         public CharactersController(ICharacterService characterService, UserManager<WowGuildManagerUser> userManager)
         { 
             this.characterService = characterService;
