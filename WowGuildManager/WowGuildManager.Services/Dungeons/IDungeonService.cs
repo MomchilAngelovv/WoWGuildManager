@@ -23,5 +23,7 @@
         T GetDestinationByDestinationName<T>(string destinationName);
 
         string GetDestinationIdByName(string destinationName);
+
+        T GetDungeon<T>(string dungeonId);
     }
 }

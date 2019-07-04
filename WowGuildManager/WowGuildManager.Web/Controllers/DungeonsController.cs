@@ -83,6 +83,8 @@
         //TODO: Think how to implement guild points
         public async Task<IActionResult> Details(string id)
         {
+            var dungeonDetailsViewModel = this.dungeonService.GetDungeon<DungeonDetailsViewModel>(id);
+
             var registeredCharacters = this.dungeonService
                 .GetRegisteredCharactersByDungeonId<CharacterDungeonDetailsViewModel>(id);
 
@@ -92,12 +94,8 @@
                 .GetCharactersByUserId<CharacterIdNameViewModel>(userId);
 
             //TODO: Fix bug hwen it syas to register character when dungeon is full
-            var dungeonDetailsViewModel = new DungeonDetailsViewModel
-            {
-                Id = id,
-                Characters = registeredCharacters,
-                AvailableCharacters = myCharacters
-            };
+            dungeonDetailsViewModel.Characters = registeredCharacters;
+            dungeonDetailsViewModel.AvailableCharacters = myCharacters;
 
             foreach (var myCharacter in myCharacters)
             {

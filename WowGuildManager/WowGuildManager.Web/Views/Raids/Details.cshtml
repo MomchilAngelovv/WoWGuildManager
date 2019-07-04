@@ -1,7 +1,7 @@
 ﻿@model WowGuildManager.Models.ViewModels.Raids.RaidDetailsViewModel
 
-<h2>Dugeons Details</h2>
-
+<h2>Details: @Model.Destination - Today: @Model.EventDateTime.ToShortTimeString()</h2>
+<p>@Model.Description</p>
 <table class="table table-sm table-hover table-dark">
     <thead>
         <tr>

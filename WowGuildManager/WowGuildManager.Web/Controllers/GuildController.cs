@@ -1,9 +1,12 @@
 ﻿//TOD0: FIX ALL EXLUDE DEVELOPMENT LIBRATIES !~~
 namespace WowGuildManager.Web.Controllers
 {
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
     using Microsoft.AspNetCore.Mvc;
+    using System.IO;
     using System.Threading.Tasks;
-
+    using WowGuildManager.Models.BindingModels.Guilds;
     using WowGuildManager.Models.ViewModels.Guild;
     using WowGuildManager.Services.Guilds;
     using WowGuildManager.Services.Raids;

@@ -21,6 +21,9 @@
             this.CreateMap<Raid, RaidIdDestinationViewModel>()
                 .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name));
 
+            this.CreateMap<Raid, RaidDetailsViewModel>()
+               .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name));
+
             this.CreateMap<RaidDestination, RaidDestinationProgressViewModel>();
 
             this.CreateMap<RaidDestination, SelectListItem>()

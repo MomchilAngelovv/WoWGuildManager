@@ -158,5 +158,18 @@ namespace WowGuildManager.Services.Dungeons
 
             return destination.Id;
         }
+
+        public T GetDungeon<T>(string dungeonId)
+        {
+            var dungeon = this.context.Dungeons
+                .FirstOrDefault(d => d.Id == dungeonId);
+
+            if (dungeon == null)
+            {
+                throw new InvalidOperationException(ErrorConstants.InvalidDungeonErrorMessage);
+            }
+
+            return mapper.Map<T>(dungeon);
+        }
     }
 }

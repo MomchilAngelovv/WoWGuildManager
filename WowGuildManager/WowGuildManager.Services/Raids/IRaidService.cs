@@ -22,6 +22,8 @@ namespace WowGuildManager.Services.Raids
         Task<RaidCharacter> RegisterCharacterAsync(string characterId, string raidId);
 
         string GetDestinationIdByName(string destinationName);
+
+        T GetDungeon<T>(string raidId);
     }
 }
     

@@ -147,5 +147,18 @@ namespace WowGuildManager.Services.Raids
 
             return destination.Id;
         }
+
+        public T GetDungeon<T>(string raidId)
+        {
+            var raid = this.context.Raids
+                .FirstOrDefault(d => d.Id == raidId);
+
+            if (raid == null)
+            {
+                throw new InvalidOperationException(ErrorConstants.InvalidRaidErrorMessage);
+            }
+
+            return mapper.Map<T>(raid);
+        }
     }
 }

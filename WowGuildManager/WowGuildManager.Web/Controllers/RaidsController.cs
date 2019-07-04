@@ -86,6 +86,8 @@
 
         public async Task<IActionResult> Details(string id)
         {
+            var raidDetailsViewModel = this.raidService.GetDungeon<RaidDetailsViewModel>(id);
+
             var userId = await this.GetUserId(this.userManager);
 
             var registeredCharacters = this.raidService
@@ -96,12 +98,8 @@
                 .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
                 .ToList();
 
-            var raidDetailsViewModel = new RaidDetailsViewModel
-            {
-                Id = id,
-                Characters = registeredCharacters,
-                AvailableCharacters = myCharacters
-            };
+            raidDetailsViewModel.Characters = registeredCharacters;
+            raidDetailsViewModel.AvailableCharacters = myCharacters;
 
             foreach (var myCharacter in myCharacters)
             {

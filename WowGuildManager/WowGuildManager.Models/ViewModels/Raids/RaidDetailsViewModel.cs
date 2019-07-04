@@ -1,11 +1,18 @@
 ﻿namespace WowGuildManager.Models.ViewModels.Raids
 {
+    using System;
     using System.Collections.Generic;
 
     using WowGuildManager.Models.ViewModels.Characters;
     public class RaidDetailsViewModel
     {
         public string Id { get; set; }
+
+        public DateTime EventDateTime { get; set; }
+
+        public string Destination { get; set; }
+
+        public string Description { get; set; }
 
         public IEnumerable<CharacterRaidDetailsViewModel> Characters { get; set; }
 

@@ -20,6 +20,9 @@
             this.CreateMap<Dungeon, DungeonIdDestinationViewModel>()
                 .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name));
 
+            this.CreateMap<Dungeon, DungeonDetailsViewModel>()
+                .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name));
+
             this.CreateMap<DungeonDestination, SelectListItem>()
                 .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.Name));
         }
