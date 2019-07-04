@@ -22,7 +22,7 @@ namespace WowGuildManager.Web.Controllers
             this.guildService = guildService;
         }
 
-        public IActionResult Index()
+        public IActionResult GuildMaster()
         {
             return this.View();
         }

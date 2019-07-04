@@ -42,7 +42,7 @@
                 @if (this.User.IsInRole("GuildMaster"))
                 {
                     <li class="nav-item active">
-                        <a asp-area="" asp-controller="Guild" asp-action="Index" class="nav-link text-danger">Guild master section<span class="sr-only">(current)</span></a>
+                        <a asp-area="" asp-controller="Guild" asp-action="GuildMaster" class="nav-link text-danger">Guild master section<span class="sr-only">(current)</span></a>
                     </li>
                 }
                 @if (this.User.IsInRole("Admin"))

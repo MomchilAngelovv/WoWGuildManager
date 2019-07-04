@@ -1,42 +1,10 @@
 ﻿@model WowGuildManager.Models.ViewModels.Guild.GuildProgressViewModel
 
-<div id="guildProgress">
-    <div class="w-50 mx-auto m-1">
-        <h1 class="mx-auto w-50 ">Guild progress</h1>
-        @foreach (var raidDestination in Model.RaidDestinationProgresses)
-        {
-            <div class="m-2">
-                @if (this.User.IsInRole("GuildMaster"))
-                {
-                    <h6 class="text-center">@raidDestination.Name: @raidDestination.KilledBosses/@raidDestination.TotalBosses</h6>
-                    <div class="d-flex justify-content-center">
-                        <button id="addProgressBtn" onclick="addProgress(event)" class="btn btn-success btn-sm border border-dark m-2 w-25" value="@raidDestination.Name">Add Progress</button>
-                        <button id="removeProgressBtn" onclick="removeProgress(event)" class="btn btn-danger btn-sm border border-dark m-2 w-25" value="@raidDestination.Name">Add Progress</button>
 
-                        @*<a asp-area="" asp-controller="Guild" asp-action="AddProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-success btn-sm border border-dark m-2 w-25"><i class="fas fa-arrow-up"></i> Add Progress</a>
-                        <a asp-area="" asp-controller="Guild" asp-action="RemoveProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-danger btn-sm border border-dark m-2 w-25"><i class="fas fa-arrow-down"></i> Remove Progress</a>*@
-                    </div>
-                }
-                else
-                {
-                    <h6 class="text-center">@raidDestination.Name: @raidDestination.KilledBosses/@raidDestination.TotalBosses</h6>
-                }
-                <div class="progress">
-                    <div class="progress-bar bg-info" style="width: @(raidDestination.CompletedPercent)%" role="progressbar" aria-valuenow="@raidDestination.KilledBosses" aria-valuemin="0" aria-valuemax="@raidDestination.TotalBosses"></div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
+<partial name="_GuildProgressPartial" for="RaidDestinationProgresses" />
 
+<partial name="_GuildInfoPartial" />
 
-<h1>About Deathwing lair</h1>
-<p class="lead">
-    Deathwing lair as an extraordinary guild
-</p>
-<p class="lead">
-    Deathwing lair guild ranks
-</p>
 
 @section Scripts{
     <script src="~/js/guildProgress.js"></script>
