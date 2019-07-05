@@ -1,4 +1,4 @@
-//TODO: Make tests async
+//TODO: Make last all tables same design (same classes templete)
 namespace WowGuildManager.Tests
 {
     using Xunit;

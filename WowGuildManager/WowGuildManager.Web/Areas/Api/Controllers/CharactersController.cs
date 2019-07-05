@@ -14,7 +14,7 @@
     [Route("api/[controller]")]
     [Area("Api")]
     [ApiController]
-    public class CharactersController : ControllerBase
+    public class CharactersController : ApiController
     {
         private readonly UserManager<WowGuildManagerUser> userManager;
         private readonly IApiService apiService;
@@ -27,7 +27,8 @@
             this.apiService = apiService;
         }
     
-        public IEnumerable<CharacterApiViewModel> MyCharacters()
+        [HttpGet]
+        public IEnumerable<CharacterApiViewModel> Get()
         {
             var userId = this.userManager.GetUserId(this.User);
 

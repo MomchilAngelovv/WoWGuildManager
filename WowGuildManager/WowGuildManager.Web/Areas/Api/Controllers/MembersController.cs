@@ -5,11 +5,8 @@
 
     using WowGuildManager.Models.ApiModels.Characters;
     using WowGuildManager.Services.Api;
-
-    [Area("Api")]
-    [Route("api/[controller]")]
-    [ApiController]
-    public class MembersController : ControllerBase
+   
+    public class MembersController : ApiController
     {
         private readonly IApiService apiService;
 
@@ -18,14 +15,15 @@
             this.apiService = apiService;
         }
 
-        public IEnumerable<CharacterApiViewModel> AllMembers()
+        [HttpGet]
+        public IEnumerable<CharacterApiViewModel> Get()
         {
             var members = this.apiService.Members<CharacterApiViewModel>();
             return members;
         }
 
-        [Route("{id}")]
-        public CharacterApiViewModel GetMemberById(string id)
+        [HttpGet("{id}")]
+        public CharacterApiViewModel Get(string id)
         {
             var character = this.apiService.GetCharacterById<CharacterApiViewModel>(id);
 

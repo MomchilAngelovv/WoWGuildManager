@@ -1,5 +1,6 @@
 ﻿//TODO: Make services return what i want OR THROW EX 100%
 //TODO: LOG ERRORS
+
 namespace WowGuildManager.Web
 {
     using AutoMapper;

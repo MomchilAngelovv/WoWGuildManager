@@ -15,6 +15,7 @@ namespace WowGuildManager.Web.Controllers
     using WowGuildManager.Models.ViewModels.Characters;
     using WowGuildManager.Services.Characters;
     using WowGuildManager.Models.BindingModels.Characters;
+    using System.Dynamic;
 
     [Authorize]
     public class CharactersController : BaseController

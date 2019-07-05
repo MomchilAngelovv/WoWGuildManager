@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     using WowGuildManager.Domain.Raid;
+    using WowGuildManager.Models.ApiModels.Raids;
     using WowGuildManager.Models.ViewModels.Guild;
     using WowGuildManager.Models.ViewModels.Raids;
 
@@ -24,6 +25,8 @@
             this.CreateMap<Raid, RaidDetailsViewModel>()
                .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name));
 
+            this.CreateMap<RaidDestination, RaidDestinationProgressApiViewModel>();
+           
             this.CreateMap<RaidDestination, RaidDestinationProgressViewModel>();
 
             this.CreateMap<RaidDestination, SelectListItem>()

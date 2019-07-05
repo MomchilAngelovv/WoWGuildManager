@@ -9,5 +9,7 @@
         T GetCharacterById<T>(string characterId);
 
         IEnumerable<T> Members<T>();
+
+        IEnumerable<T> GuildProgress<T>();
     }
 }

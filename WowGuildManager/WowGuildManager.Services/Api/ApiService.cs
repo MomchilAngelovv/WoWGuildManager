@@ -60,6 +60,15 @@ namespace WowGuildManager.Services.Api
             return mapper.Map<T>(character);
         }
 
+        public IEnumerable<T> GuildProgress<T>()
+        {
+            var raidDestinations = this.context.RaidDestinations
+              .Select(rd => mapper.Map<T>(rd))
+              .AsEnumerable();
+
+            return raidDestinations;
+        }
+
         public IEnumerable<T> Members<T>()
         {
             var members = this.context.Characters
