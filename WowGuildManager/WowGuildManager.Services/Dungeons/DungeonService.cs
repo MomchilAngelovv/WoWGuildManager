@@ -162,6 +162,7 @@ namespace WowGuildManager.Services.Dungeons
         public T GetDungeon<T>(string dungeonId)
         {
             var dungeon = this.context.Dungeons
+                .Include(d => d.Destination)
                 .FirstOrDefault(d => d.Id == dungeonId);
 
             if (dungeon == null)
