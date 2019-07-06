@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Linq;
     using WowGuildManager.Models.ViewModels.Characters;
     public class RaidDetailsViewModel
     {
@@ -15,6 +15,8 @@
         public string Description { get; set; }
 
         public int MaxPlayers { get; set; }
+
+        public string LeaderId { get; set; }
 
         public IEnumerable<CharacterRaidDetailsViewModel> Characters { get; set; }
 

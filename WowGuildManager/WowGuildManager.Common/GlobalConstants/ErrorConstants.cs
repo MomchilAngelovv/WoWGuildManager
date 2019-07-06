@@ -13,5 +13,6 @@
         public static string InvalidRaidErrorMessage = "There is no such dungeon!";
         public static string AlreadyHasGuildMasterErrorMessage = "Cannot have more than one GuildMaster at a time.";
         public static string InvalidDataProvided = "Invalid data provided!";
+        public static string InvalidRaidKickErrorMessage = "There is no player signed for this this raid!";
     }
 }

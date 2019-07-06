@@ -123,5 +123,11 @@
 
             return this.RedirectToAction("Upcoming", "Events");
         }
+
+        public async Task<IActionResult> Kick(string characterId, string raidId)
+        {
+            await this.raidService.KickPlayer(characterId, raidId);
+            return this.RedirectToAction("Upcoming", "Events");
+        }
     }
 }

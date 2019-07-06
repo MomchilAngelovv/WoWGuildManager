@@ -15,14 +15,24 @@
     <tbody>
         @foreach (var character in Model.Characters)
         {
-            if (character.Id == Model.JoinedCharacter?.Id)
+            if (Model.AlreadyJoined && character.Id == Model.JoinedCharacter.Id)
             {
                 <tr class="bg-warning">
                     <th scope="row">@character.GuildRank</th>
                     <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id">@character.Name</a></td>
                     <td>@character.Level</td>
                     <td>@character.Class</td>
-                    <td>@character.Role</td>
+                    <td>@character.Role </td>
+                </tr>
+            }
+            else if (Model.AlreadyJoined && character.Id != Model.LeaderId && Model.JoinedCharacter.Id == Model.LeaderId)
+            {
+                <tr>
+                    <th scope="row">@character.GuildRank</th>
+                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id">@character.Name</a></td>
+                    <td>@character.Level</td>
+                    <td>@character.Class</td>
+                    <td>@character.Role <a asp-area="" asp-controller="Raids" asp-action="Kick" asp-route-characterId="@character.Id" asp-route-raidId="@Model.Id" class="btn btn-danger btn-sm">Kick</a></td>
                 </tr>
             }
             else

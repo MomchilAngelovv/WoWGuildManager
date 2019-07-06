@@ -161,5 +161,19 @@ namespace WowGuildManager.Services.Raids
 
             return mapper.Map<T>(raid);
         }
+
+        public async Task KickPlayer(string characterId, string raidId)
+        {
+            var raidCharacter = this.context.RaidCharacter
+                .FirstOrDefault(rc => rc.CharacterId == characterId && rc.RaidId == raidId);
+
+            if (raidCharacter == null)
+            {
+                throw new InvalidOperationException(ErrorConstants.InvalidRaidKickErrorMessage);
+            }
+
+            this.context.RaidCharacter.Remove(raidCharacter);
+            await this.context.SaveChangesAsync();
+        }
     }
 }
