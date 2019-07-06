@@ -17,7 +17,6 @@ namespace WowGuildManager.Services.Characters
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Characters;
     using WowGuildManager.Models.BindingModels.Characters;
-   
 
     public class CharacterService : ICharacterService
     {
@@ -89,8 +88,9 @@ namespace WowGuildManager.Services.Characters
                 .Include(ch => ch.Role)
                 .Include(ch => ch.Class)
                 .Include(ch => ch.GuildRank)
-                .Select(ch => mapper.Map<T>(ch))
-                .AsEnumerable();
+                .AsEnumerable()
+                .Select(ch => mapper.Map<T>(ch));
+                
 
             return characters;
         }
@@ -166,7 +166,7 @@ namespace WowGuildManager.Services.Characters
         public async Task Update(CharacterEditBindingModel model)
         {
             var character = this.GetCharacterById<Character>(model.Id);
-
+            
             character.Level = model.Level;
             character.RoleId = this.GetRoleIdByName(model.Role);
 
@@ -174,7 +174,7 @@ namespace WowGuildManager.Services.Characters
             await this.context.SaveChangesAsync();
         }
 
-        private bool UserHasMaxRegiresteredCharacters(string userId)
+        public bool UserHasMaxRegiresteredCharacters(string userId)
         {
             if (this.context.Characters.Where(c => c.WowGuildManagerUserId == userId).Count() == CharacterConstants.MaximumAllowedCharactersPerUser)
             {
