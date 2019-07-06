@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using WowGuildManager.Models.ViewModels.Characters;
+
     public class DungeonDetailsViewModel
     {
         public string Id { get; set; }
@@ -13,6 +14,8 @@
         public string Destination { get; set; }
 
         public string Description { get; set; }
+
+        public int MaxPlayers { get; set; }
 
         public IEnumerable<CharacterDungeonDetailsViewModel> Characters { get; set; }
 

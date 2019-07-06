@@ -39,11 +39,11 @@
         }
     </tbody>
 </table>
-@if (Model.AvailableCharacters.Count() == 0)
+@if (Model.AvailableCharacters.Any() == false)
 {
     <a asp-area="" asp-controller="Characters" asp-action="Create" class="btn btn-secondary bg-warning w-100 text-dark">You dont have any registered characters. Click here to register new character.</a>
 }
-else if (Model.Characters.Count() < 5 && !Model.AlreadyJoined)
+else if (Model.Characters.Count() < Model.MaxPlayers && Model.AlreadyJoined == false)
 {
     <div class="dropdown ">
 

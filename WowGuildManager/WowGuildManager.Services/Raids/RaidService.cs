@@ -148,9 +148,10 @@ namespace WowGuildManager.Services.Raids
             return destination.Id;
         }
 
-        public T GetDungeon<T>(string raidId)
+        public T GetRaid<T>(string raidId)
         {
             var raid = this.context.Raids
+                .Include(d => d.Destination)
                 .FirstOrDefault(d => d.Id == raidId);
 
             if (raid == null)

@@ -23,7 +23,7 @@ namespace WowGuildManager.Services.Raids
 
         string GetDestinationIdByName(string destinationName);
 
-        T GetDungeon<T>(string raidId);
+        T GetRaid<T>(string raidId);
     }
 }
     

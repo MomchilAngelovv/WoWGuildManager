@@ -14,6 +14,8 @@
 
         public string Description { get; set; }
 
+        public int MaxPlayers { get; set; }
+
         public IEnumerable<CharacterRaidDetailsViewModel> Characters { get; set; }
 
         public IEnumerable<CharacterIdNameViewModel> AvailableCharacters { get; set; }

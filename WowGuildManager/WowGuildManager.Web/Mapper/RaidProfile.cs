@@ -23,7 +23,8 @@
                 .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name));
 
             this.CreateMap<Raid, RaidDetailsViewModel>()
-               .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name));
+               .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name))
+               .ForMember(d => d.MaxPlayers, dvm => dvm.MapFrom(x => x.Destination.MaxPlayers));
 
             this.CreateMap<RaidDestination, RaidDestinationProgressApiViewModel>();
            

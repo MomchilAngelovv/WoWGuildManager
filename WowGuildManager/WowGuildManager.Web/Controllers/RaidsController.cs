@@ -86,7 +86,7 @@
 
         public async Task<IActionResult> Details(string id)
         {
-            var raidDetailsViewModel = this.raidService.GetDungeon<RaidDetailsViewModel>(id);
+            var raidDetailsViewModel = this.raidService.GetRaid<RaidDetailsViewModel>(id);
 
             var userId = await this.GetUserId(this.userManager);
 

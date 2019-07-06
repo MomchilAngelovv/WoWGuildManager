@@ -1,13 +1,13 @@
 ﻿//TODO: Makeerror consntats
 namespace WowGuildManager.Services.Api
 {
+    using System;
     using AutoMapper;
     using System.Linq;
     using System.Collections.Generic;
     using Microsoft.EntityFrameworkCore;
 
     using WowGuildManager.Data;
-    using System;
     using WowGuildManager.Common.GlobalConstants;
 
     public class ApiService : IApiService
