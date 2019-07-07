@@ -19,7 +19,7 @@
     <tbody>
         @foreach (var character in Model.Characters)
         {
-            if (character.Id == Model.JoinedCharacter?.Id)
+            if (Model.AlreadyJoined && character.Id == Model.JoinedCharacter.Id)
             {
                 <tr class="bg-warning">
                     <td class="p-2 w-25">@character.GuildRank</td>
@@ -27,6 +27,16 @@
                     <td class="p-2">@character.Level</td>
                     <td class="p-2">@character.Class</td>
                     <td class="p-2">@character.Role</td>
+                </tr>
+            }
+            else if (Model.AlreadyJoined && character.Id != Model.LeaderId && Model.JoinedCharacter.Id == Model.LeaderId)
+            {
+                <tr>
+                    <td class="p-2 w-25">@character.GuildRank</td>
+                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
+                    <td class="p-2">@character.Level</td>
+                    <td class="p-2">@character.Class</td>
+                    <td class="p-2">@character.Role <a asp-area="" asp-controller="Dungeons" asp-action="Kick" asp-route-characterId="@character.Id" asp-route-dungeonId="@Model.Id" class="btn btn-danger btn-sm">Kick</a></td>
                 </tr>
             }
             else

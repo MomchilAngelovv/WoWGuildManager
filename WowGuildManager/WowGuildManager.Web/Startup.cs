@@ -1,6 +1,4 @@
-﻿//TODO: Make services return what i want OR THROW EX 100%
-//TODO: LOG ERRORS
-
+﻿//TODO: LOG ERRORS
 namespace WowGuildManager.Web
 {
     using AutoMapper;
@@ -21,6 +19,7 @@ namespace WowGuildManager.Web
     using WowGuildManager.Services.Api;
     using WowGuildManager.Services.Guilds;
     using WowGuildManager.Web.Filters.ActionFilters;
+    using Microsoft.Extensions.Logging;
 
     public class Startup
     {
@@ -59,6 +58,7 @@ namespace WowGuildManager.Web
             .AddEntityFrameworkStores<WowGuildManagerDbContext>();
 
             services.AddAutoMapper(typeof(Startup));
+            services.AddLogging();
             
             services.AddMvc(options => 
             {

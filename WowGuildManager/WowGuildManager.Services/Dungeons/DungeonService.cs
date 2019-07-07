@@ -172,5 +172,19 @@ namespace WowGuildManager.Services.Dungeons
 
             return mapper.Map<T>(dungeon);
         }
+
+        public async Task KickPlayer(string characterId, string dungeonId)
+        {
+            var dungeonCharacter = this.context.DungeonCharacter
+                .FirstOrDefault(rc => rc.CharacterId == characterId && rc.DungeonId == dungeonId);
+
+            if (dungeonCharacter == null)
+            {
+                throw new InvalidOperationException(ErrorConstants.InvalidRaidKickErrorMessage);
+            }
+
+            this.context.DungeonCharacter.Remove(dungeonCharacter);
+            await this.context.SaveChangesAsync();
+        }
     }
 }

@@ -28,7 +28,7 @@
             else if (Model.AlreadyJoined && character.Id != Model.LeaderId && Model.JoinedCharacter.Id == Model.LeaderId)
             {
                 <tr>
-                    <th scope="row">@character.GuildRank</th>
+                    <th>@character.GuildRank</th>
                     <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id">@character.Name</a></td>
                     <td>@character.Level</td>
                     <td>@character.Class</td>
@@ -38,7 +38,7 @@
             else
             {
                 <tr>
-                    <th scope="row">@character.GuildRank</th>
+                    <th scope="row">@character.GuildRank</th>rrd
                     <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id">@character.Name</a></td>
                     <td>@character.Level</td>
                     <td>@character.Class</td>

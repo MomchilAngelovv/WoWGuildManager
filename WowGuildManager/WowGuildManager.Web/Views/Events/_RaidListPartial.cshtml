@@ -1,38 +1,42 @@
 ﻿@model IEnumerable<WowGuildManager.Models.ViewModels.Raids.RaidViewModel>
-<section>
-    <h2 class="text-center">Raids</h2>
-    <div class="row d-flex justify-content-center">
-        @foreach (var raid in Model)
-        {
-            <div class="card col-auto m-4 bg-dark border-danger" style="width: 18rem; padding:0px;">
-                <img class="card-img-top" src="@raid.Image" alt="Card image cap">
-                <div class="card-body text-warning">
-                    <h5 class="card-title">@raid.EventDateTime</h5>
-                    <p class="card-text">@raid.Destination - Leader: @raid.LeaderName</p>
-                    <p class="card-text">Registered: @raid.RegisteredPlayers/@raid.MaxPlayers</p>
-                    <p class="card-text">@raid.Description</p>
-                    @if (raid.AlreadyJoined)
-                    {
-                        @if (raid.IsLeader)
-                        {
-                            <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Already Joined with @raid.JoinedCharacter.Name (@raid.JoinedCharacter.Role) (Leader)</a>
-                        }
-                        else
-                        {
-                            <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Already Joined with @raid.JoinedCharacter.Name (@raid.JoinedCharacter.Role)</a>
-                        }
 
-                    }
-                    else if (raid.RegisteredPlayers != raid.MaxPlayers)
-                    {
-                        <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Join</a>
-                    }
-                    else if (raid.RegisteredPlayers == raid.MaxPlayers)
-                    {
-                        <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Full - see details</a>
-                    }
+@if (Model.Any())
+{
+    <section>
+        <h2 class="text-center">Raids</h2>
+        <div class="row d-flex justify-content-center">
+            @foreach (var raid in Model)
+            {
+                <div class="card col-auto m-4 bg-dark border-danger" style="width: 18rem; padding:0px;">
+                    <img class="card-img-top" src="@raid.Image" alt="Card image cap">
+                    <div class="card-body text-warning">
+                        <h5 class="card-title">@raid.EventDateTime</h5>
+                        <p class="card-text">@raid.Destination - Leader: @raid.LeaderName</p>
+                        <p class="card-text">Registered: @raid.RegisteredPlayers/@raid.MaxPlayers</p>
+                        <p class="card-text">@raid.Description</p>
+                        @if (raid.AlreadyJoined)
+                        {
+                            @if (raid.IsLeader)
+                            {
+                                <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Already Joined with @raid.JoinedCharacter.Name (@raid.JoinedCharacter.Role) (Leader)</a>
+                            }
+                            else
+                            {
+                                <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Already Joined with @raid.JoinedCharacter.Name (@raid.JoinedCharacter.Role)</a>
+                            }
+
+                        }
+                        else if (raid.RegisteredPlayers != raid.MaxPlayers)
+                        {
+                            <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Join</a>
+                        }
+                        else if (raid.RegisteredPlayers == raid.MaxPlayers)
+                        {
+                            <a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger w-100 ">Full - see details</a>
+                        }
+                    </div>
                 </div>
-            </div>
-        }
-    </div>
-</section>
+            }
+        </div>
+    </section>
+}

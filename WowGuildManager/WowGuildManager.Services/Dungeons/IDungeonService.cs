@@ -25,5 +25,7 @@
         string GetDestinationIdByName(string destinationName);
 
         T GetDungeon<T>(string dungeonId);
+
+        Task KickPlayer(string characterId, string dungeonId);
     }
 }

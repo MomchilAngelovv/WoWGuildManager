@@ -17,6 +17,8 @@
 
         public int MaxPlayers { get; set; }
 
+        public string LeaderId { get; set; }
+
         public IEnumerable<CharacterDungeonDetailsViewModel> Characters { get; set; }
 
         public IEnumerable<CharacterIdNameViewModel> AvailableCharacters { get; set; }

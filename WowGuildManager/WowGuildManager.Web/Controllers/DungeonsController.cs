@@ -119,5 +119,11 @@
 
             return this.RedirectToAction("Upcoming", "Events");
         }
+
+        public async Task<IActionResult> Kick(string characterId, string dungeonId)
+        {
+            await this.dungeonService.KickPlayer(characterId, dungeonId);
+            return this.RedirectToAction("Upcoming", "Events");
+        }
     }
 }
