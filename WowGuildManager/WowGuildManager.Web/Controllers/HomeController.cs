@@ -3,8 +3,9 @@
 namespace WowGuildManager.Web.Controllers
 {
     using System.Diagnostics;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-
+    using WowGuildManager.Domain.Identity;
     using WowGuildManager.Models.ViewModels.Error;
 
     public class HomeController : BaseController

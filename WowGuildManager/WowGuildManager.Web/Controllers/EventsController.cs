@@ -43,9 +43,9 @@ namespace WowGuildManager.Web.Controllers
             return character.Dungeons.Any(d => d.DungeonId == dungeon.Id);
         }
 
-        public async Task<IActionResult> Upcoming()
+        public IActionResult Upcoming()
         {
-            var userId = await this.GetUserId(this.userManager);
+            var userId = this.userManager.GetUserId(this.User);
 
             var myCharacters = this.charactersService
                 .GetCharactersByUserId<Character>(userId);

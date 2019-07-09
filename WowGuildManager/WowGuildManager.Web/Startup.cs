@@ -1,4 +1,5 @@
 ﻿//TODO: LOG ERRORS
+//TODO: appsettings.json for production
 namespace WowGuildManager.Web
 {
     using AutoMapper;
@@ -20,6 +21,9 @@ namespace WowGuildManager.Web
     using WowGuildManager.Services.Guilds;
     using WowGuildManager.Web.Filters.ActionFilters;
     using Microsoft.Extensions.Logging;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.UI;
+    using System;
 
     public class Startup
     {
@@ -40,11 +44,10 @@ namespace WowGuildManager.Web
 
             services.AddDbContext<WowGuildManagerDbContext>(options =>
             {
-                options
-                    .UseSqlServer(Configuration.GetConnectionString("WowGuildManagerDbContext"));
+                options.UseSqlServer(Configuration.GetConnectionString("WowGuildManagerDbContext"));
             });
 
-            services.AddDefaultIdentity<WowGuildManagerUser>(options => 
+            services.AddIdentity<WowGuildManagerUser,WowGuildManagerRole>(options =>
             {
                 //TODO: Fix password settings
                 options.Password.RequireDigit = false;
@@ -53,13 +56,20 @@ namespace WowGuildManager.Web
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
+
+                options.Lockout.DefaultLockoutTimeSpan = new TimeSpan(1, 0, 0);
             })
-            .AddRoles<WowGuildManagerRole>()
-            .AddEntityFrameworkStores<WowGuildManagerDbContext>();
+            .AddEntityFrameworkStores<WowGuildManagerDbContext>()
+            .AddDefaultUI(UIFramework.Bootstrap4);
+
+            services.AddAuthentication().AddFacebook(options =>
+            {
+                options.AppId = this.Configuration["FacebookApp:AppId"];
+                options.AppSecret = this.Configuration["FacebookApp:AppSecret"];
+            });
 
             services.AddAutoMapper(typeof(Startup));
-            services.AddLogging();
-            
+             
             services.AddMvc(options => 
             {
                 options.Filters.Add(new ValidateModelStateActionFilter());
@@ -73,7 +83,7 @@ namespace WowGuildManager.Web
             services.AddTransient<IRaidService, RaidService>();
             services.AddTransient<IApiService, ApiService>();
             services.AddTransient<IGuildService, GuildService>();
-            #endregion
+            #endregion 
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

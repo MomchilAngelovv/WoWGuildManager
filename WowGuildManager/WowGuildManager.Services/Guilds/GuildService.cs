@@ -1,5 +1,6 @@
 ﻿//TODO: Excratd private method to set new character guild rank DRY
 //TODO: Error messages in consntants
+//TODO: Usermanager findByIdMethods
 namespace WowGuildManager.Services.Guilds
 {
     using AutoMapper;

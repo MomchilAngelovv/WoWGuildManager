@@ -38,7 +38,7 @@
        
         public async Task<IActionResult> Create()
         {
-            var myCharacters = await this.BindCharactersToSelectListItem();
+            var myCharacters = this.BindCharactersToSelectListItem();
 
             if (myCharacters.Any() == false)
             {
@@ -53,9 +53,9 @@
             return this.View();
         }
 
-        private async Task<IEnumerable<SelectListItem>> BindCharactersToSelectListItem()
+        private IEnumerable<SelectListItem> BindCharactersToSelectListItem()
         {
-            var userId = await this.GetUserId(this.userManager);
+            var userId = this.userManager.GetUserId(this.User);
 
             var myCharacters = this.characterService
                 .GetCharactersByUserId<SelectListItem>(userId);
@@ -84,11 +84,11 @@
             return RedirectToAction("Upcoming", "Events");
         }   
 
-        public async Task<IActionResult> Details(string id)
+        public IActionResult Details(string id)
         {
             var raidDetailsViewModel = this.raidService.GetRaid<RaidDetailsViewModel>(id);
 
-            var userId = await this.GetUserId(this.userManager);
+            var userId = this.userManager.GetUserId(this.User);
 
             var registeredCharacters = this.raidService
                  .GetRegisteredCharactersByRaidId<CharacterRaidDetailsViewModel>(id)

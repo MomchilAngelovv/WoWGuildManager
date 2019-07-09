@@ -35,7 +35,7 @@
 
         public async Task<IActionResult> Create()
         {
-            var myCharacters = await this.BindCharactersToSelectListItem();
+            var myCharacters = this.BindCharactersToSelectListItem();
 
             if (myCharacters.Any() == false)
             {
@@ -57,9 +57,9 @@
             return dungeonPlaceList;
         }
 
-        private async Task<IEnumerable<SelectListItem>> BindCharactersToSelectListItem()
+        private IEnumerable<SelectListItem> BindCharactersToSelectListItem()
         {
-            var userId = await this.GetUserId(this.userManager);
+            var userId = this.userManager.GetUserId(this.User);
 
             var myCharacters = this.characterService
                 .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
@@ -81,14 +81,14 @@
         }
 
         //TODO: Think how to implement guild points
-        public async Task<IActionResult> Details(string id)
+        public IActionResult Details(string id)
         {
             var dungeonDetailsViewModel = this.dungeonService.GetDungeon<DungeonDetailsViewModel>(id);
 
             var registeredCharacters = this.dungeonService
                 .GetRegisteredCharactersByDungeonId<CharacterDungeonDetailsViewModel>(id);
 
-            var userId = await this.GetUserId(this.userManager);
+            var userId = this.userManager.GetUserId(this.User);
 
             var myCharacters = this.characterService
                 .GetCharactersByUserId<CharacterIdNameViewModel>(userId);

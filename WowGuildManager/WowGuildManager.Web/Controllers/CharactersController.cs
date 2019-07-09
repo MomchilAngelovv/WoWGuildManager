@@ -30,10 +30,9 @@ namespace WowGuildManager.Web.Controllers
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            
-            var userId = await this.GetUserId(this.userManager);
+            var userId = this.userManager.GetUserId(this.User);
 
             var characters = this.characterService
                 .GetCharactersByUserId<CharacterViewModel>(userId)
@@ -62,7 +61,7 @@ namespace WowGuildManager.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CharacterCreateBindingModel model)
         {
-            var userId = await this.GetUserId(this.userManager);
+            var userId = this.userManager.GetUserId(this.User);
 
             model.UserId = userId;
 
