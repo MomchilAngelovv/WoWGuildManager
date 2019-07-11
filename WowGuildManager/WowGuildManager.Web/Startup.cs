@@ -63,8 +63,8 @@ namespace WowGuildManager.Web
 
             services.AddAuthentication().AddFacebook(options =>
             {
-                options.AppId = "440150153493696";
-                options.AppSecret = "7b330adc49cae00c5b11d5e58e0caa77";
+                options.AppId = this.Configuration["Facebook:AppId"];
+                options.AppSecret = this.Configuration["Facebook:AppSecret"];
             });
 
             services.AddAutoMapper(typeof(Startup));
