@@ -1,13 +1,14 @@
 ﻿namespace WowGuildManager.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Authorization;
+
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
 
     using WowGuildManager.Models.ViewModels.Admin;
     using WowGuildManager.Models.ViewModels.Users;
     using WowGuildManager.Services.Guilds;
-    //TODO: Put bootstrap icons
+   
     [Area("Administration")]
     [Authorize(Roles ="Admin")]
     public class AdminController : Controller
@@ -28,7 +29,7 @@
                 Users = users
             };
 
-            return this.View(adminIndexViewModel); ;
+            return this.View(adminIndexViewModel); 
         }
 
         public async Task<IActionResult> SetGuildMaster(string id)

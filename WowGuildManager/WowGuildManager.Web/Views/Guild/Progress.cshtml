@@ -1,10 +1,6 @@
 ﻿@model WowGuildManager.Models.ViewModels.Guild.GuildProgressViewModel
 
-<div id="guildProgress">
-    <partial name="_GuildProgressPartial" for="RaidDestinationProgresses" />
+<div class="bc">
+    <vc:guild-progress></vc:guild-progress>
+    <partial name="_GuildInfoPartial" />
 </div>
-<partial name="_GuildInfoPartial" />
-
-@section Scripts{
-    <script src="~/js/guildProgress.js"></script>
-}

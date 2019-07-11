@@ -6,6 +6,7 @@
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Domain.Identity;
     using WowGuildManager.Domain.Raid;
+
     public class Character  
     {
         public Character()
