@@ -1,4 +1,4 @@
-﻿<div class="container-fluid px-0">
+﻿<div class="container-fluid">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -17,14 +17,14 @@
                 <img class="d-block w-100" src="https://res.cloudinary.com/dbfb4iufu/image/upload/v1561387586/WowGuildManager/images/common/carousel2_ez9aok.jpg" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Check out our upcoming guild events</h5>
-                    <a asp-area="" asp-controller="Gallery" asp-action="Index" class="btn btn-info text-center"><p style="margin-bottom:0px">Upcoming events</p></a>
+                    <a asp-area="" asp-controller="Events" asp-action="Upcoming" class="btn btn-info text-center"><p style="margin-bottom:0px">Upcoming events</p></a>
                 </div>
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="https://res.cloudinary.com/dbfb4iufu/image/upload/v1561387562/WowGuildManager/images/common/carousel1_xk3pr3.jpg" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Legends of Deathwing lair</h5>
-                    <a asp-area="" asp-controller="Events" asp-action="Upcoming" class="btn btn-info text-center"><p style="margin-bottom:0px">Guild members</p></a>
+                    <a asp-area="" asp-controller="Members" asp-action="All" class="btn btn-info text-center"><p style="margin-bottom:0px">Guild members</p></a>
                 </div>
             </div>
         </div>
@@ -39,6 +39,6 @@
     </div>
 </div>
 
-<div id="todayEvents">
+<div class="container-fluid">
     <vc:today-events></vc:today-events>
 </div>

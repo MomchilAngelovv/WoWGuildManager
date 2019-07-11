@@ -1,0 +1,41 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Deathwing lair</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a asp-area="" asp-controller="Events" asp-action="Upcoming" class="nav-link">Upcoming events<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a asp-area="" asp-controller="Members" asp-action="All" class="nav-link">Guild Members<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a asp-area="" asp-controller="Gallery" asp-action="Index" class="nav-link">Gallery<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a asp-area="" asp-controller="Characters" asp-action="Index" class="nav-link">My Characters<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a asp-area="" asp-controller="Guild" asp-action="Progress" class="nav-link">Guild Progression and Information<span class="sr-only">(current)</span></a>
+            </li>
+            @if (this.User.IsInRole(WowGuildManagerUserConstants.GuildMaster))
+            {
+                <li class="nav-item active">
+                    <a asp-area="" asp-controller="Guild" asp-action="GuildMaster" class="nav-link text-danger">Guild master section<span class="sr-only">(current)</span></a>
+                </li>
+            }
+            @if (this.User.IsInRole(WowGuildManagerUserConstants.Admin))
+            {
+                <li class="nav-item active">
+                    <a asp-area="Administration" asp-controller="Admin" asp-action="Index" class="nav-link text-danger">Administration section<span class="sr-only">(current)</span></a>
+                </li>
+            }
+        </ul>
+
+        <partial name="_LoginPartial" />
+    </div>
+</nav>

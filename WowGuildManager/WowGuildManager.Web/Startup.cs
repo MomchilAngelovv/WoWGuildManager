@@ -47,19 +47,18 @@ namespace WowGuildManager.Web
                 options.UseSqlServer(Configuration.GetConnectionString("WowGuildManagerDbContext"));
             });
 
-            services.AddIdentity<WowGuildManagerUser,WowGuildManagerRole>(options =>
-            {
+            services.AddIdentity<WowGuildManagerUser, WowGuildManagerRole>(options =>
+             {
                 //TODO: Fix password settings
                 options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 3;
-                options.Password.RequiredUniqueChars = 0;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-
-                options.Lockout.DefaultLockoutTimeSpan = new TimeSpan(1, 0, 0);
-            })
+                 options.Password.RequiredLength = 3;
+                 options.Password.RequiredUniqueChars = 0;
+                 options.Password.RequireLowercase = false;
+                 options.Password.RequireNonAlphanumeric = false;
+                 options.Password.RequireUppercase = false;
+             })
             .AddEntityFrameworkStores<WowGuildManagerDbContext>()
+            .AddDefaultTokenProviders()
             .AddDefaultUI(UIFramework.Bootstrap4);
 
             services.AddAuthentication().AddFacebook(options =>

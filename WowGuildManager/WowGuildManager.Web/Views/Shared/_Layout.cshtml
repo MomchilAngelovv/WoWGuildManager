@@ -7,81 +7,27 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap-4.3.1/css/bootstrap.min.css">
-        <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" >
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap-4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+        <link rel="stylesheet" href="~/css/site.css" />
     </environment>
+
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-
-        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Deathwing lair</a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a asp-area="" asp-controller="Events" asp-action="Upcoming" class="nav-link">Upcoming events<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a asp-area="" asp-controller="Members" asp-action="All" class="nav-link">Guild Members<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a asp-area="" asp-controller="Gallery" asp-action="Index" class="nav-link">Gallery<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a asp-area="" asp-controller="Characters" asp-action="Index" class="nav-link">My Characters<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a asp-area="" asp-controller="Guild" asp-action="Progress" class="nav-link">Guild Progression and Information<span class="sr-only">(current)</span></a>
-                </li>
-                @if (this.User.IsInRole("GuildMaster"))
-                {
-                    <li class="nav-item active">
-                        <a asp-area="" asp-controller="Guild" asp-action="GuildMaster" class="nav-link text-danger">Guild master section<span class="sr-only">(current)</span></a>
-                    </li>
-                }
-                @if (this.User.IsInRole("Admin"))
-                {
-                    <li class="nav-item active">
-                        <a asp-area="Administration" asp-controller="Admin" asp-action="Index" class="nav-link text-danger">Administration section<span class="sr-only">(current)</span></a>
-                    </li>
-                }
-            </ul>
-
-            <partial name="_LoginPartial" />
-
-        </div>
-    </nav>
-
+    <partial name="_NavbarPartial" />
     <partial name="_CookieConsentPartial" />
 
     <div class="container-fluid text-white">
         @RenderBody()
     </div>
 
-    <footer class="fixed-bottom page-footer font-small bg-dark">
-        <div class="bg-white">
-            <ul class="list-unstyled list-inline text-center py-2 bg-dark mb-0">
+    <partial name="_FooterPartial" />
 
-                <li class="list-inline-item">
-                    <h5 class="mb-1"></h5>
-                </li>
-
-                <li class="list-inline-item">
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-dark">Go at start page!</a>
-                </li>
-                <li class="list-inline-item">
-                    <a asp-area="" asp-controller="Home" asp-action="Privacy" class="btn btn-dark">See privacy page</a>
-                </li>
-            </ul>
-        </div>
-    </footer>
-
+    <!--Scripts strat-->
     <environment include="Development">
         <script src="~/lib/jquery/jquery-3.4.1.min.js"></script>
         <script src="~/lib/popper/popper.min.js"></script>
@@ -89,8 +35,12 @@
         <script src="~/lib/font-awesome/js/all.min.js"></script>
     </environment>
     <environment exclude="Development">
+        <script src="~/lib/jquery/jquery-3.4.1.min.js"></script>
+        <script src="~/lib/popper/popper.min.js"></script>
+        <script src="~/lib/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+        <script src="~/lib/font-awesome/js/all.min.js"></script>
     </environment>
-
     @RenderSection("Scripts", required: false)
+    <!--Scripts end-->
 </body>
 </html>
