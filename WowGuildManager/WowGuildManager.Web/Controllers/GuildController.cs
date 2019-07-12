@@ -29,11 +29,9 @@ namespace WowGuildManager.Web.Controllers
 
         public IActionResult Progress()
         {
-            var raidDestinations = this.raidService.GetDestinations<RaidDestinationProgressViewModel>();
-
             var guildProgressViewModel = new GuildProgressViewModel
             {
-                RaidDestinationProgresses = raidDestinations
+                
             };
 
             return this.View(guildProgressViewModel);

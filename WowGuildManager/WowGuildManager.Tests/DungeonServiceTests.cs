@@ -3,6 +3,7 @@
     using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using WowGuildManager.Data;
@@ -95,7 +96,7 @@
             {
                 var dungeonService = new DungeonService(dbContext, null);
 
-                Assert.Throws< ArgumentException>(() =>dungeonService.RegisterCharacterAsync("NoSuchCharacterId", "NoSuchDungeonId").GetAwaiter().GetResult());
+                Assert.Throws<ArgumentException>(() => dungeonService.RegisterCharacterAsync("NoSuchCharacterId", "NoSuchDungeonId").GetAwaiter().GetResult());
             }
         }
 
@@ -122,6 +123,42 @@
                 var actualResult = dungeonService.GetDestinationIdByName("TestDestination");
 
                 Assert.Equal(expectedResult, actualResult);
+            }
+        }
+
+        [Fact]
+        public async Task KickPlayer_Should_Properly_Delete_Registered_Player_From_Dungeon()
+        {
+            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
+                .UseInMemoryDatabase("KickCharacter_Database")
+                .Options;
+
+            using (var context = new WowGuildManagerDbContext(options))
+            {
+                var dungeonService = new DungeonService(context, null);
+
+                var dungeonCharacters = new List<DungeonCharacter>
+                {
+                     new DungeonCharacter
+                     {
+                         CharacterId = "TestCharacterId1",
+                         DungeonId = "TestDungeonId1"
+                     },
+                     new DungeonCharacter
+                     {
+                         CharacterId = "TestCharacterId2",
+                         DungeonId = "TestDungeonId2"
+                     },
+                };
+
+                await context.DungeonCharacter.AddRangeAsync(dungeonCharacters);
+                await context.SaveChangesAsync();
+
+                await dungeonService.KickCharacter("TestCharacterId1", "TestDungeonId1");
+
+                var expectedCount = 1;
+
+                Assert.Equal(expectedCount, context.DungeonCharacter.Count());
             }
         }
     }

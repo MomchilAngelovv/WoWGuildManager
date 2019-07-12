@@ -15,5 +15,9 @@
         Task PromoteRankAsync(string characterId);
 
         Task DemoteRankAsync(string characterId);
+
+        int GetRegisteredUsersCount();
+
+        int GetRegisteredCharactersCount();
     }
 }

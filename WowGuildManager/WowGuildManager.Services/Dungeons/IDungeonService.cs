@@ -26,6 +26,6 @@
 
         T GetDungeon<T>(string dungeonId);
 
-        Task KickPlayer(string characterId, string dungeonId);
+        Task KickCharacter(string characterId, string dungeonId);
     }
 }

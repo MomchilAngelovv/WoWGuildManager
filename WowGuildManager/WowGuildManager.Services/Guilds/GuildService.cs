@@ -173,5 +173,15 @@ namespace WowGuildManager.Services.Guilds
 
             return false;
         }
+
+        public int GetRegisteredUsersCount()
+        {
+            return this.userManager.Users.Count();
+        }
+
+        public int GetRegisteredCharactersCount()
+        {
+            return this.context.Characters.Count();
+        }
     }
 }

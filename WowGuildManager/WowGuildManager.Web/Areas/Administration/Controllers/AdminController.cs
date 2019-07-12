@@ -8,7 +8,10 @@
     using WowGuildManager.Models.ViewModels.Admin;
     using WowGuildManager.Models.ViewModels.Users;
     using WowGuildManager.Services.Guilds;
-   
+    using Microsoft.AspNetCore.Identity;
+    using WowGuildManager.Domain.Identity;
+    using System.Linq;
+
     [Area("Administration")]
     [Authorize(Roles ="Admin")]
     public class AdminController : Controller
@@ -22,11 +25,13 @@
 
         public IActionResult Index()
         {
-            var users = this.guildService.GetRegisteredUsers<UserAdminViewModel>();
+            var registeredUsers = this.guildService.GetRegisteredUsersCount();
+            var registeredCharactersCount = this.guildService.GetRegisteredCharactersCount();
 
             var adminIndexViewModel = new AdminIndexViewModel
             {
-                Users = users
+                RegisteredUsers = registeredUsers,
+                RegisteredCharacters = registeredCharactersCount
             };
 
             return this.View(adminIndexViewModel); 

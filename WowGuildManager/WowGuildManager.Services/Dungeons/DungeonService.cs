@@ -173,7 +173,7 @@ namespace WowGuildManager.Services.Dungeons
             return mapper.Map<T>(dungeon);
         }
 
-        public async Task KickPlayer(string characterId, string dungeonId)
+        public async Task KickCharacter(string characterId, string dungeonId)
         {
             var dungeonCharacter = this.context.DungeonCharacter
                 .FirstOrDefault(rc => rc.CharacterId == characterId && rc.DungeonId == dungeonId);

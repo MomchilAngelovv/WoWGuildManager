@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<WowGuildManager.Models.ViewModels.Users.UserAdminViewModel>
 
 <div class="list-group">
-    <h2>Total registered users: @Model.Count()</h2>
-    <h3>Select guild master</h3>
+   
+    <h3>You can select guild master from here.</h3>
     @foreach (var user in Model)
     {
         @if (user.IsGuildMaster)

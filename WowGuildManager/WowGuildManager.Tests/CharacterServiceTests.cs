@@ -107,13 +107,6 @@ namespace WowGuildManager.Tests
             }
         }
         
-        //TODO: Delete method tests
-        [Fact]
-        public void GetRoles_Should_Return_Correct_Roles()
-        {
-            
-        }
-
         [Fact]
         public void GetCharacterById_Shuold_Return_Correct_Character()
         {

@@ -33,7 +33,7 @@
             this.characterService = characterService;
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             var myCharacters = this.BindCharactersToSelectListItem();
 
@@ -122,7 +122,7 @@
 
         public async Task<IActionResult> Kick(string characterId, string dungeonId)
         {
-            await this.dungeonService.KickPlayer(characterId, dungeonId);
+            await this.dungeonService.KickCharacter(characterId, dungeonId);
             return this.RedirectToAction("Upcoming", "Events");
         }
     }
