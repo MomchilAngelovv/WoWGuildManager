@@ -9,6 +9,6 @@ namespace WowGuildManager.Models.BindingModels.Guilds
 {
     public class GuildMasterViewModel
     {
-        public IFormFile Image { get; set; }
+        public int RegisteredCharactersCount { get; set; }
     }
 }
