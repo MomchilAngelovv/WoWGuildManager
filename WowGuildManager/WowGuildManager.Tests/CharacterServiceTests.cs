@@ -57,7 +57,56 @@ namespace WowGuildManager.Tests
 
             await service.CreateAsync(newCharacter);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async() => await service.CreateAsync(newCharacter));
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => await service.CreateAsync(newCharacter));
+        }
+
+        [Fact]
+        public async Task Delete_Should_Remove_Character_From_Database()
+        {
+            var context = await GetDatabase();
+            var service = new CharacterService(context, null);
+
+            await service.Delete("1");
+
+            var expected = 2;
+            var actual = context.Characters.Count();
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public async Task UserHasMaxRegiresteredCharacters_Shuold_Return_False_When_User_Has_Less_Than_4_Characters()
+        { 
+            var context = await GetDatabase();
+            var service = new CharacterService(context, null);
+
+            var expected = false;
+            var actual = service.UserHasMaxRegiresteredCharacters("TestUser1");
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public async Task UserHasMaxRegiresteredCharacters_Shuold_Return_True_When_User_Has_4_Characters()
+        {
+            var context = await GetDatabase();
+            var service = new CharacterService(context, null);
+
+            var newCharacter = new CharacterCreateBindingModel
+            {
+                Class = "Rogue",
+                Level = 50,
+                Name = "TestChar",
+                Role = "Damage",
+                UserId = "TestUser1"
+            };
+
+            await service.CreateAsync(newCharacter);
+
+            var expected = true;
+            var actual = service.UserHasMaxRegiresteredCharacters("TestUser1");
+
+            Assert.Equal(expected, actual);
         }
 
         private async Task<WowGuildManagerDbContext> GetDatabase()
@@ -70,7 +119,8 @@ namespace WowGuildManager.Tests
             {
                 new Character
                 {
-                     WowGuildManagerUserId = "TestUser1"
+                    Id = "1",
+                    WowGuildManagerUserId = "TestUser1"
                 },
                 new Character
                 {
@@ -95,6 +145,11 @@ namespace WowGuildManager.Tests
                 {
                     Id = "1",
                     Name = "Damage"
+                },
+                new CharacterRole
+                {
+                    Id = "2",
+                    Name = "Tank"
                 }
             };
             var ranks = new List<GuildRank>
