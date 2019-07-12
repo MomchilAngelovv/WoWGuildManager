@@ -19,15 +19,18 @@ namespace WowGuildManager.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<WowGuildManagerUser> _signInManager;
         private readonly UserManager<WowGuildManagerUser> _userManager;
+        private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<WowGuildManagerUser> userManager,
             SignInManager<WowGuildManagerUser> signInManager,
+            ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _logger = logger;
             _emailSender = emailSender;
         }
 
@@ -81,6 +84,8 @@ namespace WowGuildManager.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, WowGuildManagerUserConstants.DefaultUser);
+
+                    _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Page(

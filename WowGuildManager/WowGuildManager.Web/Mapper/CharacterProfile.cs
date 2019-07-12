@@ -6,9 +6,8 @@
 
     using WowGuildManager.Domain.Characters;
     using WowGuildManager.Models.ApiModels.Characters;
-   
-    using WowGuildManager.Models.ViewModels.Characters;
     using WowGuildManager.Models.BindingModels.Characters;
+    using WowGuildManager.Models.ViewModels.Characters;
 
     public class CharacterProfile : Profile
     {
@@ -23,7 +22,7 @@
             this.CreateMap<Character, CharacterIdNameViewModel>();
             this.CreateMap<Character, CharacterNameRoleViewModel>();
 
-            this.CreateMap<Character, CharacterUpdateBindingModel>()
+            this.CreateMap<Character, CharacterEditBindingModel>()
                 .ForMember(cvm => cvm.Role, sli => sli.MapFrom(x => x.Role.Name));
 
             this.CreateMap<Character, CharacterDungeonDetailsViewModel>()

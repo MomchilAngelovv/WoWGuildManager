@@ -7,10 +7,21 @@
 
 <div class="container-fluid">
     <div class="d-flex justify-content-center">
-        <div class="card-login w-50">
+        <div class="card-login">
             <div class="card-header">
-                <h3 class="text-center">Log In</h3>
+                <h3>Log In</h3>
             </div>
+            @if ((Model.ExternalLogins?.Count ?? 0) == 0)
+            {
+            <div>
+                <p>
+                    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                    for details on setting up this ASP.NET application to support logging in via external services.
+                </p>
+            </div>
+            }
+            else
+            {
             <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                 <div class="card-body">
 
@@ -21,9 +32,10 @@
 
                 </div>
             </form>
+            }
             <div class="card-body">
                 <section>
-                    <form method="post">
+                    <form id="account" method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
@@ -44,11 +56,13 @@
                             </label>
                         </div>
                         <div class="form-group w-100">
-                            <button type="submit" class="btn w-100 login_btn">Login</button>
+                            <input type="submit" value="Login" class="btn w-100 login_btn">
                         </div>
                     </form>
                 </section>
-                <div class="d-flex justify-content-center">
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center ">
                     <a id="forgot-password" asp-page="./ForgotPassword" class="btn btn-info w-100">Forgot your password?</a>
                 </div>
             </div>

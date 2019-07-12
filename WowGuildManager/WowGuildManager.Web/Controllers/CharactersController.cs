@@ -102,7 +102,7 @@ namespace WowGuildManager.Web.Controllers
         public IActionResult Edit(string id)
         {
             var characterEditBindingModel = this.characterService
-                .GetCharacterById<CharacterUpdateBindingModel>(id);
+                .GetCharacterById<CharacterEditBindingModel>(id);
 
             var roleList = this.BindRolesToSelectListItem();
             this.ViewData["Roles"] = roleList;
@@ -111,7 +111,7 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(CharacterUpdateBindingModel model)
+        public async Task<IActionResult> Edit(CharacterEditBindingModel model)
         {
             await this.characterService.Update(model);
             return this.RedirectToAction(nameof(Index));
