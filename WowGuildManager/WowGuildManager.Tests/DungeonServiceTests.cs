@@ -1,6 +1,5 @@
 ﻿namespace WowGuildManager.Tests
 {
-    using AutoMapper;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;

@@ -163,7 +163,7 @@ namespace WowGuildManager.Services.Characters
             return rankObject.Id;
         }
 
-        public async Task Update(CharacterEditBindingModel model)
+        public async Task Update(CharacterUpdateBindingModel model)
         {
             var character = this.GetCharacterById<Character>(model.Id);
             

@@ -6,13 +6,13 @@
 
 <div class="container-fluid">
     <div class="d-flex justify-content-center">
-        <div class="card-login">
+        <div class="card-login w-50">
             <div class="card-header">
                 <h3>Register</h3>
             </div>
             <div class="card-body">
                 <section>
-                    <form id="account" method="post">
+                    <form method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
@@ -39,7 +39,7 @@
                             <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm password" />
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Create new acount" class="btn w-100 login_btn">
+                            <button type="submit" class="btn w-100 login_btn">Create new acount</button>
                         </div>
                     </form>
                 </section>

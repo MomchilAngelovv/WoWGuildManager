@@ -1,4 +1,4 @@
-﻿//TODO: 100% make validator by ids
+﻿//TODO: Make all test database names Guid.newGuid
 namespace WowGuildManager.Services.Dungeons
 {
     using System;

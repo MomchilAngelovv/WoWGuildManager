@@ -18,12 +18,10 @@ namespace WowGuildManager.Web.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly SignInManager<WowGuildManagerUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<WowGuildManagerUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<WowGuildManagerUser> signInManager)
         {
             _signInManager = signInManager;
-            _logger = logger;
         }
 
         [BindProperty]
@@ -51,19 +49,16 @@ namespace WowGuildManager.Web.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
             returnUrl = returnUrl ?? Url.Content("~/");
-
-            // Clear the existing external cookie to ensure a clean login process
+         
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-           
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
         }
@@ -74,12 +69,10 @@ namespace WowGuildManager.Web.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -88,7 +81,6 @@ namespace WowGuildManager.Web.Areas.Identity.Pages.Account
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
                 else
@@ -98,6 +90,7 @@ namespace WowGuildManager.Web.Areas.Identity.Pages.Account
                 }
             }
 
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             // If we got this far, something failed, redisplay form
             return Page();
         }

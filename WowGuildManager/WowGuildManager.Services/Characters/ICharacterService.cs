@@ -28,7 +28,7 @@ namespace WowGuildManager.Services.Characters
 
         string GetRankIdByName(string rankName);
 
-        Task Update(CharacterEditBindingModel model);
+        Task Update(CharacterUpdateBindingModel model);
 
         bool UserHasMaxRegiresteredCharacters(string userId);
     }

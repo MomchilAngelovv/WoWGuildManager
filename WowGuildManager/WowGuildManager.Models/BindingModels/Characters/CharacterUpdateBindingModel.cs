@@ -1,7 +1,7 @@
 ﻿namespace WowGuildManager.Models.BindingModels.Characters
 {
     using System.ComponentModel.DataAnnotations;
-    public class CharacterEditBindingModel
+    public class CharacterUpdateBindingModel
     {
         public string Id { get; set; }
 
