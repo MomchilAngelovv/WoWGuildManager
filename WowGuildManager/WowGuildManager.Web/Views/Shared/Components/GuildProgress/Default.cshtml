@@ -1,17 +1,12 @@
 ﻿@model IEnumerable<WowGuildManager.Models.ViewModels.Guild.RaidDestinationProgressViewModel>
 
-<div id="guildProgress">
-    <div class="w-50 mx-auto m-1">
-        <h1 id="progressSection" class="text-center text-danger">Guild progress</h1>
+<div class="d-flex justify-content-around">
+    <div class="w-50">
+        <h1 class="text-center text-danger">Guild progress</h1>
         @foreach (var raidDestination in Model)
         {
             <div class="m-1">
                 <h6 class="text-center text-warning">@raidDestination.Name: @raidDestination.KilledBosses/@raidDestination.TotalBosses</h6>
-                @*<div class="d-flex justify-content-center">
-                    <a asp-area="" asp-controller="Guild" asp-action="AddProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-success btn-sm border border-dark m-2 w-25"><i class="fas fa-arrow-up"></i> Add Progress</a>
-                    <a asp-area="" asp-controller="Guild" asp-action="RemoveProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-danger btn-sm border border-dark m-2 w-25"><i class="fas fa-arrow-down"></i> Remove Progress</a>
-                </div>*@
-
                 <div class="progress">
                     <div class="progress-bar bg-info" style="width: @(raidDestination.CompletedPercent)%" role="progressbar" aria-valuenow="@raidDestination.KilledBosses" aria-valuemin="0" aria-valuemax="@raidDestination.TotalBosses"></div>
                 </div>

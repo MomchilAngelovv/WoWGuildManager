@@ -11,5 +11,7 @@ namespace WowGuildManager.Models.ViewModels.Users
         public string Name { get; set; }
 
         public bool IsRaidLeader { get; set; }
+
+        public bool IsGuildMaster { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace WowGuildManager.Web.Controllers
     using System.Threading.Tasks;
     using WowGuildManager.Models.BindingModels.Guilds;
     using WowGuildManager.Models.ViewModels.Guild;
+    using WowGuildManager.Models.ViewModels.Raids;
     using WowGuildManager.Models.ViewModels.Users;
     using WowGuildManager.Services.Guilds;
     using WowGuildManager.Services.Raids;
@@ -27,11 +28,13 @@ namespace WowGuildManager.Web.Controllers
         {
             var registeredCharacters = this.guildService.GetRegisteredCharactersCount();
             var users = this.guildService.GetRegisteredUsers<UserGuildMasterViewModel>();
+            var raidDestinations = this.raidService.GetDestinations<RaidDestinationGuildMasterProgressViewModel>();
 
             var guildMasterViewModel = new GuildMasterViewModel
             {
                 RegisteredCharactersCount = registeredCharacters,
-                Users = users
+                Users = users,
+                RaidDestinations = raidDestinations
             };
 
             return this.View(guildMasterViewModel);
@@ -50,13 +53,13 @@ namespace WowGuildManager.Web.Controllers
         public async Task<IActionResult> AddProgress(string raidName)
         {
             await this.guildService.AddProgressToRaid(raidName);
-            return this.RedirectToAction(nameof(Progress));
+            return this.RedirectToAction(nameof(GuildMaster));
         }
 
         public async Task<IActionResult> RemoveProgress(string raidName)
         {
             await this.guildService.RemoveProgressToRaid(raidName);
-            return this.RedirectToAction(nameof(Progress));
+            return this.RedirectToAction(nameof(GuildMaster));
         }
 
         public async Task<IActionResult> PromoteRank(string characterId)

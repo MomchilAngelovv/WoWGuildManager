@@ -30,6 +30,8 @@
            
             this.CreateMap<RaidDestination, RaidDestinationProgressViewModel>();
 
+            this.CreateMap<RaidDestination, RaidDestinationGuildMasterProgressViewModel>();
+
             this.CreateMap<RaidDestination, SelectListItem>()
                 .ForMember(cl => cl.Text, sli => sli.MapFrom(x => x.Name));
         }
