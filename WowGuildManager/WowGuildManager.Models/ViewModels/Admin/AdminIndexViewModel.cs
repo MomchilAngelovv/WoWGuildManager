@@ -2,8 +2,8 @@
 {
     public class AdminIndexViewModel
     {
-        public int RegisteredUsers { get; set; }
+        public int RegisteredUsersCount { get; set; }
 
-        public int RegisteredCharacters { get; set; }
+        public int RegisteredCharactersCount { get; set; }
     }
 }

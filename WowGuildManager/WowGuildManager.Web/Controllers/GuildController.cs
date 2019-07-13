@@ -8,6 +8,7 @@ namespace WowGuildManager.Web.Controllers
     using System.Threading.Tasks;
     using WowGuildManager.Models.BindingModels.Guilds;
     using WowGuildManager.Models.ViewModels.Guild;
+    using WowGuildManager.Models.ViewModels.Users;
     using WowGuildManager.Services.Guilds;
     using WowGuildManager.Services.Raids;
 
@@ -24,7 +25,16 @@ namespace WowGuildManager.Web.Controllers
 
         public IActionResult GuildMaster()
         {
-            return this.View();
+            var registeredCharacters = this.guildService.GetRegisteredCharactersCount();
+            var users = this.guildService.GetRegisteredUsers<UserGuildMasterViewModel>();
+
+            var guildMasterViewModel = new GuildMasterViewModel
+            {
+                RegisteredCharactersCount = registeredCharacters,
+                Users = users
+            };
+
+            return this.View(guildMasterViewModel);
         }
 
         public IActionResult Progress()
@@ -59,6 +69,13 @@ namespace WowGuildManager.Web.Controllers
         {
             await this.guildService.DemoteRankAsync(characterId);
             return this.RedirectToAction("All", "Members");
+        }
+
+        public async Task<IActionResult> SetOrUnsetRaidLeader(string userId)
+        {
+            await this.guildService.SetOrUnsetRaidLeader(userId);
+
+            return RedirectToAction(nameof(GuildMaster));
         }
     }
 }

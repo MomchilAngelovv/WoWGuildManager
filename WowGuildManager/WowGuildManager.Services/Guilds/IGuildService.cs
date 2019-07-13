@@ -8,6 +8,8 @@
 
         Task SetGuildMasterAsync(string userId);
 
+        Task SetOrUnsetRaidLeader(string userId);
+
         Task AddProgressToRaid(string raidName);
 
         Task RemoveProgressToRaid(string raidName);
@@ -19,5 +21,7 @@
         int GetRegisteredUsersCount();
 
         int GetRegisteredCharactersCount();
+
+
     }
 }

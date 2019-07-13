@@ -25,13 +25,13 @@
 
         public IActionResult Index()
         {
-            var registeredUsers = this.guildService.GetRegisteredUsersCount();
+            var registeredUsersCount = this.guildService.GetRegisteredUsersCount();
             var registeredCharactersCount = this.guildService.GetRegisteredCharactersCount();
 
             var adminIndexViewModel = new AdminIndexViewModel
             {
-                RegisteredUsers = registeredUsers,
-                RegisteredCharacters = registeredCharactersCount
+                RegisteredUsersCount = registeredUsersCount,
+                RegisteredCharactersCount = registeredCharactersCount
             };
 
             return this.View(adminIndexViewModel); 

@@ -95,6 +95,25 @@ namespace WowGuildManager.Services.Guilds
             await this.context.SaveChangesAsync();
         }
 
+        public async Task SetOrUnsetRaidLeader(string userId)
+        {
+            var user = this.context.Users
+                .SingleOrDefault(u => u.Id == userId);
+
+            if (user.IsRaidLeader)
+            {
+                await this.userManager.RemoveFromRoleAsync(user, WowGuildManagerUserConstants.RaidLeader);
+                user.IsRaidLeader = false;
+            }
+            else
+            {
+                await this.userManager.AddToRoleAsync(user, WowGuildManagerUserConstants.RaidLeader);
+                user.IsRaidLeader = true;
+            }
+           
+            await this.context.SaveChangesAsync();
+        }
+
         public async Task PromoteRankAsync(string characterId)
         {
             var character = this.characterService.GetCharacterById<Character>(characterId);
