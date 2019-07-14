@@ -24,6 +24,7 @@ namespace WowGuildManager.Web
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI;
     using System;
+    using Microsoft.EntityFrameworkCore.Diagnostics;
 
     public class Startup
     {
@@ -45,6 +46,11 @@ namespace WowGuildManager.Web
             services.AddDbContext<WowGuildManagerDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("WowGuildManagerDbContext"));
+                options.UseLazyLoadingProxies();
+                //options.ConfigureWarnings(warnings =>
+                //{
+                //    warnings.Ignore(CoreEventId.DetachedLazyLoadingWarning);
+                //});
             });
 
             services.AddIdentity<WowGuildManagerUser, WowGuildManagerRole>(options =>

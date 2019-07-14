@@ -23,7 +23,7 @@ namespace WowGuildManager.Services.Characters
         private readonly WowGuildManagerDbContext context;
         private readonly IMapper mapper;
 
-        public CharacterService(WowGuildManagerDbContext context,IMapper mapper)
+        public CharacterService(WowGuildManagerDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -54,7 +54,8 @@ namespace WowGuildManager.Services.Characters
 
         public async Task<Character> Delete(string characterId)
         {
-            var character = this.context.Characters.Find(characterId);
+            var character = this.context.Characters
+                .Find(characterId);
 
             this.context.Characters.Remove(character);
             await this.context.SaveChangesAsync();
@@ -66,7 +67,7 @@ namespace WowGuildManager.Services.Characters
         {
             var classes = this.context.CharacterClasses
                .Select(cc => mapper.Map<T>(cc))
-               .AsEnumerable();
+               .ToList();
 
             return classes;
         }
@@ -74,8 +75,8 @@ namespace WowGuildManager.Services.Characters
         public IEnumerable<T> GetRoles<T>()
         {
             var classes = this.context.CharacterRoles
-               .Select(cc => mapper.Map<T>(cc))
-               .AsEnumerable();
+                .Select(cc => mapper.Map<T>(cc))
+                .ToList();
 
             return classes;
         }
@@ -84,13 +85,8 @@ namespace WowGuildManager.Services.Characters
         {
             var characters = this.context.Characters
                 .Where(character => character.WowGuildManagerUserId == userId)
-                .Include(ch => ch.Dungeons)
-                .Include(ch => ch.Role)
-                .Include(ch => ch.Class)
-                .Include(ch => ch.GuildRank)
-                .AsEnumerable()
+                .ToList()
                 .Select(ch => mapper.Map<T>(ch));
-                
 
             return characters;
         }
@@ -98,10 +94,7 @@ namespace WowGuildManager.Services.Characters
         public T GetCharacterById<T>(string characterId)
         {
             var character = this.context.Characters
-                .Include(ch => ch.Class)
-                .Include(ch => ch.Role)
-                .Include(ch => ch.GuildRank)
-                .FirstOrDefault(ch => ch.Id == characterId);
+                .Find(characterId);
 
             if (character == null)
             {
@@ -114,12 +107,8 @@ namespace WowGuildManager.Services.Characters
         public IEnumerable<T> GetAll<T>()
         {
             var characters = this.context.Characters
-                .Include(ch => ch.Dungeons)
-                .Include(ch => ch.Role)
-                .Include(ch => ch.Class)
-                .Include(ch => ch.GuildRank)
-                .Select(c => mapper.Map<T>(c))
-                .ToList();
+                .ToList()
+                .Select(c => mapper.Map<T>(c));
 
             return characters;
         }
@@ -134,7 +123,7 @@ namespace WowGuildManager.Services.Characters
                 throw new ArgumentException(ErrorConstants.InvalidClassTypeErrorMessage);
             }
 
-            return classObject.Id; 
+            return classObject.Id;
         }
 
         public string GetRoleIdByName(string roleName)
@@ -163,10 +152,10 @@ namespace WowGuildManager.Services.Characters
             return rankObject.Id;
         }
 
-        public async Task Update(CharacterEditBindingModel model)
+        public async Task Edit(CharacterEditBindingModel model)
         {
             var character = this.GetCharacterById<Character>(model.Id);
-            
+
             character.Level = model.Level;
             character.RoleId = this.GetRoleIdByName(model.Role);
 

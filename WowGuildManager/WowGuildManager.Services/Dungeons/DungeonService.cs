@@ -50,11 +50,8 @@ namespace WowGuildManager.Services.Dungeons
         {
             var dungeons = this.context.Dungeons
                 .Where(r => r.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents))
-                .Include(dungeon => dungeon.Leader)
-                .Include(dungeon => dungeon.RegisteredCharacters)
-                .Include(dungeon => dungeon.Destination)
-                .Select(dungeon => this.mapper.Map<T>(dungeon))
-                .AsEnumerable();
+                .ToList()
+                .Select(dungeon => this.mapper.Map<T>(dungeon));
 
             return dungeons;
         }
@@ -63,7 +60,7 @@ namespace WowGuildManager.Services.Dungeons
         {
             var dungeonDestinations = this.context.DungeonDestinations
                 .Select(dd => mapper.Map<T>(dd))
-                .AsEnumerable();
+                .ToList();
 
             return dungeonDestinations;
         }
@@ -71,7 +68,7 @@ namespace WowGuildManager.Services.Dungeons
         public async Task<DungeonCharacter> RegisterCharacterAsync(string characterId, string dungeonId)
         {
             var character = this.context.Characters
-                .FirstOrDefault(ch => ch.Id == characterId);
+                .Find(characterId);
 
             if (character == null)
             {
@@ -79,7 +76,7 @@ namespace WowGuildManager.Services.Dungeons
             }
 
             var dungeon = this.context.Dungeons
-                .FirstOrDefault(d => d.Id == dungeonId);
+                .Find(dungeonId);
 
             if (dungeon == null)
             {
@@ -115,9 +112,8 @@ namespace WowGuildManager.Services.Dungeons
         {
             var dungeonsForToday = this.context.Dungeons
                 .Where(d => d.EventDateTime.Day == DateTime.Now.Day)
-                .Include(d => d.Destination)
-                .Select(d => mapper.Map<T>(d))
-                .AsEnumerable();
+                .ToList()
+                .Select(d => mapper.Map<T>(d));
 
             return dungeonsForToday;
         }
@@ -125,7 +121,7 @@ namespace WowGuildManager.Services.Dungeons
         public IEnumerable<T> GetRegisteredCharactersByDungeonId<T>(string dungeonId)
         {
             var dungeon = this.context.Dungeons
-              .FirstOrDefault(d => d.Id == dungeonId);
+              .Find(dungeonId);
 
             if (dungeon == null)
             {
@@ -134,13 +130,14 @@ namespace WowGuildManager.Services.Dungeons
 
             var characters = this.context.DungeonCharacter
                .Where(dc => dc.DungeonId == dungeonId)
-               .Include(rc => rc.Character)
-               .ThenInclude(ch => ch.Role)
-               .Include(rc => rc.Character)
-               .ThenInclude(ch => ch.Class)
-               .Include(rc => rc.Character)
-               .ThenInclude(ch => ch.GuildRank)
-               .AsEnumerable()
+               //.Include(rc => rc.Character)
+               //.ThenInclude(ch => ch.Role)
+               //.Include(rc => rc.Character)
+               //.ThenInclude(ch => ch.Class)
+               //.Include(rc => rc.Character)
+               //.ThenInclude(ch => ch.GuildRank)
+               //.AsEnumerable()
+               .ToList()
                .Select(dc => mapper.Map<T>(dc.Character));
 
             return characters;
@@ -162,8 +159,7 @@ namespace WowGuildManager.Services.Dungeons
         public T GetDungeon<T>(string dungeonId)
         {
             var dungeon = this.context.Dungeons
-                .Include(d => d.Destination)
-                .FirstOrDefault(d => d.Id == dungeonId);
+                .Find(dungeonId);
 
             if (dungeon == null)
             {

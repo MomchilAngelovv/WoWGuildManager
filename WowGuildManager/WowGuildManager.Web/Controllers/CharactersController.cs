@@ -113,7 +113,7 @@ namespace WowGuildManager.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(CharacterEditBindingModel model)
         {
-            await this.characterService.Update(model);
+            await this.characterService.Edit(model);
             return this.RedirectToAction(nameof(Index));
         }
     }

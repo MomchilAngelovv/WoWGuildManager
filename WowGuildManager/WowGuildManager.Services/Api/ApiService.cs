@@ -32,11 +32,7 @@ namespace WowGuildManager.Services.Api
 
             var characters = this.context.Characters
                 .Where(c => c.WowGuildManagerUserId == userId)
-                .Include(ch => ch.Class)
-                .Include(ch => ch.Role)
-                .Include(ch => ch.GuildRank)
-                .Include(c => c.Dungeons)
-                .Include(c => c.Raids)
+                .ToList()
                 .Select(c => mapper.Map<T>(c));
 
             return characters;
@@ -45,12 +41,7 @@ namespace WowGuildManager.Services.Api
         public T GetCharacterById<T>(string characterId)
         {
             var character = this.context.Characters
-                .Include(ch => ch.Class)
-                .Include(ch => ch.Role)
-                .Include(ch => ch.GuildRank)
-                .Include(c => c.Raids)
-                .Include(c => c.Dungeons)
-                .FirstOrDefault(c => c.Id == characterId);
+                .Find(characterId);
 
             if (character == null)
             {
@@ -64,7 +55,7 @@ namespace WowGuildManager.Services.Api
         {
             var raidDestinations = this.context.RaidDestinations
               .Select(rd => mapper.Map<T>(rd))
-              .AsEnumerable();
+              .ToList();
 
             return raidDestinations;
         }
@@ -72,11 +63,6 @@ namespace WowGuildManager.Services.Api
         public IEnumerable<T> Members<T>()
         {
             var members = this.context.Characters
-                .Include(ch => ch.Class)
-                .Include(ch => ch.Role)
-                .Include(ch => ch.GuildRank)
-                .Include(ch => ch.Dungeons)
-                .Include(ch => ch.Raids)
                 .ToList()
                 .Select(m => mapper.Map<T>(m));
 

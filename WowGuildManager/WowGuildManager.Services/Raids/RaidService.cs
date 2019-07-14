@@ -52,12 +52,9 @@ namespace WowGuildManager.Services.Raids
         {
             var raids = this.context.Raids
                .Where(r => r.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents))
-               .Include(raid => raid.Leader)
-               .Include(raid => raid.RegisteredCharacters)
-               .Include(raid => raid.Destination)
-               .Select(raid => mapper.Map<T>(raid))
-               .AsEnumerable();
-
+               .ToList()
+               .Select(raid => mapper.Map<T>(raid));
+              
             return raids;
         }
 

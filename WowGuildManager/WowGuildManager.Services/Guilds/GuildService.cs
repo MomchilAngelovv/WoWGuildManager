@@ -41,8 +41,7 @@ namespace WowGuildManager.Services.Guilds
 
         public async Task AddProgressToRaid(string raidName)
         {
-            var destinationId = this.raidService.GetDestinationIdByName(raidName);
-            var destination = this.context.RaidDestinations.Find(destinationId);
+            var destination = this.context.RaidDestinations.Find(this.raidService.GetDestinationIdByName(raidName));
 
             if (destination.KilledBosses < destination.TotalBosses)
             {
@@ -64,8 +63,7 @@ namespace WowGuildManager.Services.Guilds
 
         public async Task RemoveProgressToRaid(string raidName)
         {
-            var destinationId = this.raidService.GetDestinationIdByName(raidName);
-            var destination = this.context.RaidDestinations.Find(destinationId);
+            var destination = this.context.RaidDestinations.Find(this.raidService.GetDestinationIdByName(raidName));
             
             if (destination.KilledBosses > 0)
             {
@@ -79,10 +77,10 @@ namespace WowGuildManager.Services.Guilds
         public async Task SetGuildMasterAsync(string userId)
         {
             var user = this.context.Users
-                .SingleOrDefault(u => u.Id == userId);
+                .Find(userId);
 
             var previuosGuildMaster = this.context.Users
-                .FirstOrDefault(u => u.IsGuildMaster == true);
+                .SingleOrDefault(u => u.IsGuildMaster == true);
 
             if (previuosGuildMaster != null)
             {
@@ -98,7 +96,7 @@ namespace WowGuildManager.Services.Guilds
         public async Task SetOrUnsetRaidLeader(string userId)
         {
             var user = this.context.Users
-                .SingleOrDefault(u => u.Id == userId);
+                .Find(userId);
 
             if (user.IsRaidLeader)
             {
@@ -116,7 +114,8 @@ namespace WowGuildManager.Services.Guilds
 
         public async Task PromoteRankAsync(string characterId)
         {
-            var character = this.characterService.GetCharacterById<Character>(characterId);
+            var character = this.characterService
+                .GetCharacterById<Character>(characterId);
 
             if (character.GuildRank.Name != GuildRanksConstants.GuildMaster)
             {
@@ -152,7 +151,8 @@ namespace WowGuildManager.Services.Guilds
 
         public async Task DemoteRankAsync(string characterId)
         {
-            var character = this.characterService.GetCharacterById<Character>(characterId);
+            var character = this.characterService
+                .GetCharacterById<Character>(characterId);
 
             if (character.GuildRank.Name != GuildRanksConstants.Member)
             {

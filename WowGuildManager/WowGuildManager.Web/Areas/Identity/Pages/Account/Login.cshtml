@@ -8,9 +8,6 @@
 <div class="container-fluid">
     <div class="d-flex justify-content-center">
         <div class="card-login w-50">
-            <div class="card-header">
-                <h3>Log In</h3>
-            </div>
             @if ((Model.ExternalLogins?.Count ?? 0) == 0)
             {
             <div>
@@ -33,39 +30,39 @@
                 </div>
             </form>
             }
-            <div class="card-body">
-                <section>
-                    <form id="account" method="post">
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="input-group form-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            </div>
-                            <input asp-for="Input.Username" class="form-control" placeholder="Username" />
+        <div class="card-body">
+            <h3>Log In</h3>
+            <hr class="bg-warning" />
+            <section>
+                <form id="account" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <div class="input-group form-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                        <input asp-for="Input.Username" class="form-control" placeholder="Username" />
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <div class="row align-items-center remember">
-                            <label asp-for="Input.RememberMe">
-                                <input asp-for="Input.RememberMe" />
-                                @Html.DisplayNameFor(m => m.Input.RememberMe)
-                            </label>
-                        </div>
-                        <div class="form-group w-100">
-                            <input type="submit" value="Login" class="btn w-100 login_btn">
-                        </div>
-                    </form>
-                </section>
-            </div>
-            <div class="card-footer">
-                <div class="d-flex justify-content-center ">
-                    <a id="forgot-password" asp-page="./ForgotPassword" class="btn btn-info w-100">Forgot your password?</a>
-                </div>
-            </div>
+                        <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                    </div>
+                    <div class="row align-items-center remember">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                    <div class="form-group w-100">
+                        <input type="submit" value="Login" class="btn w-100 login_btn">
+                    </div>
+                    <div class="d-flex justify-content-center ">
+                        <a id="forgot-password" asp-page="./ForgotPassword" class="btn btn-info w-100">Forgot your password?</a>
+                    </div>
+                </form>
+            </section>
+        </div>
         </div>
     </div>
 </div>

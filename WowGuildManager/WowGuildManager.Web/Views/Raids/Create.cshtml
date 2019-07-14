@@ -9,7 +9,9 @@
             <div class="card-body">
                 <section>
                     <form method="post">
-                        <h2 class="text-center mt-3">Create new raid</h2>
+                        <h2 class="text-center mt-3">Create new raid event</h2>
+                        <hr class="bg-warning" />
+
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="form-group">
                             <input asp-for="@Model.DateTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ','T')" class="form-control border-dark" />
