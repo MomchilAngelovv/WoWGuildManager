@@ -2,18 +2,20 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="container-fluid bc">
+    <div class="row d-flex justify-content-center">
+        <a asp-area="" asp-controller="Dungeons" asp-action="Create" class="btn btn-warning btn-sm m-3 border-dark col-sm-6"><h2>Create new Dungeon</h2></a>
 
-<div class="row d-flex justify-content-center">
-    <a asp-area="" asp-controller="Dungeons" asp-action="Create" class="btn btn-warning btn-sm m-3 border-dark col-sm-6"><h2>Create new Dungeon</h2></a>
+        @if (Model.IsUserRaidLeaderOrGuildMaster)
+        {
+            <a asp-area="" asp-controller="Raids" asp-action="Create" class="btn btn-warning btn-sm m-3 border-dark col-sm-6"><h2>Create new Raid</h2></a>
+        }
+    </div>
 
-    @if (Model.IsUserRaidLeaderOrGuildMaster)
-    {
-        <a asp-area="" asp-controller="Raids" asp-action="Create" class="btn btn-warning btn-sm m-3 border-dark col-sm-6"><h2>Create new Raid</h2></a>
-    }
+    <partial name="_RaidListPartial" for="Raids" />
+
+    <partial name="_DungeonListPartial" for="Dungeons" />
+
 </div>
-
-<partial name="_RaidListPartial" for="Raids" />
-
-<partial name="_DungeonListPartial" for="Dungeons"/>
 
 

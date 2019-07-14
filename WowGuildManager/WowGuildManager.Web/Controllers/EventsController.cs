@@ -95,6 +95,11 @@ namespace WowGuildManager.Web.Controllers
             return this.View();
         }
 
+        public IActionResult Today()
+        {
+            return this.View();
+        }
+
         private static void SetJoinedCharacterToDungeon(Character character, DungeonViewModel dungeon)
         {
             var joinedCharacter = new CharacterNameRoleViewModel

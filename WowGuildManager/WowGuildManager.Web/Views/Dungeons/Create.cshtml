@@ -3,39 +3,44 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="row d-flex justify-content-center m-3">
-    <div class="col-sm-6 col-sm">
-        <form method="post">
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        <div class="card-login col-md-6 col-auto">
+            <div class="card-body">
+                <section>
+                    <form method="post">
+                        <h2 class="text-center mt-3">Create new dungeon event</h2>
 
-            <h2 class="text-center mt-3">Create new dungeon event</h2>
+                        <div asp-validation-summary="All" class="text-danger"></div>
 
-            <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="@Model.DateTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ','T')" class="form-control border-dark" />
+                            <span asp-validation-for="@Model.DateTime" class="text-danger"></span>
+                        </div>
 
-            <div class="form-group">
-                <input asp-for="@Model.DateTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ','T')" class="form-control border-dark" />
-                <span asp-validation-for="@Model.DateTime" class="text-danger"></span>
+                        <div class="form-group">
+                            <select asp-for="@Model.Destination" asp-items="@((IEnumerable<SelectListItem>)ViewData["Places"])" class="form-control border-dark">
+                                <option disabled selected> -- Place -- </option>
+                            </select>
+                            <span asp-validation-for="@Model.Destination" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <select asp-for="@Model.LeaderId" asp-items="@((IEnumerable<SelectListItem>)ViewData["Characters"])" class="form-control border-dark">
+                                <option disabled selected> -- Leader -- </option>
+                            </select>
+                            <span asp-validation-for="@Model.LeaderId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input asp-for="@Model.Description" class="form-control border-dark" placeholder="Optional description (Quest run, Item farm, Event chase etc...)" />
+                        </div>
+
+                        <button type="submit" class="btn btn-warning w-100 border-dark">Create</button>
+                    </form>
+                </section>
             </div>
-
-            <div class="form-group">
-                <select asp-for="@Model.Destination" asp-items="@((IEnumerable<SelectListItem>)ViewData["Places"])" class="form-control border-dark">
-                    <option disabled selected> -- Place -- </option>
-                </select>
-                <span asp-validation-for="@Model.Destination" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <select asp-for="@Model.LeaderId" asp-items="@((IEnumerable<SelectListItem>)ViewData["Characters"])" class="form-control border-dark">
-                    <option disabled selected> -- Leader -- </option>
-                </select>
-                <span asp-validation-for="@Model.LeaderId" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <input asp-for="@Model.Description" class="form-control border-dark" placeholder="Optional description (Quest run, Item farm, Event chase etc...)" />
-            </div>
-
-            <button type="submit" class="btn btn-warning w-100 border-dark">Create</button>
-        </form>
+        </div>
     </div>
 </div>
 
