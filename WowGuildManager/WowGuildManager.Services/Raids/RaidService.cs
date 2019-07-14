@@ -62,9 +62,8 @@ namespace WowGuildManager.Services.Raids
         {
             var raidsForToday = this.context.Raids
                 .Where(d => d.EventDateTime.Day == DateTime.Now.Day)
-                .Include(d => d.Destination)
-                .Select(d => mapper.Map<T>(d))
-                .AsEnumerable();
+                .ToList()
+                .Select(d => mapper.Map<T>(d));
 
             return raidsForToday;
         }
@@ -73,7 +72,7 @@ namespace WowGuildManager.Services.Raids
         {
             var raidDestinations = this.context.RaidDestinations
                 .Select(rd => mapper.Map<T>(rd))
-                .AsEnumerable();
+                .ToList();
 
             return raidDestinations;
         }
@@ -81,7 +80,7 @@ namespace WowGuildManager.Services.Raids
         public IEnumerable<T> GetRegisteredCharactersByRaidId<T>(string raidId)
         {
             var raid = this.context.Raids
-            .FirstOrDefault(d => d.Id == raidId);
+                .Find(raidId);
 
             if (raid == null)
             {
@@ -90,13 +89,7 @@ namespace WowGuildManager.Services.Raids
 
             var registeredCharacters = this.context.RaidCharacter
                 .Where(rc => rc.RaidId == raidId)
-                .Include(rc => rc.Character)
-                .ThenInclude(ch => ch.Role)
-                .Include(rc => rc.Character)
-                .ThenInclude(ch => ch.Class)
-                .Include(rc => rc.Character)
-                .ThenInclude(ch => ch.GuildRank)
-                .AsEnumerable()
+                .ToList()
                 .Select(rc => mapper.Map<T>(rc.Character));
            
             return registeredCharacters;
@@ -105,7 +98,7 @@ namespace WowGuildManager.Services.Raids
         public async Task<RaidCharacter> RegisterCharacterAsync(string characterId, string raidId)
         {
             var character = this.context.Characters
-               .FirstOrDefault(ch => ch.Id == characterId);
+               .Find(characterId);
 
             if (character == null)
             {
@@ -113,7 +106,7 @@ namespace WowGuildManager.Services.Raids
             }
 
             var raid = this.context.Raids
-                .FirstOrDefault(d => d.Id == raidId);
+                .Find(raidId);
 
             if (raid == null)
             {
@@ -148,8 +141,7 @@ namespace WowGuildManager.Services.Raids
         public T GetRaid<T>(string raidId)
         {
             var raid = this.context.Raids
-                .Include(d => d.Destination)
-                .FirstOrDefault(d => d.Id == raidId);
+                .Find(raidId);
 
             if (raid == null)
             {

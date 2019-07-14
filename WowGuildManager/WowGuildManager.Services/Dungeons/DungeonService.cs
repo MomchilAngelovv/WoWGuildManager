@@ -130,13 +130,6 @@ namespace WowGuildManager.Services.Dungeons
 
             var characters = this.context.DungeonCharacter
                .Where(dc => dc.DungeonId == dungeonId)
-               //.Include(rc => rc.Character)
-               //.ThenInclude(ch => ch.Role)
-               //.Include(rc => rc.Character)
-               //.ThenInclude(ch => ch.Class)
-               //.Include(rc => rc.Character)
-               //.ThenInclude(ch => ch.GuildRank)
-               //.AsEnumerable()
                .ToList()
                .Select(dc => mapper.Map<T>(dc.Character));
 
