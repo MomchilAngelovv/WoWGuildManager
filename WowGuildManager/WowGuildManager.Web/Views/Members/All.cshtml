@@ -24,15 +24,15 @@
                     <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@member.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@member.Name</a></td>
                     <td class="p-2">@member.Level</td>
                     <td class="p-2">@member.Class</td>
-                    @if (member.Role == "Damage")
+                    @if (member.Role == CharacterRoleConstants.Damage)
                     {
                         <td><span class="btn btn-danger btn-sm w-50">@member.Role</span></td>
                     }
-                    else if (member.Role == "Healer")
+                    else if (member.Role == CharacterRoleConstants.Healer)
                     {
                         <td><span class="btn btn-success btn-sm w-50">@member.Role</span></td>
                     }
-                    else if (member.Role == "Tank")
+                    else if (member.Role == CharacterRoleConstants.Tank)
                     {
                         <td><span class="btn btn-warning btn-sm w-50">@member.Role</span></td>
                     }

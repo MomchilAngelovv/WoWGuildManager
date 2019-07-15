@@ -12,13 +12,13 @@
     <li class="list-group-item bg-dark">@Model.Role</li>
     <li class="list-group-item bg-dark">@Model.Class</li>
 
-    @if (this.User.IsInRole("GuildMaster"))
+    @if (this.User.IsInRole(GuildRanksConstants.GuildMaster))
     {
-        @if (Model.Rank == "Member")
+        @if (Model.Rank == GuildRanksConstants.Member)
         {
             <li class="list-group-item bg-dark">@Model.Rank <a asp-area="" asp-controller="Guild" asp-action="PromoteRank" asp-route-characterId="@Model.Id" class="btn btn-success btn-sm">Promote <i class="fas fa-arrow-up"></i></a></li>
         }
-        else if (Model.Rank == "GuildMaster")
+        else if (Model.Rank == GuildRanksConstants.GuildMaster)
         {
             <li class="list-group-item bg-dark">@Model.Rank <a asp-area="" asp-controller="Guild" asp-action="DemoteRank" asp-route-characterId="@Model.Id" class="btn btn-danger btn-sm">Demote <i class="fas fa-arrow-down"></i></a></li>
 

@@ -4,10 +4,10 @@
     {
         <section>
             <h2 class="text-center">Dungeons</h2>
-            <div class="row d-flex justify-content-start">
+            <div class="row d-flex justify-content-around">
                 @foreach (var dungeon in Model)
                 {
-                    <div class="card col-auto m-4 bg-dark border-success" style="width: 18rem; padding:0px;">
+                    <div class="card col-md-3 m-1 col-sm-auto bg-dark border-danger" style="width: 18rem; padding:0px;">
                         <img class="card-img-top" src="@dungeon.Image" alt="Card image cap">
                         <div class="card-body text-warning">
                             <h5 class="card-title">@dungeon.DateTime</h5>

@@ -3,7 +3,6 @@
 //TODO: OrderBy clouses where nesesary
 //TODO: Delete remainning comments when READY ! IMPORTANT !!!
 //TODO: Implement Delete character
-//TODO: Consoder to make validator
 namespace WowGuildManager.Services.Characters
 {
     using System;

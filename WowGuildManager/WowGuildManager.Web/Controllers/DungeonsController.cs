@@ -1,27 +1,28 @@
 ﻿namespace WowGuildManager.Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
+    using System.Collections.Generic;
+
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Models.BindingModels.Dungeons;
-    using WowGuildManager.Models.ViewModels.Characters;
-    using WowGuildManager.Models.ViewModels.Dungeons;
-    using WowGuildManager.Services.Characters;
     using WowGuildManager.Services.Dungeons;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Models.ViewModels.Dungeons;
+    using WowGuildManager.Models.ViewModels.Characters;
+    using WowGuildManager.Models.BindingModels.Dungeons;
 
     [Authorize]
     public class DungeonsController : BaseController
     {
         private readonly UserManager<WowGuildManagerUser> userManager;
+
         private readonly IDungeonService dungeonService;
         private readonly ICharacterService characterService;
-       
 
         public DungeonsController(
             UserManager<WowGuildManagerUser> userManager,
@@ -93,7 +94,6 @@
             var myCharacters = this.characterService
                 .GetCharactersByUserId<CharacterIdNameViewModel>(userId);
 
-            //TODO: Fix bug hwen it syas to register character when dungeon is full
             dungeonDetailsViewModel.Characters = registeredCharacters;
             dungeonDetailsViewModel.AvailableCharacters = myCharacters;
 

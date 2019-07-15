@@ -47,16 +47,12 @@ namespace WowGuildManager.Web
             {
                 options.UseSqlServer(Configuration.GetConnectionString("WowGuildManagerDbContext"));
                 options.UseLazyLoadingProxies();
-                //options.ConfigureWarnings(warnings =>
-                //{
-                //    warnings.Ignore(CoreEventId.DetachedLazyLoadingWarning);
-                //});
             });
 
             services.AddIdentity<WowGuildManagerUser, WowGuildManagerRole>(options =>
              {
                 //TODO: Fix password settings
-                options.Password.RequireDigit = false;
+                 options.Password.RequireDigit = false;
                  options.Password.RequiredLength = 3;
                  options.Password.RequiredUniqueChars = 0;
                  options.Password.RequireLowercase = false;

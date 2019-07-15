@@ -1,7 +1,8 @@
 ﻿namespace WowGuildManager.Web.Areas.Api.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
+
+    using Microsoft.AspNetCore.Mvc;
 
     using WowGuildManager.Models.ApiModels.Characters;
     using WowGuildManager.Services.Api;
@@ -10,7 +11,8 @@
     {
         private readonly IApiService apiService;
 
-        public MembersController(IApiService apiService)
+        public MembersController(
+            IApiService apiService)
         {
             this.apiService = apiService;
         }
@@ -19,6 +21,7 @@
         public IEnumerable<CharacterApiViewModel> Get()
         {
             var members = this.apiService.Members<CharacterApiViewModel>();
+
             return members;
         }
 

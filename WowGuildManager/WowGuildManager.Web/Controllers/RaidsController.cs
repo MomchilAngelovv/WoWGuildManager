@@ -124,10 +124,18 @@
             return this.RedirectToAction("Upcoming", "Events");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Edit(RaidEditBindingModel input)
+        {
+            await this.raidService.Edit(input);
+
+            return this.RedirectToAction(nameof(Details),new { id = input.RaidId });
+        }
+
         public async Task<IActionResult> Kick(string characterId, string raidId)
         {
             await this.raidService.KickPlayer(characterId, raidId);
-            return this.RedirectToAction("Upcoming", "Events");
+            return this.RedirectToAction(nameof(Details), new { id = raidId});
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿//TODO: 100% make validator by ids
-namespace WowGuildManager.Services.Dungeons
+﻿namespace WowGuildManager.Services.Dungeons
 {
     using System;
     using System.Collections.Generic;

@@ -1,7 +1,7 @@
 ﻿namespace WowGuildManager.Web.Areas.Api.Controllers
 {
-    using System.Linq;
     using System.Collections.Generic;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -11,12 +11,10 @@
     using WowGuildManager.Services.Api;
 
     [Authorize]
-    [Route("api/[controller]")]
-    [Area("Api")]
-    [ApiController]
     public class CharactersController : ApiController
     {
         private readonly UserManager<WowGuildManagerUser> userManager;
+
         private readonly IApiService apiService;
       
         public CharactersController(
@@ -32,7 +30,7 @@
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            var characters = this.apiService.GetAll<CharacterApiViewModel>(userId).AsEnumerable();
+            var characters = this.apiService.GetAll<CharacterApiViewModel>(userId);
 
             return characters;
         }

@@ -3,28 +3,30 @@
 //TODO: Consider remove selectitem list
 namespace WowGuildManager.Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
+    using System.Collections.Generic;
+
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Models.ViewModels.Characters;
     using WowGuildManager.Services.Characters;
+    using WowGuildManager.Models.ViewModels.Characters;
     using WowGuildManager.Models.BindingModels.Characters;
-    using System.Dynamic;
 
     [Authorize]
     public class CharactersController : BaseController
     {
-        private readonly ICharacterService characterService;
         private readonly UserManager<WowGuildManagerUser> userManager;
 
+        private readonly ICharacterService characterService;
         
-        public CharactersController(ICharacterService characterService, UserManager<WowGuildManagerUser> userManager)
+        public CharactersController(
+            UserManager<WowGuildManagerUser> userManager, 
+            ICharacterService characterService)
         { 
             this.characterService = characterService;
             this.userManager = userManager;
@@ -35,8 +37,7 @@ namespace WowGuildManager.Web.Controllers
             var userId = this.userManager.GetUserId(this.User);
 
             var characters = this.characterService
-                .GetCharactersByUserId<CharacterViewModel>(userId)
-                .ToList();
+                .GetCharactersByUserId<CharacterViewModel>(userId);
 
             var characterIndexViewModel = new CharacterIndexViewModel
             {
@@ -105,6 +106,7 @@ namespace WowGuildManager.Web.Controllers
                 .GetCharacterById<CharacterEditBindingModel>(id);
 
             var roleList = this.BindRolesToSelectListItem();
+
             this.ViewData["Roles"] = roleList;
 
             return this.View(characterEditBindingModel);

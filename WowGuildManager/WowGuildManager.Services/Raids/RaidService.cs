@@ -164,5 +164,19 @@ namespace WowGuildManager.Services.Raids
             this.context.RaidCharacter.Remove(raidCharacter);
             await this.context.SaveChangesAsync();
         }
+
+        public async Task Edit(RaidEditBindingModel input)
+        {
+            var raid = this.context.Raids.Find(input.RaidId);
+
+            if (raid == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidRaidErrorMessage);
+            }
+
+            raid.Description = input.Description;
+            this.context.Update(raid);
+            await this.context.SaveChangesAsync();
+        }
     }
 }

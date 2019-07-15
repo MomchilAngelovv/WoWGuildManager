@@ -26,6 +26,8 @@ namespace WowGuildManager.Services.Raids
         T GetRaid<T>(string raidId);
 
         Task KickPlayer(string characterId, string raidId);
+
+        Task Edit(RaidEditBindingModel input);
     }
 }
     

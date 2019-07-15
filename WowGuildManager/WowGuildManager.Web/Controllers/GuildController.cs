@@ -44,7 +44,7 @@ namespace WowGuildManager.Web.Controllers
         {
             var guildProgressViewModel = new GuildProgressViewModel
             {
-                
+
             };
 
             return this.View(guildProgressViewModel);
@@ -65,13 +65,13 @@ namespace WowGuildManager.Web.Controllers
         public async Task<IActionResult> PromoteRank(string characterId)
         {
             await this.guildService.PromoteRankAsync(characterId);
-            return this.RedirectToAction("All", "Members");
+            return this.RedirectToAction("Details", "Characters", new { id = characterId });
         }
 
         public async Task<IActionResult> DemoteRank(string characterId)
         {
             await this.guildService.DemoteRankAsync(characterId);
-            return this.RedirectToAction("All", "Members");
+            return this.RedirectToAction("Details", "Characters", new { id = characterId });
         }
 
         public async Task<IActionResult> SetOrUnsetRaidLeader(string userId)
