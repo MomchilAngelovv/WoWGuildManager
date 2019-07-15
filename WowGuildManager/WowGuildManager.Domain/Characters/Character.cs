@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using WowGuildManager.Domain.Raid;
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Domain.Raid;
 
     public class Character  
     {

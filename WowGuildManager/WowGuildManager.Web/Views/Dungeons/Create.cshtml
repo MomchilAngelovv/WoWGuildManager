@@ -15,19 +15,19 @@
                         <div asp-validation-summary="All" class="text-danger"></div>
 
                         <div class="form-group">
-                            <input asp-for="@Model.DateTime" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm").Replace(' ','T')" class="form-control border-dark" />
+                            <input asp-for="@Model.DateTime" value="@DateTime.Now.ToString(" yyyy-MM-dd HH:mm").Replace(' ','T')" class="form-control border-dark" />
                             <span asp-validation-for="@Model.DateTime" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <select asp-for="@Model.Destination" asp-items="@((IEnumerable<SelectListItem>)ViewData["Places"])" class="form-control border-dark">
+                            <select asp-for="@Model.Destination" asp-items="@((IEnumerable<SelectListItem>)ViewData[" Places"])" class="form-control border-dark">
                                 <option disabled selected> -- Place -- </option>
                             </select>
                             <span asp-validation-for="@Model.Destination" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <select asp-for="@Model.LeaderId" asp-items="@((IEnumerable<SelectListItem>)ViewData["Characters"])" class="form-control border-dark">
+                            <select asp-for="@Model.LeaderId" asp-items="@((IEnumerable<SelectListItem>)ViewData[" Characters"])" class="form-control border-dark">
                                 <option disabled selected> -- Leader -- </option>
                             </select>
                             <span asp-validation-for="@Model.LeaderId" class="text-danger"></span>
@@ -47,4 +47,10 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
 }

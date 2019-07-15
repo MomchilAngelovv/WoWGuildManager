@@ -1,14 +1,14 @@
 ﻿namespace WowGuildManager.Data
 {
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-    using WowGuildManager.Data.Configurations;
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Raid;
+    using WowGuildManager.Domain.Logs;
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Domain.Logs;
-    using WowGuildManager.Domain.Raid;
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Data.Configurations;
 
     public class WowGuildManagerDbContext : IdentityDbContext<WowGuildManagerUser, WowGuildManagerRole, string>
     {
@@ -17,6 +17,7 @@
         {
 
         }
+
         public DbSet<Character> Characters { get; set; }
 
         public DbSet<Dungeon> Dungeons { get; set; }

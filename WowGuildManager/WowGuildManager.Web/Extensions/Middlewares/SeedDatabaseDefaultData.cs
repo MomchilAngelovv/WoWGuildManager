@@ -1,16 +1,17 @@
 ﻿namespace WowGuildManager.Web.Extensions
 {
-    using Microsoft.AspNetCore.Http;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
-    using WowGuildManager.Common;
-    using WowGuildManager.Common.GlobalConstants;
+    using Microsoft.AspNetCore.Http;
+
     using WowGuildManager.Data;
-    using WowGuildManager.Domain.Characters;
-    using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Common;
     using WowGuildManager.Domain.Raid;
+    using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Common.GlobalConstants;
 
     public class SeedDatabaseDefaultData
     {

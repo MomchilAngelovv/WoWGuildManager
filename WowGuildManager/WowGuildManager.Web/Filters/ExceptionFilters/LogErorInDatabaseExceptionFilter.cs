@@ -36,7 +36,8 @@ namespace WowGuildManager.Web.Filters.ExceptionFilters
             var exceptionLog = new ExceptionLog
             {
                 ExceptionMessage = context.Exception.Message,
-                Username = username
+                Username = username,
+                ExceptionTime = DateTime.UtcNow
             };
 
             context.ExceptionHandled = true;

@@ -50,6 +50,7 @@ namespace WowGuildManager.Web
                 options.UseLazyLoadingProxies();
             });
 
+
             services.AddIdentity<WowGuildManagerUser, WowGuildManagerRole>(options =>
              {
                 //TODO: Fix password settings

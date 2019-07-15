@@ -1,13 +1,14 @@
 ﻿namespace WowGuildManager.Web.Extensions
 {
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
-    using WowGuildManager.Common.GlobalConstants;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
+
     using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Common.GlobalConstants;
 
     public class SeedAdminUserAndRoles
     {

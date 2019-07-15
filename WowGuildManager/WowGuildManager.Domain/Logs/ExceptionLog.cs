@@ -16,5 +16,8 @@ namespace WowGuildManager.Domain.Logs
 
         [Required]
         public string Username { get; set; }
+
+        [Required]
+        public DateTime ExceptionTime { get; set; }
     }
 }
