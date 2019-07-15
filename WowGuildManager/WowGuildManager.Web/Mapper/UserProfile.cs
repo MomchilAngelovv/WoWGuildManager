@@ -1,13 +1,10 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Models.ViewModels.Users;
-
-namespace WowGuildManager.Web.Mapper
+﻿namespace WowGuildManager.Web.Mapper
 {
+    using AutoMapper;
+
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Models.ViewModels.Users;
+
     public class UserProfile : Profile
     {
         public UserProfile()

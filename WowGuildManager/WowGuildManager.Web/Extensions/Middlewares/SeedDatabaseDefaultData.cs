@@ -17,7 +17,6 @@
     {
         private readonly RequestDelegate _next;
 
-
         public SeedDatabaseDefaultData(RequestDelegate next)
         {
             this._next = next;

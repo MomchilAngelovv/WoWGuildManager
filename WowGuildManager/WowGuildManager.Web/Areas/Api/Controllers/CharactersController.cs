@@ -2,13 +2,13 @@
 {
     using System.Collections.Generic;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Authorization;
 
+    using WowGuildManager.Services.Api;
     using WowGuildManager.Domain.Identity;
     using WowGuildManager.Models.ApiModels.Characters;
-    using WowGuildManager.Services.Api;
 
     [Authorize]
     public class CharactersController : ApiController

@@ -1,22 +1,25 @@
 ﻿//TODO: MAKE RESPONSIVE VERY BAD
-//TODO: Think how to extract userId with better way in base controller
+//TODO:REARANGE private and public stuff AT END !! IMPORTANT
+//TODO: Consider Events view change border if joined or no
+
+
 namespace WowGuildManager.Web.Controllers
 {
     using System.Linq;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
 
-    using WowGuildManager.Domain.Characters;
-    using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Models.ViewModels.Characters;
-    using WowGuildManager.Models.ViewModels.Dungeons;
-    using WowGuildManager.Models.ViewModels.Events;
-    using WowGuildManager.Models.ViewModels.Raids;
-    using WowGuildManager.Services.Characters;
-    using WowGuildManager.Services.Dungeons;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Authorization;
+
     using WowGuildManager.Services.Raids;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Services.Dungeons;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Models.ViewModels.Raids;
+    using WowGuildManager.Models.ViewModels.Events;
+    using WowGuildManager.Models.ViewModels.Dungeons;
+    using WowGuildManager.Models.ViewModels.Characters;
 
     [Authorize]
     public class EventsController : BaseController
@@ -37,7 +40,6 @@ namespace WowGuildManager.Web.Controllers
             this.raidService = raidService;
             this.charactersService = charactersService;
         }
-        //TODO:REARANGE private and public stuff AT END !! IMPORTANT
         private bool IsCharacterRegisteredForDungeon(Character character, DungeonViewModel dungeon)
         {
             return character.Dungeons.Any(d => d.DungeonId == dungeon.Id);
@@ -58,7 +60,6 @@ namespace WowGuildManager.Web.Controllers
                .GetAllUpcoming<RaidViewModel>()
                .ToList();
 
-            //TODO: Consider Events view change border if joined or no
             foreach (var character in myCharacters)
             {
                 foreach (var dungeon in dungeons)

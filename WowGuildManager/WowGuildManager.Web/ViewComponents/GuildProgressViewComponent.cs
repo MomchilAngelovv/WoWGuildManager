@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Models.ViewModels.Guild;
-using WowGuildManager.Services.Raids;
-
-namespace WowGuildManager.Web.ViewComponents
+﻿namespace WowGuildManager.Web.ViewComponents
 {
+    using Microsoft.AspNetCore.Mvc;
+
+    using WowGuildManager.Services.Raids;
+    using WowGuildManager.Models.ViewModels.Guild;
+
     public class GuildProgressViewComponent : ViewComponent
     {
         private readonly IRaidService raidService;

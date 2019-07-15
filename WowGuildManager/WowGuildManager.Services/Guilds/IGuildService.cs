@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using System.Collections.Generic;
+
     public interface IGuildService
     {
         IEnumerable<T> GetRegisteredUsers<T>();
@@ -21,7 +22,5 @@
         int GetRegisteredUsersCount();
 
         int GetRegisteredCharactersCount();
-
-
     }
 }

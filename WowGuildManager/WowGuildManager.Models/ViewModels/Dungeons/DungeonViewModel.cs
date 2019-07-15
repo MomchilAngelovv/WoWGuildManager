@@ -1,6 +1,7 @@
 ﻿namespace WowGuildManager.Models.ViewModels.Dungeons
 {
     using WowGuildManager.Models.ViewModels.Characters;
+
     public class DungeonViewModel
     {
         public string Id { get; set; }

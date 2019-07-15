@@ -1,13 +1,15 @@
 ﻿namespace WowGuildManager.Web.Mapper
 {
-    using AutoMapper;
     using System.Linq;
+
     using Microsoft.AspNetCore.Mvc.Rendering;
+
+    using AutoMapper;
 
     using WowGuildManager.Domain.Characters;
     using WowGuildManager.Models.ApiModels.Characters;
-    using WowGuildManager.Models.BindingModels.Characters;
     using WowGuildManager.Models.ViewModels.Characters;
+    using WowGuildManager.Models.BindingModels.Characters;
 
     public class CharacterProfile : Profile
     {

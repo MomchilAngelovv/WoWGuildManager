@@ -1,11 +1,11 @@
-﻿//TOD0: Move this to dungeon service
-namespace WowGuildManager.Services.Characters
+﻿namespace WowGuildManager.Services.Characters
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     using WowGuildManager.Domain.Characters;
     using WowGuildManager.Models.BindingModels.Characters;
+
     public interface ICharacterService
     {
         Task<Character> CreateAsync(CharacterCreateBindingModel inputModel);

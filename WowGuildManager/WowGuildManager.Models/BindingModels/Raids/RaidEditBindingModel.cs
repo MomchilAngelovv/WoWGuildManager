@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace WowGuildManager.Models.BindingModels.Raids
+﻿namespace WowGuildManager.Models.BindingModels.Raids
 {
+    using System;
+
     public class RaidEditBindingModel
     {
         public string RaidId { get; set; }

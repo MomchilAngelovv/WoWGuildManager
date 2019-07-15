@@ -1,19 +1,19 @@
 //TODO: Make last all tables same design (same classes templete)
 namespace WowGuildManager.Tests
 {
-    using Xunit;
     using System;
-    using AutoMapper;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Collections.Generic;
+
     using Microsoft.EntityFrameworkCore;
+
+    using Xunit;
 
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Characters;
     using WowGuildManager.Services.Characters;
-    using WowGuildManager.Models.ViewModels.Characters;
     using WowGuildManager.Models.BindingModels.Characters;
-    using System.Threading.Tasks;
 
     public class CharacterServiceTests
     {

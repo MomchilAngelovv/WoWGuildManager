@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using WowGuildManager.Domain.Identity;
-
-namespace WowGuildManager.Domain.Logs
+﻿namespace WowGuildManager.Domain.Logs
 {
+    using System;
+
+    using System.ComponentModel.DataAnnotations;
+
     public class ExceptionLog
     {
         [Key]

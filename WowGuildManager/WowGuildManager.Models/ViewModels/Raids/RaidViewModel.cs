@@ -1,6 +1,7 @@
 ﻿namespace WowGuildManager.Models.ViewModels.Raids
 {
     using WowGuildManager.Models.ViewModels.Characters;
+
     public class RaidViewModel
     {
         public string Id { get; set; }

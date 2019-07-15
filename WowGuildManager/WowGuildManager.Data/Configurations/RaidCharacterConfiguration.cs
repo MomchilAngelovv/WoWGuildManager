@@ -4,6 +4,7 @@
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     using WowGuildManager.Domain.Raid;
+
     public class RaidCharacterConfiguration : IEntityTypeConfiguration<RaidCharacter>
     {
         public void Configure(EntityTypeBuilder<RaidCharacter> entity)

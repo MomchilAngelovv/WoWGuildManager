@@ -1,15 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using WowGuildManager.Models.ViewModels.Characters;
-using WowGuildManager.Models.ViewModels.Guild;
-using WowGuildManager.Models.ViewModels.Raids;
-using WowGuildManager.Models.ViewModels.Users;
-
-namespace WowGuildManager.Models.BindingModels.Guilds
+﻿namespace WowGuildManager.Models.BindingModels.Guilds
 {
+    using System.Collections.Generic;
+
+    using WowGuildManager.Models.ViewModels.Raids;
+    using WowGuildManager.Models.ViewModels.Users;
+
     public class GuildMasterViewModel
     {
         public int RegisteredCharactersCount { get; set; }

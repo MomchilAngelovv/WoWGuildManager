@@ -6,15 +6,15 @@
 namespace WowGuildManager.Services.Characters
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using AutoMapper;
-    using Microsoft.EntityFrameworkCore;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
-    using WowGuildManager.Common.GlobalConstants;
+    using AutoMapper;
+
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Models.BindingModels.Characters;
 
     public class CharacterService : ICharacterService

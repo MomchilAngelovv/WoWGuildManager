@@ -1,4 +1,6 @@
-﻿namespace WowGuildManager.Web.Controllers
+﻿//TODO: Think how to implement guild points
+
+namespace WowGuildManager.Web.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -81,7 +83,6 @@
             return RedirectToAction("Upcoming", "Events");
         }
 
-        //TODO: Think how to implement guild points
         public IActionResult Details(string id)
         {
             var dungeonDetailsViewModel = this.dungeonService.GetDungeon<DungeonDetailsViewModel>(id);

@@ -1,42 +1,45 @@
-﻿namespace WowGuildManager.Web.Controllers
+﻿//TODO: Security and authority validation everyWHERE !! IMPORTANTT !!!!
+
+namespace WowGuildManager.Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Identity;
+    using System.Collections.Generic;
+
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
+    using WowGuildManager.Services.Raids;
     using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Models.ViewModels.Raids;
     using WowGuildManager.Models.BindingModels.Raids;
     using WowGuildManager.Models.ViewModels.Characters;
-    using WowGuildManager.Models.ViewModels.Raids;
-    using WowGuildManager.Services.Characters;
-    using WowGuildManager.Services.Raids;
 
     public class RaidsController : BaseController
     {
-        private readonly IRaidService raidService;
-        private readonly ICharacterService characterService;
         private readonly UserManager<WowGuildManagerUser> userManager;
 
+        private readonly IRaidService raidService;
+        private readonly ICharacterService characterService;
+
         public RaidsController(
+            UserManager<WowGuildManagerUser> userManager,
             IRaidService raidService, 
-            ICharacterService characterService,
-            UserManager<WowGuildManagerUser> userManager)
+            ICharacterService characterService)
         {
+            this.userManager = userManager;
             this.raidService = raidService;
             this.characterService = characterService;
-            this.userManager = userManager;
         }
 
-        //TODO: Security and authority validation everyWHERE !! IMPORTANTT !!!!
         public IActionResult Index()
         {
             return View();
         }
        
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             var myCharacters = this.BindCharactersToSelectListItem();
 

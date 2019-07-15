@@ -5,12 +5,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
-    using WowGuildManager.Models.ViewModels.Admin;
-    using WowGuildManager.Models.ViewModels.Users;
     using WowGuildManager.Services.Guilds;
-    using Microsoft.AspNetCore.Identity;
-    using WowGuildManager.Domain.Identity;
-    using System.Linq;
+    using WowGuildManager.Models.ViewModels.Admin;
 
     [Area("Administration")]
     [Authorize(Roles ="Admin")]

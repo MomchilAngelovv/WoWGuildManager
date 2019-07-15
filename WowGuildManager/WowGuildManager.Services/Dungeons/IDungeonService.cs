@@ -1,7 +1,7 @@
 ﻿namespace WowGuildManager.Services.Dungeons
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Models.BindingModels.Dungeons;

@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using System.Collections.Generic;
+
     public class MembersIndexViewModel
     {
         public IEnumerable<CharacterViewModel> Members { get; set; }

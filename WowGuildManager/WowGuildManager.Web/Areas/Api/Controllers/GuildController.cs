@@ -5,8 +5,8 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
 
     using Microsoft.AspNetCore.Mvc;
 
-    using WowGuildManager.Models.ApiModels.Raids;
     using WowGuildManager.Services.Api;
+    using WowGuildManager.Models.ApiModels.Raids;
 
     public class GuildController : ApiController
     {

@@ -3,6 +3,7 @@
 namespace WowGuildManager.Models.BindingModels.Characters
 {
     using System.ComponentModel.DataAnnotations;
+
     public class CharacterCreateBindingModel
     {
         [Required]

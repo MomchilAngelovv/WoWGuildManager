@@ -1,24 +1,24 @@
-﻿//TOD0: FIX ALL EXLUDE DEVELOPMENT LIBRATIES !~~
-namespace WowGuildManager.Web.Controllers
+﻿namespace WowGuildManager.Web.Controllers
 {
-    using CloudinaryDotNet;
-    using CloudinaryDotNet.Actions;
-    using Microsoft.AspNetCore.Mvc;
-    using System.IO;
     using System.Threading.Tasks;
-    using WowGuildManager.Models.BindingModels.Guilds;
-    using WowGuildManager.Models.ViewModels.Guild;
-    using WowGuildManager.Models.ViewModels.Raids;
-    using WowGuildManager.Models.ViewModels.Users;
-    using WowGuildManager.Services.Guilds;
+
+    using Microsoft.AspNetCore.Mvc;
+
     using WowGuildManager.Services.Raids;
+    using WowGuildManager.Services.Guilds;
+    using WowGuildManager.Models.ViewModels.Users;
+    using WowGuildManager.Models.ViewModels.Raids;
+    using WowGuildManager.Models.ViewModels.Guild;
+    using WowGuildManager.Models.BindingModels.Guilds;
 
     public class GuildController : BaseController
     {
         private readonly IRaidService raidService;
         private readonly IGuildService guildService;
 
-        public GuildController(IRaidService raidService, IGuildService guildService)
+        public GuildController(
+            IRaidService raidService, 
+            IGuildService guildService)
         {
             this.raidService = raidService;
             this.guildService = guildService;

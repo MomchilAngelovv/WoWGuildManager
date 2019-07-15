@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace WowGuildManager.Web.Areas.Api.Controllers
+﻿namespace WowGuildManager.Web.Areas.Api.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [Area("Api")]
     [ApiController]

@@ -1,11 +1,14 @@
 ﻿//TODO: MAKE EVEYEWHERE BUTTON-SM !!
 //TODO APPLY Authorization attribites everywhere
+//TODO: Intoduce Privacy policy page
+//TODO: Consired proper error view (search in net)
+
 namespace WowGuildManager.Web.Controllers
 {
     using System.Diagnostics;
-    using Microsoft.AspNetCore.Identity;
+
     using Microsoft.AspNetCore.Mvc;
-    using WowGuildManager.Domain.Identity;
+
     using WowGuildManager.Models.ViewModels.Error;
 
     public class HomeController : BaseController
@@ -17,12 +20,10 @@ namespace WowGuildManager.Web.Controllers
 
         public IActionResult Privacy()
         {
-            //TODO: Intoduce Privacy policy page
             return View();
         }
 
-        //TODO: COnsider leaveing sections and some few divs outside partial views
-        //TODO: Consired proper error view (search in net)
+      
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

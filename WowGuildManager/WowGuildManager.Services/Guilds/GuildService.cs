@@ -1,19 +1,21 @@
 ﻿//TODO: Excratd private method to set new character guild rank DRY
 namespace WowGuildManager.Services.Guilds
 {
-    using AutoMapper;
-    using Microsoft.AspNetCore.Identity;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
-    using WowGuildManager.Common.GlobalConstants;
+    using Microsoft.AspNetCore.Identity;
+
+    using AutoMapper;
+
     using WowGuildManager.Data;
-    using WowGuildManager.Domain.Characters;
-    using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Services.Characters;
     using WowGuildManager.Services.Raids;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Common.GlobalConstants;
 
     public class GuildService : IGuildService
     {

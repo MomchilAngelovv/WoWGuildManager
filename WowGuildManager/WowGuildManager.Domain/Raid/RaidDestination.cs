@@ -1,6 +1,7 @@
 ﻿namespace WowGuildManager.Domain.Raid
 {
     using System.ComponentModel.DataAnnotations;
+
     public class RaidDestination
     {
         [Key]

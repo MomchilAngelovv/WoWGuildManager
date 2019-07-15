@@ -1,9 +1,10 @@
-﻿//TODO: Make carousel links only on GO TO ....
+﻿//TODO: Require unique email;
+
 namespace WowGuildManager.Web.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    //TODO: Require unique email;
+    using Microsoft.AspNetCore.Authorization;
+
     [AllowAnonymous]
     public class GalleryController : BaseController
     {

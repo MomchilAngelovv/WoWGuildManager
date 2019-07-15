@@ -4,11 +4,12 @@
 namespace WowGuildManager.Web.Controllers
 {
     using System.Linq;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
 
-    using WowGuildManager.Models.ViewModels.Characters;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
+
     using WowGuildManager.Services.Characters;
+    using WowGuildManager.Models.ViewModels.Characters;
 
     [AllowAnonymous]
     public class MembersController : BaseController

@@ -1,17 +1,19 @@
 ﻿namespace WowGuildManager.Tests
 {
-    using AutoMapper;
-    using Microsoft.EntityFrameworkCore;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using WowGuildManager.Data;
-    using WowGuildManager.Domain.Characters;
-    using WowGuildManager.Domain.Dungeon;
-    using WowGuildManager.Models.BindingModels.Dungeons;
-    using WowGuildManager.Services.Dungeons;
+    using System.Collections.Generic;
+
+    using Microsoft.EntityFrameworkCore;
+
     using Xunit;
+
+    using WowGuildManager.Data;
+    using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Services.Dungeons;
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Models.BindingModels.Dungeons;
 
     public class DungeonServiceTests
     {

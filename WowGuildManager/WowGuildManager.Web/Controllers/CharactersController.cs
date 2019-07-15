@@ -1,9 +1,9 @@
 ﻿//TODO: COnsier create input forms to make models in Get methods and return view models
 //TODO: Api endpoits for dungeons /raids / characers everythng
-//TODO: Consider remove selectitem list
+//TODO: Sort controllers dependanicyes and methods
+
 namespace WowGuildManager.Web.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
@@ -47,7 +47,6 @@ namespace WowGuildManager.Web.Controllers
             return View(characterIndexViewModel);
         }
 
-        //TODO: Sort controllers dependanicyes and methods
         public IActionResult Create()
         {
             var classList = this.BindClassesToSelectListItem();

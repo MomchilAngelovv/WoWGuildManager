@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using WowGuildManager.Domain.Characters;
+
     public class Dungeon
     {
         public Dungeon()

@@ -4,6 +4,7 @@
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     using WowGuildManager.Domain.Characters;
+
     public class CharacterConfiguration : IEntityTypeConfiguration<Character>
     {
         public void Configure(EntityTypeBuilder<Character> entity)

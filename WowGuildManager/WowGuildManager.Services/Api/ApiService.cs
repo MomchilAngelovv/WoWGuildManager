@@ -1,11 +1,10 @@
-﻿//TODO: Makeerror consntats
-namespace WowGuildManager.Services.Api
+﻿namespace WowGuildManager.Services.Api
 {
     using System;
-    using AutoMapper;
     using System.Linq;
     using System.Collections.Generic;
-    using Microsoft.EntityFrameworkCore;
+
+    using AutoMapper;
 
     using WowGuildManager.Data;
     using WowGuildManager.Common.GlobalConstants;

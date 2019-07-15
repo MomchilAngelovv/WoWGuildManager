@@ -2,8 +2,9 @@
 {
     using System.Collections.Generic;
 
-    using WowGuildManager.Models.ViewModels.Dungeons;
     using WowGuildManager.Models.ViewModels.Raids;
+    using WowGuildManager.Models.ViewModels.Dungeons;
+
     public class TodayEventsViewModel
     {
         public IEnumerable<RaidIdDestinationViewModel> Raids { get; set; }

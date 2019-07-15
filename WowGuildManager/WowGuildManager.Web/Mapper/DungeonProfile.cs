@@ -1,6 +1,7 @@
 ﻿namespace WowGuildManager.Web.Mapper
 {
     using AutoMapper;
+
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     using WowGuildManager.Domain.Dungeon;

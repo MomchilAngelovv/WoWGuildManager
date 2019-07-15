@@ -1,30 +1,26 @@
-﻿//TODO: LOG ERRORS
-//TODO: appsettings.json for production
-namespace WowGuildManager.Web
+﻿namespace WowGuildManager.Web
 {
     using AutoMapper;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
+
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Builder;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.UI;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
-    using WowGuildManager.Web.Extensions;
-    using WowGuildManager.Domain.Identity;
     using WowGuildManager.Data;
-    using WowGuildManager.Services.Characters;
-    using WowGuildManager.Services.Dungeons;
-    using WowGuildManager.Services.Raids;
     using WowGuildManager.Services.Api;
+    using WowGuildManager.Services.Raids;
+    using WowGuildManager.Web.Extensions;
     using WowGuildManager.Services.Guilds;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Services.Dungeons;
+    using WowGuildManager.Services.Characters;
     using WowGuildManager.Web.Filters.ActionFilters;
-    using Microsoft.Extensions.Logging;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.UI;
-    using System;
-    using Microsoft.EntityFrameworkCore.Diagnostics;
     using WowGuildManager.Web.Filters.ExceptionFilters;
 
     public class Startup
@@ -49,7 +45,6 @@ namespace WowGuildManager.Web
                 options.UseSqlServer(Configuration.GetConnectionString("WowGuildManagerDbContext"));
                 options.UseLazyLoadingProxies();
             });
-
 
             services.AddIdentity<WowGuildManagerUser, WowGuildManagerRole>(options =>
              {

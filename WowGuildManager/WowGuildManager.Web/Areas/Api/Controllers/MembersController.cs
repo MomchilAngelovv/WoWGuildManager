@@ -4,8 +4,8 @@
 
     using Microsoft.AspNetCore.Mvc;
 
-    using WowGuildManager.Models.ApiModels.Characters;
     using WowGuildManager.Services.Api;
+    using WowGuildManager.Models.ApiModels.Characters;
    
     public class MembersController : ApiController
     {

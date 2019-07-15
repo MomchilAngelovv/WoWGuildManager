@@ -1,27 +1,27 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Common.GlobalConstants;
-using WowGuildManager.Data;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Domain.Logs;
-
-namespace WowGuildManager.Web.Filters.ExceptionFilters
+﻿namespace WowGuildManager.Web.Filters.ExceptionFilters
 {
+    using System;
+
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc.Filters;
+
+    using WowGuildManager.Data;
+    using WowGuildManager.Domain.Logs;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Common.GlobalConstants;
+
     public class LogErorInDatabaseExceptionFilter : ExceptionFilterAttribute
     {
-        private readonly WowGuildManagerDbContext context;
         private readonly UserManager<WowGuildManagerUser> userManager;
 
+        private readonly WowGuildManagerDbContext context;
+
         public LogErorInDatabaseExceptionFilter(
-            WowGuildManagerDbContext context,
-            UserManager<WowGuildManagerUser> userManager)
+            UserManager<WowGuildManagerUser> userManager,
+            WowGuildManagerDbContext context)
         {
-            this.context = context;
             this.userManager = userManager;
+            this.context = context;
         }
 
         public override void OnException(ExceptionContext context)

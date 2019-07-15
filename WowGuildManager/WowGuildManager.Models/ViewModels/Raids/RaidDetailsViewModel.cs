@@ -2,8 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+
     using WowGuildManager.Models.ViewModels.Characters;
+
     public class RaidDetailsViewModel
     {
         public string Id { get; set; }

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WowGuildManager.Models.BindingModels.Dungeons
+﻿namespace WowGuildManager.Models.BindingModels.Dungeons
 {
+    using System;
+
     public class DungeonEditBindingModel
     {
         public string DungeonId { get; set; }

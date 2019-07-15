@@ -1,4 +1,6 @@
-﻿namespace WowGuildManager.Web.Extensions
+﻿//TODO: Fix password and admin info
+
+namespace WowGuildManager.Web.Extensions
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -19,10 +21,7 @@
             this._next = next;
         }
 
-        public async Task InvokeAsync(
-            HttpContext context,
-            UserManager<WowGuildManagerUser> userManager,
-            RoleManager<WowGuildManagerRole> roleManager)
+        public async Task InvokeAsync(HttpContext context, UserManager<WowGuildManagerUser> userManager, RoleManager<WowGuildManagerRole> roleManager)
         {
             if (roleManager.Roles.Any() == false)
             {
@@ -61,7 +60,6 @@
                 UserName = WowGuildManagerUserConstants.AdminUserName,
             };
 
-            //TODO: Fix password and admin info
             await userManager.CreateAsync(adminUser, WowGuildManagerUserConstants.AdminPassword);
             await userManager.AddToRoleAsync(adminUser, WowGuildManagerUserConstants.Admin);
         }

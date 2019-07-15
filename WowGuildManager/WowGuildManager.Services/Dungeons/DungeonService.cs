@@ -1,15 +1,15 @@
 ﻿namespace WowGuildManager.Services.Dungeons
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using AutoMapper;
     using System.Threading.Tasks;
-    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
 
-    using WowGuildManager.Common.GlobalConstants;
+    using AutoMapper;
+
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Models.BindingModels.Dungeons;
 
     public class DungeonService : IDungeonService

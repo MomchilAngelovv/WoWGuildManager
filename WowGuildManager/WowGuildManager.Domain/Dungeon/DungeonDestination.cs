@@ -3,6 +3,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using WowGuildManager.Common;
+
     public class DungeonDestination
     {
         //TODO: REMOVE ALL MAGIC STRING AND NUMEBRS
