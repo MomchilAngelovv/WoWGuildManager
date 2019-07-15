@@ -7,10 +7,16 @@
     using WowGuildManager.Domain.Characters;
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Domain.Logs;
     using WowGuildManager.Domain.Raid;
 
     public class WowGuildManagerDbContext : IdentityDbContext<WowGuildManagerUser, WowGuildManagerRole, string>
     {
+        public WowGuildManagerDbContext(DbContextOptions<WowGuildManagerDbContext> options)
+           : base(options)
+        {
+
+        }
         public DbSet<Character> Characters { get; set; }
 
         public DbSet<Dungeon> Dungeons { get; set; }
@@ -31,11 +37,7 @@
 
         public DbSet<GuildRank> GuildRanks { get; set; }
 
-        public WowGuildManagerDbContext(DbContextOptions<WowGuildManagerDbContext> options)
-            : base(options)
-        {
-
-        }
+        public DbSet<ExceptionLog> ExceptionLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

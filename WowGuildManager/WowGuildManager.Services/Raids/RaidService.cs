@@ -2,11 +2,11 @@
 namespace WowGuildManager.Services.Raids
 {
     using System;
-    using System.Collections.Generic;
-    using AutoMapper;
-    using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
+
+    using AutoMapper;
 
     using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Data;
@@ -174,7 +174,16 @@ namespace WowGuildManager.Services.Raids
                 throw new ArgumentException(ErrorConstants.InvalidRaidErrorMessage);
             }
 
-            raid.Description = input.Description;
+            if (string.IsNullOrWhiteSpace(input.Description) == false)
+            {
+                raid.Description = input.Description;
+            }
+
+            if (input.EventDateTime != null)
+            {
+                raid.EventDateTime = input.EventDateTime.Value;
+            }
+
             this.context.Update(raid);
             await this.context.SaveChangesAsync();
         }

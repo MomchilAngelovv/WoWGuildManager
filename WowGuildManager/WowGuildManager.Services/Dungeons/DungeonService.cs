@@ -174,5 +174,28 @@
             this.context.DungeonCharacter.Remove(dungeonCharacter);
             await this.context.SaveChangesAsync();
         }
+
+        public async Task Edit(DungeonEditBindingModel input)
+        {
+            var dungeon = this.context.Dungeons.Find(input.DungeonId);
+
+            if (dungeon == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidRaidErrorMessage);
+            }
+
+            if (string.IsNullOrWhiteSpace(input.Description) == false)
+            {
+                dungeon.Description = input.Description;
+            }
+
+            if (input.EventDateTime != null)
+            {
+                dungeon.EventDateTime = input.EventDateTime.Value;
+            }
+
+            this.context.Update(dungeon);
+            await this.context.SaveChangesAsync();
+        }
     }
 }

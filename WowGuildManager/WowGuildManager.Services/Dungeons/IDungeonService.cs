@@ -27,5 +27,7 @@
         T GetDungeon<T>(string dungeonId);
 
         Task KickCharacter(string characterId, string dungeonId);
+
+        Task Edit(DungeonEditBindingModel input);
     }
 }

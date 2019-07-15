@@ -15,5 +15,7 @@
         public static string AdminEmail = "Admin@admin.com";
         public static string AdminUserName = "Admin";
         public static string AdminPassword = "123";
+
+        public static string NullUserWarningMessage = "Warning! Null user!";
     }
 }

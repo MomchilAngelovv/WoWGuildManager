@@ -125,5 +125,13 @@
             await this.dungeonService.KickCharacter(characterId, dungeonId);
             return this.RedirectToAction("Upcoming", "Events");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(DungeonEditBindingModel input)
+        {
+            await this.dungeonService.Edit(input);
+
+            return this.RedirectToAction(nameof(Details), new { id = input.DungeonId });
+        }
     }
 }

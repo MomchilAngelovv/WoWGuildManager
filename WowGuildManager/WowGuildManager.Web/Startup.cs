@@ -25,6 +25,7 @@ namespace WowGuildManager.Web
     using Microsoft.AspNetCore.Identity.UI;
     using System;
     using Microsoft.EntityFrameworkCore.Diagnostics;
+    using WowGuildManager.Web.Filters.ExceptionFilters;
 
     public class Startup
     {
@@ -73,8 +74,9 @@ namespace WowGuildManager.Web
              
             services.AddMvc(options => 
             {
-                options.Filters.Add(new ValidateModelStateActionFilter());
-                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                options.Filters.Add<ValidateModelStateActionFilter>();
+                options.Filters.Add<LogErorInDatabaseExceptionFilter>();
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             })  
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 

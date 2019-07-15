@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WowGuildManager.Data;
 
 namespace WowGuildManager.Data.Migrations
 {
     [DbContext(typeof(WowGuildManagerDbContext))]
-    partial class WowGuildManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190715095205_Added_ExceptionLogs")]
+    partial class Added_ExceptionLogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -335,10 +337,12 @@ namespace WowGuildManager.Data.Migrations
                     b.Property<string>("ExceptionMessage")
                         .IsRequired();
 
-                    b.Property<string>("Username")
+                    b.Property<string>("WowGuildManagerUserId")
                         .IsRequired();
 
                     b.HasKey("Id");
+
+                    b.HasIndex("WowGuildManagerUserId");
 
                     b.ToTable("ExceptionLogs");
                 });
@@ -495,6 +499,14 @@ namespace WowGuildManager.Data.Migrations
                         .WithMany("RegisteredCharacters")
                         .HasForeignKey("DungeonId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("WowGuildManager.Domain.Logs.ExceptionLog", b =>
+                {
+                    b.HasOne("WowGuildManager.Domain.Identity.WowGuildManagerUser", "User")
+                        .WithMany()
+                        .HasForeignKey("WowGuildManagerUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WowGuildManager.Domain.Raid.Raid", b =>
