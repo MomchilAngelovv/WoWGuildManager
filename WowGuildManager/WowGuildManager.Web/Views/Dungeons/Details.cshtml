@@ -11,7 +11,6 @@
         <div class="col-lg-4">
             <p>Information: @Model.Description</p>
             <p>Event datetime: @Model.EventDateTime</p>
-
         </div>
 
         <div class="col-lg-8">
@@ -40,11 +39,11 @@
     <table class="table table-sm table-hover table-dark text-center">
         <thead>
             <tr>
-                <th scope="col" class="text-center">Guild rank</th>
-                <th scope="col" class="text-center">Name</th>
-                <th scope="col" class="text-center">Level</th>
-                <th scope="col" class="text-center">Class</th>
-                <th scope="col" class="text-center">Role</th>
+                <th scope="col" >Guild rank</th>
+                <th scope="col" >Name</th>
+                <th scope="col" >Level</th>
+                <th scope="col" >Class</th>
+                <th scope="col" class="text-left">Role</th>
             </tr>
         </thead>
         <tbody>
@@ -52,22 +51,22 @@
             {
                 if (Model.AlreadyJoined && character.Id == Model.JoinedCharacter.Id)
                 {
-                    <tr class="bg-warning">
+                    <tr class="">
                         <td class="p-2 w-25">@character.GuildRank</td>
-                        <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
+                        <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-warning btn-sm w-75">@character.Name</a></td>
                         <td class="p-2">@character.Level</td>
                         <td class="p-2">@character.Class</td>
-                        <td class="p-2">@character.Role</td>
+                        <td class="p-2 d-flex justify-content-between">@character.Role</td>
                     </tr>
                 }
                 else if (Model.AlreadyJoined && character.Id != Model.LeaderId && Model.JoinedCharacter.Id == Model.LeaderId)
                 {
-                    <tr>
+                    <tr class="">
                         <td class="p-2 w-25">@character.GuildRank</td>
                         <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
                         <td class="p-2">@character.Level</td>
                         <td class="p-2">@character.Class</td>
-                        <td class="p-2">@character.Role <a asp-area="" asp-controller="Dungeons" asp-action="Kick" asp-route-characterId="@character.Id" asp-route-dungeonId="@Model.Id" class="btn btn-danger btn-sm">Kick</a></td>
+                        <td class="p-2 d-flex justify-content-between">@character.Role <a asp-area="" asp-controller="Dungeons" asp-action="Kick" asp-route-characterId="@character.Id" asp-route-dungeonId="@Model.Id" class="btn btn-danger btn-sm">Kick</a></td>
                     </tr>
                 }
                 else
