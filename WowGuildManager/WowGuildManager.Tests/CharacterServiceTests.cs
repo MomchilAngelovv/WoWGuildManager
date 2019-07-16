@@ -1,4 +1,3 @@
-//TODO: Make last all tables same design (same classes templete)
 namespace WowGuildManager.Tests
 {
     using System;
@@ -120,15 +119,15 @@ namespace WowGuildManager.Tests
                 new Character
                 {
                     Id = "1",
-                    WowGuildManagerUserId = "TestUser1"
+                    UserId = "TestUser1"
                 },
                 new Character
                 {
-                     WowGuildManagerUserId = "TestUser1"
+                     UserId = "TestUser1"
                 },
                 new Character
                 {
-                     WowGuildManagerUserId = "TestUser1"
+                     UserId = "TestUser1"
                 },
             };
             var classes = new List<CharacterClass>

@@ -16,7 +16,7 @@
 
         public int GuildPoints { get; set; }
 
-        public string WowGuildManagerUserId { get; set; }
+        public string UserId { get; set; }
 
         public string[] Raids { get; set; }
 

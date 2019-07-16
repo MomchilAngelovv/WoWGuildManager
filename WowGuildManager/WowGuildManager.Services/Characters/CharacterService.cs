@@ -41,7 +41,7 @@ namespace WowGuildManager.Services.Characters
                 Level = model.Level,
                 Name = model.Name,
                 RoleId = this.GetRoleIdByName(model.Role),
-                WowGuildManagerUserId = model.UserId,
+                UserId = model.UserId,
                 GuildRankId = this.GetRankIdByName(GuildRanksConstants.Member),
             };
 
@@ -83,7 +83,7 @@ namespace WowGuildManager.Services.Characters
         public IEnumerable<T> GetCharactersByUserId<T>(string userId)
         {
             var characters = this.context.Characters
-                .Where(character => character.WowGuildManagerUserId == userId)
+                .Where(character => character.UserId == userId)
                 .ToList()
                 .Select(ch => mapper.Map<T>(ch));
 
@@ -164,7 +164,7 @@ namespace WowGuildManager.Services.Characters
 
         public bool UserHasMaxRegiresteredCharacters(string userId)
         {
-            if (this.context.Characters.Where(c => c.WowGuildManagerUserId == userId).Count() == CharacterConstants.MaximumAllowedCharactersPerUser)
+            if (this.context.Characters.Where(c => c.UserId == userId).Count() == CharacterConstants.MaximumAllowedCharactersPerUser)
             {
                 return true;
             }

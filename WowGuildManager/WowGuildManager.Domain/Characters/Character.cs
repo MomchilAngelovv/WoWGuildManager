@@ -42,7 +42,7 @@
         public virtual GuildRank GuildRank { get; set; }
 
         [Required]
-        public string WowGuildManagerUserId { get; set; }
+        public string UserId { get; set; }
         public virtual WowGuildManagerUser User { get; set; }
 
         public virtual ICollection<RaidCharacter> Raids { get; set; }

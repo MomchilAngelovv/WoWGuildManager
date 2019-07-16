@@ -5,34 +5,39 @@
 }
 
 <div class="container-fluid bc">
-    <h1>Details</h1>
+    <h1>Character details</h1>
 
-    <ul class="list-group bg-dark">
-        <li class="list-group-item bg-dark">@Model.Name</li>
-        <li class="list-group-item bg-dark">@Model.Level</li>
-        <li class="list-group-item bg-dark">@Model.Role</li>
-        <li class="list-group-item bg-dark">@Model.Class</li>
-
-        @if (this.User.IsInRole(GuildRanksConstants.GuildMaster))
-        {
-            @if (Model.Rank == GuildRanksConstants.Member)
+    <div class="row">
+        <div class="col-4">
+            <ul class="list-group bg-dark mb-3  pr-0">
+                <li class="list-group-item bg-dark">@Model.Name</li>
+                <li class="list-group-item bg-dark">@Model.Level</li>
+                <li class="list-group-item bg-dark">@Model.Role</li>
+                <li class="list-group-item bg-dark">@Model.Class</li>
+                <li class="list-group-item bg-dark">@Model.Rank</li>
+            </ul>
+        </div>
+        <div class="col-lg-3">
+            @if (this.User.IsInRole(GuildRanksConstants.GuildMaster))
             {
-                <li class="list-group-item bg-dark">@Model.Rank <a asp-area="" asp-controller="Guild" asp-action="PromoteRank" asp-route-characterId="@Model.Id" class="btn btn-success btn-sm">Promote <i class="fas fa-arrow-up"></i></a></li>
+                @if (Model.Rank == GuildRanksConstants.Member)
+                {
+                    <div><a asp-area="" asp-controller="Guild" asp-action="PromoteRank" asp-route-characterId="@Model.Id" class="btn btn-success btn-sm col-lg-6">Promote <i class="fas fa-arrow-up"></i></a></div>
+                }
+                else if (Model.Rank == GuildRanksConstants.Officer)
+                {   
+                    <div><a asp-area="" asp-controller="Guild" asp-action="DemoteRank" asp-route-characterId="@Model.Id" class="btn btn-danger btn-sm col-lg-6">Demote <i class="fas fa-arrow-down"></i></a></div>
+                }
+                else
+                {
+                    <div>
+                        <a asp-area="" asp-controller="Guild" asp-action="PromoteRank" asp-route-characterId="@Model.Id" class="btn btn-success btn-sm col-lg-6">Promote <i class="fas fa-arrow-up"></i></a>
+                    </div>
+                    <div>
+                        <a asp-area="" asp-controller="Guild" asp-action="DemoteRank" asp-route-characterId="@Model.Id" class="btn btn-danger btn-sm col-lg-6">Demote <i class="fas fa-arrow-down"></i></a>
+                    </div>
+                }
             }
-            else if (Model.Rank == GuildRanksConstants.GuildMaster)
-            {
-                <li class="list-group-item bg-dark">@Model.Rank <a asp-area="" asp-controller="Guild" asp-action="DemoteRank" asp-route-characterId="@Model.Id" class="btn btn-danger btn-sm">Demote <i class="fas fa-arrow-down"></i></a></li>
-
-            }
-            else
-            {
-                <li class="list-group-item bg-dark">@Model.Rank <a asp-area="" asp-controller="Guild" asp-action="PromoteRank" asp-route-characterId="@Model.Id" class="btn btn-success btn-sm">Promote <i class="fas fa-arrow-up"></i></a> <a asp-area="" asp-controller="Guild" asp-action="DemoteRank" asp-route-characterId="@Model.Id" class="btn btn-danger btn-sm">Demote <i class="fas fa-arrow-down"></i></a></li>
-            }
-        }
-        else
-        {
-            <li class="list-group-item bg-dark">@Model.Rank</li>
-        }
-    </ul>
+        </div>
+    </div>
 </div>
-

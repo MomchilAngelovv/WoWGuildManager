@@ -39,6 +39,8 @@
 
         public DbSet<ExceptionLog> ExceptionLogs { get; set; }
 
+        public DbSet<ImageUploadLog> ImageUploadLogs { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new CharacterConfiguration());

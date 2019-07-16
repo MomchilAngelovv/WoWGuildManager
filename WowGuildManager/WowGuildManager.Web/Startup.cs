@@ -23,6 +23,7 @@
     using WowGuildManager.Web.Filters.ActionFilters;
     using WowGuildManager.Web.Filters.ExceptionFilters;
     using System;
+    using CloudinaryDotNet;
 
     public class Startup
     {
@@ -83,6 +84,14 @@
             services.AddTransient<IRaidService, RaidService>();
             services.AddTransient<IApiService, ApiService>();
             services.AddTransient<IGuildService, GuildService>();
+
+            var cloud = this.Configuration["Cloudinary:Cloud"];
+            var apiKey = this.Configuration["Cloudinary:ApiKey"];
+            var apiSecret = this.Configuration["Cloudinary:ApiSecret"];
+
+            var account = new Account(cloud, apiKey, apiSecret);
+            var cloudinary = new Cloudinary(account);
+            services.AddSingleton<Cloudinary>(cloudinary);
             #endregion 
         }
 

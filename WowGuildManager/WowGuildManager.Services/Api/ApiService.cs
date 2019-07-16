@@ -30,7 +30,7 @@
             }
 
             var characters = this.context.Characters
-                .Where(c => c.WowGuildManagerUserId == userId)
+                .Where(c => c.UserId == userId)
                 .ToList()
                 .Select(c => mapper.Map<T>(c));
 
