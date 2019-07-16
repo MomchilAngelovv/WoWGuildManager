@@ -7,8 +7,12 @@
     <div class="card-columns m-3">
         @foreach (var image in Model.Images)
         {
-            <div class="card m-3">
-                <img class="card-img-top" src="@image" alt="Card image cap">
+            <div class="card m-2 p-2 border border-warning bc">
+                <img class="card-img-top p-2" src="@image.Url" alt="Card image cap">
+                @if (this.User.IsInRole(WowGuildManagerUserConstants.GuildMaster))
+                {
+                    <a asp-area="" asp-controller="Gallery" asp-action="MakeNonActualAsync" asp-route-id="@image.Id" class="btn btn-danger btn-sm m-3">Remove picture</a>
+                }
             </div>
         }
     </div>

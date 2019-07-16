@@ -22,5 +22,7 @@
 
         [Required]
         public string Url { get; set; }
+
+        public bool IsActual { get; set; }
     }
 }

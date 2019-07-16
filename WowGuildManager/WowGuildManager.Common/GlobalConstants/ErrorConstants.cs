@@ -14,5 +14,6 @@
         public static string AlreadyHasGuildMasterErrorMessage = "Cannot have more than one GuildMaster at a time.";
         public static string InvalidDataProvided = "Invalid data provided!";
         public static string InvalidRaidKickErrorMessage = "There is no player signed for this this raid!";
+        public static string InvalidImageErrorMessage = "There is no such Image!";
     }
 }

@@ -38,9 +38,17 @@ namespace WowGuildManager.Web.Controllers
             this.galleryService = galleryService;
         }
 
+        public async Task<IActionResult> MakeNonActualAsync(string id)
+        {
+            await this.galleryService.MakeNonActualAsync(id);
+            
+            return this.RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Index()
         {
-            var images = this.galleryService.GetAllGallery();
+            var images = this.galleryService
+                .GetAllGallery<GalleryImageViewModel>();
 
             var galleryIndexViewModel = new GalleryIndexViewModel
             {
@@ -82,7 +90,8 @@ namespace WowGuildManager.Web.Controllers
                 Format = uploadResult.Format,
                 Length = uploadResult.Length,
                 UserId = userId,
-                Url = uploadResult.SecureUri.AbsoluteUri
+                Url = uploadResult.SecureUri.AbsoluteUri,
+                IsActual = true
             };
 
             await this.context.ImageUploadLogs.AddAsync(imageUploadLog);

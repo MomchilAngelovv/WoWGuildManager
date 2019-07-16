@@ -29,7 +29,7 @@ namespace WowGuildManager.Data.Migrations
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     Format = table.Column<string>(nullable: false),
                     Length = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: false),
+                    UsedId = table.Column<string>(nullable: false),
                     Url = table.Column<string>(nullable: false)
                 },
                 constraints: table =>

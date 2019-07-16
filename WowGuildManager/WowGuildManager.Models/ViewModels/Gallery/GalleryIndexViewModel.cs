@@ -4,6 +4,6 @@ namespace WowGuildManager.Models.ViewModels.Gallery
 {
     public class GalleryIndexViewModel
     {
-        public IEnumerable<string> Images { get; set; }
+        public IEnumerable<GalleryImageViewModel> Images { get; set; }
     }
 }
