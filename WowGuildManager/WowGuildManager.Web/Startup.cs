@@ -24,6 +24,7 @@
     using WowGuildManager.Web.Filters.ExceptionFilters;
     using System;
     using CloudinaryDotNet;
+    using WowGuildManager.Services.Gallery;
 
     public class Startup
     {
@@ -84,6 +85,7 @@
             services.AddTransient<IRaidService, RaidService>();
             services.AddTransient<IApiService, ApiService>();
             services.AddTransient<IGuildService, GuildService>();
+            services.AddTransient<IGalleryService, GalleryService>();
 
             var cloud = this.Configuration["Cloudinary:Cloud"];
             var apiKey = this.Configuration["Cloudinary:ApiKey"];

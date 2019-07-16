@@ -14,6 +14,8 @@ namespace WowGuildManager.Web.Controllers
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Identity;
     using Microsoft.AspNetCore.Identity;
+    using WowGuildManager.Models.ViewModels.Gallery;
+    using WowGuildManager.Services.Gallery;
 
     [AllowAnonymous]
     public class GalleryController : BaseController
@@ -22,20 +24,30 @@ namespace WowGuildManager.Web.Controllers
 
         private readonly Cloudinary cloudinary;
         private readonly WowGuildManagerDbContext context;
+        private readonly IGalleryService galleryService;
 
         public GalleryController(
             UserManager<WowGuildManagerUser> userManager,
             Cloudinary cloudinary,
-            WowGuildManagerDbContext context)
+            WowGuildManagerDbContext context,
+            IGalleryService galleryService)
         {
             this.userManager = userManager;
             this.cloudinary = cloudinary;
             this.context = context;
+            this.galleryService = galleryService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var images = this.galleryService.GetAllGallery();
+
+            var galleryIndexViewModel = new GalleryIndexViewModel
+            {
+                Images = images
+            };
+
+            return View(galleryIndexViewModel);
         }
 
         [HttpPost]

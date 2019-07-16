@@ -1,4 +1,16 @@
-﻿@{
+﻿@model WowGuildManager.Models.ViewModels.Gallery.GalleryIndexViewModel
+@{
     ViewData["Title"] = "Index";
 }
+
+<div class="container-fluid bc">
+    <div class="card-columns m-3">
+        @foreach (var image in Model.Images)
+        {
+            <div class="card m-3">
+                <img class="card-img-top" src="@image" alt="Card image cap">
+            </div>
+        }
+    </div>
+</div>
 
