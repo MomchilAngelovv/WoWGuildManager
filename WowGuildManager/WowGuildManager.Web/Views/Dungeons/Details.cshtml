@@ -51,7 +51,7 @@
             {
                 if (Model.AlreadyJoined && character.Id == Model.JoinedCharacter.Id)
                 {
-                    <tr class="">
+                    <tr>
                         <td class="p-2 w-25">@character.GuildRank</td>
                         <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-warning btn-sm w-75">@character.Name</a></td>
                         <td class="p-2">@character.Level</td>
@@ -61,7 +61,7 @@
                 }
                 else if (Model.AlreadyJoined && character.Id != Model.LeaderId && Model.JoinedCharacter.Id == Model.LeaderId)
                 {
-                    <tr class="">
+                    <tr >
                         <td class="p-2 w-25">@character.GuildRank</td>
                         <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
                         <td class="p-2">@character.Level</td>
@@ -76,7 +76,7 @@
                         <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
                         <td class="p-2">@character.Level</td>
                         <td class="p-2">@character.Class</td>
-                        <td class="p-2">@character.Role</td>
+                        <td class="p-2 d-flex justify-content-between">@character.Role</td>
                     </tr>
                 }
 

@@ -141,6 +141,10 @@ namespace WowGuildManager.Services.Guilds
                         {
                             character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.GuildMaster);
                         }
+                        else
+                        {
+                            throw new InvalidOperationException(ErrorConstants.AlreadyHasGuildMasterErrorMessage);
+                        }
                         break;
                 }
 

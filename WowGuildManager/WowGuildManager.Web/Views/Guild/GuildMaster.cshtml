@@ -42,8 +42,8 @@
                         <td class="p-2 w-25">@raidDestination.Name</td>
                         <td class="p-2 w-25">@raidDestination.KilledBosses/@raidDestination.TotalBosses</td>
                         <td>
-                            <a asp-area="" asp-controller="Guild" asp-action="AddProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-success btn-sm border border-dark"><i class="fas fa-plus-square"></i></a>
-                            <a asp-area="" asp-controller="Guild" asp-action="RemoveProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-danger btn-sm border border-dark"><i class="fas fa-minus-square"></i></a>
+                            <a asp-area="" asp-controller="Guild" asp-action="AddProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-success btn-sm border border-dark"><i class="fas fa-plus-square"></i> Add progress</a>
+                            <a asp-area="" asp-controller="Guild" asp-action="RemoveProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-danger btn-sm border border-dark"><i class="fas fa-minus-square"></i> Remove progress</a>
                         </td>
                     </tr>
                 }

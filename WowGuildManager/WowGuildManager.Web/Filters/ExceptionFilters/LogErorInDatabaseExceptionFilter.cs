@@ -35,12 +35,10 @@
 
             var exceptionLog = new ExceptionLog
             {
-                ExceptionMessage = context.Exception.Message,
+                ExceptionMessage = $"Error: {context.Exception.Message}",
                 Username = username,
                 ExceptionTime = DateTime.UtcNow
             };
-
-            context.ExceptionHandled = true;
 
             this.context.ExceptionLogs.Add(exceptionLog);
             this.context.SaveChanges();

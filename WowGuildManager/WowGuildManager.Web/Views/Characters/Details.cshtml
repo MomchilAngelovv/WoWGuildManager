@@ -24,7 +24,7 @@
                 {
                     <div><a asp-area="" asp-controller="Guild" asp-action="PromoteRank" asp-route-characterId="@Model.Id" class="btn btn-success btn-sm col-lg-6">Promote <i class="fas fa-arrow-up"></i></a></div>
                 }
-                else if (Model.Rank == GuildRanksConstants.Officer)
+                else if (Model.Rank == GuildRanksConstants.GuildMaster)
                 {   
                     <div><a asp-area="" asp-controller="Guild" asp-action="DemoteRank" asp-route-characterId="@Model.Id" class="btn btn-danger btn-sm col-lg-6">Demote <i class="fas fa-arrow-down"></i></a></div>
                 }
