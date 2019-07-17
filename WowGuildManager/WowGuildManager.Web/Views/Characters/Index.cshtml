@@ -4,6 +4,13 @@
 }
 
 <div class="container-fluid bc">
+    @if (this.TempData["NewCharacter"] != null)
+    {
+        <div id="new-character-alert" class="alert alert-success mt-3" role="alert">
+            @this.TempData["NewCharacter"]
+        </div>
+    }
+
     <div class="text-center">
         <a asp-area="" asp-controller="Characters" asp-action="Create" class="btn btn-warning btn-sm mt-3 mb-3 border-dark col-sm-6"><h2>Add character</h2></a>
     </div>
@@ -29,4 +36,12 @@
         </div>
     </section>
 </div>
+
+@section Scripts {
+    <script>
+        setTimeout(function () {
+            $('#new-character-alert').toggle(100);
+        }, 3000);
+    </script>
+}
 

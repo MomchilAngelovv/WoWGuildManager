@@ -67,6 +67,7 @@ namespace WowGuildManager.Web.Controllers
 
             await this.characterService.CreateAsync(model);
 
+            this.TempData["NewCharacter"] = "Thank you for registering new character!";
             return this.RedirectToAction(nameof(Index));
         }
 

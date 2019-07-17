@@ -23,7 +23,7 @@
             this.userManager = userManager;
             this.context = context;
         }
-
+        
         public override void OnException(ExceptionContext context)
         {
             var username = userManager.GetUserName(context.HttpContext.User);
@@ -37,10 +37,10 @@
             {
                 ExceptionMessage = $"Error: {context.Exception.Message}",
                 Username = username,
-                ExceptionTime = DateTime.UtcNow
+                ExceptionTime = DateTime.UtcNow,
             };
 
-            this.context.ExceptionLogs.Add(exceptionLog);
+            this.context.ExceptionLogs.AddAsync(exceptionLog);
             this.context.SaveChanges();
         }
     }

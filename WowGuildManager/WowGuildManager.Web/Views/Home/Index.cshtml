@@ -1,4 +1,10 @@
 ﻿<div class="container-fluid bc">
+    @if (this.TempData["NewUser"] != null)
+    {
+        <div id="new-user-alert" class="alert alert-success" role="alert">
+            @this.TempData["NewUser"]
+        </div>
+    }
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -42,3 +48,11 @@
         <vc:today-events></vc:today-events>
     </cache>
 </div>
+
+@section Scripts {
+    <script>
+        setTimeout(function () {
+            $('#new-user-alert').toggle(100);
+        }, 3000);
+    </script>
+}
