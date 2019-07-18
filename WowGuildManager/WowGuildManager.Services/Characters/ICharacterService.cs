@@ -10,7 +10,7 @@
     {
         Task<Character> CreateAsync(CharacterCreateBindingModel inputModel);
 
-        Task<Character> Delete(string characterId);
+        Task<Character> DeleteAsync(string characterId);
 
         IEnumerable<T> GetClasses<T>();
 

@@ -1,0 +1,21 @@
+﻿@model WowGuildManager.Models.ViewModels.Characters.CharacterDeleteViewModel
+
+<div class="container-fluid bc">
+    <h2>Are you sure you want to delete this character?</h2>
+    <hr class="bg-warning" />
+
+    <div class="row">
+        <div class="col-lg-4">
+            <p>Name: @Model.Name</p>
+            <p>Rank: @Model.Rank</p>
+            <p>Role: @Model.Role</p>
+        </div>
+    </div>
+    <form method="post">
+        <button type="submit" asp-area="" asp-controller="Characters" asp-action="DeleteAsync" asp-route-id="@Model.Id" class="btn btn-danger w-25 mb-3">Delete characeter</button>
+    </form>
+
+    <a asp-area="" asp-controller="Characters" asp-action="Index" class="btn btn-info w-25">Back to character</a>
+    <hr class="bg-warning" />
+</div>
+

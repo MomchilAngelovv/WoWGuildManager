@@ -51,10 +51,21 @@ namespace WowGuildManager.Services.Characters
             return character;
         }
 
-        public async Task<Character> Delete(string characterId)
+        public async Task<Character> DeleteAsync(string characterId)
         {
             var character = this.context.Characters
                 .Find(characterId);
+
+            if (character == null)
+            {
+                throw new ArgumentException(ErrorConstants.InvalidCharacterErrorMessage);
+            }
+
+            this.context.RemoveRange(this.context.DungeonCharacter
+                .Where(dc => dc.CharacterId == characterId));
+
+            this.context.RemoveRange(this.context.RaidCharacter
+               .Where(dc => dc.CharacterId == characterId));
 
             this.context.Characters.Remove(character);
             await this.context.SaveChangesAsync();

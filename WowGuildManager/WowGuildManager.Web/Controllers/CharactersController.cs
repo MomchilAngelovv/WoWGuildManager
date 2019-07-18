@@ -81,7 +81,17 @@ namespace WowGuildManager.Web.Controllers
 
         public IActionResult Delete(string id)
         {
-            this.characterService.Delete(id);
+            var characterDeleteViewModel = this.characterService
+                .GetCharacterById<CharacterDeleteViewModel>(id);
+
+            return this.View(characterDeleteViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAsync(string id)
+        {
+            await this.characterService
+                .DeleteAsync(id);
 
             return this.RedirectToAction(nameof(Index));
         }

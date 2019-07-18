@@ -22,6 +22,11 @@
                 .ForMember(cvm => cvm.Image, sli => sli.MapFrom(x => x.Class.ImagePath));
 
             this.CreateMap<Character, CharacterIdNameViewModel>();
+
+            this.CreateMap<Character, CharacterDeleteViewModel>()
+                .ForMember(cvm => cvm.Rank, sli => sli.MapFrom(x => x.GuildRank.Name))
+                .ForMember(cvm => cvm.Role, sli => sli.MapFrom(x => x.Role.Name));
+
             this.CreateMap<Character, CharacterNameRoleViewModel>();
 
             this.CreateMap<Character, CharacterEditBindingModel>()

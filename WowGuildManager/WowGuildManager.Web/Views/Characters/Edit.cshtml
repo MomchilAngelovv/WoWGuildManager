@@ -9,7 +9,7 @@
             <section>
                 <form asp-action="Edit">
                     <h2 class="text-center mt-3">Edit character </h2>
-                    <hr class="bg-warning"/>
+                    <hr class="bg-warning" />
 
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-group">
@@ -27,6 +27,9 @@
                         <input type="submit" value="Save" class="btn btn-warning w-100" />
                     </div>
                     <div class="form-group">
+                        <a asp-area="" asp-controller="Characters" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger w-100">Delete characeter</a>
+                    </div>
+                    <div class="form-group">    
                         <a asp-area="" asp-controller="Characters" asp-action="Index" class="btn btn-info w-100">Back to character</a>
                     </div>
                 </form>
