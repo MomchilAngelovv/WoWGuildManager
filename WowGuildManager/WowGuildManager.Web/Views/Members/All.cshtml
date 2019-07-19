@@ -4,24 +4,25 @@
 }
 
 <div class="container-fluid bc">
-    <h2 class="text-center">Total Guild members: @Model.MembersCount</h2>
 
-    <table class="table table-sm table-hover table-dark text-center">
+    <h2>Total Guild members: @Model.MembersCount</h2>
+    
+    <table class="table table-sm table-hover table-dark text-warning ">
         <thead>
             <tr>
-                <th scope="col" class="text-center">Guild rank</th>
-                <th scope="col" class="text-center">Name</th>
-                <th scope="col" class="text-center">Level</th>
-                <th scope="col" class="text-center">Class</th>
-                <th scope="col" class="text-center">Role</th>
+                <th>Guild rank</th>
+                <th>Name</th>
+                <th>Level</th>
+                <th>Class</th>
+                <th>Role</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var member in Model.Members)
             {
                 <tr>
-                    <td class="p-2 w-25">@member.Rank</td>
-                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@member.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@member.Name</a></td>
+                    <td class="p-2">@member.Rank</td>
+                    <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@member.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75 text-white">@member.Name</a></td>
                     <td class="p-2">@member.Level</td>
                     <td class="p-2">@member.Class</td>
                     @if (member.Role == CharacterRoleConstants.Damage)
@@ -40,7 +41,7 @@
             }
         </tbody>
     </table>
-    <hr class="bg-warning"/>
+    <hr class="bg-warning" />
 </div>
 
 @section Scripts{

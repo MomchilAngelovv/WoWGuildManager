@@ -8,24 +8,35 @@
         </div>
     </div>
     <hr class="bg-warning" />
-    <div class="list-group">
-        <h3>Promoting user to Raid Leader will give them right to create Raid Events.</h3>
-        @foreach (var user in Model.Users)
-        {
-            @if (user.IsRaidLeader && user.IsGuildMaster)
+    <h3>Select raid leaders:</h3>
+    <div class="row" style="padding-left:15px">
+        <div class="list-group col-lg-6 col-sm-auto">
+            @foreach (var user in Model.Users)
             {
-                <a asp-area="" asp-controller="Guild" asp-action="SetOrUnsetRaidLeader" type="button" asp-route-userId="@user.Id" class="list-group-item list-group-item-info disabled">@user.Name (Raid Leader) (Guild Master)</a>
+                @if (user.IsRaidLeader && user.IsGuildMaster)
+                {
+                    <a asp-area="" asp-controller="Guild" asp-action="SetOrUnsetRaidLeader" type="button" asp-route-userId="@user.Id" class="list-group-item list-group-item-action bg-dark text-warning">@user.Name (Raid Leader) (Guild Master)</a>
+                }
+                else if (user.IsGuildMaster)
+                {
+                    <a asp-area="" asp-controller="Guild" asp-action="SetOrUnsetRaidLeader" type="button" asp-route-userId="@user.Id" class="list-group-item list-group-item-action bg-dark text-info">@user.Name (Guild Master)</a>
+                }
+                else if (user.IsRaidLeader)
+                {
+                    <a asp-area="" asp-controller="Guild" asp-action="SetOrUnsetRaidLeader" type="button" asp-route-userId="@user.Id" class="list-group-item list-group-item-action bg-dark text-warning">@user.Name (Raid Leader)</a>
+                }
+                else
+                {
+                    <a asp-area="" asp-controller="Guild" asp-action="SetOrUnsetRaidLeader" type="button" asp-route-userId="@user.Id" class="list-group-item list-group-item-action bg-dark text-info">@user.Name</a>
+                }
             }
-            else if (user.IsRaidLeader)
-            {
-                <a asp-area="" asp-controller="Guild" asp-action="SetOrUnsetRaidLeader" type="button" asp-route-userId="@user.Id" class="list-group-item list-group-item-info">@user.Name (Raid Leader)</a>
-            }
-            else
-            {
-                <a asp-area="" asp-controller="Guild" asp-action="SetOrUnsetRaidLeader" type="button" asp-route-userId="@user.Id" class="list-group-item list-group-item-action">@user.Name</a>
-            }
-        }
+        </div>
+        <div class="col-lg-5">
+            <h3>Raid leaders</h3>
+            <p>Information: Raid leaders are users who are allowed to create and manage Raid events. You can select/deselect them by clicking on the name of the user.</p>
+        </div>
     </div>
+
     <hr class="bg-warning" />
     <div>
         <h3>Adjust guild progress from here.</h3>
@@ -44,8 +55,8 @@
                         <td class="p-2 w-25">@raidDestination.Name</td>
                         <td class="p-2 w-25">@raidDestination.KilledBosses/@raidDestination.TotalBosses</td>
                         <td>
-                            <a asp-area="" asp-controller="Guild" asp-action="AddProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-success btn-sm border border-dark"><i class="fas fa-plus-square"></i> Add progress</a>
-                            <a asp-area="" asp-controller="Guild" asp-action="RemoveProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-danger btn-sm border border-dark"><i class="fas fa-minus-square"></i> Remove progress</a>
+                            <a asp-area="" asp-controller="Guild" asp-action="AddProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-success btn-sm border border-dark col-sm-3"><i class="fas fa-plus-square"></i> Add progress</a>
+                            <a asp-area="" asp-controller="Guild" asp-action="RemoveProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-danger btn-sm border border-dark col-sm-3"><i class="fas fa-minus-square"></i> Remove progress</a>
                         </td>
                     </tr>
                 }
