@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WowGuildManager.Models", "W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WowGuildManager.Common", "WowGuildManager.Common\WowGuildManager.Common.csproj", "{12A1EA27-DD88-42B5-BC86-E8723CD68D54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WowGuildManager.Tests", "WowGuildManager.Tests\WowGuildManager.Tests.csproj", "{6B1C1C1A-2727-498B-B093-DE9C93D8F3A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WowGuildManager.Tests", "WowGuildManager.Tests\WowGuildManager.Tests.csproj", "{6B1C1C1A-2727-498B-B093-DE9C93D8F3A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

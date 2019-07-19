@@ -1,10 +1,14 @@
 ﻿<div class="container-fluid bc">
+
     @if (this.TempData["NewUser"] != null)
     {
-        <div id="new-user-alert" class="alert alert-success" role="alert">
-            @this.TempData["NewUser"]
+        <div class="row">
+            <div id="new-user-alert" class="alert alert-success m-3 w-100" role="alert">
+                @this.TempData["NewUser"]
+            </div>
         </div>
     }
+
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -44,9 +48,13 @@
         </a>
     </div>
 
+    <hr class="bg-warning" />
+
     <cache expires-after="new TimeSpan(0,1,0)">
         <vc:today-events></vc:today-events>
     </cache>
+
+    <hr class="bg-warning" />
 </div>
 
 @section Scripts {

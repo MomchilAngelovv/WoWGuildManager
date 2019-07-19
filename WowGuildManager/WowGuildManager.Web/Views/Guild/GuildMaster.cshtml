@@ -7,6 +7,7 @@
             <h3 class="text-warning">Total characters: @Model.RegisteredCharactersCount</h3>
         </div>
     </div>
+    <hr class="bg-warning" />
     <div class="list-group">
         <h3>Promoting user to Raid Leader will give them right to create Raid Events.</h3>
         @foreach (var user in Model.Users)
@@ -25,6 +26,7 @@
             }
         }
     </div>
+    <hr class="bg-warning" />
     <div>
         <h3>Adjust guild progress from here.</h3>
         <table class="table table-sm table-hover table-dark text-center">
@@ -50,18 +52,17 @@
             </tbody>
         </table>
     </div>
-
-    <div class="col-4">
-        <hr class="bg-warning" />
+    <hr class="bg-warning" />
+    <div>
         <form method="post" enctype="multipart/form-data" asp-area="" asp-controller="Gallery" asp-action="UploadImageAsync">
-            <div class="input-group">
-                <div class="col-md-10 input-group">
-                    <h3>Choose files to upload:</h3>
-                    <input type="file" name="files" multiple>
-                </div>
-            </div>
+            <h3>Choose images to upload to gallery page:</h3>
+
             <div class="form-group">
-                <div class="col-md-10 input-group">
+                <input type="file" name="files" multiple>
+            </div>
+
+            <div class="form-group">
+                <div class=" input-group">
                     <input class="btn btn-warning col-lg-6 mt-3" type="submit" value="Upload">
                 </div>
             </div>
