@@ -1,5 +1,4 @@
-﻿//TODO: Excratd private method to set new character guild rank DRY
-namespace WowGuildManager.Services.Guilds
+﻿namespace WowGuildManager.Services.Guilds
 {
     using System;
     using System.Linq;

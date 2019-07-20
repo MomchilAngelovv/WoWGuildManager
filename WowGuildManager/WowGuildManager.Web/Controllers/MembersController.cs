@@ -1,6 +1,5 @@
 ﻿
 //TODO: Bootstrap tooltips
-//TODO: CHECK CSS EVEYRHWEW AND FIX CLASSES
 namespace WowGuildManager.Web.Controllers
 {
     using System.Linq;

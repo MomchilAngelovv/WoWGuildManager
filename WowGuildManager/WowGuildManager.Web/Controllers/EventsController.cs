@@ -1,6 +1,5 @@
 ﻿//TODO: MAKE RESPONSIVE VERY BAD
 //TODO:REARANGE private and public stuff AT END !! IMPORTANT
-//TODO: Consider Events view change border if joined or no
 
 
 namespace WowGuildManager.Web.Controllers

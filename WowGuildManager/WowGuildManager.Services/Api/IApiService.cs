@@ -11,5 +11,9 @@
         IEnumerable<T> Members<T>();
 
         IEnumerable<T> GuildProgress<T>();
+
+        IEnumerable<T> GetAllImages<T>();
+
+        IEnumerable<T> GetAllExceptions<T>();
     }
 }

@@ -4,15 +4,17 @@
     <h2>@Model.Destination</h2>
     <hr class="bg-warning" />
 
-    <div class="row">
+    <div class="row d-flex justify-content-between">
+
         <div class="col-lg-4">
             <p>Information: @Model.Description</p>
             <p>Event datetime: @Model.EventDateTime</p>
         </div>
-        <div class="col-lg-8">
+
+        <div class="col-lg-4">
             @if (Model.AlreadyJoined && Model.JoinedCharacter.Id == Model.LeaderId)
             {
-                <form asp-area="" asp-controller="Raids" asp-action="Edit" asp-route-raidId="@Model.Id" method="post" class="d-flex justify-content-between">
+                <form asp-area="" asp-controller="Raids" asp-action="Edit" asp-route-raidId="@Model.Id" method="post">
                     <div class="input-group form-group">
                         <input type="text" class="form-control border-dark" name="description" placeholder="New description..." />
                     </div>
@@ -22,7 +24,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-info w-100 border-dark">Update raid event info</button>
+                        <button type="submit" class="btn btn-info w-100 border-dark">Update raid event information</button>
                     </div>
                 </form>
             }

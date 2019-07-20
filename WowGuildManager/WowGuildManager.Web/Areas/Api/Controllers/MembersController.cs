@@ -20,7 +20,8 @@
         [HttpGet]
         public IEnumerable<CharacterApiViewModel> Get()
         {
-            var members = this.apiService.Members<CharacterApiViewModel>();
+            var members = this.apiService
+                .Members<CharacterApiViewModel>();
 
             return members;
         }
@@ -28,7 +29,8 @@
         [HttpGet("{id}")]
         public CharacterApiViewModel Get(string id)
         {
-            var character = this.apiService.GetCharacterById<CharacterApiViewModel>(id);
+            var character = this.apiService
+                .GetCharacterById<CharacterApiViewModel>(id);
 
             return character;
         }

@@ -22,7 +22,8 @@
 
         public IEnumerable<T> GetAll<T>(string userId)
         {
-            var user = this.context.Users.FirstOrDefault(u => u.Id == userId);
+            var user = this.context.Users
+                .FirstOrDefault(u => u.Id == userId);
 
             if (user == null)
             {
@@ -66,6 +67,22 @@
                 .Select(m => mapper.Map<T>(m));
 
             return members;
+        }
+
+        public IEnumerable<T> GetAllImages<T>()
+        {
+            var images = this.context.ImageUploadLogs
+                .Select(i => mapper.Map<T>(i));
+
+            return images;
+        }
+
+        public IEnumerable<T> GetAllExceptions<T>()
+        {
+            var errors = this.context.ExceptionLogs
+                .Select(i => mapper.Map<T>(i));
+
+            return errors;
         }
     }
 }

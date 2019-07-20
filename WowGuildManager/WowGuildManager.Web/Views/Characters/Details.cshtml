@@ -10,14 +10,15 @@
     <div class="row">
         <div class="col-4">
             <ul class="list-group bg-dark mb-3  pr-0">
-                <li class="list-group-item bg-dark">@Model.Name</li>
-                <li class="list-group-item bg-dark">@Model.Level</li>
-                <li class="list-group-item bg-dark">@Model.Role</li>
-                <li class="list-group-item bg-dark">@Model.Class</li>
-                <li class="list-group-item bg-dark">@Model.Rank</li>
+                <li class="list-group-item bg-dark">Name: @Model.Name</li>
+                <li class="list-group-item bg-dark">Level: @Model.Level</li>
+                <li class="list-group-item bg-dark">Role: @Model.Role</li>
+                <li class="list-group-item bg-dark">Class: @Model.Class</li>
+                <li class="list-group-item bg-dark">Rank: @Model.Rank</li>
             </ul>
         </div>
         <div class="col-lg-3">
+            <h3 class="text-danger">Guild master actions:</h3>
             @if (this.User.IsInRole(GuildRanksConstants.GuildMaster))
             {
                 @if (Model.Rank == GuildRanksConstants.Member)
@@ -40,4 +41,5 @@
             }
         </div>
     </div>
+    <hr class="bg-warning"/>
 </div>

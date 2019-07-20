@@ -1,8 +1,6 @@
 ﻿//TODO: Make test for EVERY service method
-//TODO: Make all services throw exceptions instead of returning null
 //TODO: OrderBy clouses where nesesary
 //TODO: Delete remainning comments when READY ! IMPORTANT !!!
-//TODO: Implement Delete character
 namespace WowGuildManager.Services.Characters
 {
     using System;

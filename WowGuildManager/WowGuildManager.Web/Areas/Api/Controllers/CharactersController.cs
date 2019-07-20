@@ -9,6 +9,7 @@
     using WowGuildManager.Services.Api;
     using WowGuildManager.Domain.Identity;
     using WowGuildManager.Models.ApiModels.Characters;
+    using System.Linq;
 
     [Authorize]
     public class CharactersController : ApiController
@@ -26,11 +27,13 @@
         }
     
         [HttpGet]
-        public IEnumerable<CharacterApiViewModel> Get()
+        public ActionResult<IEnumerable<CharacterApiViewModel>> Get()
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            var characters = this.apiService.GetAll<CharacterApiViewModel>(userId);
+            var characters = this.apiService
+                .GetAll<CharacterApiViewModel>(userId)
+                .ToList();
 
             return characters;
         }

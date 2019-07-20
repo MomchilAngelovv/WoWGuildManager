@@ -1,5 +1,4 @@
-﻿//TODO: COnsier create input forms to make models in Get methods and return view models
-//TODO: Api endpoits for dungeons /raids / characers everythng
+﻿//TODO: Api endpoits for dungeons /raids / characers everythng
 //TODO: Sort controllers dependanicyes and methods
 
 namespace WowGuildManager.Web.Controllers

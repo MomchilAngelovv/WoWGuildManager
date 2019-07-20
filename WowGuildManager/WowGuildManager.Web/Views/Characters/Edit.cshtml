@@ -3,41 +3,40 @@
     ViewData["Title"] = "Edit";
 }
 
-<div class="row d-flex justify-content-center">
-    <div class="card-login col-md-6 col-sm-auto">
-        <div class="card-body">
-            <section>
-                <form asp-action="Edit">
-                    <h2 class="text-center mt-3">Edit character </h2>
-                    <hr class="bg-warning" />
+<div class="container-fluid bc">
+    <form asp-action="Edit">
+        <h2>Edit character </h2>
+        <hr class="bg-warning" />
 
-                    <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Level" class="control-label"></label>
-                        <input asp-for="Level" value="@Model.Level" class="form-control" />
-                        <span asp-validation-for="Level" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Role" class="control-label"></label>
-                        <select id="role" asp-for="@Model.Role" asp-items="@((IEnumerable<SelectListItem>)ViewData["Roles"])" class="form-control border-dark"></select>
-                        <span asp-validation-for="@Model.Role" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-warning w-100" />
-                    </div>
-                    <div class="form-group">
-                        <a asp-area="" asp-controller="Characters" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger w-100">Delete characeter</a>
-                    </div>
-                    <div class="form-group">    
-                        <a asp-area="" asp-controller="Characters" asp-action="Index" class="btn btn-info w-100">Back to character</a>
-                    </div>
-                </form>
-            </section>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <div class="row">
+                <label asp-for="Level" class="control-label col-lg-1"></label>
+                <input asp-for="Level" value="@Model.Level" class="form-control col-lg-3" />
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-</div>
+        <div class="form-group">
+            <div class="row">
+                <label asp-for="Role" class="control-label col-lg-1"></label>
+                <select id="role" asp-for="@Model.Role" asp-items="@((IEnumerable<SelectListItem>)ViewData["Roles"])" class="form-control border-dark col-lg-3"></select>
+                <span asp-validation-for="@Model.Role" class="text-danger"></span>
+            </div>
+           
+        </div>
 
+        <hr  class="bg-warning"/>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-warning col-lg-4" />
+        </div>
+        <div class="form-group">
+            <a asp-area="" asp-controller="Characters" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger col-lg-4">Delete characeter</a>
+        </div>
+        <div class="form-group">
+            <a asp-area="" asp-controller="Characters" asp-action="Index" class="btn btn-info col-lg-4">Back to character</a>
+        </div>
+    </form>
+</div>
 
 @section Scripts{
     <partial name="_ValidationScriptsPartial" />

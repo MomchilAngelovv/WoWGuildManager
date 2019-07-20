@@ -2,29 +2,29 @@
 
 <h2 class="m-3">Today's events</h2>
 
-<table class="table table-sm table-hover table-dark col-sm-auto">
+<table class="table table-sm table-hover table-dark text-warning">
     <tbody>
         @if (Model.Raids.Any())
         {
             <tr>
-                <th scope="row" class="text-center">Raids</th>
+                <th>Raids</th>
             </tr>
             @foreach (var raid in Model.Raids)
             {
                 <tr>
-                    <th scope="col"><a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger btn-sm col-sm-auto">@raid.Destination</a></th>
+                    <th class="w-25"><a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger btn-sm col-sm-3">@raid.Destination</a></th>
                 </tr>
             }
         }
         @if (Model.Dungeons.Any())
         {
             <tr>
-                <th scope="row" class="text-center">Dungeons</th>
+                <th>Dungeons</th>
             </tr>
             @foreach (var dungeon in Model.Dungeons)
             {
                 <tr>
-                    <th scope="col"><a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning btn-sm col-sm-auto">@dungeon.Destination</a></th>
+                    <th><a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning btn-sm col-sm-3">@dungeon.Destination</a></th>
                 </tr>
             }
         }

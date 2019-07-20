@@ -40,12 +40,12 @@
     <hr class="bg-warning" />
     <div>
         <h3>Adjust guild progress from here.</h3>
-        <table class="table table-sm table-hover table-dark text-center">
+        <table class="table table-sm table-hover table-dark text-warning">
             <thead>
                 <tr>
-                    <th scope="col" class="text-center">Destination</th>
-                    <th scope="col" class="text-center">Progress</th>
-                    <th scope="col" class="text-center">Adjust progress</th>
+                    <th>Destination</th>
+                    <th>Progress</th>
+                    <th>Adjust progress</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,20 +64,22 @@
         </table>
     </div>
     <hr class="bg-warning" />
-    <div>
-        <form method="post" enctype="multipart/form-data" asp-area="" asp-controller="Gallery" asp-action="UploadImageAsync">
-            <h3>Choose images to upload to gallery page:</h3>
+    <div class="row">
+        <div class="col-lg-4">
+            <form method="post" enctype="multipart/form-data" asp-area="" asp-controller="Gallery" asp-action="UploadImageAsync">
+                <h3>Choose images to upload to gallery page:</h3>
 
-            <div class="form-group">
-                <input type="file" name="files" multiple>
-            </div>
-
-            <div class="form-group">
-                <div class=" input-group">
-                    <input class="btn btn-warning col-lg-6 mt-3" type="submit" value="Upload">
+                <div class="form-group">
+                    <input type="file" name="files" multiple>
                 </div>
-            </div>
-        </form>
+
+                <div class="form-group">
+                    <div class="input-group ">
+                        <input class="btn btn-warning mt-3 w-100" type="submit" value="Upload">
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

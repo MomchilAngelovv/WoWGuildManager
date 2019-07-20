@@ -7,6 +7,7 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
 
     using WowGuildManager.Services.Api;
     using WowGuildManager.Models.ApiModels.Raids;
+    using System.Linq;
 
     public class GuildController : ApiController
     {
@@ -19,9 +20,11 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
         }
 
         [Route("Progress")]
-        public IEnumerable<RaidDestinationProgressApiViewModel> Progress()
+        public ActionResult<IEnumerable<RaidDestinationProgressApiViewModel>> Progress()
         {
-            var raidDestinations = this.apiService.GuildProgress<RaidDestinationProgressApiViewModel>();
+            var raidDestinations = this.apiService
+                .GuildProgress<RaidDestinationProgressApiViewModel>()
+                .ToList();
             
             return raidDestinations;
         }

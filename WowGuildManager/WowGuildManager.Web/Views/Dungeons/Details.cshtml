@@ -7,17 +7,16 @@
     <h2>@Model.Destination</h2>
     <hr class="bg-warning" />
 
-    <div class="row">
+    <div class="row d-flex justify-content-between">
         <div class="col-lg-4">
             <p>Information: @Model.Description</p>
             <p>Event datetime: @Model.EventDateTime</p>
         </div>
 
-        <div class="col-lg-8">
-
+        <div class="col-lg-4">
             @if (Model.AlreadyJoined && Model.JoinedCharacter.Id == Model.LeaderId)
             {
-                <form asp-area="" asp-controller="Dungeons" asp-action="Edit" asp-route-dungeonId="@Model.Id" method="post" class="d-flex justify-content-between">
+                <form asp-area="" asp-controller="Dungeons" asp-action="Edit" asp-route-dungeonId="@Model.Id" method="post">
                     <div class="input-group form-group">
                         <input type="text" class="form-control border-dark" name="description" placeholder="New description..." />
                     </div>
@@ -27,7 +26,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-info w-100 border-dark">Update raid event info</button>
+                        <button type="submit" class="btn btn-info w-100 border-dark">Update dungeon event information</button>
                     </div>
                 </form>
             }
@@ -35,7 +34,7 @@
     </div>
 
     <hr class="bg-warning" />
-
+    <h3>Joined players:</h3>
     <table class="table table-sm table-hover table-dark text-warning">
         <thead>
             <tr>
@@ -56,12 +55,12 @@
                         <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-warning btn-sm w-75">@character.Name</a></td>
                         <td class="p-2">@character.Level</td>
                         <td class="p-2">@character.Class</td>
-                        <td class="p-2 d-flex justify-content-between">@character.Role</td>
+                        <td class="d-flex justify-content-between">@character.Role</td>
                     </tr>
                 }
                 else if (Model.AlreadyJoined && character.Id != Model.LeaderId && Model.JoinedCharacter.Id == Model.LeaderId)
                 {
-                    <tr >
+                    <tr>
                         <td class="p-2 w-25">@character.GuildRank</td>
                         <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
                         <td class="p-2">@character.Level</td>
@@ -76,7 +75,7 @@
                         <td><a asp-area="" asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
                         <td class="p-2">@character.Level</td>
                         <td class="p-2">@character.Class</td>
-                        <td class="p-2 d-flex justify-content-between">@character.Role</td>
+                        <td class="d-flex justify-content-between">@character.Role</td>
                     </tr>
                 }
 
@@ -103,6 +102,7 @@
             </div>
         </div>
     }
+    <hr class="bg-warning" />
 </div>
 
 @section Scripts{
