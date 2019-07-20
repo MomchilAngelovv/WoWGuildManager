@@ -41,6 +41,7 @@ namespace WowGuildManager.Services.Characters
                 RoleId = this.GetRoleIdByName(model.Role),
                 UserId = model.UserId,
                 GuildRankId = this.GetRankIdByName(GuildRanksConstants.Member),
+                IsActive = true
             };
 
             await this.context.Characters.AddAsync(character);
@@ -59,13 +60,9 @@ namespace WowGuildManager.Services.Characters
                 throw new ArgumentException(ErrorConstants.InvalidCharacterErrorMessage);
             }
 
-            this.context.RemoveRange(this.context.DungeonCharacter
-                .Where(dc => dc.CharacterId == characterId));
+            character.IsActive = false;
+            this.context.Update(character);
 
-            this.context.RemoveRange(this.context.RaidCharacter
-               .Where(dc => dc.CharacterId == characterId));
-
-            this.context.Characters.Remove(character);
             await this.context.SaveChangesAsync();
 
             return character;
@@ -92,7 +89,7 @@ namespace WowGuildManager.Services.Characters
         public IEnumerable<T> GetCharactersByUserId<T>(string userId)
         {
             var characters = this.context.Characters
-                .Where(character => character.UserId == userId)
+                .Where(character => character.UserId == userId && character.IsActive)
                 .ToList()
                 .Select(ch => mapper.Map<T>(ch));
 
@@ -115,6 +112,7 @@ namespace WowGuildManager.Services.Characters
         public IEnumerable<T> GetAll<T>()
         {
             var characters = this.context.Characters
+                .Where(c => c.IsActive)
                 .ToList()
                 .Select(c => mapper.Map<T>(c));
 

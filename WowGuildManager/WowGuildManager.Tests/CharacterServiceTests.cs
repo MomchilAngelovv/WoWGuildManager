@@ -65,7 +65,7 @@ namespace WowGuildManager.Tests
             var context = await GetDatabase();
             var service = new CharacterService(context, null);
 
-            await service.Delete("1");
+            await service.DeleteAsync("1");
 
             var expected = 2;
             var actual = context.Characters.Count();

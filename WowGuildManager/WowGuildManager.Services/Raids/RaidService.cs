@@ -51,7 +51,7 @@ namespace WowGuildManager.Services.Raids
         public IEnumerable<T> GetAllUpcoming<T>()
         {
             var raids = this.context.Raids
-               .Where(r => r.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents))
+               .Where(r => r.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents) && r.RegisteredCharacters.Any(rc => rc.Character.IsActive != false))
                .ToList()
                .Select(raid => mapper.Map<T>(raid));
               
@@ -61,7 +61,7 @@ namespace WowGuildManager.Services.Raids
         public IEnumerable<T> GetRaidsForToday<T>()
         {
             var raidsForToday = this.context.Raids
-                .Where(d => d.EventDateTime.Day == DateTime.Now.Day)
+                .Where(d => d.EventDateTime.Day == DateTime.Now.Day && d.RegisteredCharacters.Any(rc => rc.Character.IsActive != false))
                 .ToList()
                 .Select(d => mapper.Map<T>(d));
 
@@ -88,7 +88,7 @@ namespace WowGuildManager.Services.Raids
             }
 
             var registeredCharacters = this.context.RaidCharacter
-                .Where(rc => rc.RaidId == raidId)
+                .Where(rc => rc.RaidId == raidId && rc.Character.IsActive)
                 .ToList()
                 .Select(rc => mapper.Map<T>(rc.Character));
            

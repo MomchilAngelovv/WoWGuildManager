@@ -63,6 +63,8 @@
             .AddDefaultTokenProviders()
             .AddDefaultUI(UIFramework.Bootstrap4);
 
+            services.AddResponseCompression();
+
             services.AddAuthentication().AddFacebook(options =>
             {
                 options.AppId = this.Configuration["Facebook:AppId"];
@@ -115,6 +117,7 @@
             app.UseSeedDatabaseDefaultData();
             #endregion
 
+            app.UseResponseCompression();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

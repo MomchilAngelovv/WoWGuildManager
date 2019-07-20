@@ -45,6 +45,8 @@
         public string UserId { get; set; }
         public virtual WowGuildManagerUser User { get; set; }
 
+        public bool IsActive { get; set; }
+
         public virtual ICollection<RaidCharacter> Raids { get; set; }
 
         public virtual ICollection<DungeonCharacter> Dungeons { get; set; }

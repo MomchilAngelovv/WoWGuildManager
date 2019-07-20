@@ -3,7 +3,7 @@
     using AutoMapper;
 
     using Microsoft.AspNetCore.Mvc.Rendering;
-
+    using System.Linq;
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Models.ViewModels.Dungeons;
 
@@ -12,7 +12,7 @@
         public DungeonProfile()
         {
             this.CreateMap<Dungeon, DungeonViewModel>()
-                .ForMember(d => d.RegisteredPlayers, dvm => dvm.MapFrom(x => x.RegisteredCharacters.Count))
+                .ForMember(d => d.RegisteredPlayers, dvm => dvm.MapFrom(x => x.RegisteredCharacters.Where(rc => rc.Character.IsActive).Count()))
                 .ForMember(d => d.Image, dvm => dvm.MapFrom(x => x.Destination.ImagePath))
                 .ForMember(d => d.MaxPlayers, dvm => dvm.MapFrom(x => x.Destination.MaxPlayers))
                 .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name))

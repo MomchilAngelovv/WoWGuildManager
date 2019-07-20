@@ -6,11 +6,12 @@
 
     public class DungeonCharacter
     {
-        [Required]
+        [Key]
+        public string Id { get; set; }
+       
         public string DungeonId { get; set; }
         public virtual Dungeon Dungeon { get; set; }
 
-        [Required]
         public string CharacterId { get; set; }
         public virtual Character Character { get; set; }
     }

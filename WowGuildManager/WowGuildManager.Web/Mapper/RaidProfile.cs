@@ -3,7 +3,7 @@
     using AutoMapper;
 
     using Microsoft.AspNetCore.Mvc.Rendering;
-
+    using System.Linq;
     using WowGuildManager.Domain.Raid;
     using WowGuildManager.Models.ApiModels.Raids;
     using WowGuildManager.Models.ViewModels.Guild;
@@ -14,7 +14,7 @@
         public RaidProfile()
         {
             this.CreateMap<Raid, RaidViewModel>()
-                .ForMember(d => d.RegisteredPlayers, dvm => dvm.MapFrom(x => x.RegisteredCharacters.Count))
+                .ForMember(d => d.RegisteredPlayers, dvm => dvm.MapFrom(x => x.RegisteredCharacters.Where(rc => rc.Character.IsActive).Count()))
                 .ForMember(d => d.Image, dvm => dvm.MapFrom(x => x.Destination.ImagePath))
                 .ForMember(d => d.MaxPlayers, dvm => dvm.MapFrom(x => x.Destination.MaxPlayers))
                 .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name))

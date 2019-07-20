@@ -10,9 +10,6 @@
         public void Configure(EntityTypeBuilder<RaidCharacter> entity)
         {
             entity
-                .HasKey(raidChar => new { raidChar.RaidId, raidChar.CharacterId });
-
-            entity
               .HasOne(raidChar => raidChar.Raid)
               .WithMany(raid => raid.RegisteredCharacters)
               .HasForeignKey(raidChar => raidChar.RaidId)

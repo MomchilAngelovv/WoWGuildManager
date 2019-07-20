@@ -10,9 +10,6 @@
         public void Configure(EntityTypeBuilder<DungeonCharacter> entity)
         {
             entity
-                .HasKey(dungChar => new { dungChar.DungeonId, dungChar.CharacterId });
-
-            entity
               .HasOne(dungChar => dungChar.Dungeon)
               .WithMany(dung => dung.RegisteredCharacters)
               .HasForeignKey(dungChar => dungChar.DungeonId)

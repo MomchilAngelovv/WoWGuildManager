@@ -48,7 +48,7 @@
         public IEnumerable<T> GetAllUpcoming<T>()
         {
             var dungeons = this.context.Dungeons
-                .Where(r => r.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents))
+                .Where(r => r.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents) && r.RegisteredCharacters.Any(rc => rc.Character.IsActive != false))
                 .ToList()
                 .Select(dungeon => this.mapper.Map<T>(dungeon));
 
@@ -110,7 +110,7 @@
         public IEnumerable<T> GetDungeonsForToday<T>()
         {
             var dungeonsForToday = this.context.Dungeons
-                .Where(d => d.EventDateTime.Day == DateTime.Now.Day)
+                .Where(d => d.EventDateTime.Day == DateTime.Now.Day && d.RegisteredCharacters.Any(rc => rc.Character.IsActive != false))
                 .ToList()
                 .Select(d => mapper.Map<T>(d));
 
@@ -128,7 +128,7 @@
             }
 
             var characters = this.context.DungeonCharacter
-               .Where(dc => dc.DungeonId == dungeonId)
+               .Where(dc => dc.DungeonId == dungeonId && dc.Character.IsActive)
                .ToList()
                .Select(dc => mapper.Map<T>(dc.Character));
 
