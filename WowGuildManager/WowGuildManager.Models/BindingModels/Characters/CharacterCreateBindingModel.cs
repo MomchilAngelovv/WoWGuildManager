@@ -1,5 +1,4 @@
 ﻿//TODO: FIx identity area bootstrap and interface
-//TODO: FIX CSS LAST
 namespace WowGuildManager.Models.BindingModels.Characters
 {
     using System.ComponentModel.DataAnnotations;

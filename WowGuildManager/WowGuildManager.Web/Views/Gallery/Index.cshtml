@@ -7,7 +7,7 @@
     <div class="card-columns m-3">
         @foreach (var image in Model.Images)
         {
-            <div class="card m-2 p-3 border border-warning bc">
+            <div class="card m-1 p-2 border border-warning bc">
                 <img class="card-img-top border border-dark" src="@image.Url" alt="Card image cap">
                 @if (this.User.IsInRole(WowGuildManagerUserConstants.GuildMaster))
                 {
