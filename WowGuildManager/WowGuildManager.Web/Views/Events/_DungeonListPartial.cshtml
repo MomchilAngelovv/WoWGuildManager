@@ -1,41 +1,43 @@
 ﻿@model IEnumerable<WowGuildManager.Models.ViewModels.Dungeons.DungeonViewModel>
 
-    @if (Model.Any())
-    {
-        <section>
-            <h2 class="text-center">Dungeons</h2>
-            <div class="row d-flex justify-content-center">
-                @foreach (var dungeon in Model)
-                {
-                    <div class="card col-md-3 m-3 col-sm-auto bg-dark border-warning" style="padding:0px;">
-                        <img class="card-img-top" src="@dungeon.Image" alt="Card image cap">
-                        <div class="card-body text-warning">
-                            <h5 class="card-title">@dungeon.DateTime</h5>
-                            <p class="card-text">@dungeon.Destination - Leader: @dungeon.LeaderName</p>
-                            <p class="card-text">Registered: @dungeon.RegisteredPlayers / @dungeon.MaxPlayers</p>
-                            <p class="card-text">@dungeon.Description</p>
-                            @if (dungeon.AlreadyJoined)
+@if (Model.Any())
+{
+    <section>
+        <h2 class="text-center">Dungeons</h2>
+        <div class="row d-flex justify-content-center">
+            @foreach (var dungeon in Model)
+            {
+                <div class="card col-md-3 m-3 col-sm-auto bg-dark border-warning" style="padding:0px;">
+                    <img class="card-img-top" src="@dungeon.Image" alt="Card image cap">
+                    <div class="card-body text-warning">
+                        <h5 class="card-title">@dungeon.DateTime</h5>
+                        <p class="card-text">@dungeon.Destination - Leader: @dungeon.LeaderName</p>
+                        <p class="card-text">Registered: @dungeon.RegisteredPlayers / @dungeon.MaxPlayers</p>
+                        <p class="card-text">@dungeon.Description</p>
+                        @if (dungeon.AlreadyJoined)
+                        {
+                            @if (dungeon.IsLeader)
                             {
-                                @if (dungeon.IsLeader)
-                                {
-                                    <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning w-100 ">Already Joined with @dungeon.JoinedCharacter.Name (@dungeon.JoinedCharacter.Role) (Leader)</a>
-                                }
-                                else
-                                {
-                                    <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning w-100 ">Already Joined with @dungeon.JoinedCharacter.Name (@dungeon.JoinedCharacter.Role)</a>
-                                }
-                            }
-                            else if (dungeon.RegisteredPlayers != dungeon.MaxPlayers)
-                            {
-                                <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning w-100 ">Join</a>
+                                <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning w-100 ">Already Joined with @dungeon.JoinedCharacter.Name (@dungeon.JoinedCharacter.Role) (Leader)</a>
                             }
                             else
                             {
-                                <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning w-100 ">Full - see details</a>
+                                <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning w-100 ">Already Joined with @dungeon.JoinedCharacter.Name (@dungeon.JoinedCharacter.Role)</a>
                             }
-                        </div>
+                        }
+                        else if (dungeon.RegisteredPlayers != dungeon.MaxPlayers)
+                        {
+                            <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning w-100 ">Join</a>
+                        }
+                        else
+                        {
+                            <a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning w-100 ">Full - see details</a>
+                        }
                     </div>
-                }
-            </div>
-        </section>
-    }
+                </div>
+            }
+        </div>
+    </section>
+
+    <hr class="bg-warning" />
+}

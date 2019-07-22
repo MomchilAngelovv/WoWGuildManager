@@ -60,16 +60,16 @@ namespace WowGuildManager.Tests
         }
 
         [Fact]
-        public async Task Delete_Should_Remove_Character_From_Database()
+        public async Task Delete_Should_Set_Character_Is_Active_To_False()
         {
             var context = await GetDatabase();
             var service = new CharacterService(context, null);
 
             await service.DeleteAsync("1");
 
-            var expected = 2;
-            var actual = context.Characters.Count();
-
+            var expected = false;
+            var actual = context.Characters.First(c => c.Id == "1").IsActive;
+            
             Assert.Equal(expected, actual);
         }
 

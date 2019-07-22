@@ -18,150 +18,187 @@
     public class DungeonServiceTests
     {
         [Fact]
-        public async Task CreateAsync_Should_Register_Character()
+        public async Task CreateAsync_Should_Register_Dungeon_In_Database()
         {
-            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
-                .UseInMemoryDatabase("CreateAsync_Database")
-                .Options;
-
-            using (var dbContext = new WowGuildManagerDbContext(options))
+            using (var context = await GetDatabase())
             {
-                var dungeonService = new DungeonService(dbContext, null);
-
-                var dungeonDestination = new DungeonDestination
-                {
-                    Name = "Scarlet Monastery"
-                };
-
-                dbContext.DungeonDestinations.Add(dungeonDestination);
-                dbContext.SaveChanges();
+                var dungeonService = new DungeonService(context, null);
 
                 var dungeonCreateBindingModel = new DungeonCreateBindingModel
                 {
                     DateTime = DateTime.Now,
-                    Description = "RandomStuff",
-                    Destination = "Scarlet Monastery",
-                    LeaderId = "TestUser1"
+                    Description = "TestDescr",
+                    Destination = "TestDest",
+                    LeaderId = "1"
                 };
 
                 await dungeonService.CreateAsync(dungeonCreateBindingModel);
 
-                var expectedResult = 1;
-                var actualResult = dbContext.Dungeons.Count();
+                var expected = 2;
+                var actual = context.Dungeons.Count();
 
-                Assert.Equal(expectedResult, actualResult);
+                Assert.Equal(expected, actual);
             }
         }
 
         [Fact]
-        public async Task RegisterCharacterAsync_Should_Register_Character_To_Dungeon()
+        public async Task CreateAsync_Should_Throw_If_Incorrect_Destination_Provided()
         {
-            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
-               .UseInMemoryDatabase("RegisterCharacterAsync_Database")
-               .Options;
-
-            using (var dbContext = new WowGuildManagerDbContext(options))
-            {
-                var dungeonService = new DungeonService(dbContext, null);
-
-                var dungeon = new Dungeon
-                {
-                    Id = "D1"
-                };
-
-                var character = new Character
-                {
-                    Id = "C1"
-                };
-
-                dbContext.Dungeons.Add(dungeon);
-                dbContext.Characters.Add(character);
-                dbContext.SaveChanges();
-
-                await dungeonService.RegisterCharacterAsync(character.Id, dungeon.Id);
-
-                var expectedResult = 1;
-                var actualResult = dbContext.DungeonCharacter.Count();
-
-                Assert.Equal(expectedResult, actualResult);
-            }
-        }
-
-        [Fact]
-        public void RegisterCharacterAsync_Should_Throw_If_No_Character_Or_Dungeon_Found()
-        {
-            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
-               .UseInMemoryDatabase("RegisterCharacterAsync_Database")
-               .Options;
-
-            using (var dbContext = new WowGuildManagerDbContext(options))
-            {
-                var dungeonService = new DungeonService(dbContext, null);
-
-                Assert.Throws<ArgumentException>(() => dungeonService.RegisterCharacterAsync("NoSuchCharacterId", "NoSuchDungeonId").GetAwaiter().GetResult());
-            }
-        }
-
-        [Fact]
-        public void GetDestinationByDestinationName_Should_Return_Correct_Destination()
-        {
-            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
-              .UseInMemoryDatabase("RegisterCharacterAsync_Database")
-              .Options;
-
-            using (var dbContext = new WowGuildManagerDbContext(options))
-            {
-                var dungeonService = new DungeonService(dbContext, null);
-
-                var dungeonDestination = new DungeonDestination
-                {
-                    Id = "1",
-                    Name = "TestDestination"
-                };
-                dbContext.DungeonDestinations.Add(dungeonDestination);
-                dbContext.SaveChanges();
-
-                var expectedResult = "1";
-                var actualResult = dungeonService.GetDestinationIdByName("TestDestination");
-
-                Assert.Equal(expectedResult, actualResult);
-            }
-        }
-
-        [Fact]
-        public async Task KickPlayer_Should_Properly_Delete_Registered_Player_From_Dungeon()
-        {
-            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
-                .UseInMemoryDatabase("KickCharacter_Database")
-                .Options;
-
-            using (var context = new WowGuildManagerDbContext(options))
+            using (var context = await GetDatabase())
             {
                 var dungeonService = new DungeonService(context, null);
 
-                var dungeonCharacters = new List<DungeonCharacter>
+                var dungeonCreateBindingModel = new DungeonCreateBindingModel
                 {
-                     new DungeonCharacter
-                     {
-                         CharacterId = "TestCharacterId1",
-                         DungeonId = "TestDungeonId1"
-                     },
-                     new DungeonCharacter
-                     {
-                         CharacterId = "TestCharacterId2",
-                         DungeonId = "TestDungeonId2"
-                     },
+                    DateTime = DateTime.Now,
+                    Description = "TestDescr",
+                    Destination = "TestDest2",
+                    LeaderId = "TestChar1"
                 };
 
-                await context.DungeonCharacter.AddRangeAsync(dungeonCharacters);
-                await context.SaveChangesAsync();
-
-                await dungeonService.KickCharacter("TestCharacterId1", "TestDungeonId1");
-
-                var expectedCount = 1;
-
-                Assert.Equal(expectedCount, context.DungeonCharacter.Count());
+                await Assert.ThrowsAsync<ArgumentException>(async () => await dungeonService.CreateAsync(dungeonCreateBindingModel));
             }
+        }
+
+        [Fact]
+        public async Task RegisterCharacter_Should_Create_New_Dungeon_Character_Entity_In_Database()
+        {
+            using (var context = await GetDatabase())
+            {
+                var dungeonService = new DungeonService(context, null);
+
+                await dungeonService.RegisterCharacterAsync("1", "1");
+                var expected = 1;
+                var actual = context.DungeonCharacter.Count();
+
+                Assert.Equal(expected, actual);
+            }
+        }
+
+        [Fact]
+        public async Task RegisterCharacter_Should_Throw_If_No_Character_Found()
+        {
+            using (var context = await GetDatabase())
+            {
+                var dungeonService = new DungeonService(context, null);
+
+                await Assert.ThrowsAsync<ArgumentException>(async () => await dungeonService.RegisterCharacterAsync("IncorectId", "1"));
+            }
+        }
+
+        [Fact]
+        public async Task GetDestinationId_Should_Return_Correct_Id()
+        {
+            using (var context = await GetDatabase())
+            {
+                var dungeonService = new DungeonService(context, null);
+
+                var expected = "1";
+                var actual = dungeonService.GetDestinationIdByName("TestDest");
+
+                Assert.Equal(expected, actual);
+            }
+        }
+
+        [Fact]
+        public async Task GetDestinationId_Should_Throw_If_No_Such_Destination_Exists()
+        {
+            using (var context = await GetDatabase())
+            {
+                var dungeonService = new DungeonService(context, null);
+
+                Assert.Throws<ArgumentException>(() => dungeonService.GetDestinationIdByName("Incorrect"));
+            }
+        }
+
+        [Fact]
+        public async Task RegisterCharacter_Should_Throw_If_No_Dungeon_Found()
+        {
+            using (var context = await GetDatabase())
+            {
+                var dungeonService = new DungeonService(context, null);
+
+                await Assert.ThrowsAsync<ArgumentException>(async () => await dungeonService.RegisterCharacterAsync("1", "IncorectId"));
+            }
+        }
+
+        [Fact]
+        public async Task KickCharacter_Should_Remove_Dungeon_Character_Entity_In_Database()
+        {
+            using (var context = await GetDatabase())
+            {
+                var dungeonService = new DungeonService(context, null);
+
+                await dungeonService.RegisterCharacterAsync("1", "1");
+                await dungeonService.KickCharacter("1", "1");
+
+                var expected = 0;
+                var actual = context.DungeonCharacter.Count();
+
+                Assert.Equal(expected, actual);
+            }
+        }
+
+        [Fact]
+        public async Task KickCharacter_Should_Throw_If_Invalid_Character()
+        {
+            using (var context = await GetDatabase())
+            {
+                var dungeonService = new DungeonService(context, null);
+
+                await Assert.ThrowsAsync<InvalidOperationException>(async () => await dungeonService.KickCharacter("Incorrect", "1"));
+            }
+        }
+
+        [Fact]
+        public async Task KickCharacter_Should_Throw_If_Invalid_Dungeon()
+        {
+            using (var context = await GetDatabase())
+            {
+                var dungeonService = new DungeonService(context, null);
+
+                await Assert.ThrowsAsync<InvalidOperationException>(async () => await dungeonService.KickCharacter("1", "Incorrect"));
+            }
+        }
+
+
+        private async Task<WowGuildManagerDbContext> GetDatabase()
+        {
+            var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+
+            var context = new WowGuildManagerDbContext(options);
+
+            var dungeons = new List<Dungeon>
+            {
+                new Dungeon
+                {
+                    Id="1",
+                }
+            };
+            var destinations = new List<DungeonDestination>
+            {
+                new DungeonDestination
+                {
+                    Id = "1",
+                    Name = "TestDest"
+                }
+            };
+            var characters = new List<Character>
+            {
+                new Character
+                {
+                    Id = "1"
+                }
+            };
+
+            await context.AddRangeAsync(destinations);
+            await context.AddRangeAsync(characters);
+            await context.AddRangeAsync(dungeons);
+            await context.SaveChangesAsync();
+
+            return context;
         }
     }
 }

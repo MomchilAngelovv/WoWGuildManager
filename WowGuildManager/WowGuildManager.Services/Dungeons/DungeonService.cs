@@ -168,7 +168,7 @@
 
             if (dungeonCharacter == null)
             {
-                throw new InvalidOperationException(ErrorConstants.InvalidRaidKickErrorMessage);
+                throw new InvalidOperationException(ErrorConstants.InvalidCharacterErrorMessage);
             }
 
             this.context.DungeonCharacter.Remove(dungeonCharacter);
