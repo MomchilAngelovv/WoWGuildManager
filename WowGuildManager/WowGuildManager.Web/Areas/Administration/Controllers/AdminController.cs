@@ -21,8 +21,8 @@
 
         public IActionResult Index()
         {
-            var registeredUsersCount = this.guildService.GetRegisteredUsersCount();
-            var registeredCharactersCount = this.guildService.GetRegisteredCharactersCount();
+            var registeredUsersCount = this.guildService.GetTotalRegisteredUsersCount();
+            var registeredCharactersCount = this.guildService.GetTotalRegisteredCharactersCount();
 
             var adminIndexViewModel = new AdminIndexViewModel
             {

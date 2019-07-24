@@ -24,7 +24,7 @@ namespace WowGuildManager.Web.Controllers
         public IActionResult All()
         {
             var members = this.characterService
-                .GetAll<CharacterViewModel>()
+                .GetAllCharacters<CharacterViewModel>()
                 .ToList();
 
             var membersIndexViewModel = new MembersIndexViewModel

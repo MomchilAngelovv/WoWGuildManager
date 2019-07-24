@@ -6,31 +6,39 @@
     using System.Collections.Generic;
 
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Models.BindingModels.Dungeons;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Domain.Characters;
 
     public class DungeonService : IDungeonService
     {
         private readonly WowGuildManagerDbContext context;
+        private readonly ICharacterService characterService;
         private readonly IMapper mapper;
 
-        public DungeonService(WowGuildManagerDbContext context,IMapper mapper)
+        public DungeonService(
+            WowGuildManagerDbContext context,
+            ICharacterService characterService,
+            IMapper mapper)
         {
             this.context = context;
+            this.characterService = characterService;
             this.mapper = mapper;
         }
 
-        public async Task<Dungeon> CreateAsync(DungeonCreateBindingModel inputModel)
+        public async Task<Dungeon> CreateAsync(DungeonCreateBindingModel createModel)
         {
             var dungeon = new Dungeon
             {
-                EventDateTime = inputModel.DateTime,
-                Description = inputModel.Description,
-                DestinationId = this.GetDestinationIdByName(inputModel.Destination),
-                LeaderId = inputModel.LeaderId
+                EventDateTime = createModel.DateTime,
+                Description = createModel.Description,
+                LeaderId = createModel.LeaderId,
+                DestinationId = this.GetDestinationId(createModel.Destination)
             };
 
             dungeon.RegisteredCharacters.Add(new DungeonCharacter
@@ -44,48 +52,35 @@
 
             return dungeon;
         }
-
-        public IEnumerable<T> GetAllUpcoming<T>()
+        public async Task<Dungeon> EditAsync(DungeonEditBindingModel editModel)
         {
-            var dungeons = this.context.Dungeons
-                .Where(r => r.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents) && r.RegisteredCharacters.Any(rc => rc.Character.IsActive != false))
-                .ToList()
-                .Select(dungeon => this.mapper.Map<T>(dungeon));
+            var dungeon = this.GetDungeon<Dungeon>(editModel.DungeonId);
 
-            return dungeons;
-        }
-
-        public IEnumerable<T> GetDestinations<T>()
-        {
-            var dungeonDestinations = this.context.DungeonDestinations
-                .Select(dd => mapper.Map<T>(dd))
-                .ToList();
-
-            return dungeonDestinations;
-        }
-
-        public async Task<DungeonCharacter> RegisterCharacterAsync(string characterId, string dungeonId)
-        {
-            var character = this.context.Characters
-                .Find(characterId);
-
-            if (character == null)
+            if (string.IsNullOrWhiteSpace(editModel.Description) == false)
             {
-                throw new ArgumentException(ErrorConstants.InvalidCharacterErrorMessage);
+                dungeon.Description = editModel.Description;
             }
 
-            var dungeon = this.context.Dungeons
-                .Find(dungeonId);
-
-            if (dungeon == null)
+            if (editModel.EventDateTime != null)
             {
-                throw new ArgumentException(ErrorConstants.InvalidDungeonErrorMessage);
+                dungeon.EventDateTime = editModel.EventDateTime.Value;
             }
+
+            this.context.Update(dungeon);
+            await this.context.SaveChangesAsync();
+
+            return dungeon;
+        }
+
+        public async Task<DungeonCharacter> RegisterCharacterAsync(string dungeonId, string characterId)
+        {
+            var dungeon = this.GetDungeon<Dungeon>(dungeonId);
+            var character = this.characterService.GetCharacter<Character>(characterId);
 
             var dungeonCharacter = new DungeonCharacter
             {
-                CharacterId = character.Id,
-                DungeonId = dungeon.Id
+                DungeonId = dungeon.Id,
+                CharacterId = character.Id
             };
 
             await this.context.DungeonCharacter.AddAsync(dungeonCharacter);
@@ -93,61 +88,40 @@
 
             return dungeonCharacter;
         }
-
-        public T GetDestinationByDestinationName<T>(string destinationName)
+        public async Task<DungeonCharacter> KickCharacterAsync(string dungeonId, string characterId)
         {
-            var destination = mapper.Map<T>(this.context.DungeonDestinations
-                .FirstOrDefault(dd => dd.Name == destinationName));
+            var dungeonCharacter = this.context.DungeonCharacter
+                .FirstOrDefault(rc => rc.DungeonId == dungeonId && rc.CharacterId == characterId);
 
-            if (destination == null)
+            if (dungeonCharacter == null)
             {
-                throw new ArgumentException(ErrorConstants.InvalidDestinationNameErrorMessage);
+                throw new InvalidOperationException(ErrorConstants.InvalidCharacterKickErrorMessage);
             }
 
-            return destination;
+            this.context.DungeonCharacter.Remove(dungeonCharacter);
+            await this.context.SaveChangesAsync();
+
+            return dungeonCharacter;
         }
 
-        public IEnumerable<T> GetDungeonsForToday<T>()
+        public IEnumerable<T> GetAllUpcoming<T>()
         {
-            var dungeonsForToday = this.context.Dungeons
-                .Where(d => d.EventDateTime.Day == DateTime.Now.Day && d.RegisteredCharacters.Any(rc => rc.Character.IsActive != false))
-                .ToList()
-                .Select(d => mapper.Map<T>(d));
+            var upcomingDungeons = this.context.Dungeons
+                .Where(dung => dung.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents) && dung.RegisteredCharacters.Any(regChar => regChar.Character.IsActive != false))
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
 
-            return dungeonsForToday;
+            return upcomingDungeons;
         }
-
-        public IEnumerable<T> GetRegisteredCharactersByDungeonId<T>(string dungeonId)
+        public IEnumerable<T> GetTodayDungeons<T>()
         {
-            var dungeon = this.context.Dungeons
-              .Find(dungeonId);
+            var todayDungeons = this.context.Dungeons
+                .Where(dung => dung.EventDateTime.Day == DateTime.Now.Day && dung.RegisteredCharacters.Any(regChar => regChar.Character.IsActive != false))
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
 
-            if (dungeon == null)
-            {
-                throw new ArgumentException(ErrorConstants.InvalidDungeonErrorMessage);
-            }
-
-            var characters = this.context.DungeonCharacter
-               .Where(dc => dc.DungeonId == dungeonId && dc.Character.IsActive)
-               .ToList()
-               .Select(dc => mapper.Map<T>(dc.Character));
-
-            return characters;
+            return todayDungeons;
         }
-
-        public string GetDestinationIdByName(string destinationName)
-        {
-            var destination = this.context.DungeonDestinations
-               .FirstOrDefault(dd => dd.Name == destinationName);
-
-            if (destination == null)
-            {
-                throw new ArgumentException(ErrorConstants.InvalidDestinationNameErrorMessage);
-            }
-
-            return destination.Id;
-        }
-
         public T GetDungeon<T>(string dungeonId)
         {
             var dungeon = this.context.Dungeons
@@ -158,44 +132,49 @@
                 throw new InvalidOperationException(ErrorConstants.InvalidDungeonErrorMessage);
             }
 
-            return mapper.Map<T>(dungeon);
+            var mappedDungeon = mapper.Map<T>(dungeon);
+            return mappedDungeon;
         }
 
-        public async Task KickCharacter(string characterId, string dungeonId)
+        public IEnumerable<T> GetRegisteredCharacters<T>(string dungeonId)
         {
-            var dungeonCharacter = this.context.DungeonCharacter
-                .FirstOrDefault(rc => rc.CharacterId == characterId && rc.DungeonId == dungeonId);
+            var dungeon = this.GetDungeon<Dungeon>(dungeonId);
 
-            if (dungeonCharacter == null)
-            {
-                throw new InvalidOperationException(ErrorConstants.InvalidCharacterErrorMessage);
-            }
+            var registeredCharacters = this.context.DungeonCharacter
+               .Where(dc => dc.DungeonId == dungeonId && dc.Character.IsActive)
+               .ProjectTo<T>(mapper.ConfigurationProvider)
+               .ToList();
 
-            this.context.DungeonCharacter.Remove(dungeonCharacter);
-            await this.context.SaveChangesAsync();
+            return registeredCharacters;
         }
 
-        public async Task Edit(DungeonEditBindingModel input)
+        public IEnumerable<T> GetDestinations<T>()
         {
-            var dungeon = this.context.Dungeons.Find(input.DungeonId);
+            var destinations = this.context.DungeonDestinations
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
 
-            if (dungeon == null)
+            return destinations;
+        }
+        public T GetDestination<T>(string dungeonName)
+        {
+            var destination = this.context.DungeonDestinations
+                .FirstOrDefault(dest => dest.Name == dungeonName);
+
+            if (destination == null)
             {
-                throw new ArgumentException(ErrorConstants.InvalidRaidErrorMessage);
+                throw new ArgumentException(ErrorConstants.InvalidDestinationNameErrorMessage);
             }
 
-            if (string.IsNullOrWhiteSpace(input.Description) == false)
-            {
-                dungeon.Description = input.Description;
-            }
+            var mappedDestination = mapper.Map<T>(destination);
+            return mappedDestination;
+        }
+        public string GetDestinationId(string dungeonName)
+        {
+            var destination = this.GetDestination<DungeonDestination>(dungeonName);
 
-            if (input.EventDateTime != null)
-            {
-                dungeon.EventDateTime = input.EventDateTime.Value;
-            }
-
-            this.context.Update(dungeon);
-            await this.context.SaveChangesAsync();
+            var destinationId = destination.Id;
+            return destinationId;
         }
     }
 }

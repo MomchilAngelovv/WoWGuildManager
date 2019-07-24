@@ -4,16 +4,13 @@
 
     public interface IApiService
     {
-        IEnumerable<T> GetAll<T>(string userId);
+        IEnumerable<T> GetAllMembers<T>();
+        IEnumerable<T> GetAllCharacters<T>(string userId);
+        IEnumerable<T> GetAllImages<T>();
+        IEnumerable<T> GetAllExceptions<T>();
 
         T GetCharacterById<T>(string characterId);
 
-        IEnumerable<T> Members<T>();
-
         IEnumerable<T> GuildProgress<T>();
-
-        IEnumerable<T> GetAllImages<T>();
-
-        IEnumerable<T> GetAllExceptions<T>();
     }
 }

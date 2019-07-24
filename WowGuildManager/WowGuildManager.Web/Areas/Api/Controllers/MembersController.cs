@@ -21,7 +21,7 @@
         public IEnumerable<CharacterApiViewModel> Get()
         {
             var members = this.apiService
-                .Members<CharacterApiViewModel>();
+                .GetAllMembers<CharacterApiViewModel>();
 
             return members;
         }

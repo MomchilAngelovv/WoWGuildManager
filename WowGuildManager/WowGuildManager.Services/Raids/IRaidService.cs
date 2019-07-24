@@ -1,8 +1,7 @@
-﻿//TODO: SOrt interface methods
-namespace WowGuildManager.Services.Raids
+﻿namespace WowGuildManager.Services.Raids
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     using WowGuildManager.Domain.Raid;
     using WowGuildManager.Models.BindingModels.Raids;
@@ -10,24 +9,20 @@ namespace WowGuildManager.Services.Raids
     public interface IRaidService
     {
         Task<Raid> CreateAsync(RaidCreateBindingModel model);
+        Task<Raid> EditAsync(RaidEditBindingModel input);
+
+        Task<RaidCharacter> RegisterCharacterAsync(string raidId, string caracterId);
+        Task<RaidCharacter> KickPlayerAsync(string characterId, string raidId);
 
         IEnumerable<T> GetAllUpcoming<T>();
-
-        IEnumerable<T> GetRaidsForToday<T>();
-
-        IEnumerable<T> GetDestinations<T>();
-
-        IEnumerable<T> GetRegisteredCharactersByRaidId<T>(string raidId);
-
-        Task<RaidCharacter> RegisterCharacterAsync(string characterId, string raidId);
-
-        string GetDestinationIdByName(string destinationName);
-
+        IEnumerable<T> GetTodayRaids<T>();
         T GetRaid<T>(string raidId);
 
-        Task KickPlayer(string characterId, string raidId);
+        IEnumerable<T> GetRegisteredCharacters<T>(string raidId);
 
-        Task Edit(RaidEditBindingModel input);
+        IEnumerable<T> GetDestinations<T>();
+        T GetDestination<T>(string raidName);
+        string GetDestinationId(string raidName);
     }
 }
     

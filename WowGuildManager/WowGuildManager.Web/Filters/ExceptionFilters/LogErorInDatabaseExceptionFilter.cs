@@ -13,7 +13,6 @@
     public class LogErorInDatabaseExceptionFilter : ExceptionFilterAttribute
     {
         private readonly UserManager<WowGuildManagerUser> userManager;
-
         private readonly WowGuildManagerDbContext context;
 
         public LogErorInDatabaseExceptionFilter(
@@ -26,21 +25,21 @@
         
         public override void OnException(ExceptionContext context)
         {
-            var username = userManager.GetUserName(context.HttpContext.User);
+            var userId = userManager.GetUserId(context.HttpContext.User);
 
-            if (username == null)
+            if (userId == null)
             {
-                username = WowGuildManagerUserConstants.NullUserWarningMessage;
+                userId = WowGuildManagerUserConstants.NullUserWarningMessage;
             }
 
-            var exceptionLog = new ExceptionLog
+            var exceptionLog = new Error
             {
-                ExceptionMessage = $"Error: {context.Exception.Message}",
-                Username = username,
-                ExceptionTime = DateTime.UtcNow,
+                Message = $"Exception: {context.Exception.Message}",
+                UserId = userId,
+                DateTime = DateTime.UtcNow,
             };
 
-            this.context.ExceptionLogs.AddAsync(exceptionLog);
+            this.context.Errors.AddAsync(exceptionLog);
             this.context.SaveChanges();
         }
     }

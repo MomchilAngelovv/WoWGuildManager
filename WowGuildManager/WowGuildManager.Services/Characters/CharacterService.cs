@@ -9,6 +9,7 @@ namespace WowGuildManager.Services.Characters
     using System.Collections.Generic;
 
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Characters;
@@ -20,7 +21,9 @@ namespace WowGuildManager.Services.Characters
         private readonly WowGuildManagerDbContext context;
         private readonly IMapper mapper;
 
-        public CharacterService(WowGuildManagerDbContext context, IMapper mapper)
+        public CharacterService(
+            WowGuildManagerDbContext context, 
+            IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
@@ -35,13 +38,13 @@ namespace WowGuildManager.Services.Characters
 
             var character = new Character
             {
-                ClassId = this.GetClassIdByName(model.Class),
-                Level = model.Level,
                 Name = model.Name,
-                RoleId = this.GetRoleIdByName(model.Role),
+                Level = model.Level,
                 UserId = model.UserId,
-                GuildRankId = this.GetRankIdByName(GuildRanksConstants.Member),
-                IsActive = true
+                IsActive = true,
+                ClassId = this.GetClassId(model.Class),
+                RoleId = this.GetRoleId(model.Role),
+                RankId = this.GetRankId(GuildRanksConstants.Member)
             };
 
             await this.context.Characters.AddAsync(character);
@@ -49,7 +52,18 @@ namespace WowGuildManager.Services.Characters
 
             return character;
         }
+        public async Task<Character> EditAsync(CharacterEditBindingModel model)
+        {
+            var character = this.GetCharacter<Character>(model.Id);
 
+            character.Level = model.Level;
+            character.RoleId = this.GetRoleId(model.Role);
+
+            this.context.Update(character);
+            await this.context.SaveChangesAsync();
+
+            return character;
+        }
         public async Task<Character> DeleteAsync(string characterId)
         {
             var character = this.context.Characters
@@ -68,35 +82,25 @@ namespace WowGuildManager.Services.Characters
             return character;
         }
 
-        public IEnumerable<T> GetClasses<T>()
-        {
-            var classes = this.context.CharacterClasses
-               .Select(cc => mapper.Map<T>(cc))
-               .ToList();
-
-            return classes;
-        }
-
-        public IEnumerable<T> GetRoles<T>()
-        {
-            var classes = this.context.CharacterRoles
-                .Select(cc => mapper.Map<T>(cc))
-                .ToList();
-
-            return classes;
-        }
-
-        public IEnumerable<T> GetCharactersByUserId<T>(string userId)
+        public IEnumerable<T> GetAllCharacters<T>()
         {
             var characters = this.context.Characters
-                .Where(character => character.UserId == userId && character.IsActive)
-                .ToList()
-                .Select(ch => mapper.Map<T>(ch));
+                .Where(c => c.IsActive)
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
 
             return characters;
         }
+        public IEnumerable<T> GetUserCharacters<T>(string userId)
+        {
+            var characters = this.context.Characters
+                .Where(character => character.UserId == userId && character.IsActive)
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
 
-        public T GetCharacterById<T>(string characterId)
+            return characters;
+        }
+        public T GetCharacter<T>(string characterId)
         {
             var character = this.context.Characters
                 .Find(characterId);
@@ -109,17 +113,24 @@ namespace WowGuildManager.Services.Characters
             return mapper.Map<T>(character);
         }
 
-        public IEnumerable<T> GetAll<T>()
+        public IEnumerable<T> GetClassList<T>()
         {
-            var characters = this.context.Characters
-                .Where(c => c.IsActive)
-                .ToList()
-                .Select(c => mapper.Map<T>(c));
+            var classes = this.context.CharacterClasses
+               .ProjectTo<T>(mapper.ConfigurationProvider)
+               .ToList();
 
-            return characters;
+            return classes;
+        }
+        public IEnumerable<T> GetRoleList<T>()
+        {
+            var classes = this.context.CharacterRoles
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
+
+            return classes;
         }
 
-        public string GetClassIdByName(string className)
+        public string GetClassId(string className)
         {
             var classObject = this.context.CharacterClasses
                 .FirstOrDefault(cc => cc.Name == className);
@@ -131,8 +142,7 @@ namespace WowGuildManager.Services.Characters
 
             return classObject.Id;
         }
-
-        public string GetRoleIdByName(string roleName)
+        public string GetRoleId(string roleName)
         {
             var roleObject = this.context.CharacterRoles
                  .FirstOrDefault(cr => cr.Name == roleName);
@@ -144,10 +154,9 @@ namespace WowGuildManager.Services.Characters
 
             return roleObject.Id;
         }
-
-        public string GetRankIdByName(string rankName)
+        public string GetRankId(string rankName)
         {
-            var rankObject = this.context.GuildRanks
+            var rankObject = this.context.CharacterRanks
                  .FirstOrDefault(cr => cr.Name == rankName);
 
             if (rankObject == null)
@@ -158,20 +167,9 @@ namespace WowGuildManager.Services.Characters
             return rankObject.Id;
         }
 
-        public async Task Edit(CharacterEditBindingModel model)
-        {
-            var character = this.GetCharacterById<Character>(model.Id);
-
-            character.Level = model.Level;
-            character.RoleId = this.GetRoleIdByName(model.Role);
-
-            this.context.Update(character);
-            await this.context.SaveChangesAsync();
-        }
-
         public bool UserHasMaxRegiresteredCharacters(string userId)
         {
-            if (this.context.Characters.Where(c => c.UserId == userId).Count() == CharacterConstants.MaximumAllowedCharactersPerUser)
+            if (this.context.Characters.Where(c => c.UserId == userId && c.IsActive == true).Count() == CharacterConstants.MaximumAllowedCharactersPerUser)
             {
                 return true;
             }

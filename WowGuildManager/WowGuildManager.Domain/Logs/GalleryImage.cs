@@ -3,7 +3,9 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class ImageUploadLog
+    using WowGuildManager.Domain.Identity;
+
+    public class GalleryImage
     {
         [Key]
         public string Id { get; set; }
@@ -14,11 +16,12 @@
         [Required]
         public string Format { get; set; }
 
-        [Range(1,long.MaxValue)]
+        [Range(1, long.MaxValue)]
         public long Length { get; set; }
 
         [Required]
         public string UserId { get; set; }
+        public virtual WowGuildManagerUser User { get; set; }
 
         [Required]
         public string Url { get; set; }

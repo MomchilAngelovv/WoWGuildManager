@@ -24,10 +24,10 @@
         public IViewComponentResult Invoke()
         {
             var raidsForToday = this.raidService
-               .GetRaidsForToday<RaidIdDestinationViewModel>();
+               .GetTodayRaids<RaidIdDestinationViewModel>();
 
             var dungeonsForToday = this.dungeonService
-                .GetDungeonsForToday<DungeonIdDestinationViewModel>();
+                .GetTodayDungeons<DungeonIdDestinationViewModel>();
 
             var todayEventsViewModel = new TodayEventsViewModel
             {

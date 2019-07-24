@@ -40,7 +40,7 @@ namespace WowGuildManager.Web.Controllers
 
         public async Task<IActionResult> MakeNonActualAsync(string id)
         {
-            await this.galleryService.MakeNonActualAsync(id);
+            await this.galleryService.RemoveImageAsync(id);
             
             return this.RedirectToAction(nameof(Index));
         }
@@ -48,7 +48,7 @@ namespace WowGuildManager.Web.Controllers
         public IActionResult Index()
         {
             var images = this.galleryService
-                .GetAllGallery<GalleryImageViewModel>();
+                .GetAllImages<GalleryImageViewModel>();
 
             var galleryIndexViewModel = new GalleryIndexViewModel
             {
@@ -61,43 +61,10 @@ namespace WowGuildManager.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadImageAsync(List<IFormFile> files)
         {
-            foreach (var file in files)
-            {
-                using (var stream = file.OpenReadStream())
-                {
-                    var uploadParams = new ImageUploadParams()
-                    {
-                        Folder = "Gallery",
-                        File = new FileDescription(Guid.NewGuid().ToString(), stream)
-                    };
-
-                    var uploadResult = await cloudinary.UploadAsync(uploadParams);
-
-                    await this.InsertUploadLogAsync(uploadResult);
-                }
-            }
+            var userId = this.userManager.GetUserId(this.User);
+            await this.galleryService.UploadImagesAsync(files, userId);
 
             return this.RedirectToAction(nameof(Index));
-        }
-
-        private async Task<ImageUploadLog> InsertUploadLogAsync(ImageUploadResult uploadResult)
-        {
-            var userId = this.userManager.GetUserId(this.User);
-
-            var imageUploadLog = new ImageUploadLog
-            {
-                CreatedAt = uploadResult.CreatedAt,
-                Format = uploadResult.Format,
-                Length = uploadResult.Length,
-                UserId = userId,
-                Url = uploadResult.SecureUri.AbsoluteUri,
-                IsActual = true
-            };
-
-            await this.context.ImageUploadLogs.AddAsync(imageUploadLog);
-            await this.context.SaveChangesAsync();
-
-            return null;
         }
     }
 }

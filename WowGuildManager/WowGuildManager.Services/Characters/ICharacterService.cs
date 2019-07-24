@@ -9,26 +9,19 @@
     public interface ICharacterService
     {
         Task<Character> CreateAsync(CharacterCreateBindingModel inputModel);
-
+        Task<Character> EditAsync(CharacterEditBindingModel model);
         Task<Character> DeleteAsync(string characterId);
 
-        IEnumerable<T> GetClasses<T>();
+        IEnumerable<T> GetAllCharacters<T>();
+        IEnumerable<T> GetUserCharacters<T>(string userId);
+        T GetCharacter<T>(string characterId);
 
-        IEnumerable<T> GetRoles<T>();
+        IEnumerable<T> GetClassList<T>();
+        IEnumerable<T> GetRoleList<T>();
 
-        IEnumerable<T> GetCharactersByUserId<T>(string userId);
-
-        T GetCharacterById<T>(string characterId);
-
-        IEnumerable<T> GetAll<T>();
-
-        string GetClassIdByName(string className);
-
-        string GetRoleIdByName(string roleName);
-
-        string GetRankIdByName(string rankName);
-
-        Task Edit(CharacterEditBindingModel model);
+        string GetClassId(string className);
+        string GetRoleId(string roleName);
+        string GetRankId(string rankName);
 
         bool UserHasMaxRegiresteredCharacters(string userId);
     }

@@ -8,94 +8,55 @@
     using Microsoft.AspNetCore.Identity;
 
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using WowGuildManager.Data;
+    using WowGuildManager.Domain.Raid;
     using WowGuildManager.Services.Raids;
     using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Domain.Characters;
     using WowGuildManager.Services.Characters;
     using WowGuildManager.Common.GlobalConstants;
 
     public class GuildService : IGuildService
     {
-        private readonly WowGuildManagerDbContext context;
-        private readonly IMapper mapper;
         private readonly UserManager<WowGuildManagerUser> userManager;
+        private readonly WowGuildManagerDbContext context;
         private readonly IRaidService raidService;
         private readonly ICharacterService characterService;
+        private readonly IMapper mapper;
 
         public GuildService(
-            WowGuildManagerDbContext context, 
-            IMapper mapper, 
             UserManager<WowGuildManagerUser> userManager,
+            WowGuildManagerDbContext context,
             IRaidService raidService,
-            ICharacterService characterService)
+            ICharacterService characterService,
+            IMapper mapper)
         {
-            this.context = context;
-            this.mapper = mapper;
             this.userManager = userManager;
+            this.context = context;
             this.raidService = raidService;
             this.characterService = characterService;
-        }
-
-        public async Task AddProgressToRaid(string raidName)
-        {
-            var destination = this.context.RaidDestinations.Find(this.raidService.GetDestinationIdByName(raidName));
-
-            if (destination.KilledBosses < destination.TotalBosses)
-            {
-                destination.KilledBosses += 1;
-            }
-
-            this.context.Update(destination);
-            await this.context.SaveChangesAsync();
-        }
-
-        public IEnumerable<T> GetRegisteredUsers<T>()
-        {
-            var users = this.context.Users
-                .ToList()
-                .Select(u => mapper.Map<T>(u));
-
-            return users;
-        }
-
-        public async Task RemoveProgressToRaid(string raidName)
-        {
-            var destination = this.context.RaidDestinations.Find(this.raidService.GetDestinationIdByName(raidName));
-            
-            if (destination.KilledBosses > 0)
-            {
-                destination.KilledBosses -= 1;
-            }
-
-            this.context.Update(destination);
-            await this.context.SaveChangesAsync();
+            this.mapper = mapper;
         }
 
         public async Task SetGuildMasterAsync(string userId)
         {
-            var user = this.context.Users
-                .Find(userId);
+            var nextGuildMasterUser = this.context.Users.Find(userId);
+            var previuosGuildMasterUser = this.context.Users.SingleOrDefault(u => u.IsGuildMaster == true);
 
-            var previuosGuildMaster = this.context.Users
-                .SingleOrDefault(u => u.IsGuildMaster == true);
-
-            if (previuosGuildMaster != null)
+            if (previuosGuildMasterUser != null)
             {
-                await this.userManager.RemoveFromRoleAsync(previuosGuildMaster, WowGuildManagerUserConstants.GuildMaster);
-                previuosGuildMaster.IsGuildMaster = false;
+                await this.userManager.RemoveFromRoleAsync(previuosGuildMasterUser, WowGuildManagerUserConstants.GuildMaster);
+                previuosGuildMasterUser.IsGuildMaster = false;
             }
 
-            await this.userManager.AddToRoleAsync(user, WowGuildManagerUserConstants.GuildMaster);
-            user.IsGuildMaster = true;
+            await this.userManager.AddToRoleAsync(nextGuildMasterUser, WowGuildManagerUserConstants.GuildMaster);
+            nextGuildMasterUser.IsGuildMaster = true;
             await this.context.SaveChangesAsync();
         }
-
-        public async Task SetOrUnsetRaidLeader(string userId)
+        public async Task SetOrUnsetRaidLeaderAsync(string userId)
         {
-            var user = this.context.Users
-                .Find(userId);
+            var user = this.context.Users.Find(userId);
 
             if (user.IsRaidLeader)
             {
@@ -107,38 +68,36 @@
                 await this.userManager.AddToRoleAsync(user, WowGuildManagerUserConstants.RaidLeader);
                 user.IsRaidLeader = true;
             }
-           
+
             await this.context.SaveChangesAsync();
         }
-
         public async Task PromoteRankAsync(string characterId)
         {
-            var character = this.characterService
-                .GetCharacterById<Character>(characterId);
+            var character = this.context.Characters.Find(characterId);
 
-            if (character.GuildRank.Name != GuildRanksConstants.GuildMaster)
+            if (character.Rank.Name != GuildRanksConstants.GuildMaster)
             {
-                switch (character.GuildRank.Name)
+                switch (character.Rank.Name)
                 {
                     case GuildRanksConstants.Member:
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Alt);
+                        character.RankId = this.characterService.GetRankId(GuildRanksConstants.Alt);
                         break;
                     case GuildRanksConstants.Alt:
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.PvP);
+                        character.RankId = this.characterService.GetRankId(GuildRanksConstants.PvP);
                         break;
                     case GuildRanksConstants.PvP:
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Veteran);
+                        character.RankId = this.characterService.GetRankId(GuildRanksConstants.Veteran);
                         break;
                     case GuildRanksConstants.Veteran:
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Raider);
+                        character.RankId = this.characterService.GetRankId(GuildRanksConstants.Raider);
                         break;
                     case GuildRanksConstants.Raider:
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Officer);
+                        character.RankId = this.characterService.GetRankId(GuildRanksConstants.Officer);
                         break;
                     case GuildRanksConstants.Officer:
                         if (this.HasGuildMaster() == false)
                         {
-                            character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.GuildMaster);
+                            character.RankId = this.characterService.GetRankId(GuildRanksConstants.GuildMaster);
                         }
                         else
                         {
@@ -151,33 +110,31 @@
                 await this.context.SaveChangesAsync();
             }
         }
-
         public async Task DemoteRankAsync(string characterId)
         {
-            var character = this.characterService
-                .GetCharacterById<Character>(characterId);
+            var character = this.context.Characters.Find(characterId);
 
-            if (character.GuildRank.Name != GuildRanksConstants.Member)
+            if (character.Rank.Name != GuildRanksConstants.Member)
             {
-                switch (character.GuildRank.Name)
+                switch (character.Rank.Name)
                 {
                     case GuildRanksConstants.GuildMaster:
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Officer);
+                        character.RankId = this.characterService.GetRankId(GuildRanksConstants.Officer);
                         break;
                     case GuildRanksConstants.Officer:
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Raider);
+                        character.RankId = this.characterService.GetRankId(GuildRanksConstants.Raider);
                         break;
                     case GuildRanksConstants.Raider:
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Veteran);
+                        character.RankId = this.characterService.GetRankId(GuildRanksConstants.Veteran);
                         break;
                     case GuildRanksConstants.Veteran:
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.PvP);
+                        character.RankId = this.characterService.GetRankId(GuildRanksConstants.PvP);
                         break;
                     case GuildRanksConstants.PvP:
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Alt);
+                        character.RankId = this.characterService.GetRankId(GuildRanksConstants.Alt);
                         break;
                     case GuildRanksConstants.Alt:
-                        character.GuildRankId = this.characterService.GetRankIdByName(GuildRanksConstants.Member);
+                        character.RankId = this.characterService.GetRankId(GuildRanksConstants.Member);
                         break;
                 }
 
@@ -186,24 +143,59 @@
             }
         }
 
+        public async Task AddProgressToRaidAsync(string raidName)
+        {
+            var destination = this.raidService.GetDestination<RaidDestination>(raidName);
+
+            if (destination.KilledBosses < destination.TotalBosses)
+            {
+                destination.KilledBosses += 1;
+            }
+
+            this.context.Update(destination);
+            await this.context.SaveChangesAsync();
+        }
+        public async Task RemoveProgressToRaidAsync(string raidName)
+        {
+            var destination = this.raidService.GetDestination<RaidDestination>(raidName);
+
+            if (destination.KilledBosses > 0)
+            {
+                destination.KilledBosses -= 1;
+            }
+
+            this.context.Update(destination);
+            await this.context.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetTotalRegisteredUsers<T>()
+        {
+            var users = this.context.Users
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
+
+            return users;
+        }
+
+        public int GetTotalRegisteredUsersCount()
+        {
+            var usersCount = this.userManager.Users.Count();
+            return usersCount;
+        }
+        public int GetTotalRegisteredCharactersCount()
+        {
+            var charactersCount = this.context.Characters.Count();
+            return charactersCount;
+        }
+
         private bool HasGuildMaster()
         {
-            if (this.context.Characters.Any(ch => ch.GuildRank.Name == GuildRanksConstants.GuildMaster))
+            if (this.context.Characters.Any(ch => ch.Rank.Name == GuildRanksConstants.GuildMaster))
             {
                 throw new InvalidOperationException(ErrorConstants.AlreadyHasGuildMasterErrorMessage);
             }
 
             return false;
-        }
-
-        public int GetRegisteredUsersCount()
-        {
-            return this.userManager.Users.Count();
-        }
-
-        public int GetRegisteredCharactersCount()
-        {
-            return this.context.Characters.Count();
         }
     }
 }

@@ -61,7 +61,7 @@ namespace WowGuildManager.Web.Controllers
             var userId = this.userManager.GetUserId(this.User);
 
             var myCharacters = this.characterService
-                .GetCharactersByUserId<SelectListItem>(userId);
+                .GetUserCharacters<SelectListItem>(userId);
                
             return myCharacters;
         }
@@ -94,12 +94,10 @@ namespace WowGuildManager.Web.Controllers
             var userId = this.userManager.GetUserId(this.User);
 
             var registeredCharacters = this.raidService
-                 .GetRegisteredCharactersByRaidId<CharacterRaidDetailsViewModel>(id)
-                 .ToList();
+                 .GetRegisteredCharacters<CharacterRaidDetailsViewModel>(id);
 
             var myCharacters = this.characterService
-                .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
-                .ToList();
+                .GetUserCharacters<CharacterIdNameViewModel>(userId);
 
             raidDetailsViewModel.Characters = registeredCharacters;
             raidDetailsViewModel.AvailableCharacters = myCharacters;
@@ -109,7 +107,7 @@ namespace WowGuildManager.Web.Controllers
                 if (registeredCharacters.Any(rc => rc.Id == myCharacter.Id))
                 {
                     var characterNameIdViewModel = this.characterService
-                        .GetCharacterById<CharacterIdNameViewModel>(myCharacter.Id);
+                        .GetCharacter<CharacterIdNameViewModel>(myCharacter.Id);
 
                     raidDetailsViewModel.AlreadyJoined = true;
                     raidDetailsViewModel.JoinedCharacter = characterNameIdViewModel;
@@ -122,7 +120,7 @@ namespace WowGuildManager.Web.Controllers
 
         public async Task<IActionResult> Join(string characterId, string raidId)
         {
-            await this.raidService.RegisterCharacterAsync(characterId, raidId);
+            await this.raidService.RegisterCharacterAsync(raidId, characterId);
 
             return this.RedirectToAction("Upcoming", "Events");
         }
@@ -130,14 +128,14 @@ namespace WowGuildManager.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(RaidEditBindingModel input)
         {
-            await this.raidService.Edit(input);
+            await this.raidService.EditAsync(input);
 
             return this.RedirectToAction(nameof(Details),new { id = input.RaidId });
         }
 
         public async Task<IActionResult> Kick(string characterId, string raidId)
         {
-            await this.raidService.KickPlayer(characterId, raidId);
+            await this.raidService.KickPlayerAsync(characterId, raidId);
             return this.RedirectToAction(nameof(Details), new { id = raidId});
         }
     }

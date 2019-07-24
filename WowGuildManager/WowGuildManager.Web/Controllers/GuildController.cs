@@ -26,8 +26,8 @@
 
         public IActionResult GuildMaster()
         {
-            var registeredCharacters = this.guildService.GetRegisteredCharactersCount();
-            var users = this.guildService.GetRegisteredUsers<UserGuildMasterViewModel>();
+            var registeredCharacters = this.guildService.GetTotalRegisteredCharactersCount();
+            var users = this.guildService.GetTotalRegisteredUsers<UserGuildMasterViewModel>();
             var raidDestinations = this.raidService.GetDestinations<RaidDestinationGuildMasterProgressViewModel>();
 
             var guildMasterViewModel = new GuildMasterViewModel
@@ -52,13 +52,13 @@
 
         public async Task<IActionResult> AddProgress(string raidName)
         {
-            await this.guildService.AddProgressToRaid(raidName);
+            await this.guildService.AddProgressToRaidAsync(raidName);
             return this.RedirectToAction(nameof(GuildMaster));
         }
 
         public async Task<IActionResult> RemoveProgress(string raidName)
         {
-            await this.guildService.RemoveProgressToRaid(raidName);
+            await this.guildService.RemoveProgressToRaidAsync(raidName);
             return this.RedirectToAction(nameof(GuildMaster));
         }
 
@@ -76,7 +76,7 @@
 
         public async Task<IActionResult> SetOrUnsetRaidLeader(string userId)
         {
-            await this.guildService.SetOrUnsetRaidLeader(userId);
+            await this.guildService.SetOrUnsetRaidLeaderAsync(userId);
 
             return RedirectToAction(nameof(GuildMaster));
         }

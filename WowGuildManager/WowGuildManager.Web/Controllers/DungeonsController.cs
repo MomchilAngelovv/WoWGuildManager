@@ -65,7 +65,7 @@ namespace WowGuildManager.Web.Controllers
             var userId = this.userManager.GetUserId(this.User);
 
             var myCharacters = this.characterService
-                .GetCharactersByUserId<CharacterIdNameViewModel>(userId)
+                .GetUserCharacters<CharacterIdNameViewModel>(userId)
                 .Select(c => new SelectListItem
                 {
                     Text = c.Name,
@@ -88,12 +88,12 @@ namespace WowGuildManager.Web.Controllers
             var dungeonDetailsViewModel = this.dungeonService.GetDungeon<DungeonDetailsViewModel>(id);
 
             var registeredCharacters = this.dungeonService
-                .GetRegisteredCharactersByDungeonId<CharacterDungeonDetailsViewModel>(id);
+                .GetRegisteredCharacters<CharacterDungeonDetailsViewModel>(id);
 
             var userId = this.userManager.GetUserId(this.User);
 
             var myCharacters = this.characterService
-                .GetCharactersByUserId<CharacterIdNameViewModel>(userId);
+                .GetUserCharacters<CharacterIdNameViewModel>(userId);
 
             dungeonDetailsViewModel.Characters = registeredCharacters;
             dungeonDetailsViewModel.AvailableCharacters = myCharacters;
@@ -103,7 +103,7 @@ namespace WowGuildManager.Web.Controllers
                 if (registeredCharacters.Any(rc => rc.Id == myCharacter.Id))
                 {
                     var characterNameIdViewModel = this.characterService
-                        .GetCharacterById<CharacterIdNameViewModel>(myCharacter.Id);
+                        .GetCharacter<CharacterIdNameViewModel>(myCharacter.Id);
 
                     dungeonDetailsViewModel.AlreadyJoined = true;
                     dungeonDetailsViewModel.JoinedCharacter = characterNameIdViewModel;
@@ -114,23 +114,24 @@ namespace WowGuildManager.Web.Controllers
             return this.View(dungeonDetailsViewModel);
         }
 
-        public async Task<IActionResult> Join(string characterId, string dungeonId)
+        public async Task<IActionResult> Join(string dungeonId, string characterId)
         {
-            await this.dungeonService.RegisterCharacterAsync(characterId, dungeonId);
+            await this.dungeonService.RegisterCharacterAsync(dungeonId, characterId);
 
             return this.RedirectToAction("Upcoming", "Events");
         }
 
-        public async Task<IActionResult> Kick(string characterId, string dungeonId)
+        public async Task<IActionResult> Kick(string dungeonId, string characterId)
         {
-            await this.dungeonService.KickCharacter(characterId, dungeonId);
+            await this.dungeonService.KickCharacterAsync(dungeonId, characterId);
+
             return this.RedirectToAction("Upcoming", "Events");
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(DungeonEditBindingModel input)
         {
-            await this.dungeonService.Edit(input);
+            await this.dungeonService.EditAsync(input);
 
             return this.RedirectToAction(nameof(Details), new { id = input.DungeonId });
         }

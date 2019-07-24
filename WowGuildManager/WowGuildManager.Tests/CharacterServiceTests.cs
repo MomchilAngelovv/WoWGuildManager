@@ -151,9 +151,9 @@ namespace WowGuildManager.Tests
                     Name = "Tank"
                 }
             };
-            var ranks = new List<GuildRank>
+            var ranks = new List<CharacterRank>
             {
-                new GuildRank
+                new CharacterRank
                 {
                     Id = "1",
                     Name = "Member"

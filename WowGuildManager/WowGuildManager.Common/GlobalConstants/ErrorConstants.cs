@@ -4,6 +4,7 @@
     {
         public static string InvalidUserErrorMessage = "There is no such user!";
         public static string InvalidCharacterErrorMessage = "There is no such character!";
+        public static string InvalidCharacterKickErrorMessage = "Can not kick that player!";
         public static string MaximumRegisteredPlayers = $"User cannot have more than {CharacterConstants.MaximumAllowedCharactersPerUser} characters in the guild!";
         public static string InvalidClassTypeErrorMessage = "Invalid class type!";
         public static string InvalidRoleTypeErrorMessage = "Invalid role type!";

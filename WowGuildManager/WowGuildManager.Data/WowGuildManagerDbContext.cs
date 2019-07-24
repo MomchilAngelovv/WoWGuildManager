@@ -18,28 +18,20 @@
         }
 
         public DbSet<Character> Characters { get; set; }
-
-        public DbSet<Dungeon> Dungeons { get; set; }
-
-        public DbSet<Raid> Raids { get; set; }
-
-        public DbSet<RaidCharacter> RaidCharacter { get; set; }
-
-        public DbSet<DungeonCharacter> DungeonCharacter { get; set; }
-
         public DbSet<CharacterClass> CharacterClasses { get; set; }
-
+        public DbSet<CharacterRank> CharacterRanks { get; set; }
         public DbSet<CharacterRole> CharacterRoles { get; set; }
 
+        public DbSet<Dungeon> Dungeons { get; set; }
         public DbSet<DungeonDestination> DungeonDestinations { get; set; }
+        public DbSet<DungeonCharacter> DungeonCharacter { get; set; }
 
+        public DbSet<Raid> Raids { get; set; }
         public DbSet<RaidDestination> RaidDestinations { get; set; }
+        public DbSet<RaidCharacter> RaidCharacter { get; set; }
 
-        public DbSet<GuildRank> GuildRanks { get; set; }
-
-        public DbSet<ExceptionLog> ExceptionLogs { get; set; }
-
-        public DbSet<ImageUploadLog> ImageUploadLogs { get; set; }
+        public DbSet<Error> Errors { get; set; }
+        public DbSet<GalleryImage> GalleryImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

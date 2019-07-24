@@ -9,25 +9,19 @@
     public interface IDungeonService
     {
         Task<Dungeon> CreateAsync(DungeonCreateBindingModel inputModel);
+        Task<Dungeon> EditAsync(DungeonEditBindingModel input);
+
+        Task<DungeonCharacter> RegisterCharacterAsync(string dungeonId, string characterId);
+        Task<DungeonCharacter> KickCharacterAsync(string dungeonId, string characterId);
 
         IEnumerable<T> GetAllUpcoming<T>();
-
-        IEnumerable<T> GetDungeonsForToday<T>();
-
-        IEnumerable<T> GetDestinations<T>();
-
-        Task<DungeonCharacter> RegisterCharacterAsync(string characterId, string dungeonId);
-
-        IEnumerable<T> GetRegisteredCharactersByDungeonId<T>(string dungeonId);
-
-        T GetDestinationByDestinationName<T>(string destinationName);
-
-        string GetDestinationIdByName(string destinationName);
-
+        IEnumerable<T> GetTodayDungeons<T>();
         T GetDungeon<T>(string dungeonId);
 
-        Task KickCharacter(string characterId, string dungeonId);
+        IEnumerable<T> GetRegisteredCharacters<T>(string dungeonId);
 
-        Task Edit(DungeonEditBindingModel input);
+        IEnumerable<T> GetDestinations<T>();
+        T GetDestination<T>(string dungeonName);
+        string GetDestinationId(string dungeonName);
     }
 }

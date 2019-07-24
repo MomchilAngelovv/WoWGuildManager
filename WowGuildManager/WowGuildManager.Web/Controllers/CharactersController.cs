@@ -36,7 +36,7 @@ namespace WowGuildManager.Web.Controllers
             var userId = this.userManager.GetUserId(this.User);
 
             var characters = this.characterService
-                .GetCharactersByUserId<CharacterViewModel>(userId);
+                .GetUserCharacters<CharacterViewModel>(userId);
 
             var characterIndexViewModel = new CharacterIndexViewModel
             {
@@ -73,7 +73,7 @@ namespace WowGuildManager.Web.Controllers
         public IActionResult Details(string id)
         {
             var character = this.characterService
-                .GetCharacterById<CharacterViewModel>(id);
+                .GetCharacter<CharacterViewModel>(id);
 
             return this.View(character);
         }
@@ -81,7 +81,7 @@ namespace WowGuildManager.Web.Controllers
         public IActionResult Delete(string id)
         {
             var characterDeleteViewModel = this.characterService
-                .GetCharacterById<CharacterDeleteViewModel>(id);
+                .GetCharacter<CharacterDeleteViewModel>(id);
 
             return this.View(characterDeleteViewModel);
         }
@@ -97,14 +97,14 @@ namespace WowGuildManager.Web.Controllers
 
         private IEnumerable<SelectListItem> BindRolesToSelectListItem()
         {
-            var roleList = this.characterService.GetRoles<SelectListItem>();
+            var roleList = this.characterService.GetRoleList<SelectListItem>();
 
             return roleList;
         }
 
         private IEnumerable<SelectListItem> BindClassesToSelectListItem()
         {
-            var classList = this.characterService.GetClasses<SelectListItem>();
+            var classList = this.characterService.GetClassList<SelectListItem>();
 
             return classList;
         }
@@ -112,7 +112,7 @@ namespace WowGuildManager.Web.Controllers
         public IActionResult Edit(string id)
         {
             var characterEditBindingModel = this.characterService
-                .GetCharacterById<CharacterEditBindingModel>(id);
+                .GetCharacter<CharacterEditBindingModel>(id);
 
             var roleList = this.BindRolesToSelectListItem();
 
@@ -124,7 +124,7 @@ namespace WowGuildManager.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(CharacterEditBindingModel model)
         {
-            await this.characterService.Edit(model);
+            await this.characterService.EditAsync(model);
             return this.RedirectToAction(nameof(Index));
         }
     }

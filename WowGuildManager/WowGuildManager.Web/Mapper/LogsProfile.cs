@@ -13,11 +13,11 @@ namespace WowGuildManager.Web.Mapper
     {
         public LogsProfile()
         {
-            this.CreateMap<ImageUploadLog, GalleryImageViewModel>();
+            this.CreateMap<GalleryImage, GalleryImageViewModel>();
 
-            this.CreateMap<ImageUploadLog, ImageApiViewModel>();
+            this.CreateMap<GalleryImage, ImageApiViewModel>();
 
-            this.CreateMap<ExceptionLog, ExceptionApiViewModel>();
+            this.CreateMap<Error, ExceptionApiViewModel>();
         }
     }
 }

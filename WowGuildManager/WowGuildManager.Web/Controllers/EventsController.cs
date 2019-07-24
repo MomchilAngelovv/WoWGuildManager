@@ -49,7 +49,7 @@ namespace WowGuildManager.Web.Controllers
             var userId = this.userManager.GetUserId(this.User);
 
             var myCharacters = this.charactersService
-                .GetCharactersByUserId<Character>(userId);
+                .GetUserCharacters<Character>(userId);
 
             var dungeons = this.dungeonService
                 .GetAllUpcoming<DungeonViewModel>()

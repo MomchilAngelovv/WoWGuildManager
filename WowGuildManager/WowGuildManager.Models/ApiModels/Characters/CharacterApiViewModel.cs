@@ -18,6 +18,8 @@
 
         public string UserId { get; set; }
 
+        public bool IsActive { get; set; }
+
         public string[] Raids { get; set; }
 
         public string[] Dungeons { get; set; }

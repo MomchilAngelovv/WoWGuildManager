@@ -5,22 +5,17 @@
 
     public interface IGuildService
     {
-        IEnumerable<T> GetRegisteredUsers<T>();
-
         Task SetGuildMasterAsync(string userId);
-
-        Task SetOrUnsetRaidLeader(string userId);
-
-        Task AddProgressToRaid(string raidName);
-
-        Task RemoveProgressToRaid(string raidName);
-
+        Task SetOrUnsetRaidLeaderAsync(string userId);
         Task PromoteRankAsync(string characterId);
-
         Task DemoteRankAsync(string characterId);
 
-        int GetRegisteredUsersCount();
+        Task AddProgressToRaidAsync(string raidName);
+        Task RemoveProgressToRaidAsync(string raidName);
 
-        int GetRegisteredCharactersCount();
+        IEnumerable<T> GetTotalRegisteredUsers<T>();
+
+        int GetTotalRegisteredUsersCount();
+        int GetTotalRegisteredCharactersCount();
     }
 }

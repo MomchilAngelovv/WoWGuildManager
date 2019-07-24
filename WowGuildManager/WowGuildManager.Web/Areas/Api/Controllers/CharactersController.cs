@@ -32,7 +32,7 @@
             var userId = this.userManager.GetUserId(this.User);
 
             var characters = this.apiService
-                .GetAll<CharacterApiViewModel>(userId)
+                .GetAllCharacters<CharacterApiViewModel>(userId)
                 .ToList();
 
             return characters;

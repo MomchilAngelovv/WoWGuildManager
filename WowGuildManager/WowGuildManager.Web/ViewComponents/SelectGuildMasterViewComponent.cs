@@ -16,7 +16,7 @@
 
         public IViewComponentResult Invoke()
         {
-            var users = this.guildService.GetRegisteredUsers<UserAdminViewModel>();
+            var users = this.guildService.GetTotalRegisteredUsers<UserAdminViewModel>();
 
             return this.View(users);
         }

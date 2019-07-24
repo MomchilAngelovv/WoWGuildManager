@@ -1,4 +1,5 @@
 ﻿//TODO: Chage images for heroes to be better scaling with square
+//TODO: See all netcoreapp versions or netstandard
 namespace WowGuildManager.Services.Raids
 {
     using System;
@@ -7,38 +8,46 @@ namespace WowGuildManager.Services.Raids
     using System.Collections.Generic;
 
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
-    using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Data;
+    using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Domain.Raid;
     using WowGuildManager.Models.BindingModels.Raids;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Domain.Characters;
 
     public class RaidService : IRaidService
     {
         private readonly WowGuildManagerDbContext context;
+        private readonly ICharacterService characterService;
         private readonly IMapper mapper;
 
-        public RaidService(WowGuildManagerDbContext context, IMapper mapper)
+        public RaidService(
+            WowGuildManagerDbContext context,
+            ICharacterService characterService,
+            IMapper mapper)
         {
             this.context = context;
+            this.characterService = characterService;
             this.mapper = mapper;
         }
 
-        public async Task<Raid> CreateAsync(RaidCreateBindingModel model)
+        public async Task<Raid> CreateAsync(RaidCreateBindingModel createModel)
         {
-            var destinationId = this.GetDestinationIdByName(model.Destination);
+            var destinationId = this.GetDestinationId(createModel.Destination);
 
             var raid = new Raid
             {
-                EventDateTime = model.DateTime,
-                Description = model.Description,
+                EventDateTime = createModel.DateTime,
+                Description = createModel.Description,
                 DestinationId = destinationId,
-                LeaderId = model.LeaderId,
+                LeaderId = createModel.LeaderId,
             };
 
             raid.RegisteredCharacters.Add(new RaidCharacter
             {
-                CharacterId = model.LeaderId,
+                CharacterId = createModel.LeaderId,
                 RaidId = raid.Id
             });
 
@@ -47,76 +56,35 @@ namespace WowGuildManager.Services.Raids
 
             return raid;
         }
-
-        public IEnumerable<T> GetAllUpcoming<T>()
+        public async Task<Raid> EditAsync(RaidEditBindingModel editModel)
         {
-            var raids = this.context.Raids
-               .Where(r => r.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents) && r.RegisteredCharacters.Any(rc => rc.Character.IsActive != false))
-               .ToList()
-               .Select(raid => mapper.Map<T>(raid));
-              
-            return raids;
-        }
+            var raid = this.GetRaid<Raid>(editModel.RaidId);
 
-        public IEnumerable<T> GetRaidsForToday<T>()
-        {
-            var raidsForToday = this.context.Raids
-                .Where(d => d.EventDateTime.Day == DateTime.Now.Day && d.RegisteredCharacters.Any(rc => rc.Character.IsActive != false))
-                .ToList()
-                .Select(d => mapper.Map<T>(d));
-
-            return raidsForToday;
-        }
-
-        public IEnumerable<T> GetDestinations<T>()
-        {
-            var raidDestinations = this.context.RaidDestinations
-                .Select(rd => mapper.Map<T>(rd))
-                .ToList();
-
-            return raidDestinations;
-        }
-
-        public IEnumerable<T> GetRegisteredCharactersByRaidId<T>(string raidId)
-        {
-            var raid = this.context.Raids
-                .Find(raidId);
-
-            if (raid == null)
+            if (string.IsNullOrWhiteSpace(editModel.Description) == false)
             {
-                throw new ArgumentException(ErrorConstants.InvalidRaidErrorMessage);
+                raid.Description = editModel.Description;
             }
 
-            var registeredCharacters = this.context.RaidCharacter
-                .Where(rc => rc.RaidId == raidId && rc.Character.IsActive)
-                .ToList()
-                .Select(rc => mapper.Map<T>(rc.Character));
-           
-            return registeredCharacters;
+            if (editModel.EventDateTime != null)
+            {
+                raid.EventDateTime = editModel.EventDateTime.Value;
+            }
+
+            this.context.Update(raid);
+            await this.context.SaveChangesAsync();
+
+            return raid;
         }
 
-        public async Task<RaidCharacter> RegisterCharacterAsync(string characterId, string raidId)
+        public async Task<RaidCharacter> RegisterCharacterAsync(string raidId, string characterId)
         {
-            var character = this.context.Characters
-               .Find(characterId);
-
-            if (character == null)
-            {
-                throw new ArgumentException(ErrorConstants.InvalidCharacterErrorMessage);
-            }
-
-            var raid = this.context.Raids
-                .Find(raidId);
-
-            if (raid == null)
-            {
-                throw new ArgumentException(ErrorConstants.InvalidRaidErrorMessage);
-            }
+            var raid = this.GetRaid<Raid>(raidId);
+            var character = this.characterService.GetCharacter<Character>(characterId);
 
             var raidCharacter = new RaidCharacter
             {
-                CharacterId = character.Id,
-                RaidId = raid.Id
+                RaidId = raid.Id,
+                CharacterId = character.Id
             };
 
             await this.context.RaidCharacter.AddAsync(raidCharacter);
@@ -124,20 +92,40 @@ namespace WowGuildManager.Services.Raids
 
             return raidCharacter;
         }
-
-        public string GetDestinationIdByName(string destinationName)
+        public async Task<RaidCharacter> KickPlayerAsync(string raidId, string characterId)
         {
-            var destination = this.context.RaidDestinations
-                .FirstOrDefault(rd => rd.Name == destinationName);
+            var raidCharacter = this.context.RaidCharacter
+                .FirstOrDefault(raidChar => raidChar.RaidId == raidId && raidChar.CharacterId == characterId);
 
-            if (destination == null)
+            if (raidCharacter == null)
             {
-                throw new InvalidOperationException(ErrorConstants.InvalidDestinationNameErrorMessage);
+                throw new InvalidOperationException(ErrorConstants.InvalidRaidKickErrorMessage);
             }
 
-            return destination.Id;
+            this.context.RaidCharacter.Remove(raidCharacter);
+            await this.context.SaveChangesAsync();
+
+            return raidCharacter;
         }
 
+        public IEnumerable<T> GetAllUpcoming<T>()
+        {
+            var upcomingRaids = this.context.Raids
+               .Where(raid => raid.EventDateTime >= DateTime.Now.AddHours(TimeConstants.HourDifferenceForUpcomingEvents) && raid.RegisteredCharacters.Any(regChar => regChar.Character.IsActive != false))
+               .ProjectTo<T>(mapper.ConfigurationProvider)
+               .ToList();
+              
+            return upcomingRaids;
+        }
+        public IEnumerable<T> GetTodayRaids<T>()
+        {
+            var todayRaids = this.context.Raids
+                .Where(raid => raid.EventDateTime.Day == DateTime.Now.Day && raid.RegisteredCharacters.Any(regChar => regChar.Character.IsActive != false))
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
+
+            return todayRaids;
+        }
         public T GetRaid<T>(string raidId)
         {
             var raid = this.context.Raids
@@ -148,44 +136,49 @@ namespace WowGuildManager.Services.Raids
                 throw new InvalidOperationException(ErrorConstants.InvalidRaidErrorMessage);
             }
 
-            return mapper.Map<T>(raid);
+            var mappedRaid = mapper.Map<T>(raid);
+            return mappedRaid;
         }
 
-        public async Task KickPlayer(string characterId, string raidId)
+        public IEnumerable<T> GetRegisteredCharacters<T>(string raidId)
         {
-            var raidCharacter = this.context.RaidCharacter
-                .FirstOrDefault(rc => rc.CharacterId == characterId && rc.RaidId == raidId);
+            var raid = this.GetRaid<Raid>(raidId);
 
-            if (raidCharacter == null)
-            {
-                throw new InvalidOperationException(ErrorConstants.InvalidRaidKickErrorMessage);
-            }
-
-            this.context.RaidCharacter.Remove(raidCharacter);
-            await this.context.SaveChangesAsync();
+            var registeredCharacters = this.context.RaidCharacter
+                .Where(regChar => regChar.RaidId == raidId && regChar.Character.IsActive)
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
+           
+            return registeredCharacters;
         }
 
-        public async Task Edit(RaidEditBindingModel input)
+        public IEnumerable<T> GetDestinations<T>()
         {
-            var raid = this.context.Raids.Find(input.RaidId);
+            var destinations = this.context.RaidDestinations
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
 
-            if (raid == null)
+            return destinations;
+        }
+        public T GetDestination<T>(string raidName)
+        {
+            var destination = this.context.RaidDestinations
+                .FirstOrDefault(raidDest => raidDest.Name == raidName);
+
+            if (destination == null)
             {
-                throw new ArgumentException(ErrorConstants.InvalidRaidErrorMessage);
+                throw new ArgumentException(ErrorConstants.InvalidDestinationNameErrorMessage);
             }
 
-            if (string.IsNullOrWhiteSpace(input.Description) == false)
-            {
-                raid.Description = input.Description;
-            }
+            var mappedDestination = mapper.Map<T>(destination);
+            return mappedDestination;
+        }
+        public string GetDestinationId(string raidName)
+        {
+            var destination = this.GetDestination<RaidDestination>(raidName);
 
-            if (input.EventDateTime != null)
-            {
-                raid.EventDateTime = input.EventDateTime.Value;
-            }
-
-            this.context.Update(raid);
-            await this.context.SaveChangesAsync();
+            var destinationId = destination.Id;
+            return destinationId;
         }
     }
 }

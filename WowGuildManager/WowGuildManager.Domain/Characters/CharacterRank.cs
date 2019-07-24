@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class GuildRank
+    public class CharacterRank
     {
         [Key]
         public string Id { get; set; }

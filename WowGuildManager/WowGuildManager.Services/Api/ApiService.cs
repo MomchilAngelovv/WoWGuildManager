@@ -5,6 +5,7 @@
     using System.Collections.Generic;
 
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
 
     using WowGuildManager.Data;
     using WowGuildManager.Common.GlobalConstants;
@@ -14,13 +15,23 @@
         private readonly WowGuildManagerDbContext context;
         private readonly IMapper mapper;
 
-        public ApiService(WowGuildManagerDbContext context, IMapper mapper)
+        public ApiService(
+            WowGuildManagerDbContext context, 
+            IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
 
-        public IEnumerable<T> GetAll<T>(string userId)
+        public IEnumerable<T> GetAllMembers<T>()
+        {
+            var members = this.context.Characters
+                .ToList()
+                .Select(m => mapper.Map<T>(m));
+
+            return members;
+        }
+        public IEnumerable<T> GetAllCharacters<T>(string userId)
         {
             var user = this.context.Users
                 .FirstOrDefault(u => u.Id == userId);
@@ -32,10 +43,26 @@
 
             var characters = this.context.Characters
                 .Where(c => c.UserId == userId)
-                .ToList()
-                .Select(c => mapper.Map<T>(c));
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
 
             return characters;
+        }
+        public IEnumerable<T> GetAllImages<T>()
+        {
+            var images = this.context.GalleryImages
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
+
+            return images;
+        }
+        public IEnumerable<T> GetAllExceptions<T>()
+        {
+            var exceptions = this.context.Errors
+                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ToList();
+
+            return exceptions;
         }
 
         public T GetCharacterById<T>(string characterId)
@@ -54,35 +81,10 @@
         public IEnumerable<T> GuildProgress<T>()
         {
             var raidDestinations = this.context.RaidDestinations
-              .Select(rd => mapper.Map<T>(rd))
+              .ProjectTo<T>(mapper.ConfigurationProvider)
               .ToList();
 
             return raidDestinations;
-        }
-
-        public IEnumerable<T> Members<T>()
-        {
-            var members = this.context.Characters
-                .ToList()
-                .Select(m => mapper.Map<T>(m));
-
-            return members;
-        }
-
-        public IEnumerable<T> GetAllImages<T>()
-        {
-            var images = this.context.ImageUploadLogs
-                .Select(i => mapper.Map<T>(i));
-
-            return images;
-        }
-
-        public IEnumerable<T> GetAllExceptions<T>()
-        {
-            var errors = this.context.ExceptionLogs
-                .Select(i => mapper.Map<T>(i));
-
-            return errors;
         }
     }
 }

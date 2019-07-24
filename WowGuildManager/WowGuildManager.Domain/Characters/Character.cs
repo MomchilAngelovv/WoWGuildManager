@@ -38,8 +38,8 @@
         public virtual CharacterRole Role { get; set; }
 
         [Required]
-        public string GuildRankId { get; set; }
-        public virtual GuildRank GuildRank { get; set; }
+        public string RankId { get; set; }
+        public virtual CharacterRank Rank { get; set; }
 
         [Required]
         public string UserId { get; set; }

@@ -44,7 +44,7 @@
                 await this.SeedRaidDestinations(context);
             }
 
-            if (context.GuildRanks.Any() == false)
+            if (context.CharacterRanks.Any() == false)
             {
                 await this.SeedGuildRanks(context);
             }
@@ -65,11 +65,11 @@
                 GuildRanksConstants.Alt,
             };
 
-            var guildRanks = new List<GuildRank>();
+            var guildRanks = new List<CharacterRank>();
 
             foreach (var guildRankName in guildrankNames)
             {
-                var guildRank = new GuildRank
+                var guildRank = new CharacterRank
                 {
                     Name = guildRankName
                 };
@@ -77,7 +77,7 @@
                 guildRanks.Add(guildRank);
             }
 
-            await context.GuildRanks.AddRangeAsync(guildRanks);
+            await context.CharacterRanks.AddRangeAsync(guildRanks);
             await context.SaveChangesAsync();
         }
 
