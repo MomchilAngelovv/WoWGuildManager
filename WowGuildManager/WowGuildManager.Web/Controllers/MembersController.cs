@@ -1,6 +1,4 @@
-﻿
-//TODO: Bootstrap tooltips
-namespace WowGuildManager.Web.Controllers
+﻿namespace WowGuildManager.Web.Controllers
 {
     using System.Linq;
 
@@ -21,6 +19,7 @@ namespace WowGuildManager.Web.Controllers
             this.characterService = characterService;
         }
 
+        [HttpGet]
         public IActionResult All()
         {
             var members = this.characterService

@@ -9,7 +9,8 @@
     {
         private readonly IGuildService guildService;
 
-        public SelectGuildMasterViewComponent(IGuildService guildService)
+        public SelectGuildMasterViewComponent(
+            IGuildService guildService)
         {
             this.guildService = guildService;
         }

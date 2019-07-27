@@ -3,7 +3,6 @@
 <h3>Select guild master:</h3>
 <div class="row" style="padding-left:15px">
     <div class="list-group col-lg-6 col-sm-auto">
-
         @foreach (var user in Model)
         {
             @if (user.IsGuildMaster)
@@ -15,14 +14,11 @@
                 <a asp-area="Administration" asp-controller="Admin" asp-action="SetGuildMaster" type="button" asp-route-id="@user.Id" class="list-group-item list-group-item-action bg-dark text-info">@user.Name</a>
             }
         }
-
-
-
     </div>
 
     <div class="col-lg-5">
         <h3>Guild Master</h3>
-        <p>Information: Guild master have all access to manage the guild.</p>
+        <p>Information: Guild master have all access to manage the guild. Click to select Guild master. There can be only one Guild master at a time.</p>
     </div>
 </div>
 

@@ -5,6 +5,8 @@ namespace WowGuildManager.Models.BindingModels.Characters
 
     public class CharacterCreateBindingModel
     {
+        public string UserId { get; set; }
+
         [Required]
         [MinLength(3)]
         [MaxLength(30)]
@@ -18,7 +20,5 @@ namespace WowGuildManager.Models.BindingModels.Characters
 
         [Required]
         public string Role { get; set; }
-        
-        public string UserId { get; set; }
     }
 }

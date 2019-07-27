@@ -4,10 +4,11 @@
 
     public class CharacterEditBindingModel
     {
-        public string Id { get; set; }
+        [Required]
+        public string CharacterId { get; set; }
 
         [Range(1, 60)]
-        public int Level { get; set; }
+        public int Level { get; set; }  
 
         [Required]
         public string Role { get; set; }

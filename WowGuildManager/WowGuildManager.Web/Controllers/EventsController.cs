@@ -1,7 +1,4 @@
 ﻿//TODO: MAKE RESPONSIVE VERY BAD
-//TODO:REARANGE private and public stuff AT END !! IMPORTANT
-
-
 namespace WowGuildManager.Web.Controllers
 {
     using System.Linq;
@@ -39,11 +36,18 @@ namespace WowGuildManager.Web.Controllers
             this.raidService = raidService;
             this.charactersService = charactersService;
         }
-        private bool IsCharacterRegisteredForDungeon(Character character, DungeonViewModel dungeon)
-        {
-            return character.Dungeons.Any(d => d.DungeonId == dungeon.Id);
-        }
 
+        [HttpGet]
+        public IActionResult History()
+        {
+            return this.View();
+        }
+        [HttpGet]
+        public IActionResult Today()
+        {
+            return this.View();
+        }
+        [HttpGet]
         public IActionResult Upcoming()
         {
             var userId = this.userManager.GetUserId(this.User);
@@ -73,12 +77,10 @@ namespace WowGuildManager.Web.Controllers
                 {
                     if (IsCharacterRegisteredForRaid(character, raid))
                     {
-                        SetJoinedCharacterToDungeon(character, raid);
+                        SetJoinedCharacterToRaid(character, raid);
                     }
                 }
             }
-
-            //TODO: Code queility when finish !!!!!! IMPORTNAT !!!
            
             var eventsIndexViewModel = new EventsIndexViewModel
             {
@@ -90,16 +92,14 @@ namespace WowGuildManager.Web.Controllers
             return View(eventsIndexViewModel);
         }
 
-        public IActionResult History()
+        private bool IsCharacterRegisteredForRaid(Character character, RaidViewModel raid)
         {
-            return this.View();
+            return character.Raids.Any(r => r.RaidId == raid.Id);
         }
-
-        public IActionResult Today()
+        private bool IsCharacterRegisteredForDungeon(Character character, DungeonViewModel dungeon)
         {
-            return this.View();
+            return character.Dungeons.Any(dung => dung.DungeonId == dungeon.Id);
         }
-
         private static void SetJoinedCharacterToDungeon(Character character, DungeonViewModel dungeon)
         {
             var joinedCharacter = new CharacterNameRoleViewModel
@@ -111,9 +111,8 @@ namespace WowGuildManager.Web.Controllers
             dungeon.AlreadyJoined = true;
             dungeon.JoinedCharacter = joinedCharacter;
         }
-
-        private static void SetJoinedCharacterToDungeon(Character character, RaidViewModel raid)
-        { 
+        private static void SetJoinedCharacterToRaid(Character character, RaidViewModel raid)
+        {
             var joinedCharacter = new CharacterNameRoleViewModel
             {
                 Name = character.Name,
@@ -122,11 +121,6 @@ namespace WowGuildManager.Web.Controllers
 
             raid.AlreadyJoined = true;
             raid.JoinedCharacter = joinedCharacter;
-        }
-
-        private bool IsCharacterRegisteredForRaid(Character character, RaidViewModel raid)
-        {
-            return character.Raids.Any(d => d.RaidId == raid.Id);
         }
     }
 }

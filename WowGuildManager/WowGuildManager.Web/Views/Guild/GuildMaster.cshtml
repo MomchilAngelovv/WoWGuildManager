@@ -15,19 +15,19 @@
             {
                 @if (user.IsRaidLeader && user.IsGuildMaster)
                 {
-                    <a asp-area="" asp-controller="Guild" asp-action="SetOrUnsetRaidLeader" type="button" asp-route-userId="@user.Id" class="list-group-item list-group-item-action bg-dark text-warning">@user.Name (Raid Leader) (Guild Master)</a>
+                    <a asp-controller="Guild" asp-action="SetOrUnsetRaidLeaderAsync" asp-route-userId="@user.Id" type="button" class="list-group-item list-group-item-action bg-dark text-warning">@user.Name (Raid Leader) (Guild Master)</a>
                 }
                 else if (user.IsGuildMaster)
                 {
-                    <a asp-area="" asp-controller="Guild" asp-action="SetOrUnsetRaidLeader" type="button" asp-route-userId="@user.Id" class="list-group-item list-group-item-action bg-dark text-info">@user.Name (Guild Master)</a>
+                    <a asp-controller="Guild" asp-action="SetOrUnsetRaidLeaderAsync" asp-route-userId="@user.Id" type="button" class="list-group-item list-group-item-action bg-dark text-info">@user.Name (Guild Master)</a>
                 }
                 else if (user.IsRaidLeader)
                 {
-                    <a asp-area="" asp-controller="Guild" asp-action="SetOrUnsetRaidLeader" type="button" asp-route-userId="@user.Id" class="list-group-item list-group-item-action bg-dark text-warning">@user.Name (Raid Leader)</a>
+                    <a asp-controller="Guild" asp-action="SetOrUnsetRaidLeaderAsync" asp-route-userId="@user.Id" type="button" class="list-group-item list-group-item-action bg-dark text-warning">@user.Name (Raid Leader)</a>
                 }
                 else
                 {
-                    <a asp-area="" asp-controller="Guild" asp-action="SetOrUnsetRaidLeader" type="button" asp-route-userId="@user.Id" class="list-group-item list-group-item-action bg-dark text-info">@user.Name</a>
+                    <a asp-controller="Guild" asp-action="SetOrUnsetRaidLeaderAsync" asp-route-userId="@user.Id" type="button" class="list-group-item list-group-item-action bg-dark text-info">@user.Name</a>
                 }
             }
         </div>
@@ -55,8 +55,8 @@
                         <td class="p-2 w-25">@raidDestination.Name</td>
                         <td class="p-2 w-25">@raidDestination.KilledBosses/@raidDestination.TotalBosses</td>
                         <td>
-                            <a asp-area="" asp-controller="Guild" asp-action="AddProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-success btn-sm border border-dark col-sm-3"><i class="fas fa-plus-square"></i> Add progress</a>
-                            <a asp-area="" asp-controller="Guild" asp-action="RemoveProgress" asp-route-raidName="@raidDestination.Name" class="btn btn-danger btn-sm border border-dark col-sm-3"><i class="fas fa-minus-square"></i> Remove progress</a>
+                            <a asp-controller="Guild" asp-action="AddGuildProgressAsync" asp-route-raidName="@raidDestination.Name" class="btn btn-success btn-sm border border-dark col-sm-3"><i class="fas fa-plus-square"></i> Add progress</a>
+                            <a asp-controller="Guild" asp-action="RemoveGuildProgressAsync" asp-route-raidName="@raidDestination.Name" class="btn btn-danger btn-sm border border-dark col-sm-3"><i class="fas fa-minus-square"></i> Remove progress</a>
                         </td>
                     </tr>
                 }
@@ -66,7 +66,7 @@
     <hr class="bg-warning" />
     <div class="row">
         <div class="col-lg-4">
-            <form method="post" enctype="multipart/form-data" asp-area="" asp-controller="Gallery" asp-action="UploadImageAsync">
+            <form asp-controller="Gallery" asp-action="UploadImageAsync" method="post" enctype="multipart/form-data">
                 <h3>Choose images to upload to gallery page:</h3>
 
                 <div class="form-group">

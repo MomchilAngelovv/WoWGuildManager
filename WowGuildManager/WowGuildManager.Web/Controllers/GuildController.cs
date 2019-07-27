@@ -24,6 +24,7 @@
             this.guildService = guildService;
         }
 
+        [HttpGet]
         public IActionResult GuildMaster()
         {
             var registeredCharacters = this.guildService.GetTotalRegisteredCharactersCount();
@@ -39,7 +40,7 @@
 
             return this.View(guildMasterViewModel);
         }
-
+        [HttpGet]
         public IActionResult Progress()
         {
             var guildProgressViewModel = new GuildProgressViewModel
@@ -49,35 +50,34 @@
 
             return this.View(guildProgressViewModel);
         }
-
-        public async Task<IActionResult> AddProgress(string raidName)
+        [HttpGet]
+        public async Task<IActionResult> AddGuildProgressAsync(string raidName)
         {
             await this.guildService.AddProgressToRaidAsync(raidName);
             return this.RedirectToAction(nameof(GuildMaster));
         }
-
-        public async Task<IActionResult> RemoveProgress(string raidName)
+        [HttpGet]
+        public async Task<IActionResult> RemoveGuildProgressAsync(string raidName)
         {
             await this.guildService.RemoveProgressToRaidAsync(raidName);
             return this.RedirectToAction(nameof(GuildMaster));
         }
-
-        public async Task<IActionResult> PromoteRank(string characterId)
+        [HttpGet]
+        public async Task<IActionResult> PromoteRankAsync(string characterId)
         {
             await this.guildService.PromoteRankAsync(characterId);
             return this.RedirectToAction("Details", "Characters", new { id = characterId });
         }
-
-        public async Task<IActionResult> DemoteRank(string characterId)
+        [HttpGet]
+        public async Task<IActionResult> DemoteRankAsync(string characterId)
         {
             await this.guildService.DemoteRankAsync(characterId);
             return this.RedirectToAction("Details", "Characters", new { id = characterId });
         }
-
-        public async Task<IActionResult> SetOrUnsetRaidLeader(string userId)
+        [HttpGet]
+        public async Task<IActionResult> SetOrUnsetRaidLeaderAsync(string userId)
         {
             await this.guildService.SetOrUnsetRaidLeaderAsync(userId);
-
             return RedirectToAction(nameof(GuildMaster));
         }
     }

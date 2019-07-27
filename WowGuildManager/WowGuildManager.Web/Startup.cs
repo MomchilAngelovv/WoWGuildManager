@@ -12,19 +12,19 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
+    using CloudinaryDotNet;
+
     using WowGuildManager.Data;
     using WowGuildManager.Services.Api;
     using WowGuildManager.Services.Raids;
     using WowGuildManager.Web.Extensions;
     using WowGuildManager.Services.Guilds;
     using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Services.Gallery;
     using WowGuildManager.Services.Dungeons;
     using WowGuildManager.Services.Characters;
     using WowGuildManager.Web.Filters.ActionFilters;
     using WowGuildManager.Web.Filters.ExceptionFilters;
-    using System;
-    using CloudinaryDotNet;
-    using WowGuildManager.Services.Gallery;
 
     public class Startup
     {
@@ -92,10 +92,9 @@
             var cloud = this.Configuration["Cloudinary:Cloud"];
             var apiKey = this.Configuration["Cloudinary:ApiKey"];
             var apiSecret = this.Configuration["Cloudinary:ApiSecret"];
-
             var account = new Account(cloud, apiKey, apiSecret);
             var cloudinary = new Cloudinary(account);
-            services.AddSingleton<Cloudinary>(cloudinary);
+            services.AddSingleton(cloudinary);
             #endregion 
         }
 

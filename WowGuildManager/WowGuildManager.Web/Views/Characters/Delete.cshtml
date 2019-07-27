@@ -11,11 +11,15 @@
             <p>Role: @Model.Role</p>
         </div>
     </div>
-    <form method="post">
-        <button type="submit" asp-area="" asp-controller="Characters" asp-action="DeleteAsync" asp-route-id="@Model.Id" class="btn btn-danger w-25 mb-3">Delete characeter</button>
+
+    <form asp-controller="Characters" asp-action="DeleteAsync" method="post">
+        <div class="input-group form-group">
+            <input asp-for="Id" hidden />
+        </div>
+        <button type="submit" class="btn btn-danger w-25 mb-3">Delete characeter</button>
     </form>
 
-    <a asp-area="" asp-controller="Characters" asp-action="Index" class="btn btn-info w-25">Back to character</a>
+    <a asp-controller="Characters" asp-action="Index" class="btn btn-info w-25">Back to character</a>
     <hr class="bg-warning" />
 </div>
 

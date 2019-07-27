@@ -4,11 +4,12 @@
 }
 
 <div class="container-fluid bc">
-    <form asp-action="Edit">
+    <form asp-controller="Characters" asp-action="EditAsync" method="post">
         <h2>Edit character </h2>
         <hr class="bg-warning" />
 
         <div asp-validation-summary="All" class="text-danger"></div>
+
         <div class="form-group">
             <div class="row">
                 <label asp-for="Level" class="control-label col-lg-1"></label>
@@ -16,26 +17,33 @@
                 <span asp-validation-for="Level" class="text-danger"></span>
             </div>
         </div>
+
         <div class="form-group">
             <div class="row">
                 <label asp-for="Role" class="control-label col-lg-1"></label>
                 <select id="role" asp-for="@Model.Role" asp-items="@((IEnumerable<SelectListItem>)ViewData["Roles"])" class="form-control border-dark col-lg-3"></select>
                 <span asp-validation-for="@Model.Role" class="text-danger"></span>
             </div>
-           
         </div>
 
-        <hr  class="bg-warning"/>
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-warning col-lg-4" />
+            <div class="row">
+                <input asp-for="CharacterId" value="@Model.CharacterId" hidden />
+            </div>
         </div>
+
+        <hr class="bg-warning" />
         <div class="form-group">
-            <a asp-area="" asp-controller="Characters" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger col-lg-4">Delete characeter</a>
-        </div>
-        <div class="form-group">
-            <a asp-area="" asp-controller="Characters" asp-action="Index" class="btn btn-info col-lg-4">Back to character</a>
+            <button type="submit" class="btn btn-warning col-lg-4">Save</button>
         </div>
     </form>
+
+    <div>
+        <a asp-controller="Characters" asp-action="Delete" asp-route-id="@Model.CharacterId" class="btn btn-danger col-lg-4">Delete characeter</a>
+    </div>
+    <div>
+        <a asp-controller="Characters" asp-action="Index" class="btn btn-info col-lg-4">Back to characters</a>
+    </div>
 </div>
 
 @section Scripts{

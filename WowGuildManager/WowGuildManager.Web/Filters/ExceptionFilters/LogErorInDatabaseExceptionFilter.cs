@@ -39,7 +39,7 @@
                 DateTime = DateTime.UtcNow,
             };
 
-            this.context.Errors.AddAsync(exceptionLog);
+            this.context.Errors.Add(exceptionLog);
             this.context.SaveChanges();
         }
     }

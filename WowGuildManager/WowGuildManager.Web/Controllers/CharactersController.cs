@@ -20,17 +20,17 @@ namespace WowGuildManager.Web.Controllers
     public class CharactersController : BaseController
     {
         private readonly UserManager<WowGuildManagerUser> userManager;
-
         private readonly ICharacterService characterService;
         
         public CharactersController(
             UserManager<WowGuildManagerUser> userManager, 
             ICharacterService characterService)
         { 
-            this.characterService = characterService;
             this.userManager = userManager;
+            this.characterService = characterService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var userId = this.userManager.GetUserId(this.User);
@@ -46,6 +46,7 @@ namespace WowGuildManager.Web.Controllers
             return View(characterIndexViewModel);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             var classList = this.BindClassesToSelectListItem();
@@ -56,20 +57,18 @@ namespace WowGuildManager.Web.Controllers
 
             return this.View();
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(CharacterCreateBindingModel model)
+        [HttpGet]
+        public IActionResult Edit(string id)
         {
-            var userId = this.userManager.GetUserId(this.User);
+            var characterEditBindingModel = this.characterService
+                .GetCharacter<CharacterEditBindingModel>(id);
 
-            model.UserId = userId;
+            var roleList = this.BindRolesToSelectListItem();
+            this.ViewData["Roles"] = roleList;
 
-            await this.characterService.CreateAsync(model);
-
-            this.TempData["NewCharacter"] = "Thank you for registering new character!";
-            return this.RedirectToAction(nameof(Index));
+            return this.View(characterEditBindingModel);
         }
-
+        [HttpGet]
         public IActionResult Details(string id)
         {
             var character = this.characterService
@@ -77,7 +76,7 @@ namespace WowGuildManager.Web.Controllers
 
             return this.View(character);
         }
-
+        [HttpGet]
         public IActionResult Delete(string id)
         {
             var characterDeleteViewModel = this.characterService
@@ -87,45 +86,40 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> CreateAsync(CharacterCreateBindingModel createModel)
+        {
+            var userId = this.userManager.GetUserId(this.User);
+
+            createModel.UserId = userId;
+            await this.characterService.CreateAsync(createModel);
+
+            this.TempData["NewCharacter"] = "Thank you for registering new character!";
+            return this.RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditAsync(CharacterEditBindingModel editModel)
+        {
+            await this.characterService.EditAsync(editModel);
+            return this.RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
         public async Task<IActionResult> DeleteAsync(string id)
         {
             await this.characterService
                 .DeleteAsync(id);
 
             return this.RedirectToAction(nameof(Index));
-        }
-
-        private IEnumerable<SelectListItem> BindRolesToSelectListItem()
-        {
-            var roleList = this.characterService.GetRoleList<SelectListItem>();
-
-            return roleList;
-        }
-
+        }   
+       
         private IEnumerable<SelectListItem> BindClassesToSelectListItem()
         {
             var classList = this.characterService.GetClassList<SelectListItem>();
-
             return classList;
-        }
-
-        public IActionResult Edit(string id)
+        }   
+        private IEnumerable<SelectListItem> BindRolesToSelectListItem()
         {
-            var characterEditBindingModel = this.characterService
-                .GetCharacter<CharacterEditBindingModel>(id);
-
-            var roleList = this.BindRolesToSelectListItem();
-
-            this.ViewData["Roles"] = roleList;
-
-            return this.View(characterEditBindingModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(CharacterEditBindingModel model)
-        {
-            await this.characterService.EditAsync(model);
-            return this.RedirectToAction(nameof(Index));
+            var roleList = this.characterService.GetRoleList<SelectListItem>();
+            return roleList;
         }
     }
 }

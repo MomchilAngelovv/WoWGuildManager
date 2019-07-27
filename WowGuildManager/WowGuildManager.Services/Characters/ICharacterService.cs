@@ -8,8 +8,8 @@
 
     public interface ICharacterService
     {
-        Task<Character> CreateAsync(CharacterCreateBindingModel inputModel);
-        Task<Character> EditAsync(CharacterEditBindingModel model);
+        Task<Character> CreateAsync(CharacterCreateBindingModel createModel);
+        Task<Character> EditAsync(CharacterEditBindingModel editModel);
         Task<Character> DeleteAsync(string characterId);
 
         IEnumerable<T> GetAllCharacters<T>();

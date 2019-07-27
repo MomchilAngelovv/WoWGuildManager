@@ -9,7 +9,8 @@
     {
         private readonly IRaidService raidService;
 
-        public GuildProgressViewComponent(IRaidService raidService)
+        public GuildProgressViewComponent(
+            IRaidService raidService)
         {
             this.raidService = raidService;
         }

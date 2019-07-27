@@ -1,28 +1,34 @@
 ﻿namespace WowGuildManager.Web.Filters.ActionFilters
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Filters;
 
-    using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Logs;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Common.GlobalConstants;
 
     public class ValidateModelStateActionFilter : IAsyncActionFilter
     {
+        private readonly UserManager<WowGuildManagerUser> userManager;
         private readonly WowGuildManagerDbContext context;
 
         public ValidateModelStateActionFilter(
+            UserManager<WowGuildManagerUser> userManager,
             WowGuildManagerDbContext context)
         {
+            this.userManager = userManager;
             this.context = context;
         }
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var errors = new List<Error>();
+            var userId = this.userManager.GetUserId(context.HttpContext.User);
 
             if (context.ModelState.IsValid == false)
             {
@@ -33,15 +39,15 @@
                         var exceptionLog = new Error
                         {
                             Message = $"Warning: {error.ErrorMessage}",
-                            UserId = context.HttpContext.User.Identity.Name,
-                            DateTime = DateTime.UtcNow,
+                            UserId = userId,
+                            DateTime = DateTime.UtcNow
                         };
 
                         errors.Add(exceptionLog);
                     }
                 }
 
-                await this.context.Errors.AddRangeAsync(errors);
+                await this.context.AddRangeAsync(errors);
                 await this.context.SaveChangesAsync();
 
                 throw new ArgumentException(ErrorConstants.InvalidDataProvided);

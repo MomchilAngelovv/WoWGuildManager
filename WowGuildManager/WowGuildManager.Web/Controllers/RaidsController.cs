@@ -1,5 +1,4 @@
 ﻿//TODO: Security and authority validation everyWHERE !! IMPORTANTT !!!!
-
 namespace WowGuildManager.Web.Controllers
 {
     using System.Linq;
@@ -20,7 +19,6 @@ namespace WowGuildManager.Web.Controllers
     public class RaidsController : BaseController
     {
         private readonly UserManager<WowGuildManagerUser> userManager;
-
         private readonly IRaidService raidService;
         private readonly ICharacterService characterService;
 
@@ -34,11 +32,13 @@ namespace WowGuildManager.Web.Controllers
             this.characterService = characterService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
-       
+
+        [HttpGet]
         public IActionResult Create()
         {
             var myCharacters = this.BindCharactersToSelectListItem();
@@ -55,38 +55,7 @@ namespace WowGuildManager.Web.Controllers
 
             return this.View();
         }
-
-        private IEnumerable<SelectListItem> BindCharactersToSelectListItem()
-        {
-            var userId = this.userManager.GetUserId(this.User);
-
-            var myCharacters = this.characterService
-                .GetUserCharacters<SelectListItem>(userId);
-               
-            return myCharacters;
-        }
-
-        private IEnumerable<SelectListItem> BindRaidPlacesToSelectListItem()
-        {
-            var raidPlaceList = this.raidService
-                .GetDestinations<SelectListItem>();
-
-            return raidPlaceList;
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(RaidCreateBindingModel inputModel)
-        {
-            if (ModelState.IsValid == false)
-            {
-                return RedirectToAction(nameof(Create));
-            }
-
-            await this.raidService.CreateAsync(inputModel);
-
-            return RedirectToAction("Upcoming", "Events");
-        }   
-
+        [HttpGet]
         public IActionResult Details(string id)
         {
             var raidDetailsViewModel = this.raidService.GetRaid<RaidDetailsViewModel>(id);
@@ -117,26 +86,55 @@ namespace WowGuildManager.Web.Controllers
 
             return this.View(raidDetailsViewModel);
         }
-
-        public async Task<IActionResult> Join(string characterId, string raidId)
+        [HttpGet]
+        public async Task<IActionResult> JoinAsync(string characterId, string raidId)
         {
             await this.raidService.RegisterCharacterAsync(raidId, characterId);
 
             return this.RedirectToAction("Upcoming", "Events");
         }
+        [HttpGet]
+        public async Task<IActionResult> KickAsync(string characterId, string raidId)
+        {
+            await this.raidService.KickPlayerAsync(characterId, raidId);
+            return this.RedirectToAction(nameof(Details), new { id = raidId});
+        }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(RaidEditBindingModel input)
+        public async Task<IActionResult> CreateAsync(RaidCreateBindingModel inputModel)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return RedirectToAction(nameof(Create));
+            }
+
+            await this.raidService.CreateAsync(inputModel);
+
+            return RedirectToAction("Upcoming", "Events");
+        }   
+        [HttpPost]
+        public async Task<IActionResult> EditAsync(RaidEditBindingModel input)
         {
             await this.raidService.EditAsync(input);
 
             return this.RedirectToAction(nameof(Details),new { id = input.RaidId });
         }
 
-        public async Task<IActionResult> Kick(string characterId, string raidId)
+        private IEnumerable<SelectListItem> BindCharactersToSelectListItem()
         {
-            await this.raidService.KickPlayerAsync(characterId, raidId);
-            return this.RedirectToAction(nameof(Details), new { id = raidId});
+            var userId = this.userManager.GetUserId(this.User);
+
+            var myCharacters = this.characterService
+                .GetUserCharacters<SelectListItem>(userId);
+
+            return myCharacters;
+        }
+        private IEnumerable<SelectListItem> BindRaidPlacesToSelectListItem()
+        {
+            var raidPlaceList = this.raidService
+                .GetDestinations<SelectListItem>();
+
+            return raidPlaceList;
         }
     }
 }

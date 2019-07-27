@@ -1,6 +1,4 @@
-﻿//TODO: Think how to implement guild points
-
-namespace WowGuildManager.Web.Controllers
+﻿namespace WowGuildManager.Web.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -22,7 +20,6 @@ namespace WowGuildManager.Web.Controllers
     public class DungeonsController : BaseController
     {
         private readonly UserManager<WowGuildManagerUser> userManager;
-
         private readonly IDungeonService dungeonService;
         private readonly ICharacterService characterService;
 
@@ -36,6 +33,7 @@ namespace WowGuildManager.Web.Controllers
             this.characterService = characterService;
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             var myCharacters = this.BindCharactersToSelectListItem();
@@ -52,12 +50,61 @@ namespace WowGuildManager.Web.Controllers
 
             return this.View();
         }
-
-        private IEnumerable<SelectListItem> BindDungeonPlacesToSelectListItem()
+        [HttpGet]
+        public IActionResult Details(string id)
         {
-            var dungeonPlaceList = this.dungeonService.GetDestinations<SelectListItem>();
+            var dungeonDetailsViewModel = this.dungeonService
+                .GetDungeon<DungeonDetailsViewModel>(id);
+            var registeredCharacters = this.dungeonService
+                .GetRegisteredCharacters<CharacterDungeonDetailsViewModel>(id);
 
-            return dungeonPlaceList;
+            var userId = this.userManager.GetUserId(this.User);
+            var myCharacters = this.characterService
+                .GetUserCharacters<CharacterIdNameViewModel>(userId);
+
+            dungeonDetailsViewModel.Characters = registeredCharacters;
+            dungeonDetailsViewModel.AvailableCharacters = myCharacters;
+
+            foreach (var myCharacter in myCharacters)
+            {
+                if (registeredCharacters.Any(regChar => regChar.Id == myCharacter.Id))
+                {
+                    var characterNameIdViewModel = this.characterService
+                        .GetCharacter<CharacterIdNameViewModel>(myCharacter.Id);
+
+                    dungeonDetailsViewModel.AlreadyJoined = true;
+                    dungeonDetailsViewModel.JoinedCharacter = characterNameIdViewModel;
+                    break;
+                }
+            }
+
+            return this.View(dungeonDetailsViewModel);
+        }
+        [HttpGet]
+        public async Task<IActionResult> JoinAsync(string dungeonId, string characterId)
+        {
+            await this.dungeonService.RegisterCharacterAsync(dungeonId, characterId);
+            return this.RedirectToAction("Upcoming", "Events");
+        }
+        [HttpGet]
+        public async Task<IActionResult> KickAsync(string dungeonId, string characterId)
+        {
+            await this.dungeonService.KickCharacterAsync(dungeonId, characterId);
+            return this.RedirectToAction("Upcoming", "Events");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync(DungeonCreateBindingModel inputModel)
+        {
+            await this.dungeonService.CreateAsync(inputModel);
+
+            return RedirectToAction("Upcoming", "Events");
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditAsync(DungeonEditBindingModel input)
+        {
+            await this.dungeonService.EditAsync(input);
+            return this.RedirectToAction(nameof(Details), new { id = input.DungeonId });
         }
 
         private IEnumerable<SelectListItem> BindCharactersToSelectListItem()
@@ -74,66 +121,10 @@ namespace WowGuildManager.Web.Controllers
 
             return myCharacters;
         }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(DungeonCreateBindingModel inputModel)
+        private IEnumerable<SelectListItem> BindDungeonPlacesToSelectListItem()
         {
-            await this.dungeonService.CreateAsync(inputModel);
-
-            return RedirectToAction("Upcoming", "Events");
-        }
-
-        public IActionResult Details(string id)
-        {
-            var dungeonDetailsViewModel = this.dungeonService.GetDungeon<DungeonDetailsViewModel>(id);
-
-            var registeredCharacters = this.dungeonService
-                .GetRegisteredCharacters<CharacterDungeonDetailsViewModel>(id);
-
-            var userId = this.userManager.GetUserId(this.User);
-
-            var myCharacters = this.characterService
-                .GetUserCharacters<CharacterIdNameViewModel>(userId);
-
-            dungeonDetailsViewModel.Characters = registeredCharacters;
-            dungeonDetailsViewModel.AvailableCharacters = myCharacters;
-
-            foreach (var myCharacter in myCharacters)
-            {
-                if (registeredCharacters.Any(rc => rc.Id == myCharacter.Id))
-                {
-                    var characterNameIdViewModel = this.characterService
-                        .GetCharacter<CharacterIdNameViewModel>(myCharacter.Id);
-
-                    dungeonDetailsViewModel.AlreadyJoined = true;
-                    dungeonDetailsViewModel.JoinedCharacter = characterNameIdViewModel;
-                    break;
-                }
-            }
-
-            return this.View(dungeonDetailsViewModel);
-        }
-
-        public async Task<IActionResult> Join(string dungeonId, string characterId)
-        {
-            await this.dungeonService.RegisterCharacterAsync(dungeonId, characterId);
-
-            return this.RedirectToAction("Upcoming", "Events");
-        }
-
-        public async Task<IActionResult> Kick(string dungeonId, string characterId)
-        {
-            await this.dungeonService.KickCharacterAsync(dungeonId, characterId);
-
-            return this.RedirectToAction("Upcoming", "Events");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Edit(DungeonEditBindingModel input)
-        {
-            await this.dungeonService.EditAsync(input);
-
-            return this.RedirectToAction(nameof(Details), new { id = input.DungeonId });
+            var dungeonPlaceList = this.dungeonService.GetDestinations<SelectListItem>();
+            return dungeonPlaceList;
         }
     }
 }

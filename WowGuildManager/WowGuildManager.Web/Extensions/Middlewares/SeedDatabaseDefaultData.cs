@@ -22,37 +22,39 @@
             this._next = next;
         }
 
-        public async Task InvokeAsync(HttpContext httpContext, WowGuildManagerDbContext context)
+        public async Task InvokeAsync(
+            HttpContext httpContext, 
+            WowGuildManagerDbContext context)
         {
             if (context.CharacterClasses.Any() == false)
             {
-                await this.SeedCharacterClasses(context);
+                await this.SeedCharacterClassesAsync(context);
             }
 
             if (context.CharacterRoles.Any() == false)
             {
-                await this.SeedCharacterRoles(context);
+                await this.SeedCharacterRolesAsync(context);
             }
 
             if (context.DungeonDestinations.Any() == false)
             {
-                await this.SeedDungeonDestinations(context);
+                await this.SeedDungeonDestinationsAsync(context);
             }
 
             if (context.RaidDestinations.Any() == false)
             {
-                await this.SeedRaidDestinations(context);
+                await this.SeedRaidDestinationsAsync(context);
             }
 
             if (context.CharacterRanks.Any() == false)
             {
-                await this.SeedGuildRanks(context);
+                await this.SeedGuildRanksAsync(context);
             }
 
             await _next(httpContext);
         }
 
-        private async Task SeedGuildRanks(WowGuildManagerDbContext context)
+        private async Task SeedGuildRanksAsync(WowGuildManagerDbContext context)
         {
             var guildrankNames = new List<string>
             {
@@ -80,8 +82,7 @@
             await context.CharacterRanks.AddRangeAsync(guildRanks);
             await context.SaveChangesAsync();
         }
-
-        private async Task SeedRaidDestinations(WowGuildManagerDbContext context)
+        private async Task SeedRaidDestinationsAsync(WowGuildManagerDbContext context)
         {
             var raidNamesAndMaxPlayers = new Dictionary<string, int>
             {
@@ -147,8 +148,7 @@
             await context.RaidDestinations.AddRangeAsync(raidDestinations);
             await context.SaveChangesAsync();
         }
-
-        private async Task SeedDungeonDestinations(WowGuildManagerDbContext context)
+        private async Task SeedDungeonDestinationsAsync(WowGuildManagerDbContext context)
         {
             var dungeonNamesAnddungeonImagePaths = new Dictionary<string, string>
             {
@@ -189,8 +189,7 @@
             await context.DungeonDestinations.AddRangeAsync(dungeonDestinations);
             await context.SaveChangesAsync();
         }
-
-        private async Task SeedCharacterRoles(WowGuildManagerDbContext context)
+        private async Task SeedCharacterRolesAsync(WowGuildManagerDbContext context)
         {
             var roleNames = new List<string>
             {
@@ -214,8 +213,7 @@
             await context.CharacterRoles.AddRangeAsync(characterRoles);
             await context.SaveChangesAsync();
         }
-
-        private async Task SeedCharacterClasses(WowGuildManagerDbContext context)
+        private async Task SeedCharacterClassesAsync(WowGuildManagerDbContext context)
         {
             var classNamesAndImagePaths = new Dictionary<string, string>
             {

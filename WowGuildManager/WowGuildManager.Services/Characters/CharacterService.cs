@@ -52,12 +52,12 @@ namespace WowGuildManager.Services.Characters
 
             return character;
         }
-        public async Task<Character> EditAsync(CharacterEditBindingModel model)
+        public async Task<Character> EditAsync(CharacterEditBindingModel editModel)
         {
-            var character = this.GetCharacter<Character>(model.Id);
+            var character = await this.context.Characters.FindAsync(editModel.CharacterId);
 
-            character.Level = model.Level;
-            character.RoleId = this.GetRoleId(model.Role);
+            character.Level = editModel.Level;
+            character.RoleId = this.GetRoleId(editModel.Role);
 
             this.context.Update(character);
             await this.context.SaveChangesAsync();

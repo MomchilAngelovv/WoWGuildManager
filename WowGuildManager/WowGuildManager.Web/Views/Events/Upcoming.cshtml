@@ -5,21 +5,22 @@
 
 <div class="container-fluid bc">
     <div class="row d-flex justify-content-start">
-        <div class="col-lg-4 col-sm-auto mt-3 mb-3">
-            <a asp-area="" asp-controller="Events" asp-action="Today" class="btn btn-warning btn-sm border-dark w-100"><h2>Today's events</h2></a>
+        <div class="col-lg-4 col-sm-auto mt-3">
+            <a asp-controller="Events" asp-action="Today" class="btn btn-warning btn-sm border-dark w-100"><h2>Today's events</h2></a>
         </div>
 
         <div class="col-lg-4 col-sm-auto mt-3">
-            <a asp-area="" asp-controller="Dungeons" asp-action="Create" class="btn btn-warning btn-sm border-dark w-100"><h2>Create new Dungeon</h2></a>
+            <a asp-controller="Dungeons" asp-action="Create" class="btn btn-warning btn-sm border-dark w-100"><h2>Create new Dungeon</h2></a>
         </div>
 
         @if (Model.IsUserRaidLeaderOrGuildMaster)
         {
             <div class="col-lg-4 col-sm-auto mt-3">
-                <a asp-area="" asp-controller="Raids" asp-action="Create" class="btn btn-warning btn-sm border-dark w-100"><h2>Create new Raid</h2></a>
+                <a asp-controller="Raids" asp-action="Create" class="btn btn-warning btn-sm border-dark w-100"><h2>Create new Raid</h2></a>
             </div>
         }
     </div>
+    <hr class="bg-warning"/>
 
     <partial name="_RaidListPartial" for="Raids" />
    
