@@ -30,7 +30,7 @@
             if (userId == null)
             {
                 userId = WowGuildManagerUserConstants.NullUserWarningMessage;
-            }
+            }   
 
             var exceptionLog = new Error
             {

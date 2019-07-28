@@ -50,7 +50,7 @@
             });
 
             services.AddIdentity<WowGuildManagerUser, WowGuildManagerRole>(options =>
-             {
+            {
                 //TODO: Fix password settings
                  options.Password.RequireDigit = false;
                  options.Password.RequiredLength = 3;

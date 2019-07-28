@@ -14,6 +14,10 @@
     using WowGuildManager.Services.Dungeons;
     using WowGuildManager.Domain.Characters;
     using WowGuildManager.Models.BindingModels.Dungeons;
+    using WowGuildManager.Services.Characters;
+    using AutoMapper;
+    using WowGuildManager.Models.ViewModels.Dungeons;
+    using WowGuildManager.Models.ViewModels.Characters;
 
     public class DungeonServiceTests
     {
@@ -22,7 +26,9 @@
         {
             using (var context = await GetDatabase())
             {
-                var dungeonService = new DungeonService(context, null, null);
+                var mapper = this.GetMapper();
+                var characterService = new CharacterService(context, mapper);
+                var dungeonService = new DungeonService(context, characterService, mapper);
 
                 var dungeonCreateBindingModel = new DungeonCreateBindingModel
                 {
@@ -65,7 +71,9 @@
         {
             using (var context = await GetDatabase())
             {
-                var dungeonService = new DungeonService(context, null, null);
+                var mapper = this.GetMapper();
+                var characterService = new CharacterService(context, mapper);
+                var dungeonService = new DungeonService(context, characterService, mapper);
 
                 await dungeonService.RegisterCharacterAsync("1", "1");
                 var expected = 1;
@@ -83,7 +91,9 @@
         {
             using (var context = await GetDatabase())
             {
-                var dungeonService = new DungeonService(context, null, null);
+                var mapper = this.GetMapper();
+                var characterService = new CharacterService(context, mapper);
+                var dungeonService = new DungeonService(context, characterService, mapper);
 
                 await Assert.ThrowsAsync<ArgumentException>(async () => await dungeonService.RegisterCharacterAsync("1", characterId));
             }
@@ -94,7 +104,9 @@
         {
             using (var context = await GetDatabase())
             {
-                var dungeonService = new DungeonService(context, null, null);
+                var mapper = this.GetMapper();
+                var characterService = new CharacterService(context, mapper);
+                var dungeonService = new DungeonService(context, characterService, mapper);
 
                 var expected = "1";
                 var actual = dungeonService.GetDestinationId("TestDest");
@@ -122,9 +134,11 @@
         {
             using (var context = await GetDatabase())
             {
-                var dungeonService = new DungeonService(context, null, null);
+                var mapper = this.GetMapper();
+                var characterService = new CharacterService(context, mapper);
+                var dungeonService = new DungeonService(context, characterService, mapper);
 
-                await Assert.ThrowsAsync<ArgumentException>(async () => await dungeonService.RegisterCharacterAsync("IncorectId", "1"));
+                await Assert.ThrowsAsync<InvalidOperationException>(async () => await dungeonService.RegisterCharacterAsync("IncorectId", "1"));
             }
         }
 
@@ -133,7 +147,9 @@
         {
             using (var context = await GetDatabase())
             {
-                var dungeonService = new DungeonService(context, null, null);
+                var mapper = this.GetMapper();
+                var characterService = new CharacterService(context, mapper);
+                var dungeonService = new DungeonService(context, characterService, mapper);
 
                 await dungeonService.RegisterCharacterAsync("1", "1");
                 await dungeonService.KickCharacterAsync("1", "1");
@@ -178,7 +194,9 @@
         {
             using (var context = await GetDatabase())
             {
-                var dungeonService = new DungeonService(context, null, null);
+                var mapper = this.GetMapper();
+                var characterService = new CharacterService(context, mapper);
+                var dungeonService = new DungeonService(context, characterService, mapper);
 
                 var dungeonEditBindingModel = new DungeonEditBindingModel
                 {
@@ -202,7 +220,9 @@
         {
             using (var context = await GetDatabase())
             {
-                var dungeonService = new DungeonService(context, null, null);
+                var mapper = this.GetMapper();
+                var characterService = new CharacterService(context, mapper);
+                var dungeonService = new DungeonService(context, characterService, mapper);
 
                 var dungeonEditBindingModel = new DungeonEditBindingModel
                 {
@@ -218,6 +238,8 @@
                 Assert.Equal(expected, actual);
             }
         }
+
+
 
         private async Task<WowGuildManagerDbContext> GetDatabase()
         {
@@ -257,6 +279,37 @@
             await context.SaveChangesAsync();
 
             return context;
+        }
+
+        private IMapper GetMapper()
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<Dungeon, DungeonIdDestinationViewModel>()
+                .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name));
+                
+                cfg.CreateMap<Dungeon, DungeonDetailsViewModel>()
+                    .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name))
+                    .ForMember(d => d.MaxPlayers, dvm => dvm.MapFrom(x => x.Destination.MaxPlayers));
+
+                cfg.CreateMap<Dungeon, DungeonViewModel>()
+                    .ForMember(d => d.RegisteredPlayers, dvm => dvm.MapFrom(x => x.RegisteredCharacters.Where(rc => rc.Character.IsActive).Count()))
+                    .ForMember(d => d.Image, dvm => dvm.MapFrom(x => x.Destination.ImagePath))
+                    .ForMember(d => d.MaxPlayers, dvm => dvm.MapFrom(x => x.Destination.MaxPlayers))
+                    .ForMember(d => d.Destination, dvm => dvm.MapFrom(x => x.Destination.Name))
+                    .ForMember(d => d.DateTime, dvm => dvm.MapFrom(x => $"{x.EventDateTime.ToString("dd MMMM yyyy HH:mm")}"));
+
+                cfg.CreateMap<DungeonCharacter, CharacterDungeonDetailsViewModel>()
+                    .ForMember(d => d.GuildRank, dvm => dvm.MapFrom(x => x.Character.Rank.Name))
+                    .ForMember(d => d.Class, dvm => dvm.MapFrom(x => x.Character.Class.Name))
+                    .ForMember(d => d.Role, dvm => dvm.MapFrom(x => x.Character.Role.Name))
+                    .ForMember(d => d.Level, dvm => dvm.MapFrom(x => x.Character.Level))
+                    .ForMember(d => d.Name, dvm => dvm.MapFrom(x => x.Character.Name))
+                    .ForMember(d => d.Id, dvm => dvm.MapFrom(x => x.Character.Id));
+
+            });
+
+            var mapper = new Mapper(config);
+            return mapper;
         }
     }
 }

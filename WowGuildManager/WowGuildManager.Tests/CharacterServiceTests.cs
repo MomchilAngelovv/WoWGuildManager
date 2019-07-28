@@ -119,15 +119,18 @@ namespace WowGuildManager.Tests
                 new Character
                 {
                     Id = "1",
-                    UserId = "TestUser1"
+                    UserId = "TestUser1",
+                    IsActive = true
                 },
                 new Character
                 {
-                     UserId = "TestUser1"
+                     UserId = "TestUser1",
+                      IsActive = true
                 },
                 new Character
                 {
-                     UserId = "TestUser1"
+                     UserId = "TestUser1",
+                      IsActive = true
                 },
             };
             var classes = new List<CharacterClass>

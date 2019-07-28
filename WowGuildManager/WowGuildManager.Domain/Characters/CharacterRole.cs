@@ -1,5 +1,4 @@
-﻿//TODO: Fix All missing or added spaces
-namespace WowGuildManager.Domain.Characters
+﻿namespace WowGuildManager.Domain.Characters
 {
     using System.ComponentModel.DataAnnotations;
 
