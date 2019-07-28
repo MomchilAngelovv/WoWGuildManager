@@ -24,63 +24,57 @@
         [Fact]
         public async Task CreateAsync_Should_Register_Dungeon_In_Database()
         {
-            using (var context = await GetDatabase())
+            using var context = await GetDatabase();
+            var mapper = this.GetMapper();
+            var characterService = new CharacterService(context, mapper);
+            var dungeonService = new DungeonService(context, characterService, mapper);
+
+            var dungeonCreateBindingModel = new DungeonCreateBindingModel
             {
-                var mapper = this.GetMapper();
-                var characterService = new CharacterService(context, mapper);
-                var dungeonService = new DungeonService(context, characterService, mapper);
+                DateTime = DateTime.Now,
+                Description = "TestDescr",
+                Destination = "TestDest",
+                LeaderId = "1"
+            };
 
-                var dungeonCreateBindingModel = new DungeonCreateBindingModel
-                {
-                    DateTime = DateTime.Now,
-                    Description = "TestDescr",
-                    Destination = "TestDest",
-                    LeaderId = "1"
-                };
+            await dungeonService.CreateAsync(dungeonCreateBindingModel);
 
-                await dungeonService.CreateAsync(dungeonCreateBindingModel);
+            var expected = 2;
+            var actual = context.Dungeons.Count();
 
-                var expected = 2;
-                var actual = context.Dungeons.Count();
-
-                Assert.Equal(expected, actual);
-            }
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
         public async Task CreateAsync_Should_Throw_If_Incorrect_Destination_Provided()
         {
-            using (var context = await GetDatabase())
+            using var context = await GetDatabase();
+            var dungeonService = new DungeonService(context, null, null);
+
+            var dungeonCreateBindingModel = new DungeonCreateBindingModel
             {
-                var dungeonService = new DungeonService(context, null, null);
+                DateTime = DateTime.Now,
+                Description = "TestDescr",
+                Destination = "TestDest2",
+                LeaderId = "TestChar1"
+            };
 
-                var dungeonCreateBindingModel = new DungeonCreateBindingModel
-                {
-                    DateTime = DateTime.Now,
-                    Description = "TestDescr",
-                    Destination = "TestDest2",
-                    LeaderId = "TestChar1"
-                };
-
-                await Assert.ThrowsAsync<ArgumentException>(async () => await dungeonService.CreateAsync(dungeonCreateBindingModel));
-            }
+            await Assert.ThrowsAsync<ArgumentException>(async () => await dungeonService.CreateAsync(dungeonCreateBindingModel));
         }
 
         [Fact]
         public async Task RegisterCharacter_Should_Create_New_Dungeon_Character_Entity_In_Database()
         {
-            using (var context = await GetDatabase())
-            {
-                var mapper = this.GetMapper();
-                var characterService = new CharacterService(context, mapper);
-                var dungeonService = new DungeonService(context, characterService, mapper);
+            using var context = await GetDatabase();
+            var mapper = this.GetMapper();
+            var characterService = new CharacterService(context, mapper);
+            var dungeonService = new DungeonService(context, characterService, mapper);
 
-                await dungeonService.RegisterCharacterAsync("1", "1");
-                var expected = 1;
-                var actual = context.DungeonCharacter.Count();
+            await dungeonService.RegisterCharacterAsync("1", "1");
+            var expected = 1;
+            var actual = context.DungeonCharacter.Count();
 
-                Assert.Equal(expected, actual);
-            }
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
@@ -89,30 +83,26 @@
         [InlineData("Invalid")]
         public async Task RegisterCharacter_Should_Throw_If_No_Character_Found(string characterId)
         {
-            using (var context = await GetDatabase())
-            {
-                var mapper = this.GetMapper();
-                var characterService = new CharacterService(context, mapper);
-                var dungeonService = new DungeonService(context, characterService, mapper);
+            using var context = await GetDatabase();
+            var mapper = this.GetMapper();
+            var characterService = new CharacterService(context, mapper);
+            var dungeonService = new DungeonService(context, characterService, mapper);
 
-                await Assert.ThrowsAsync<ArgumentException>(async () => await dungeonService.RegisterCharacterAsync("1", characterId));
-            }
+            await Assert.ThrowsAsync<ArgumentException>(async () => await dungeonService.RegisterCharacterAsync("1", characterId));
         }
 
         [Fact]
         public async Task GetDestinationId_Should_Return_Correct_Id()
         {
-            using (var context = await GetDatabase())
-            {
-                var mapper = this.GetMapper();
-                var characterService = new CharacterService(context, mapper);
-                var dungeonService = new DungeonService(context, characterService, mapper);
+            using var context = await GetDatabase();
+            var mapper = this.GetMapper();
+            var characterService = new CharacterService(context, mapper);
+            var dungeonService = new DungeonService(context, characterService, mapper);
 
-                var expected = "1";
-                var actual = dungeonService.GetDestinationId("TestDest");
+            var expected = "1";
+            var actual = dungeonService.GetDestinationId("TestDest");
 
-                Assert.Equal(expected, actual);
-            }
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
@@ -121,12 +111,10 @@
         [InlineData("Invalid")]
         public async Task GetDestinationId_Should_Throw_If_No_Such_Destination_Exists(string destinationName)
         {
-            using (var context = await GetDatabase())
-            {
-                var dungeonService = new DungeonService(context, null, null);
+            using var context = await GetDatabase();
+            var dungeonService = new DungeonService(context, null, null);
 
-                Assert.Throws<ArgumentException>(() => dungeonService.GetDestinationId(destinationName));
-            }
+            Assert.Throws<ArgumentException>(() => dungeonService.GetDestinationId(destinationName));
         }
 
         [Fact]
@@ -145,20 +133,18 @@
         [Fact]
         public async Task KickCharacter_Should_Remove_Dungeon_Character_Entity_In_Database()
         {
-            using (var context = await GetDatabase())
-            {
-                var mapper = this.GetMapper();
-                var characterService = new CharacterService(context, mapper);
-                var dungeonService = new DungeonService(context, characterService, mapper);
+            using var context = await GetDatabase();
+            var mapper = this.GetMapper();
+            var characterService = new CharacterService(context, mapper);
+            var dungeonService = new DungeonService(context, characterService, mapper);
 
-                await dungeonService.RegisterCharacterAsync("1", "1");
-                await dungeonService.KickCharacterAsync("1", "1");
+            await dungeonService.RegisterCharacterAsync("1", "1");
+            await dungeonService.KickCharacterAsync("1", "1");
 
-                var expected = 0;
-                var actual = context.DungeonCharacter.Count();
+            var expected = 0;
+            var actual = context.DungeonCharacter.Count();
 
-                Assert.Equal(expected, actual);
-            }
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
@@ -167,12 +153,10 @@
         [InlineData("Invalid")]
         public async Task KickCharacter_Should_Throw_If_Invalid_Character(string characterId)
         {
-            using (var context = await GetDatabase())
-            {
-                var dungeonService = new DungeonService(context, null, null);
+            using var context = await GetDatabase();
+            var dungeonService = new DungeonService(context, null, null);
 
-                await Assert.ThrowsAsync<InvalidOperationException>(async () => await dungeonService.KickCharacterAsync("1", characterId));
-            }
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => await dungeonService.KickCharacterAsync("1", characterId));
         }
 
         [Theory]
@@ -192,25 +176,23 @@
         [Fact]
         public async Task Edit_Should_Properly_Edit_Character()
         {
-            using (var context = await GetDatabase())
+            using var context = await GetDatabase();
+            var mapper = this.GetMapper();
+            var characterService = new CharacterService(context, mapper);
+            var dungeonService = new DungeonService(context, characterService, mapper);
+
+            var dungeonEditBindingModel = new DungeonEditBindingModel
             {
-                var mapper = this.GetMapper();
-                var characterService = new CharacterService(context, mapper);
-                var dungeonService = new DungeonService(context, characterService, mapper);
+                DungeonId = "1",
+                Description = "Updated"
+            };
 
-                var dungeonEditBindingModel = new DungeonEditBindingModel
-                {
-                    DungeonId = "1",
-                    Description = "Updated"
-                };
+            await dungeonService.EditAsync(dungeonEditBindingModel);
 
-                await dungeonService.EditAsync(dungeonEditBindingModel);
+            var expected = "Updated";
+            var actual = context.Dungeons.First().Description;
 
-                var expected = "Updated";
-                var actual = context.Dungeons.First().Description;
-
-                Assert.Equal(expected, actual);
-            }
+            Assert.Equal(expected, actual);
         }
 
         [Theory]
@@ -218,28 +200,24 @@
         [InlineData(null)]
         public async Task Edit_Should_Not_Update_If_Description_Is_Null_Or_Empty(string description)
         {
-            using (var context = await GetDatabase())
+            using var context = await GetDatabase();
+            var mapper = this.GetMapper();
+            var characterService = new CharacterService(context, mapper);
+            var dungeonService = new DungeonService(context, characterService, mapper);
+
+            var dungeonEditBindingModel = new DungeonEditBindingModel
             {
-                var mapper = this.GetMapper();
-                var characterService = new CharacterService(context, mapper);
-                var dungeonService = new DungeonService(context, characterService, mapper);
+                DungeonId = "1",
+                Description = description
+            };
 
-                var dungeonEditBindingModel = new DungeonEditBindingModel
-                {
-                    DungeonId = "1",
-                    Description = description
-                };
+            await dungeonService.EditAsync(dungeonEditBindingModel);
 
-                await dungeonService.EditAsync(dungeonEditBindingModel);
+            var expected = "Initial";
+            var actual = context.Dungeons.First().Description;
 
-                var expected = "Initial";
-                var actual = context.Dungeons.First().Description;
-
-                Assert.Equal(expected, actual);
-            }
+            Assert.Equal(expected, actual);
         }
-
-
 
         private async Task<WowGuildManagerDbContext> GetDatabase()
         {

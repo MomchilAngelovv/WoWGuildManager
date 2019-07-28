@@ -11,7 +11,6 @@
     using WowGuildManager.Models.ApiModels.Characters;
     using System.Linq;
 
-    [Authorize]
     public class CharactersController : ApiController
     {
         private readonly UserManager<WowGuildManagerUser> userManager;
@@ -32,7 +31,7 @@
             var userId = this.userManager.GetUserId(this.User);
 
             var characters = this.apiService
-                .GetAllCharacters<CharacterApiViewModel>(userId)
+                .GetAllCharacters(userId)
                 .ToList();
 
             return characters;

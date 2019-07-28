@@ -1,16 +1,19 @@
 ﻿namespace WowGuildManager.Services.Api
 {
     using System.Collections.Generic;
+    using WowGuildManager.Models.ApiModels.Characters;
+    using WowGuildManager.Models.ApiModels.Logs;
+    using WowGuildManager.Models.ApiModels.Raids;
 
     public interface IApiService
     {
-        IEnumerable<T> GetAllMembers<T>();
-        IEnumerable<T> GetAllCharacters<T>(string userId);
-        IEnumerable<T> GetAllImages<T>();
-        IEnumerable<T> GetAllExceptions<T>();
+        IEnumerable<CharacterApiViewModel> GetAllMembers();
+        IEnumerable<CharacterApiViewModel> GetAllCharacters(string userId);
+        IEnumerable<ImageApiViewModel> GetAllImages();
+        IEnumerable<ExceptionApiViewModel> GetAllExceptions();
 
-        T GetCharacterById<T>(string characterId);
+        CharacterApiViewModel GetCharacter(string characterId);
 
-        IEnumerable<T> GuildProgress<T>();
+        IEnumerable<RaidDestinationProgressApiViewModel> GuildProgress();
     }
 }

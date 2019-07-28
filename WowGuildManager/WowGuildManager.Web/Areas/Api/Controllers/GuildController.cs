@@ -23,7 +23,7 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
         public ActionResult<IEnumerable<RaidDestinationProgressApiViewModel>> Progress()
         {
             var raidDestinations = this.apiService
-                .GuildProgress<RaidDestinationProgressApiViewModel>()
+                .GuildProgress()
                 .ToList();
             
             return raidDestinations;

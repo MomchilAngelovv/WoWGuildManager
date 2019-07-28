@@ -9,6 +9,9 @@
 
     using WowGuildManager.Data;
     using WowGuildManager.Common.GlobalConstants;
+    using WowGuildManager.Models.ApiModels.Characters;
+    using WowGuildManager.Models.ApiModels.Logs;
+    using WowGuildManager.Models.ApiModels.Raids;
 
     public class ApiService : IApiService
     {
@@ -23,15 +26,15 @@
             this.mapper = mapper;
         }
 
-        public IEnumerable<T> GetAllMembers<T>()
+        public IEnumerable<CharacterApiViewModel> GetAllMembers()
         {
             var members = this.context.Characters
-                .ToList()
-                .Select(m => mapper.Map<T>(m));
+                .ProjectTo<CharacterApiViewModel>(mapper.ConfigurationProvider)
+                .ToList();
 
             return members;
         }
-        public IEnumerable<T> GetAllCharacters<T>(string userId)
+        public IEnumerable<CharacterApiViewModel> GetAllCharacters(string userId)
         {
             var user = this.context.Users
                 .FirstOrDefault(u => u.Id == userId);
@@ -43,29 +46,29 @@
 
             var characters = this.context.Characters
                 .Where(c => c.UserId == userId)
-                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ProjectTo<CharacterApiViewModel>(mapper.ConfigurationProvider)
                 .ToList();
 
             return characters;
         }
-        public IEnumerable<T> GetAllImages<T>()
+        public IEnumerable<ImageApiViewModel> GetAllImages()
         {
             var images = this.context.GalleryImages
-                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ProjectTo<ImageApiViewModel>(mapper.ConfigurationProvider)
                 .ToList();
 
             return images;
         }
-        public IEnumerable<T> GetAllExceptions<T>()
+        public IEnumerable<ExceptionApiViewModel> GetAllExceptions()
         {
             var exceptions = this.context.Errors
-                .ProjectTo<T>(mapper.ConfigurationProvider)
+                .ProjectTo<ExceptionApiViewModel>(mapper.ConfigurationProvider)
                 .ToList();
 
             return exceptions;
         }
 
-        public T GetCharacterById<T>(string characterId)
+        public CharacterApiViewModel GetCharacter(string characterId)
         {
             var character = this.context.Characters
                 .Find(characterId);
@@ -75,13 +78,13 @@
                 throw new ArgumentException(ErrorConstants.InvalidCharacterErrorMessage);
             }
 
-            return mapper.Map<T>(character);
+            return mapper.Map<CharacterApiViewModel>(character);
         }
 
-        public IEnumerable<T> GuildProgress<T>()
+        public IEnumerable<RaidDestinationProgressApiViewModel> GuildProgress()
         {
             var raidDestinations = this.context.RaidDestinations
-              .ProjectTo<T>(mapper.ConfigurationProvider)
+              .ProjectTo<RaidDestinationProgressApiViewModel>(mapper.ConfigurationProvider)
               .ToList();
 
             return raidDestinations;

@@ -19,7 +19,7 @@ namespace WowGuildManager.Tests
         [Fact]
         public async Task CreateAsync_Should_Register_Character_In_Database()
         {
-            var context = await GetDatabase();
+            using var context = await GetDatabase();
             var service = new CharacterService(context, null);
 
             var newCharacter = new CharacterCreateBindingModel
@@ -42,7 +42,7 @@ namespace WowGuildManager.Tests
         [Fact]
         public async Task CreateAsync_Should_Throw_If_User_Has_4_Registered_Characters()
         {
-            var context = await GetDatabase();
+            using var context = await GetDatabase();
             var service = new CharacterService(context, null);
 
             var newCharacter = new CharacterCreateBindingModel
@@ -62,7 +62,7 @@ namespace WowGuildManager.Tests
         [Fact]
         public async Task Delete_Should_Set_Character_Is_Active_To_False()
         {
-            var context = await GetDatabase();
+            using var context = await GetDatabase();
             var service = new CharacterService(context, null);
 
             await service.DeleteAsync("1");
@@ -76,7 +76,7 @@ namespace WowGuildManager.Tests
         [Fact]
         public async Task UserHasMaxRegiresteredCharacters_Shuold_Return_False_When_User_Has_Less_Than_4_Characters()
         { 
-            var context = await GetDatabase();
+            using var context = await GetDatabase();
             var service = new CharacterService(context, null);
 
             var expected = false;
@@ -88,7 +88,7 @@ namespace WowGuildManager.Tests
         [Fact]
         public async Task UserHasMaxRegiresteredCharacters_Shuold_Return_True_When_User_Has_4_Characters()
         {
-            var context = await GetDatabase();
+            using var context = await GetDatabase();
             var service = new CharacterService(context, null);
 
             var newCharacter = new CharacterCreateBindingModel

@@ -23,7 +23,7 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
         public ActionResult<IEnumerable<ImageApiViewModel>> Images()
         {
             var images = this.apiService
-                .GetAllImages<ImageApiViewModel>()
+                .GetAllImages()
                 .ToList();
 
             return images;
@@ -33,7 +33,7 @@ namespace WowGuildManager.Web.Areas.Api.Controllers
         public ActionResult<IEnumerable<ExceptionApiViewModel>> Exceptions()
         {
             var exceptions = this.apiService
-                .GetAllExceptions<ExceptionApiViewModel>()
+                .GetAllExceptions()
                 .ToList();
 
             return exceptions;
