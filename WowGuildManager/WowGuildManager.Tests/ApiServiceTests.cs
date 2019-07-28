@@ -65,14 +65,17 @@ namespace WowGuildManager.Tests
             Assert.NotNull(actual);
         }
 
-        [Fact]
-        public async Task GetCharacter_Should_Throw_When_No_Character_Found()
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData("Invalid")]
+        public async Task GetCharacter_Should_Throw_When_No_Character_Found(string characterId)
         {
             using var context = await this.GetDatabase();
             var mapper = this.GetMapper();
             var apiService = new ApiService(context, mapper);
 
-            Assert.Throws<ArgumentException>(() => apiService.GetCharacter("InvalidId"));
+            Assert.Throws<ArgumentException>(() => apiService.GetCharacter(characterId));
         }
 
         private async Task<WowGuildManagerDbContext> GetDatabase()
