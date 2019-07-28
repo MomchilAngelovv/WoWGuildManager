@@ -133,7 +133,7 @@ namespace WowGuildManager.Services.Raids
 
             if (raid == null)
             {
-                throw new InvalidOperationException(ErrorConstants.InvalidRaidErrorMessage);
+                throw new ArgumentException(ErrorConstants.InvalidRaidErrorMessage);
             }
 
             var mappedRaid = mapper.Map<T>(raid);

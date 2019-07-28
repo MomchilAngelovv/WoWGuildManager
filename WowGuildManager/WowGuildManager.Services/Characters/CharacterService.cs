@@ -1,5 +1,4 @@
 ﻿//TODO: Make test for EVERY service method
-//TODO: OrderBy clouses where nesesary
 //TODO: Delete remainning comments when READY ! IMPORTANT !!!
 namespace WowGuildManager.Services.Characters
 {
@@ -75,8 +74,9 @@ namespace WowGuildManager.Services.Characters
             }
 
             character.IsActive = false;
-            this.context.Update(character);
+            character.RankId = this.GetRankId(GuildRanksConstants.Member);
 
+            this.context.Update(character);
             await this.context.SaveChangesAsync();
 
             return character;

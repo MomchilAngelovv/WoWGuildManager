@@ -179,7 +179,7 @@
 
         public int GetTotalRegisteredUsersCount()
         {
-            var usersCount = this.userManager.Users.Count();
+            var usersCount = this.context.Users.Count();
             return usersCount;
         }
         public int GetTotalRegisteredCharactersCount()

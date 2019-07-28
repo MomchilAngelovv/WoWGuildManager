@@ -1,5 +1,4 @@
 ﻿//TODO: Api endpoits for dungeons /raids / characers everythng
-//TODO: Sort controllers dependanicyes and methods
 
 namespace WowGuildManager.Web.Controllers
 {
