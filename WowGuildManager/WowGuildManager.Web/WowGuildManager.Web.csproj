@@ -3,12 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <UserSecretsId>aspnet-WowGuildManager.Web-374A065B-19EA-459F-BCDD-08EAD8391286</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/2afe41c1-d1ff-41c9-8508-3f58c3f0a391/resourcegroups/DeathwingLair/providers/microsoft.insights/components/DeathwingLair</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/2afe41c1-d1ff-41c9-8508-3f58c3f0a391/resourcegroups/DeathwingLair/providers/microsoft.insights/components/DeathwingLair</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
     <PackageReference Include="Cloudinary.Core" Version="1.31.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.6" />
@@ -20,6 +23,10 @@
     <ProjectReference Include="..\WowGuildManager.Domain\WowGuildManager.Domain.csproj" />
     <ProjectReference Include="..\WowGuildManager.Models\WowGuildManager.Models.csproj" />
     <ProjectReference Include="..\WowGuildManager.Services\WowGuildManager.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
 </Project>

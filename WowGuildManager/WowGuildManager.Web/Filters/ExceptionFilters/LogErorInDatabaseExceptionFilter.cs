@@ -9,6 +9,8 @@
     using WowGuildManager.Domain.Logs;
     using WowGuildManager.Domain.Identity;
     using WowGuildManager.Common.GlobalConstants;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
 
     public class LogErorInDatabaseExceptionFilter : ExceptionFilterAttribute
     {
@@ -41,6 +43,13 @@
 
             this.context.Errors.Add(exceptionLog);
             this.context.SaveChanges();
+
+            context.ExceptionHandled = true;
+            context.Result = new RedirectToRouteResult(new RouteValueDictionary
+            {
+                { "controller", "Home" },
+                { "action", "Error" },
+            });
         }
     }
 }

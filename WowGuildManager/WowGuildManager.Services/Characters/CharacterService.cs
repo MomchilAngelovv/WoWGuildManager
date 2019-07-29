@@ -34,6 +34,11 @@ namespace WowGuildManager.Services.Characters
                 throw new InvalidOperationException(ErrorConstants.MaximumRegisteredPlayers);
             }
 
+            if (this.context.Characters.Any(ch => ch.Name == model.Name))
+            {
+                throw new InvalidOperationException(ErrorConstants.InvalidCharacterNameErrorMessage);
+            }
+
             var character = new Character
             {
                 Name = model.Name,

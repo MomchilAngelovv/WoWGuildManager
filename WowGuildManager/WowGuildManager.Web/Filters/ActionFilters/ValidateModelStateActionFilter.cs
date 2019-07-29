@@ -49,8 +49,6 @@
 
                 await this.context.AddRangeAsync(errors);
                 await this.context.SaveChangesAsync();
-
-                throw new ArgumentException(ErrorConstants.InvalidDataProvided);
             }
 
             await next();
