@@ -6,7 +6,6 @@
 
     public class DungeonDestination
     {
-        //TODO: REMOVE ALL MAGIC STRING AND NUMEBRS
         public DungeonDestination()
         {
             this.MaxPlayers = DungeonConstants.MaxPlayers;

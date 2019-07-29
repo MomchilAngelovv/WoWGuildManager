@@ -3,6 +3,9 @@ namespace WowGuildManager.Common
 {
     public static class RaidConstants
     {
+        public const int MinPlayersForRaid = 10;
+        public const int MaxPlayersForRaid = 10;
+
         public const string UbrsImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380391/WowGuildManager/images/raids/ubrs_o39eme.jpg";
         public const string Aq20Image = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380388/WowGuildManager/images/raids/aq20_d5qwlx.jpg";
         public const string Aq40Image = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380388/WowGuildManager/images/raids/aq40_gmefsu.jpg";

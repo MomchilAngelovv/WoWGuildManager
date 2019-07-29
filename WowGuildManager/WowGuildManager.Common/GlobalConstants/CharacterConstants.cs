@@ -4,6 +4,12 @@
     {
         public const int MaximumAllowedCharactersPerUser = 4;
 
+        public const int MinAllowedLevel = 1;
+        public const int MaxAllowedLevel = 60;
+        
+        public const int MinAllowedNameLength = 3;
+        public const int MaxAllowedNameLength = 30;
+
         public const string DruidImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380332/WowGuildManager/images/classes/druid_sujbpd.jpg";
         public const string HunterImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380333/WowGuildManager/images/classes/hunter_wj8twl.jpg";
         public const string MageImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380330/WowGuildManager/images/classes/mage_opie3r.jpg";

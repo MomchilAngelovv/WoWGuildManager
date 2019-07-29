@@ -2,20 +2,21 @@
 namespace WowGuildManager.Models.BindingModels.Characters
 {
     using System.ComponentModel.DataAnnotations;
+    using WowGuildManager.Common.GlobalConstants;
 
     public class CharacterCreateBindingModel
     {
         public string UserId { get; set; }
 
         [Required]
-        [MinLength(3)]
-        [MaxLength(30)]
+        [MinLength(CharacterConstants.MinAllowedNameLength)]
+        [MaxLength(CharacterConstants.MaxAllowedNameLength)]
         public string Name { get; set; }
 
         [Required]
         public string Class { get; set; }
 
-        [Range(1, 60)]
+        [Range(CharacterConstants.MinAllowedLevel, CharacterConstants.MaxAllowedLevel)]
         public int Level { get; set; }
 
         [Required]

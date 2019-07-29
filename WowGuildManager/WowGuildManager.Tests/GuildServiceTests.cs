@@ -1,28 +1,29 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WowGuildManager.Data;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Domain.Dungeon;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Domain.Logs;
-using WowGuildManager.Domain.Raid;
-using WowGuildManager.Models.ApiModels.Logs;
-using WowGuildManager.Models.ViewModels.Characters;
-using WowGuildManager.Models.ViewModels.Dungeons;
-using WowGuildManager.Models.ViewModels.Gallery;
-using WowGuildManager.Services.Characters;
-using WowGuildManager.Services.Guilds;
-using WowGuildManager.Services.Raids;
-using Xunit;
-
-namespace WowGuildManager.Tests
+﻿namespace WowGuildManager.Tests
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Xunit;
+    using AutoMapper;
+
+    using WowGuildManager.Data;
+    using WowGuildManager.Domain.Logs;
+    using WowGuildManager.Domain.Raid;
+    using WowGuildManager.Services.Raids;
+    using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Services.Guilds;
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Services.Characters;
+    using WowGuildManager.Models.ApiModels.Logs;
+    using WowGuildManager.Models.ViewModels.Gallery;
+    using WowGuildManager.Models.ViewModels.Dungeons;
+    using WowGuildManager.Models.ViewModels.Characters;
+
     public class GuildServiceTests
     {
         [Fact]
@@ -264,7 +265,6 @@ namespace WowGuildManager.Tests
 
             return context;
         }
-
         private IMapper GetMapper()
         {
             var config = new MapperConfiguration(cfg =>

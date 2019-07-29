@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Domain.Characters;
 
     public class Raid
@@ -19,7 +20,7 @@
         [Required]
         public DateTime EventDateTime { get; set; }
 
-        [MaxLength(100)]
+        [MaxLength(CommonConstants.MaxDescriptionLength)]
         public string Description { get; set; }
 
         [Required]

@@ -12,7 +12,7 @@
             @foreach (var raid in Model.Raids)
             {
                 <tr>
-                    <th class="w-25"><a asp-area="" asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger btn-sm col-sm-3">@raid.Destination</a></th>
+                    <th class="w-25"><a asp-controller="Raids" asp-action="Details" asp-route-id="@raid.Id" class="btn btn-danger btn-sm col-sm-3">@raid.Destination</a></th>
                 </tr>
             }
         }
@@ -24,7 +24,7 @@
             @foreach (var dungeon in Model.Dungeons)
             {
                 <tr>
-                    <th><a asp-area="" asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning btn-sm col-sm-3">@dungeon.Destination</a></th>
+                    <th><a asp-controller="Dungeons" asp-action="Details" asp-route-id="@dungeon.Id" class="btn btn-warning btn-sm col-sm-3">@dungeon.Destination</a></th>
                 </tr>
             }
         }

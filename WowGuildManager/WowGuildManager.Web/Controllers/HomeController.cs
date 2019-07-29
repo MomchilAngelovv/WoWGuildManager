@@ -1,5 +1,4 @@
-﻿//TODO: MAKE EVEYEWHERE BUTTON-SM !!
-//TODO APPLY Authorization attribites everywhere
+﻿//TODO APPLY Authorization attribites everywhere
 //TODO: Intoduce Privacy policy page
 //TODO: Consired proper error view (search in net)
 

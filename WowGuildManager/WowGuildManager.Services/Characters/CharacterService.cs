@@ -1,5 +1,4 @@
-﻿//TODO: Make test for EVERY service method
-//TODO: Delete remainning comments when READY ! IMPORTANT !!!
+﻿//TODO: Delete remainning comments when READY ! IMPORTANT !!!
 namespace WowGuildManager.Services.Characters
 {
     using System;

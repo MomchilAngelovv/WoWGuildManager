@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WowGuildManager.Models.ApiModels.Logs
+﻿namespace WowGuildManager.Models.ApiModels.Logs
 {
+    using System;
+
     public class ExceptionApiViewModel
     {
         public string Id { get; set; }

@@ -8,16 +8,16 @@
     using Microsoft.EntityFrameworkCore;
 
     using Xunit;
+    using AutoMapper;
 
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Services.Dungeons;
     using WowGuildManager.Domain.Characters;
-    using WowGuildManager.Models.BindingModels.Dungeons;
     using WowGuildManager.Services.Characters;
-    using AutoMapper;
     using WowGuildManager.Models.ViewModels.Dungeons;
     using WowGuildManager.Models.ViewModels.Characters;
+    using WowGuildManager.Models.BindingModels.Dungeons;
 
     public class DungeonServiceTests
     {
@@ -258,7 +258,6 @@
 
             return context;
         }
-
         private IMapper GetMapper()
         {
             var config = new MapperConfiguration(cfg => {

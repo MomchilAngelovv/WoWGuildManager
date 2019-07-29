@@ -4,10 +4,12 @@
 
     using Microsoft.AspNetCore.Identity;
 
+    using WowGuildManager.Common.GlobalConstants;
+
     public class WowGuildManagerRole : IdentityRole<string>
     {
         [Required]
-        [MaxLength(100)]
+        [MaxLength(CommonConstants.MaxDescriptionLength)]
         public string Description { get; set; }
     }
 }

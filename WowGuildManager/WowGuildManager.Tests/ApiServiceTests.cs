@@ -1,28 +1,26 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WowGuildManager.Data;
-using WowGuildManager.Domain.Characters;
-using WowGuildManager.Domain.Dungeon;
-using WowGuildManager.Domain.Identity;
-using WowGuildManager.Domain.Logs;
-using WowGuildManager.Domain.Raid;
-using WowGuildManager.Models.ApiModels.Characters;
-using WowGuildManager.Models.ApiModels.Logs;
-using WowGuildManager.Models.ApiModels.Raids;
-using WowGuildManager.Models.BindingModels.Characters;
-using WowGuildManager.Models.ViewModels.Characters;
-using WowGuildManager.Models.ViewModels.Dungeons;
-using WowGuildManager.Services.Api;
-
-using Xunit;
-
-namespace WowGuildManager.Tests
+﻿namespace WowGuildManager.Tests
 {
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+
+    using Xunit;
+    using AutoMapper;
+
+    using WowGuildManager.Data;
+    using WowGuildManager.Domain.Raid;
+    using WowGuildManager.Domain.Logs;
+    using WowGuildManager.Services.Api;
+    using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Domain.Identity;
+    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Models.ApiModels.Logs;
+    using WowGuildManager.Models.ApiModels.Raids;
+    using WowGuildManager.Models.ApiModels.Characters;
+
     public class ApiServiceTests
     {
         [Fact]
@@ -149,7 +147,6 @@ namespace WowGuildManager.Tests
 
             return context;
         }
-
         private IMapper GetMapper()
         {
             var config = new MapperConfiguration(cfg =>

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace WowGuildManager.Models.ApiModels.Logs
+﻿namespace WowGuildManager.Models.ApiModels.Logs
 {
+    using System;
+
     public class ImageApiViewModel
     {
         public string Id { get; set; }

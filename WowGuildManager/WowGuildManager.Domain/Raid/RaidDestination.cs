@@ -1,6 +1,7 @@
 ﻿namespace WowGuildManager.Domain.Raid
 {
     using System.ComponentModel.DataAnnotations;
+    using WowGuildManager.Common;
 
     public class RaidDestination
     {
@@ -14,7 +15,7 @@
         public string ImagePath { get; set; }
 
         [Required]
-        [Range(10,40)]
+        [Range(RaidConstants.MinPlayersForRaid, RaidConstants.MaxPlayersForRaid)]
         public int MaxPlayers { get; set; }
 
         [Required]

@@ -1,6 +1,4 @@
-﻿//TODO: Api endpoits for dungeons /raids / characers everythng
-
-namespace WowGuildManager.Web.Controllers
+﻿namespace WowGuildManager.Web.Controllers
 {
     using System.Threading.Tasks;
     using System.Collections.Generic;
