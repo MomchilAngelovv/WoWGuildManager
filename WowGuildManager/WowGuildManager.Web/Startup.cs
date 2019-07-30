@@ -25,6 +25,7 @@
     using WowGuildManager.Services.Characters;
     using WowGuildManager.Web.Filters.ActionFilters;
     using WowGuildManager.Web.Filters.ExceptionFilters;
+    using Microsoft.AspNetCore.StaticFiles;
 
     public class Startup
     {
@@ -118,7 +119,13 @@
 
             app.UseResponseCompression();
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseFileServer();
+            StaticFileOptions option = new StaticFileOptions();
+            FileExtensionContentTypeProvider contentTypeProvider = (FileExtensionContentTypeProvider)option.ContentTypeProvider ??
+            new FileExtensionContentTypeProvider();
+            contentTypeProvider.Mappings.Add(".unityweb", "application/octet-stream");
+            option.ContentTypeProvider = contentTypeProvider;
+            app.UseStaticFiles(option);
             app.UseCookiePolicy();
 
             app.UseAuthentication();

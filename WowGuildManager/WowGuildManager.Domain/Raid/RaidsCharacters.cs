@@ -7,7 +7,7 @@
     public class RaidCharacter
     {
         [Key]
-        public string Key { get; set; }
+        public string Id { get; set; }
 
         public string RaidId { get; set; }
         public virtual Raid Raid { get; set; }

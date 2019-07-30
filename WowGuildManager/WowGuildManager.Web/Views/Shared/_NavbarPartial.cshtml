@@ -22,6 +22,9 @@
             <li class="nav-item active">
                 <a asp-controller="Guild" asp-action="Progress" class="nav-link">Guild Progress and Information<span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item active">
+                <a asp-controller="FlipBlocks" asp-action="Index" class="nav-link text-success">FlipBlocks game<span class="sr-only">(current)</span></a>
+            </li>
             @if (this.User.IsInRole(WowGuildManagerUserConstants.GuildMaster))
             {
                 <li class="nav-item active">
