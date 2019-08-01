@@ -15,7 +15,7 @@
                     <th class="priority-1">Name</th>
                     <th class="priority-1">Level</th>
                     <th class="priority-1">Class</th>
-                    <th class="priority-1">Role</th>
+                    <th class="priority-3">Role</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,26 +23,26 @@
                 {
                     <tr>
                         <td class="p-2 priority-3">@member.Rank</td>
-                        <td><a asp-controller="Characters" asp-action="Details" asp-route-id="@member.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-100 text-white priority-1">@member.Name</a></td>
+                        <td class="p-2 priority-1"><a asp-controller="Characters" asp-action="Details" asp-route-id="@member.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-100 text-white priority-1">@member.Name</a></td>
                         <td class="p-2 priority-1">@member.Level</td>
                         <td class="p-2 priority-1">@member.Class</td>
                         @if (member.Role == CharacterRoleConstants.Damage)
                         {
-                            <td><span class="btn btn-danger btn-sm w-100 priority-1">@member.Role</span></td>
+                            <td><span class="btn btn-danger btn-sm w-100 priority-3">@member.Role</span></td>
                         }
                         else if (member.Role == CharacterRoleConstants.Healer)
                         {
-                            <td><span class="btn btn-success btn-sm w-100">@member.Role</span></td>
+                            <td><span class="btn btn-success btn-sm w-100 priority-3">@member.Role</span></td>
                         }
                         else if (member.Role == CharacterRoleConstants.Tank)
                         {
-                            <td><span class="btn btn-warning btn-sm w-100">@member.Role</span></td>
+                            <td><span class="btn btn-warning btn-sm w-100 priority-3">@member.Role</span></td>
                         }
                     </tr>
                 }
             </tbody>
         </table>
-    </div>
+    </div>  
     <hr class="bg-warning" />
 </div>
 

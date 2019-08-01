@@ -2,7 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Linq;
+    using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Models.ViewModels.Characters;
 
     public class RaidDetailsViewModel
@@ -26,5 +27,9 @@
         public bool AlreadyJoined { get; set; }
 
         public CharacterIdNameViewModel JoinedCharacter { get; set; }
+
+        public int HealersCount => this.Characters.Count(cha => cha.Role == CharacterRoleConstants.Healer);
+        public int DamageDealersCount => this.Characters.Count(cha => cha.Role == CharacterRoleConstants.Damage);
+        public int TanksCount => this.Characters.Count(cha => cha.Role == CharacterRoleConstants.Tank);
     }
 }

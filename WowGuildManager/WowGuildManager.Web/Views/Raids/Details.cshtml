@@ -9,18 +9,25 @@
         <div class="col-lg-4">
             <p>Information: @Model.Description</p>
             <p>Event datetime: @Model.EventDateTime</p>
+            <p>Healers: @Model.HealersCount</p>
+            <p>Damage dealers: @Model.DamageDealersCount</p>
+            <p>Tanks: @Model.TanksCount</p>
         </div>
 
         <div class="col-lg-4">
             @if (Model.AlreadyJoined && Model.JoinedCharacter.Id == Model.LeaderId)
             {
-                <form asp-controller="Raids" asp-action="EditAsync" asp-route-raidId="@Model.Id" method="post">
+                <form asp-controller="Raids" asp-action="EditAsync" method="post">
                     <div class="input-group form-group">
-                        <input type="text" class="form-control border-dark" name="description" placeholder="New description..." />
+                        <input asp-for="Description" class="form-control border-dark" placeholder="New description..." />
                     </div>
 
                     <div class="input-group form-group">
-                        <input type="datetime-local" class="form-control border-dark" name="eventDateTime" placeholder="New description..." />
+                        <input asp-for="EventDateTime" class="form-control border-dark" placeholder="New description..." />
+                    </div>
+
+                    <div class="input-group form-group">
+                        <input asp-for="Id" name="raidId" hidden />
                     </div>
 
                     <div class="form-group">
@@ -36,11 +43,11 @@
     <table class="table table-sm table-hover table-dark text-warning">
         <thead>
             <tr>
-                <th>Guild rank</th>
-                <th>Name</th>
-                <th>Level</th>
-                <th>Class</th>
-                <th>Role</th>
+                <th class="priority-3">Guild rank</th>
+                <th class="priority-1">Name</th>
+                <th class="priority-3">Level</th>
+                <th class="priority-1">Class</th>
+                <th class="priority-1">Role</th>
             </tr>
         </thead>
         <tbody>
@@ -48,32 +55,32 @@
             {
                 if (Model.AlreadyJoined && character.Id == Model.JoinedCharacter.Id)
                 {
-                    <tr class="">
-                        <th class="p-2">@character.GuildRank</th>
-                        <td><a asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-warning btn-sm w-75">@character.Name</a></td>
-                        <td class="p-2">@character.Level</td>
-                        <td class="p-2">@character.Class</td>
-                        <td class="p-2 d-flex justify-content-between">@character.Role </td>
+                    <tr>
+                        <th class="p-2 priority-3">@character.GuildRank</th>
+                        <td class="priority-1"><a asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-warning btn-sm w-75">@character.Name</a></td>
+                        <td class="p-2 priority-3">@character.Level</td>
+                        <td class="p-2 priority-1">@character.Class</td>
+                        <td class="p-2 d-flex justify-content-between priority-1">@character.Role</td>
                     </tr>
                 }
                 else if (Model.AlreadyJoined && character.Id != Model.LeaderId && Model.JoinedCharacter.Id == Model.LeaderId)
                 {
                     <tr>
-                        <th class="p-2">@character.GuildRank</th>
-                        <td><a asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
-                        <td class="p-2">@character.Level</td>
-                        <td class="p-2">@character.Class</td>
-                        <td class="d-flex justify-content-between">@character.Role <a asp-area="" asp-controller="Raids" asp-action="Kick" asp-route-characterId="@character.Id" asp-route-raidId="@Model.Id" class="btn btn-danger btn-sm">Kick</a></td>
+                        <th class="p-2 priority-3">@character.GuildRank</th>
+                        <td class="priority-1"><a asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
+                        <td class="p-2 priority-3">@character.Level</td>
+                        <td class="p-2 priority-1">@character.Class</td>
+                        <td class="d-flex justify-content-between priority-1">@character.Role <a asp-controller="Raids" asp-action="KickAsync" asp-route-characterId="@character.Id" asp-route-raidId="@Model.Id" class="btn btn-danger btn-sm">Kick</a></td>
                     </tr>
                 }
                 else
                 {
                     <tr>
-                        <th>@character.GuildRank</th>
-                        <td><a asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
-                        <td>@character.Level</td>
-                        <td>@character.Class</td>
-                        <td class="p-2 d-flex justify-content-between">@character.Role</td>
+                        <th class="priority-3">@character.GuildRank</th>
+                        <td class="priority-1"><a asp-controller="Characters" asp-action="Details" asp-route-id="@character.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-75">@character.Name</a></td>
+                        <td class="priority-3">@character.Level</td>
+                        <td class="priority-1">@character.Class</td>
+                        <td class="p-2 d-flex justify-content-between priority-3">@character.Role</td>
                     </tr>
                 }
             }
@@ -81,21 +88,22 @@
     </table>
     @if (Model.AvailableCharacters.Any() == false)
     {
-        <a asp-controller="Characters" asp-action="Create" class="btn btn-secondary bg-warning w-100 text-dark">You dont have any registered characters. Click here to register new character.</a>
+        <a asp-controller="Characters" asp-action="Create" class="btn btn-secondary bg-warning text-dark">You dont have any registered characters. Click here to register new character.</a>
     }
     else if (Model.Characters.Count() < Model.MaxPlayers && Model.AlreadyJoined == false)
     {
-        <div class="dropdown ">
+        <div class="dropdown col-lg-4 pl-0 pr-0">
             <button class="btn btn-secondary dropdown-toggle bg-warning w-100 text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select character to join</button>
 
             <div class="dropdown-menu w-100 bg-dark" aria-labelledby="dropdownMenuButton">
                 @foreach (var availableCharacter in Model.AvailableCharacters)
                 {
-                    <a asp-controller="Raids" asp-action="JoinAsync" asp-route-characterId="@availableCharacter.Id" asp-route-raidId="@Model.Id" class="dropdown-item text-white">@availableCharacter.Name</a>
+                    <a asp-controller="Raids" asp-action="JoinAsync" asp-route-characterId="@availableCharacter.Id" asp-route-raidId="@Model.Id" class="dropdown-item text-success">@availableCharacter.Name</a>
                 }
             </div>
         </div>
     }
+    <hr class="bg-warning" />
 </div>
 
 @section Scripts{

@@ -4,45 +4,43 @@
 }
 
 <div class="container-fluid bc">
-    <form asp-controller="Characters" asp-action="EditAsync" method="post">
-        <h2>Edit character </h2>
-        <hr class="bg-warning" />
+    <h3>Edit character</h3>
+    <hr class="bg-warning" />
 
-        <div asp-validation-summary="All" class="text-danger"></div>
-
-        <div class="form-group">
-            <div class="row">
-                <label asp-for="Level" class="control-label col-lg-1"></label>
-                <input asp-for="Level" value="@Model.Level" class="form-control col-lg-3" />
-                <span asp-validation-for="Level" class="text-danger"></span>
-            </div>
+    <div class="row d-flex justify-content-between">
+        <div class="col-lg-4">
+            <p>Current level: @Model.Level</p>
+            <p>Current role: @Model.Role</p>
         </div>
 
-        <div class="form-group">
-            <div class="row">
-                <label asp-for="Role" class="control-label col-lg-1"></label>
-                <select id="role" asp-for="@Model.Role" asp-items="@((IEnumerable<SelectListItem>)ViewData["Roles"])" class="form-control border-dark col-lg-3"></select>
-                <span asp-validation-for="@Model.Role" class="text-danger"></span>
-            </div>
-        </div>
+        <div class="col-lg-4">
+            <form asp-controller="Characters" asp-action="EditAsync" method="post">
+                <div class="form-group">
+                    <input asp-for="Level" value="@Model.Level" class="form-control" />
+                    <span asp-validation-for="Level" class="text-danger"></span>
+                </div>
 
-        <div class="form-group">
-            <div class="row">
-                <input asp-for="CharacterId" value="@Model.CharacterId" hidden />
-            </div>
-        </div>
+                <div class="form-group">
+                    <select id="role" asp-for="@Model.Role" asp-items="@((IEnumerable<SelectListItem>)ViewData["Roles"])" class="form-control border-dark"></select>
+                    <span asp-validation-for="@Model.Role" class="text-danger"></span>
+                </div>
 
-        <hr class="bg-warning" />
-        <div class="form-group">
-            <button type="submit" class="btn btn-warning col-lg-4">Save</button>
-        </div>
-    </form>
+                <div class="input-group form-group">
+                    <input asp-for="CharacterId" value="@Model.CharacterId" hidden />
+                </div>
 
-    <div>
-        <a asp-controller="Characters" asp-action="Delete" asp-route-id="@Model.CharacterId" class="btn btn-danger col-lg-4">Delete characeter</a>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info w-100 border-dark">Save changes</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div>
-        <a asp-controller="Characters" asp-action="Index" class="btn btn-info col-lg-4">Back to characters</a>
+
+    <hr class="bg-warning" />
+
+    <div class="d-flex justify-content-end mb-3">
+        <a asp-controller="Characters" asp-action="Index" class="btn btn-warning border border-dark">Back to characters</a>
+        <a asp-controller="Characters" asp-action="Delete" asp-route-id="@Model.CharacterId" class="btn btn-danger border border-dark">Delete characeter</a>
     </div>
 </div>
 
