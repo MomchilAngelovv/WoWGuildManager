@@ -8,6 +8,13 @@
         <div class="col-lg-4 col-sm-auto mt-3">
             <a asp-controller="Characters" asp-action="Create" class="btn btn-warning btn-sm border-dark w-100"><h2>Add character</h2></a>
         </div>
+        <div class="col-lg-4 col-sm-auto mt-3">
+            <button id="show-geolocation-btn" onclick="showGeoLocation()" class="btn btn-warning btn-sm border-dark w-100"><h2>In case you need your location</h2></button>
+        </div>
+        <div class="col-lg-4 col-sm-auto mt-3">
+            <div id="latitude"></div>
+            <div id="longitude"></div>
+        </div>
     </div>
 
     @if (this.TempData["NewCharacter"] != null)
@@ -45,6 +52,15 @@
         setTimeout(function () {
             $('#new-character-alert').toggle(100);
         }, 3000);
+
+        function showGeoLocation() {
+            navigator.geolocation.getCurrentPosition(printGeoLocation)
+        }
+
+        function printGeoLocation(position) {
+            $('#latitude').text(`latittude: ${position.coords.latitude}`);
+            $('#longitude').text(`longitude: ${position.coords.longitude}`);
+        }
     </script>
 }
 

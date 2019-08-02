@@ -1,5 +1,4 @@
-﻿//TODO: Security and authority validation everyWHERE !! IMPORTANTT !!!!
-namespace WowGuildManager.Web.Controllers
+﻿namespace WowGuildManager.Web.Controllers
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -15,7 +14,9 @@ namespace WowGuildManager.Web.Controllers
     using WowGuildManager.Models.ViewModels.Raids;
     using WowGuildManager.Models.BindingModels.Raids;
     using WowGuildManager.Models.ViewModels.Characters;
+    using Microsoft.AspNetCore.Authorization;
 
+    [Authorize]
     public class RaidsController : BaseController
     {
         private readonly UserManager<WowGuildManagerUser> userManager;

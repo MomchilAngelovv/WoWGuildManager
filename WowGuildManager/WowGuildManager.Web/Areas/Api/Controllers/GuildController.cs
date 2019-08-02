@@ -1,5 +1,4 @@
-﻿//TODO: KUZMATA: WORLD BOSOVE TRQBVA DA DOBAVISH !!!!
-namespace WowGuildManager.Web.Areas.Api.Controllers
+﻿namespace WowGuildManager.Web.Areas.Api.Controllers
 {
     using System.Collections.Generic;
 

@@ -1,5 +1,4 @@
-﻿//TODO: Consider making some get reqeusts to POST
-namespace WowGuildManager.Web.Mapper
+﻿namespace WowGuildManager.Web.Mapper
 {
     using System.Linq;
 

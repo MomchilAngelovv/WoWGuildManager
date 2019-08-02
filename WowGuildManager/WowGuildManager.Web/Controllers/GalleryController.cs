@@ -12,6 +12,7 @@ namespace WowGuildManager.Web.Controllers
     using WowGuildManager.Domain.Identity;
     using WowGuildManager.Services.Gallery;
     using WowGuildManager.Models.ViewModels.Gallery;
+    using WowGuildManager.Common.GlobalConstants;
 
     [AllowAnonymous]
     public class GalleryController : BaseController
@@ -42,6 +43,7 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = GuildRanksConstants.GuildMaster)]
         public async Task<IActionResult> MakeNonActualAsync(string id)
         {
             await this.galleryService.RemoveImageAsync(id);
@@ -49,6 +51,7 @@ namespace WowGuildManager.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = GuildRanksConstants.GuildMaster)]
         public async Task<IActionResult> UploadImageAsync(List<IFormFile> files)
         {
             var userId = this.userManager.GetUserId(this.User);

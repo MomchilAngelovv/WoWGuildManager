@@ -1,5 +1,4 @@
-﻿//TODO: FIx identity area bootstrap and interface
-namespace WowGuildManager.Models.BindingModels.Characters
+﻿namespace WowGuildManager.Models.BindingModels.Characters
 {
     using System.ComponentModel.DataAnnotations;
     using WowGuildManager.Common.GlobalConstants;

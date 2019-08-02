@@ -10,7 +10,10 @@
     using WowGuildManager.Models.ViewModels.Raids;
     using WowGuildManager.Models.ViewModels.Guild;
     using WowGuildManager.Models.BindingModels.Guilds;
+    using Microsoft.AspNetCore.Authorization;
+    using WowGuildManager.Common.GlobalConstants;
 
+    [AllowAnonymous]
     public class GuildController : BaseController
     {
         private readonly IRaidService raidService;
@@ -25,6 +28,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = GuildRanksConstants.GuildMaster)]
         public IActionResult GuildMaster()
         {
             var registeredCharacters = this.guildService.GetTotalRegisteredCharactersCount();
@@ -57,24 +61,28 @@
             return this.RedirectToAction(nameof(GuildMaster));
         }
         [HttpGet]
+        [Authorize(Roles = GuildRanksConstants.GuildMaster)]
         public async Task<IActionResult> RemoveGuildProgressAsync(string raidName)
         {
             await this.guildService.RemoveProgressToRaidAsync(raidName);
             return this.RedirectToAction(nameof(GuildMaster));
         }
         [HttpGet]
+        [Authorize(Roles = GuildRanksConstants.GuildMaster)]
         public async Task<IActionResult> PromoteRankAsync(string characterId)
         {
             await this.guildService.PromoteRankAsync(characterId);
             return this.RedirectToAction("Details", "Characters", new { id = characterId });
         }
         [HttpGet]
+        [Authorize(Roles = GuildRanksConstants.GuildMaster)]
         public async Task<IActionResult> DemoteRankAsync(string characterId)
         {
             await this.guildService.DemoteRankAsync(characterId);
             return this.RedirectToAction("Details", "Characters", new { id = characterId });
         }
         [HttpGet]
+        [Authorize(Roles = GuildRanksConstants.GuildMaster)]
         public async Task<IActionResult> SetOrUnsetRaidLeaderAsync(string userId)
         {
             await this.guildService.SetOrUnsetRaidLeaderAsync(userId);

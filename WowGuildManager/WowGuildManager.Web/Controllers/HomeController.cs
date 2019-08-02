@@ -1,15 +1,13 @@
-﻿//TODO APPLY Authorization attribites everywhere
-//TODO: Intoduce Privacy policy page
-//TODO: Consired proper error view (search in net)
-
-namespace WowGuildManager.Web.Controllers
+﻿namespace WowGuildManager.Web.Controllers
 {
     using System.Diagnostics;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     using WowGuildManager.Models.ViewModels.Error;
-
+    
+    [AllowAnonymous]
     public class HomeController : BaseController
     {
         [HttpGet]
