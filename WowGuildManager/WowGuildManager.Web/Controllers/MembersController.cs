@@ -20,11 +20,27 @@
         }
 
         [HttpGet]
-        public IActionResult All()
+        public IActionResult All(string sortOrder)
         {
             var members = this.characterService
                 .GetAllCharacters<CharacterViewModel>()
                 .ToList();
+
+            switch (sortOrder)
+            {
+                case "level":
+                    members = members.OrderByDescending(m => m.Level).ToList();
+                    break;
+                case "class":
+                    members = members.OrderByDescending(m => m.Class).ToList();
+                    break;
+                case "role":
+                    members = members.OrderByDescending(m => m.Role).ToList();
+                    break;
+                case "name":
+                    members = members.OrderByDescending(m => m.Name).ToList();
+                    break;
+            }
 
             var membersIndexViewModel = new MembersIndexViewModel
             {

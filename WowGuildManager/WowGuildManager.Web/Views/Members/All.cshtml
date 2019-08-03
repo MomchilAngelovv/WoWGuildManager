@@ -12,10 +12,10 @@
             <thead>
                 <tr>
                     <th class="priority-3">Guild rank</th>
-                    <th class="priority-1">Name</th>
-                    <th class="priority-1">Level</th>
-                    <th class="priority-1">Class</th>
-                    <th class="priority-3">Role</th>
+                    <th class="priority-1"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="name" class="btn btn-sm btn-link border border-warning text-info">Name</a></th>
+                    <th class="priority-1"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="level" class="btn btn-sm btn-link border border-warning text-info">Level</a></th>
+                    <th class="priority-1"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="class" class="btn btn-sm btn-link border border-warning text-info">Class</a></th>
+                    <th class="priority-3"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="role" class="btn btn-sm btn-link border border-warning text-info">Role</a></th>
                 </tr>
             </thead>
             <tbody>

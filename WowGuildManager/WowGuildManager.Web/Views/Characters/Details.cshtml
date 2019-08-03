@@ -23,7 +23,7 @@
 
             @if (Model.Rank == GuildRanksConstants.Member)
             {
-                <a asp-controller="Guild" asp-action="PromoteRankAsync" asp-route-characterId="@Model.Id" class="btn btn-success btn-sm border border-dark">Promote <i class="fas fa-arrow-up"></i></a>
+                <a asp-controller="Guild" asp-action="PromoteRankAsync" asp-route-characterId="@Model.Id" class="btn btn-success btn-sm border border-dark col-sm-6">Promote <i class="fas fa-arrow-up"></i></a>
             }
             else if (Model.Rank == GuildRanksConstants.GuildMaster)
             {
@@ -31,7 +31,7 @@
                     <div class="col-lg-6">
                     </div>
                     <div class="col-lg-6 ">
-                        <a asp-controller="Guild" asp-action="DemoteRankAsync" asp-route-characterId="@Model.Id" class="btn btn-danger btn-sm border border-dark">Demote <i class="fas fa-arrow-down"></i></a>
+                        <a asp-controller="Guild" asp-action="DemoteRankAsync" asp-route-characterId="@Model.Id" class="btn btn-danger btn-sm border border-dark col-sm-12">Demote <i class="fas fa-arrow-down"></i></a>
                     </div>
                 </div>
             }
@@ -47,14 +47,32 @@
                 </div>
             }
 
-            <form asp-controller="Characters" asp-action="DeleteAsync" method="post">
-                <div class="input-group form-group">
-                    <input asp-for="Id" hidden />
+            <hr class="bg-warning"/>
+            <button type="button" class="btn btn-dark w-100 border border-danger text-danger" data-toggle="modal" data-target="#myModal">Kick character from guild!</button>
+
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content bg-info border border-danger">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Are you sure you want to kick @Model.Name from the guild?</h4>
+                        </div>
+
+                        <form asp-controller="Characters" asp-action="DeleteAsync" method="post">
+                            <div class="input-group form-group">
+                                <input asp-for="Id" hidden />
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-dark border border-danger text-danger m-3">Kick from guild!</button>
+                            </div>
+                        </form>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">Back</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-dark w-100 border border-danger text-danger">Kick character from guild!</button>
-                </div>
-            </form>
+            </div>
         }
     </div>
 
