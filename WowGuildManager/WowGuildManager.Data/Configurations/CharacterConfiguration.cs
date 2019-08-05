@@ -3,13 +3,13 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
 
     public class CharacterConfiguration : IEntityTypeConfiguration<Character>
     {
-        public void Configure(EntityTypeBuilder<Character> entity)
+        public void Configure(EntityTypeBuilder<Character> character)
         {
-            entity
+            character
                 .HasIndex(u => u.Name)
                 .IsUnique();
         }

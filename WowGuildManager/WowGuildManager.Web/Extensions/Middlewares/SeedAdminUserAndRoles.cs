@@ -1,5 +1,4 @@
-﻿//TODO: Fix password and admin info
-namespace WowGuildManager.Web.Extensions
+﻿namespace WowGuildManager.Web.Extensions
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -15,7 +14,8 @@ namespace WowGuildManager.Web.Extensions
     {
         private readonly RequestDelegate _next;
 
-        public SeedAdminUserAndRoles(RequestDelegate next)
+        public SeedAdminUserAndRoles(
+            RequestDelegate next)
         {
             this._next = next;
         }
@@ -27,13 +27,13 @@ namespace WowGuildManager.Web.Extensions
         {
             if (roleManager.Roles.Any() == false)
             {
-                await SeedRolesAsync(userManager, roleManager);
+                await SeedRolesAndAdminUser(userManager, roleManager);
             }
 
             await this._next(context);
         }
 
-        private async Task SeedRolesAsync(
+        private async Task SeedRolesAndAdminUser(
              UserManager<WowGuildManagerUser> userManager,
              RoleManager<WowGuildManagerRole> roleManager)
         {

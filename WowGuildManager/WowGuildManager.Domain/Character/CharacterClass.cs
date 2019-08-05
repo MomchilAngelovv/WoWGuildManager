@@ -1,4 +1,4 @@
-﻿namespace WowGuildManager.Domain.Characters
+﻿namespace WowGuildManager.Domain.Character
 {
     using System.ComponentModel.DataAnnotations;
 

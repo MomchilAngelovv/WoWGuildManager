@@ -7,7 +7,7 @@
     using WowGuildManager.Domain.Logs;
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Data.Configurations;
 
     public class WowGuildManagerDbContext : IdentityDbContext<WowGuildManagerUser, WowGuildManagerRole, string>

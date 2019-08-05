@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace WowGuildManager.Data.Migrations
+﻿namespace WowGuildManager.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class Added_Is_Active_On_Characters : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

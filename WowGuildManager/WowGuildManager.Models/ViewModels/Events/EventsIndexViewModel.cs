@@ -1,5 +1,4 @@
-﻿//TODO FIX INTERFACES EVEYWHRE WHEN END!!!!!!!!!! IMPORTANT
-namespace WowGuildManager.Models.ViewModels.Events
+﻿namespace WowGuildManager.Models.ViewModels.Events
 {
     using System.Collections.Generic;
 

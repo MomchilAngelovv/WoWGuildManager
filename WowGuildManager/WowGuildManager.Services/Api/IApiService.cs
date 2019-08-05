@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
 
-    using WowGuildManager.Models.ApiModels.Characters;
     using WowGuildManager.Models.ApiModels.Logs;
     using WowGuildManager.Models.ApiModels.Raids;
+    using WowGuildManager.Models.ApiModels.Characters;
 
     public interface IApiService
     {

@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Models.BindingModels.Characters;
 
     public interface ICharacterService

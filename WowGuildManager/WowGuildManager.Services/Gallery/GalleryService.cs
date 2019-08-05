@@ -49,7 +49,7 @@
 
                     var uploadResult = await cloudinary.UploadAsync(uploadParams);
                     
-                    var imageUploadLog = this.GenerateImageUploadLog(uploadResult, userId);
+                    var imageUploadLog = this.GenerateGalleryImage(uploadResult, userId);
                     imageUploadLogs.Add(imageUploadLog);
                 }
             }
@@ -94,7 +94,7 @@
             return mappedImage;
         }
 
-        private GalleryImage GenerateImageUploadLog(ImageUploadResult uploadResult, string userId)
+        private GalleryImage GenerateGalleryImage(ImageUploadResult uploadResult, string userId)
         {
             var imageUploadLog = new GalleryImage
             {

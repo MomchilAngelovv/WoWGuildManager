@@ -2,8 +2,8 @@
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +16,7 @@
     using WowGuildManager.Services.Api;
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Models.ApiModels.Logs;
     using WowGuildManager.Models.ApiModels.Raids;
     using WowGuildManager.Models.ApiModels.Characters;
@@ -34,7 +34,6 @@
             var actual = apiService.GetAllImages().Count();
 
             Assert.Equal(expected, actual);
-
         }
 
         [Fact]

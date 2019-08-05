@@ -1,20 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WowGuildManager.Domain.Logs;
-using WowGuildManager.Models.ApiModels.Logs;
-using WowGuildManager.Services.Api;
-using WowGuildManager.Services.Gallery;
-
-namespace WowGuildManager.Web.Areas.Api.Controllers
+﻿namespace WowGuildManager.Web.Areas.Api.Controllers
 {
+    using System.Linq;
+    using System.Collections.Generic;
+
+    using Microsoft.AspNetCore.Mvc;
+
+    using WowGuildManager.Services.Api;
+    using WowGuildManager.Models.ApiModels.Logs;
+
     public class LogsController : ApiController
     {
         private readonly IApiService apiService;
 
-        public LogsController(IApiService apiService)
+        public LogsController(
+            IApiService apiService)
         {
             this.apiService = apiService;
         }

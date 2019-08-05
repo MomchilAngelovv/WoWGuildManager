@@ -1,5 +1,4 @@
-﻿//TODO: Delete remainning comments when READY ! IMPORTANT !!!
-namespace WowGuildManager.Services.Characters
+﻿namespace WowGuildManager.Services.Characters
 {
     using System;
     using System.Linq;
@@ -10,7 +9,7 @@ namespace WowGuildManager.Services.Characters
     using AutoMapper.QueryableExtensions;
 
     using WowGuildManager.Data;
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Models.BindingModels.Characters;
 

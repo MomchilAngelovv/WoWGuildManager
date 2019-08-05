@@ -4,7 +4,7 @@
 
     using Microsoft.AspNetCore.Identity;
 
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
 
     public class WowGuildManagerUser : IdentityUser<string>
     {

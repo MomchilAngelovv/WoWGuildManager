@@ -7,15 +7,15 @@
 
     public class RaidCharacterConfiguration : IEntityTypeConfiguration<RaidCharacter>
     {
-        public void Configure(EntityTypeBuilder<RaidCharacter> entity)
+        public void Configure(EntityTypeBuilder<RaidCharacter> raidCharacter)
         {
-            entity
+            raidCharacter
               .HasOne(raidChar => raidChar.Raid)
               .WithMany(raid => raid.RegisteredCharacters)
               .HasForeignKey(raidChar => raidChar.RaidId)
               .OnDelete(DeleteBehavior.Restrict);
 
-            entity
+            raidCharacter
                 .HasOne(raidChar => raidChar.Character)
                 .WithMany(raid => raid.Raids)
                 .HasForeignKey(raidChar => raidChar.CharacterId)

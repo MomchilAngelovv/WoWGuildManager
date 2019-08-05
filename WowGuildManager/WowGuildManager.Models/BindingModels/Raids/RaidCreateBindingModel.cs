@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using WowGuildManager.Common.GlobalConstants;
 
     public class RaidCreateBindingModel

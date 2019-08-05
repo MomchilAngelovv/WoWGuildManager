@@ -6,7 +6,7 @@
 
     using AutoMapper;
 
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Models.ApiModels.Characters;
     using WowGuildManager.Models.ViewModels.Characters;
     using WowGuildManager.Models.BindingModels.Characters;

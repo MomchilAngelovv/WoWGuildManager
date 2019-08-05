@@ -14,7 +14,8 @@
     {
         private readonly IGuildService guildService;
 
-        public AdminController(IGuildService guildService)
+        public AdminController(
+            IGuildService guildService)
         {
             this.guildService = guildService;
         }

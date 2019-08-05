@@ -1,6 +1,7 @@
 ﻿namespace WowGuildManager.Models.BindingModels.Characters
 {
     using System.ComponentModel.DataAnnotations;
+
     using WowGuildManager.Common.GlobalConstants;
 
     public class CharacterCreateBindingModel

@@ -1,5 +1,4 @@
-﻿//TODO: Chage images for heroes to be better scaling with square
-namespace WowGuildManager.Services.Raids
+﻿namespace WowGuildManager.Services.Raids
 {
     using System;
     using System.Linq;
@@ -10,11 +9,11 @@ namespace WowGuildManager.Services.Raids
     using AutoMapper.QueryableExtensions;
 
     using WowGuildManager.Data;
-    using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Domain.Raid;
-    using WowGuildManager.Models.BindingModels.Raids;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Services.Characters;
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Common.GlobalConstants;
+    using WowGuildManager.Models.BindingModels.Raids;
 
     public class RaidService : IRaidService
     {

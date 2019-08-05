@@ -12,8 +12,8 @@
 
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Services.Dungeons;
-    using WowGuildManager.Domain.Characters;
     using WowGuildManager.Services.Characters;
     using WowGuildManager.Models.ViewModels.Dungeons;
     using WowGuildManager.Models.ViewModels.Characters;

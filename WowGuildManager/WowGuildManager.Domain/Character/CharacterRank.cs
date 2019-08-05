@@ -1,8 +1,8 @@
-﻿namespace WowGuildManager.Domain.Characters
+﻿namespace WowGuildManager.Domain.Character
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class CharacterRole
+    public class CharacterRank
     {
         [Key]
         public string Id { get; set; }

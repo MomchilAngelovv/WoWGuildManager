@@ -10,10 +10,10 @@
 
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Dungeon;
+    using WowGuildManager.Domain.Character;
+    using WowGuildManager.Services.Characters;
     using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Models.BindingModels.Dungeons;
-    using WowGuildManager.Services.Characters;
-    using WowGuildManager.Domain.Characters;
 
     public class DungeonService : IDungeonService
     {

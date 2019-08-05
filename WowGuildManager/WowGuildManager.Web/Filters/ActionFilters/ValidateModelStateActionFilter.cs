@@ -10,7 +10,6 @@
     using WowGuildManager.Data;
     using WowGuildManager.Domain.Logs;
     using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Common.GlobalConstants;
 
     public class ValidateModelStateActionFilter : IAsyncActionFilter
     {

@@ -1,6 +1,7 @@
 ﻿namespace WowGuildManager.Data.Migrations
 {
     using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class Added_IsRaidLeader_IsGuildMaster_Properties_To_Users : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

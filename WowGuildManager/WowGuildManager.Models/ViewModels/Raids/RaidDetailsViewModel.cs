@@ -1,8 +1,9 @@
 ﻿namespace WowGuildManager.Models.ViewModels.Raids
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
+    using System.Collections.Generic;
+
     using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Models.ViewModels.Characters;
 

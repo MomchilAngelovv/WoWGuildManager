@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace WowGuildManager.Data.Migrations
+﻿namespace WowGuildManager.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class Renamed_Key_To_Id_In_Raid_Charcter : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

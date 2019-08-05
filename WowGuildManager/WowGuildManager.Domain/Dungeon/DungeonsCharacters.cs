@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
 
     public class DungeonCharacter
     {

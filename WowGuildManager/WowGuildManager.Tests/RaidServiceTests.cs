@@ -16,7 +16,7 @@
     using WowGuildManager.Services.Raids;
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Services.Characters;
     using WowGuildManager.Models.ApiModels.Logs;
     using WowGuildManager.Models.ViewModels.Gallery;

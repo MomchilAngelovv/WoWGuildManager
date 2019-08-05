@@ -7,10 +7,9 @@
     using Microsoft.AspNetCore.Http;
 
     using WowGuildManager.Data;
-    using WowGuildManager.Common;
     using WowGuildManager.Domain.Raid;
     using WowGuildManager.Domain.Dungeon;
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Common.GlobalConstants;
 
     public class SeedDatabaseDefaultData

@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using WowGuildManager.Common;
+    using WowGuildManager.Common.GlobalConstants;
 
     public class DungeonDestination
     {

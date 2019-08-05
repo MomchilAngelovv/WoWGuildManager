@@ -1,5 +1,4 @@
-﻿//TODO: Require unique email;
-namespace WowGuildManager.Web.Controllers
+﻿namespace WowGuildManager.Web.Controllers
 {
     using System.Threading.Tasks;
     using System.Collections.Generic;
@@ -11,8 +10,8 @@ namespace WowGuildManager.Web.Controllers
     
     using WowGuildManager.Domain.Identity;
     using WowGuildManager.Services.Gallery;
-    using WowGuildManager.Models.ViewModels.Gallery;
     using WowGuildManager.Common.GlobalConstants;
+    using WowGuildManager.Models.ViewModels.Gallery;
 
     [AllowAnonymous]
     public class GalleryController : BaseController

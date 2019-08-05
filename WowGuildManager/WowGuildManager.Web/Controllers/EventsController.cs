@@ -1,5 +1,4 @@
-﻿//TODO: MAKE RESPONSIVE VERY BAD
-namespace WowGuildManager.Web.Controllers
+﻿namespace WowGuildManager.Web.Controllers
 {
     using System.Linq;
 
@@ -9,7 +8,7 @@ namespace WowGuildManager.Web.Controllers
 
     using WowGuildManager.Services.Raids;
     using WowGuildManager.Domain.Identity;
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Services.Dungeons;
     using WowGuildManager.Services.Characters;
     using WowGuildManager.Models.ViewModels.Raids;

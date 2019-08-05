@@ -1,6 +1,7 @@
 ﻿namespace WowGuildManager.Data.Migrations
 {
     using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class Add_Unique_Index_Characters_Name : Migration
     {
       

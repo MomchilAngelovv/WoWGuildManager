@@ -1,8 +1,8 @@
 ﻿namespace WowGuildManager.Domain.Logs
 {
     using System;
-
     using System.ComponentModel.DataAnnotations;
+
     using WowGuildManager.Domain.Identity;
 
     public class Error

@@ -8,6 +8,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.StaticFiles;
     using Microsoft.AspNetCore.Identity.UI;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +26,6 @@
     using WowGuildManager.Services.Characters;
     using WowGuildManager.Web.Filters.ActionFilters;
     using WowGuildManager.Web.Filters.ExceptionFilters;
-    using Microsoft.AspNetCore.StaticFiles;
 
     public class Startup
     {
@@ -52,14 +52,14 @@
 
             services.AddIdentity<WowGuildManagerUser, WowGuildManagerRole>(options =>
             {
-                //TODO: Fix password settings
-                 options.Password.RequireDigit = false;
-                 options.Password.RequiredLength = 3;
-                 options.Password.RequiredUniqueChars = 0;
-                 options.Password.RequireLowercase = false;
-                 options.Password.RequireNonAlphanumeric = false;
-                 options.Password.RequireUppercase = false;
-             })
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.User.RequireUniqueEmail = true;
+            })
             .AddEntityFrameworkStores<WowGuildManagerDbContext>()
             .AddDefaultTokenProviders()
             .AddDefaultUI(UIFramework.Bootstrap4);
@@ -70,16 +70,17 @@
             {
                 options.AppId = this.Configuration["Facebook:AppId"];
                 options.AppSecret = this.Configuration["Facebook:AppSecret"];
+                options.CallbackPath = new PathString("/.auth/login/facebook/callback");
             });
 
             services.AddAutoMapper(typeof(Startup));
-             
-            services.AddMvc(options => 
+
+            services.AddMvc(options =>
             {
                 options.Filters.Add<ValidateModelStateActionFilter>();
                 options.Filters.Add<LogErorInDatabaseExceptionFilter>();
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-            })  
+            })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             #region AppServices
@@ -129,7 +130,7 @@
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-            
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(name: "mvcAreaRoute",

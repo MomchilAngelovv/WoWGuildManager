@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace WowGuildManager.Models.ViewModels.Gallery
+﻿namespace WowGuildManager.Models.ViewModels.Gallery
 {
+    using System.Collections.Generic;
+
     public class GalleryIndexViewModel
     {
         public IEnumerable<GalleryImageViewModel> Images { get; set; }

@@ -2,8 +2,8 @@
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +14,7 @@
     using WowGuildManager.Domain.Logs;
     using WowGuildManager.Domain.Dungeon;
     using WowGuildManager.Services.Gallery;
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Models.ApiModels.Logs;
     using WowGuildManager.Models.ViewModels.Gallery;
     using WowGuildManager.Models.ViewModels.Dungeons;

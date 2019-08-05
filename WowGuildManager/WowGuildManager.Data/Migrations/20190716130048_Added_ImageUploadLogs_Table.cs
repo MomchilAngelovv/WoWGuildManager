@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace WowGuildManager.Data.Migrations
+﻿namespace WowGuildManager.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class Added_ImageUploadLogs_Table : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

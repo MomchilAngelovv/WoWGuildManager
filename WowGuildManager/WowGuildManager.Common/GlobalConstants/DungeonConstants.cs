@@ -1,4 +1,4 @@
-﻿namespace WowGuildManager.Common
+﻿namespace WowGuildManager.Common.GlobalConstants
 {
     public static class DungeonConstants
     {

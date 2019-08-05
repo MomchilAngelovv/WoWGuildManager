@@ -6,6 +6,7 @@
     {
         public static IApplicationBuilder UseSeedAdminUserAndRoles(this IApplicationBuilder app)
         {
+
             return app.UseMiddleware<SeedAdminUserAndRoles>();
         }
 

@@ -12,9 +12,9 @@
         public static string GuildMasterDescription = "This role is set by admin and has the authority to make changes inside the guild.";
         public static string AdminDescription = "This role is initialy created with database and has full access to everything.";
 
-        public static string AdminEmail = "Admin@admin.com";
-        public static string AdminUserName = "Admin";
-        public static string AdminPassword = "123";
+        public static string AdminEmail = "MomchilAngelov0040@gmail.com";
+        public static string AdminUserName = "Lylt";
+        public static string AdminPassword = "123456asd";
 
         public static string NullUserWarningMessage = "Warning! Null user!";
     }

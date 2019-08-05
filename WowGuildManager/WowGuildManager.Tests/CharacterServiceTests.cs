@@ -10,7 +10,7 @@ namespace WowGuildManager.Tests
     using Xunit;
 
     using WowGuildManager.Data;
-    using WowGuildManager.Domain.Characters;
+    using WowGuildManager.Domain.Character;
     using WowGuildManager.Services.Characters;
     using WowGuildManager.Models.BindingModels.Characters;
 

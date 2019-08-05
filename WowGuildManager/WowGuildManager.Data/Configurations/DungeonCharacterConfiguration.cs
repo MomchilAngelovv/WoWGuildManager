@@ -7,15 +7,15 @@
 
     public class DungeonCharacterConfiguration : IEntityTypeConfiguration<DungeonCharacter>
     {
-        public void Configure(EntityTypeBuilder<DungeonCharacter> entity)
+        public void Configure(EntityTypeBuilder<DungeonCharacter> dungeonCharacter)
         {
-            entity
+            dungeonCharacter
               .HasOne(dungChar => dungChar.Dungeon)
               .WithMany(dung => dung.RegisteredCharacters)
               .HasForeignKey(dungChar => dungChar.DungeonId)
               .OnDelete(DeleteBehavior.Restrict);
 
-            entity
+            dungeonCharacter
                 .HasOne(dungChar => dungChar.Character)
                 .WithMany(dung => dung.Dungeons)
                 .HasForeignKey(dungChar => dungChar.CharacterId)

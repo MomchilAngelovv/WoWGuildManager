@@ -8,10 +8,10 @@
     using AutoMapper.QueryableExtensions;
 
     using WowGuildManager.Data;
-    using WowGuildManager.Common.GlobalConstants;
-    using WowGuildManager.Models.ApiModels.Characters;
     using WowGuildManager.Models.ApiModels.Logs;
+    using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Models.ApiModels.Raids;
+    using WowGuildManager.Models.ApiModels.Characters;
 
     public class ApiService : IApiService
     {

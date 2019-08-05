@@ -3,15 +3,15 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authorization;
 
     using WowGuildManager.Services.Raids;
     using WowGuildManager.Services.Guilds;
+    using WowGuildManager.Common.GlobalConstants;
     using WowGuildManager.Models.ViewModels.Users;
     using WowGuildManager.Models.ViewModels.Raids;
     using WowGuildManager.Models.ViewModels.Guild;
     using WowGuildManager.Models.BindingModels.Guilds;
-    using Microsoft.AspNetCore.Authorization;
-    using WowGuildManager.Common.GlobalConstants;
 
     [AllowAnonymous]
     public class GuildController : BaseController

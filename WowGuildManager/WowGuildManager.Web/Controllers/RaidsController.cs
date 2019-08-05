@@ -6,6 +6,7 @@
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     using WowGuildManager.Services.Raids;
@@ -14,7 +15,6 @@
     using WowGuildManager.Models.ViewModels.Raids;
     using WowGuildManager.Models.BindingModels.Raids;
     using WowGuildManager.Models.ViewModels.Characters;
-    using Microsoft.AspNetCore.Authorization;
 
     [Authorize]
     public class RaidsController : BaseController

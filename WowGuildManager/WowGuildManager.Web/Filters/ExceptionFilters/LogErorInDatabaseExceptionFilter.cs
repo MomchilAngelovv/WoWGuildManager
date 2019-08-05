@@ -2,6 +2,8 @@
 {
     using System;
 
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -9,8 +11,6 @@
     using WowGuildManager.Domain.Logs;
     using WowGuildManager.Domain.Identity;
     using WowGuildManager.Common.GlobalConstants;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Routing;
 
     public class LogErorInDatabaseExceptionFilter : ExceptionFilterAttribute
     {
