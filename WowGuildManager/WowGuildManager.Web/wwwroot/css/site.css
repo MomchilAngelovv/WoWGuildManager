@@ -26,8 +26,9 @@ body {
 
 .carousel img {
     min-width: 100%;
-    height: 650px;
-    max-width: none;
+    height:auto;
+    max-height: 580px;
+    min-height: 22vh;
 }
 
 .progress {

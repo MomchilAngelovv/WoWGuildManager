@@ -17,5 +17,6 @@
         public static string InvalidRaidKickErrorMessage = "There is no player signed for this this raid!";
         public static string InvalidImageErrorMessage = "There is no such Image!";
         public static string InvalidCharacterNameErrorMessage = "There is already character with this name!";
+        public static string AccessDeniedErrorMessage = "You don not have right to do this!";
     }
 }

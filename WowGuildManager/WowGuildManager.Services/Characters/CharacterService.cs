@@ -54,9 +54,14 @@
 
             return character;
         }
-        public async Task<Character> EditAsync(CharacterEditBindingModel editModel)
+        public async Task<Character> EditAsync(CharacterEditBindingModel editModel, string userId)
         {
             var character = await this.context.Characters.FindAsync(editModel.CharacterId);
+
+            if (character.UserId != userId)
+            {
+                throw new InvalidOperationException(ErrorConstants.AccessDeniedErrorMessage);
+            }
 
             character.Level = editModel.Level;
             character.RoleId = this.GetRoleId(editModel.Role);
@@ -66,7 +71,7 @@
 
             return character;
         }
-        public async Task<Character> DeleteAsync(string characterId)
+        public async Task<Character> DeleteAsync(string characterId, string userId)
         {
             var character = this.context.Characters
                 .Find(characterId);
@@ -74,6 +79,11 @@
             if (character == null)
             {
                 throw new ArgumentException(ErrorConstants.InvalidCharacterErrorMessage);
+            }
+
+            if (character.UserId != userId)
+            {
+                throw new InvalidOperationException(ErrorConstants.AccessDeniedErrorMessage);
             }
 
             character.IsActive = false;

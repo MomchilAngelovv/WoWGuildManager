@@ -1,0 +1,18 @@
+﻿@model WowGuildManager.Models.ViewModels.Error.ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="container-fluid bc">
+    <h1 class="text-danger">Oooops</h1>
+    <h2 class="text-danger">Something went wrong!</h2>
+
+    @if (Model.ShowRequestId)
+    {
+        <p>
+            <strong>Request ID:</strong> <code>@Model.RequestId</code>
+        </p>
+    }
+</div>
+
+

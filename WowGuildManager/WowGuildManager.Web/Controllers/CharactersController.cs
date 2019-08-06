@@ -96,14 +96,20 @@
         [HttpPost]
         public async Task<IActionResult> EditAsync(CharacterEditBindingModel editModel)
         {
-            await this.characterService.EditAsync(editModel);
+            var userId = this.userManager.GetUserId(this.User);
+
+            await this.characterService
+                .EditAsync(editModel,userId);
+
             return this.RedirectToAction(nameof(Index));
         }
         [HttpPost]
         public async Task<IActionResult> DeleteAsync(string id)
         {
+            var userId = this.userManager.GetUserId(this.User);
+
             await this.characterService
-                .DeleteAsync(id);
+                .DeleteAsync(id, userId);
 
             return this.RedirectToAction(nameof(Index));
         }   
