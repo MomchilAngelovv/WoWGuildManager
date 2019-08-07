@@ -51,9 +51,9 @@
             <button type="button" class="btn btn-dark w-100 border border-danger text-danger" data-toggle="modal" data-target="#myModal">Kick character from guild!</button>
 
             <!-- Modal -->
-            <div id="myModal" class="modal fade" role="dialog">
+            <div id="myModal" class="modal fade text-dark" role="dialog">
                 <div class="modal-dialog">
-                    <div class="modal-content bg-info border border-danger">
+                    <div class="modal-content bg-warning border border-danger">
                         <div class="modal-header">
                             <h4 class="modal-title">Are you sure you want to kick @Model.Name from the guild?</h4>
                         </div>
@@ -62,13 +62,13 @@
                             <div class="input-group form-group">
                                 <input asp-for="Id" hidden />
                             </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-dark border border-danger text-danger m-3">Kick from guild!</button>
+                            <div class="form-group p-3">
+                                <button type="submit" class="btn btn-dark btn-lg border border-danger text-danger col-sm-12">Kick from guild!</button>
                             </div>
                         </form>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal">Back</button>
+                            <button type="button" class="btn btn-info border border-dark col-sm-12" data-dismiss="modal">Back</button>
                         </div>
                     </div>
                 </div>

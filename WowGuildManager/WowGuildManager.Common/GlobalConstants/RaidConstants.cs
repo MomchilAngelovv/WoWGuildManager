@@ -1,5 +1,4 @@
-﻿//TODO: Make carousel responsive 
-namespace WowGuildManager.Common.GlobalConstants
+﻿namespace WowGuildManager.Common.GlobalConstants
 {
     public static class RaidConstants
     {

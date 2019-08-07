@@ -19,7 +19,7 @@ namespace WowGuildManager.Tests
         [Fact]
         public async Task CreateAsync_Should_Register_Character_In_Database()
         {
-            using var context = await GetDatabase();
+            using var context = await GetDatabaseAsync();
             var service = new CharacterService(context, null);
 
             var newCharacter = new CharacterCreateBindingModel
@@ -42,7 +42,7 @@ namespace WowGuildManager.Tests
         [Fact]
         public async Task CreateAsync_Should_Throw_If_User_Has_4_Registered_Characters()
         {
-            using var context = await GetDatabase();
+            using var context = await GetDatabaseAsync();
             var service = new CharacterService(context, null);
 
             var newCharacter = new CharacterCreateBindingModel
@@ -62,21 +62,21 @@ namespace WowGuildManager.Tests
         [Fact]
         public async Task Delete_Should_Set_Character_Is_Active_To_False()
         {
-            using var context = await GetDatabase();
+            using var context = await GetDatabaseAsync();
             var service = new CharacterService(context, null);
 
             await service.DeleteAsync("1", "TestUser1");
 
             var expected = false;
             var actual = context.Characters.First(c => c.Id == "1").IsActive;
-            
+
             Assert.Equal(expected, actual);
         }
 
         [Fact]
         public async Task UserHasMaxRegiresteredCharacters_Shuold_Return_False_When_User_Has_Less_Than_4_Characters()
-        { 
-            using var context = await GetDatabase();
+        {
+            using var context = await GetDatabaseAsync();
             var service = new CharacterService(context, null);
 
             var expected = false;
@@ -88,7 +88,7 @@ namespace WowGuildManager.Tests
         [Fact]
         public async Task UserHasMaxRegiresteredCharacters_Shuold_Return_True_When_User_Has_4_Characters()
         {
-            using var context = await GetDatabase();
+            using var context = await GetDatabaseAsync();
             var service = new CharacterService(context, null);
 
             var newCharacter = new CharacterCreateBindingModel
@@ -108,7 +108,34 @@ namespace WowGuildManager.Tests
             Assert.Equal(expected, actual);
         }
 
-        private async Task<WowGuildManagerDbContext> GetDatabase()
+        [Fact]
+        public async Task GetClassId_Should_Throw_If_No_Such_Class_Found()
+        {
+            using var context = await this.GetDatabaseAsync();
+
+            var characterService = new CharacterService(context, null);
+            Assert.Throws<ArgumentException>(() => characterService.GetClassId("InvalidClass")); 
+        }
+
+        [Fact]
+        public async Task GetRoleId_Should_Throw_If_No_Such_Role_Found()
+        {
+            using var context = await this.GetDatabaseAsync();
+
+            var characterService = new CharacterService(context, null);
+            Assert.Throws<ArgumentException>(() => characterService.GetRoleId("InvalidRole"));
+        }
+
+        [Fact]
+        public async Task GetRankId_Should_Throw_If_No_Such_Rank_Found()
+        {
+            using var context = await this.GetDatabaseAsync();
+
+            var characterService = new CharacterService(context, null);
+            Assert.Throws<ArgumentException>(() => characterService.GetRankId("InvalidRole"));
+        }
+
+        private async Task<WowGuildManagerDbContext> GetDatabaseAsync()
         {
             var options = new DbContextOptionsBuilder<WowGuildManagerDbContext>()
              .UseInMemoryDatabase(Guid.NewGuid().ToString())

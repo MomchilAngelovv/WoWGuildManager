@@ -10,15 +10,15 @@
         public const int MinAllowedNameLength = 3;
         public const int MaxAllowedNameLength = 30;
 
-        public const string DruidImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380332/WowGuildManager/images/classes/druid_sujbpd.jpg";
-        public const string HunterImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380333/WowGuildManager/images/classes/hunter_wj8twl.jpg";
-        public const string MageImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380330/WowGuildManager/images/classes/mage_opie3r.jpg";
-        public const string PaladinImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380331/WowGuildManager/images/classes/paladin_kwqna5.jpg";
-        public const string PriestImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380331/WowGuildManager/images/classes/priest_ud67fe.jpg";
-        public const string RogueImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380332/WowGuildManager/images/classes/rogue_os8unv.jpg";
-        public const string ShamanImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380327/WowGuildManager/images/classes/shaman_d5yanx.jpg";
-        public const string WarlockImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380328/WowGuildManager/images/classes/warlock_sgx2u4.jpg";
-        public const string WarriorImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1561380331/WowGuildManager/images/classes/warrior_mycxyl.jpg";
+        public const string DruidImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1565167436/WowGuildManager/images/classes/druidImg_ufhugp.jpg";
+        public const string HunterImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1565167440/WowGuildManager/images/classes/hunterImg_nnahed.jpg";
+        public const string MageImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1565167439/WowGuildManager/images/classes/mageImg_becz3m.jpg";
+        public const string PaladinImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1565167437/WowGuildManager/images/classes/paladingImg_lny5sn.jpg";
+        public const string PriestImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1565167435/WowGuildManager/images/classes/priestImg_s9m8e2.jpg";
+        public const string RogueImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1565167433/WowGuildManager/images/classes/rogueImg_uhfgdm.jpg";
+        public const string ShamanImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1565167438/WowGuildManager/images/classes/shamanImg_bpuk8b.jpg";
+        public const string WarlockImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1565167435/WowGuildManager/images/classes/warlockImg_lih65z.jpg";
+        public const string WarriorImage = "https://res.cloudinary.com/dbfb4iufu/image/upload/v1565167439/WowGuildManager/images/classes/warriorImg_uiun8u.jpg";
 
         public const string Druid = "Druid";
         public const string Hunter = "Hunter";
