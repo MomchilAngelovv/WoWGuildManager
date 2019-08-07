@@ -18,7 +18,7 @@ namespace WowGuildManager.Common.GlobalConstants
         public const string Ubrs = "Upper Blackrock Spire";
         public const string Zg = "Zul'Gurub";
         public const string Aq20 = "Ruins of Ahn'Qiraj";
-        public const string Mc = "Molter Core";
+        public const string Mc = "Molten Core";
         public const string Ony = "Onyxia's lair";
         public const string Bwl = "Blackwing Lair";
         public const string Naxx = "Naxxramas";

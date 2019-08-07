@@ -65,7 +65,7 @@ namespace WowGuildManager.Tests
             using var context = await GetDatabase();
             var service = new CharacterService(context, null);
 
-            await service.DeleteAsync("1");
+            await service.DeleteAsync("1", "TestUser1");
 
             var expected = false;
             var actual = context.Characters.First(c => c.Id == "1").IsActive;
