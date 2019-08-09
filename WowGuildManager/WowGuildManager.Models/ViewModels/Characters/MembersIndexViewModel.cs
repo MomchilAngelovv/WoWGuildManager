@@ -7,6 +7,6 @@
     {
         public IEnumerable<CharacterViewModel> Members { get; set; }
 
-        public int MembersCount => this.Members.Count();
+        public int MembersCount { get; set; }
     }
 }

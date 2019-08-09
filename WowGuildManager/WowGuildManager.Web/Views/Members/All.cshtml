@@ -3,48 +3,56 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="container-fluid bc">
+    <div class="container-fluid bc">
 
-    <h2>Guild members: @Model.MembersCount</h2>
-    
-    <div>
-        <table class="table table-sm table-hover table-dark text-warning text-center">
-            <thead>
-                <tr>
-                    <th class="priority-3">Guild rank</th>
-                    <th class="priority-1"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="name" class="btn btn-sm btn-link border border-warning text-info">Name</a></th>
-                    <th class="priority-1"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="level" class="btn btn-sm btn-link border border-warning text-info">Level</a></th>
-                    <th class="priority-1"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="class" class="btn btn-sm btn-link border border-warning text-info">Class</a></th>
-                    <th class="priority-3"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="role" class="btn btn-sm btn-link border border-warning text-info">Role</a></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var member in Model.Members)
-                {
+        <h2>Total Guild members: @Model.MembersCount</h2>
+        <hr class="bg-warning" />
+        <h3>Search for players:</h3>
+        <form class="form-inline my-2 my-lg-0 col-lg-4 mb-3 pl-0 pr-0" method="get">
+            <input class="form-control col-sm-12 mb-3" type="search" placeholder="Player Name" aria-label="Search" name="searchName">
+            <button class="btn btn-outline-info my-2 my-sm-0 col-sm-12 " type="submit">Search</button>
+        </form>
+
+        <hr class="bg-warning" />
+        <h3>Sorting will automatically remove searched characters and sort all members</h3>
+        <div>
+            <table class="table table-sm table-hover table-dark text-warning text-center">
+                <thead>
                     <tr>
-                        <td class="p-2 priority-3">@member.Rank</td>
-                        <td class="p-2 priority-1"><a asp-controller="Characters" asp-action="Details" asp-route-id="@member.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-100 text-white priority-1">@member.Name</a></td>
-                        <td class="p-2 priority-1">@member.Level</td>
-                        <td class="p-2 priority-1">@member.Class</td>
-                        @if (member.Role == CharacterRoleConstants.Damage)
-                        {
-                            <td><span class="btn btn-danger btn-sm w-100 priority-3">@member.Role</span></td>
-                        }
-                        else if (member.Role == CharacterRoleConstants.Healer)
-                        {
-                            <td><span class="btn btn-success btn-sm w-100 priority-3">@member.Role</span></td>
-                        }
-                        else if (member.Role == CharacterRoleConstants.Tank)
-                        {
-                            <td><span class="btn btn-warning btn-sm w-100 priority-3">@member.Role</span></td>
-                        }
+                        <th class="priority-3">Guild rank</th>
+                        <th class="priority-1"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="name" class="btn btn-outline-warning border border-warning text-info">Name</a></th>
+                        <th class="priority-1"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="level" class="btn btn-outline-warning border border-warning text-info">Level</a></th>
+                        <th class="priority-1"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="class" class="btn btn-outline-warning border border-warning text-info">Class</a></th>
+                        <th class="priority-3"><a asp-controller="Members" asp-action="All" asp-route-sortOrder="role" class="btn btn-outline-warning border border-warning text-info">Role</a></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>  
-    <hr class="bg-warning" />
-</div>
+                </thead>
+                <tbody>
+                    @foreach (var member in Model.Members)
+                    {
+                        <tr>
+                            <td class="p-2 priority-3">@member.Rank</td>
+                            <td class="p-2 priority-1"><a asp-controller="Characters" asp-action="Details" asp-route-id="@member.Id" data-toggle="tooltip" data-placement="top" title="Click to see character info" class="btn btn-info btn-sm w-100 text-white priority-1">@member.Name</a></td>
+                            <td class="p-2 priority-1">@member.Level</td>
+                            <td class="p-2 priority-1">@member.Class</td>
+                            @if (member.Role == CharacterRoleConstants.Damage)
+                            {
+                                <td><span class="btn btn-danger btn-sm w-100 priority-3">@member.Role</span></td>
+                            }
+                            else if (member.Role == CharacterRoleConstants.Healer)
+                            {
+                                <td><span class="btn btn-success btn-sm w-100 priority-3">@member.Role</span></td>
+                            }
+                            else if (member.Role == CharacterRoleConstants.Tank)
+                            {
+                                <td><span class="btn btn-warning btn-sm w-100 priority-3">@member.Role</span></td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <hr class="bg-warning" />
+    </div>
 
 @section Scripts{
     <script>

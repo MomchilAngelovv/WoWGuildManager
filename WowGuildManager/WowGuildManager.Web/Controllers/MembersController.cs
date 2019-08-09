@@ -20,11 +20,13 @@
         }
 
         [HttpGet]
-        public IActionResult All(string sortOrder)
+        public IActionResult All(string sortOrder, string searchName = null)
         {
             var members = this.characterService
                 .GetAllCharacters<CharacterViewModel>()
                 .ToList();
+
+            var totalMembersCount = members.Count;
 
             switch (sortOrder)
             {
@@ -42,9 +44,15 @@
                     break;
             }
 
+            if (searchName != null)
+            {
+                members = members.Where(m => m.Name.Contains(searchName)).ToList();
+            }
+
             var membersIndexViewModel = new MembersIndexViewModel
             {
-                Members = members
+                Members = members,
+                MembersCount = totalMembersCount
             };
 
             return this.View(membersIndexViewModel);
